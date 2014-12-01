@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css">
 	
-<title>Creation annonce</title>
+<title>Creation d'une annonce</title>
 </head>
 <body>
 	<h1>Créez votre annonce !</h1>
