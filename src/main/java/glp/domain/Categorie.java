@@ -53,6 +53,9 @@ public class Categorie {
 		this.desc = desc;
 	}
 	
+	public String toString(){
+		return lib;
+	}
 	
 
 }

@@ -5,7 +5,7 @@
     <html>  
     <head>  
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-    <title>Being Java Guys | User Details</title>  
+    <title>List de categorie</title>  
     </head>  
     <body>  
       
@@ -34,6 +34,6 @@
       </c:if>  
       
       
-      <a href="form">Ajout de categorie</a>  
+      <a href="cat_form">Ajout de categorie</a>  
     </body>  
     </html>  

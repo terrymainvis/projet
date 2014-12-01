@@ -10,8 +10,17 @@
   
  <context:component-scan base-package="glp.controller" />  
  <context:property-placeholder location="classpath:database.properties" />  
- <mvc:annotation-driven />  
- <tx:annotation-driven transaction-manager="txManager"/>
+ <mvc:annotation-driven conversion-service="conversionService" />
+ <mvc:resources mapping="/resources/**" location="/resources/" />
+ <tx:annotation-driven transaction-manager="txManager" />
+
+ <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <property name="formatters">
+         <set>
+               <bean class="glp.util.CategorieFormatter"/>
+         </set>
+    </property>
+</bean>
   
  <bean id="dataSource"  
   class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
@@ -59,7 +68,12 @@
  </bean>  
   
   
+
+
+  
  <bean id="categorieDaoImpl" class="glp.dao.CategorieDaoImpl" />  
  <bean id="categorieServiceImpl" class="glp.services.CategorieServiceImpl" />  
+ <bean id="annonceDaoImpl" class="glp.dao.AnnonceDaoImpl" />  
+ <bean id="annonceServiceImpl" class="glp.services.AnnonceServiceImpl" />  
   
 </beans>  

@@ -16,7 +16,7 @@ public class Annonce {
 	private int id;
 	
 	@Column(name="ann_desc")
-	private String description;
+	private String desc;
 	
 	@ManyToOne
 	@JoinColumn(name="cat_id")
@@ -27,7 +27,7 @@ public class Annonce {
 	}
 	
 	public Annonce(String desc, Categorie cat){
-		this.description = desc;
+		this.desc = desc;
 		this.categorie = cat;
 	}
 
@@ -39,12 +39,12 @@ public class Annonce {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesc(String description) {
+		this.desc = description;
 	}
 
 	public Categorie getCategorie() {
