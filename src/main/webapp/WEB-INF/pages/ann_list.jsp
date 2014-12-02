@@ -11,7 +11,7 @@
 <title>List</title>
 </head>
 <body>
-	
+
 	<c:if test="${!empty annList}">
 		<c:forEach items="${annList}" var="ann">
 
@@ -23,11 +23,15 @@
 							src="<c:url value="/resources/img/chat.png" />">
 
 					</div>
-					<div class="small-4 medium-4 large-4 columns">
+					<div class="small-4 medium-4 large-3 columns">
 						<span> ${ann.desc} </span>
 					</div>
-					<div class="small-4 medium-4 large-4 columns">
+					<div class="small-4 medium-4 large-3 columns">
 						<span> ${ann.categorie.lib } </span>
+					</div>
+
+					<div class="small-2 medium-2 large-2 columns">
+						<span> ${ann.date_fin } </span>
 					</div>
 					<div class="small-2 medium-2 large-2 columns">
 						<a href="#" class="button round">Voir l'annonce</a>

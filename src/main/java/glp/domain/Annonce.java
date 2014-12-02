@@ -1,5 +1,7 @@
 package glp.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,9 @@ public class Annonce {
 	@Column(name="ann_desc")
 	private String desc;
 	
+	@Column(name="ann_date_fin")
+	private Date date_fin;
+	
 	@ManyToOne
 	@JoinColumn(name="cat_id")
 	private Categorie categorie;
@@ -26,8 +31,9 @@ public class Annonce {
 		
 	}
 	
-	public Annonce(String desc, Categorie cat){
+	public Annonce(String desc, Date date, Categorie cat){
 		this.desc = desc;
+		this.date_fin = date;
 		this.categorie = cat;
 	}
 
@@ -54,6 +60,15 @@ public class Annonce {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+
+	public Date getDate_fin() {
+		return date_fin;
+	}
+
+	public void setDate_fin(Date date_fin) {
+		this.date_fin = date_fin;
+	}
+	
 	
 	
 }
