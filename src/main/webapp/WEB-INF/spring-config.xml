@@ -37,6 +37,7 @@
             <list>    
                 <value>glp.domain.Annonce</value>
                 <value>glp.domain.Categorie</value>   
+               	<value>glp.domain.Utilisateur</value>   
             </list>    
         </property>   
   <property name="hibernateProperties">  
@@ -70,7 +71,8 @@
   
 
 
-  
+ <bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />  
+ <bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />  
  <bean id="categorieDaoImpl" class="glp.dao.CategorieDaoImpl" />  
  <bean id="categorieServiceImpl" class="glp.services.CategorieServiceImpl" />  
  <bean id="annonceDaoImpl" class="glp.dao.AnnonceDaoImpl" />  

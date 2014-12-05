@@ -7,14 +7,16 @@
 	href="http://cdn.foundation5.zurb.com/foundation.css">
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
-	<%@ include file="WEB-INF/templates/header.jsp" %>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+	<%@ include file="WEB-INF/templates/header.jsp"%>
 	<h2>Lille 1 Community</h2>
 	<a href="cat_list">Liste des categories</a>
 	<a href="cat_form">formulaire création categorie</a>
 	<br>
 	<a href="ann_list">Liste des annonces</a>
 	<a href="ann_form">formulaire création annonce</a>
+	<br>
+	<a href="uti_form">Creer user</a>
 </body>
 </html>

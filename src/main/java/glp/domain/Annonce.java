@@ -17,6 +17,9 @@ public class Annonce {
 	@Column(name="ann_id")
 	private int id;
 	
+	@Column(name="ann_titre")
+	private String titre;
+	
 	@Column(name="ann_desc")
 	private String desc;
 	
@@ -31,7 +34,7 @@ public class Annonce {
 		
 	}
 	
-	public Annonce(String desc, Date date, Categorie cat){
+	public Annonce(String titre, String desc, Date date, Categorie cat){
 		this.desc = desc;
 		this.date_fin = date;
 		this.categorie = cat;
@@ -68,7 +71,12 @@ public class Annonce {
 	public void setDate_fin(Date date_fin) {
 		this.date_fin = date_fin;
 	}
-	
-	
-	
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 }

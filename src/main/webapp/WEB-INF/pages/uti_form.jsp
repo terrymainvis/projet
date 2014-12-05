@@ -13,25 +13,32 @@
 <title>Creation categorie</title>
 </head>
 <body>
-<%@ include file="../templates/header.jsp" %>
+	<%@ include file="../templates/header.jsp"%>
 	<div class=" large-offset-3 large-6 colums panel">
-		<h2>Créez votre categorie !</h2>
-		<form:form id="addCatForm" modelAttribute="categorie" method="post"
-			action="addCat">
+		<h2>Créez votre compte !</h2>
+		<form:form id="addUserForm" modelAttribute="utilisateur" method="post"
+			action="addUser">
 			<div class="row">
 				<div class="large-offset-3 large-6 colums">
-					<form:input path="lib" placeholder="Libelle" />
+					<form:input path="prenom" placeholder="prenom" />
 				</div>
 			</div>
+
+
 			<div class="row">
 				<div class="large-offset-3 large-6 colums">
-					<form:textarea path="desc" placeholder="Description" />
+					<form:input path="nom" placeholder="nom" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="large-offset-3 large-6 colums">
+					<form:input path="mailLille1" placeholder="mailLille1" />
 				</div>
 				<input class="button" type="submit" value="Ajouter" />
 			</div>
 
 		</form:form>
 	</div>
-	<a href="cat_list">Liste des categories</a>
 </body>
 </html>

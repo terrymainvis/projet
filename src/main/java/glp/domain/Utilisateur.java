@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
 public class Utilisateur {
 	
@@ -23,20 +25,16 @@ public class Utilisateur {
 	@Column(name="uti_telephone")
 	private String telephone;
 	
+	@Column(name="uti_bool_contact")
+	@Value("false")
+	private boolean contactAutreMail;
+	
 	public Utilisateur(){}
 	
 	public Utilisateur(String prenom, String nom, String mailLille1) {
 		this.prenom=prenom;
 		this.nom=nom;
 		this.mailLille1=mailLille1;
-	}
-
-	public String getMailEtudiant() {
-		return mailLille1;
-	}
-
-	public void setMailEtudiant(String mailLille1) {
-		this.mailLille1 = mailLille1;
 	}
 
 	public String getPrenom() {
@@ -70,4 +68,22 @@ public class Utilisateur {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+	public String getMailLille1() {
+		return mailLille1;
+	}
+	
+	public void setMailLille1(String mailLille1){
+		this.mailLille1 = mailLille1;
+	}
+
+	public boolean isContactAutreMail() {
+		return contactAutreMail;
+	}
+
+	public void setContactAutreMail(boolean contactAutreMail) {
+		this.contactAutreMail = contactAutreMail;
+	}
+	
+	
 }

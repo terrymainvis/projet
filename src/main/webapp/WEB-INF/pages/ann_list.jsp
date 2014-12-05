@@ -11,7 +11,7 @@
 <title>List</title>
 </head>
 <body>
-
+<%@ include file="../templates/header.jsp" %>
 	<c:if test="${!empty annList}">
 		<c:forEach items="${annList}" var="ann">
 
@@ -24,7 +24,7 @@
 
 					</div>
 					<div class="small-4 medium-4 large-3 columns">
-						<span> ${ann.desc} </span>
+						<span> ${ann.titre} </span>
 					</div>
 					<div class="small-4 medium-4 large-3 columns">
 						<span> ${ann.categorie.lib } </span>

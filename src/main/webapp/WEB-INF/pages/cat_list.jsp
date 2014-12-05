@@ -8,7 +8,7 @@
     <title>List de categorie</title>  
     </head>  
     <body>  
-      
+      <%@ include file="../templates/header.jsp" %>
  
       <c:if test="${!empty catList}">  
        <table border="1" bgcolor="black" width="600px">  
