@@ -1,8 +1,5 @@
 package glp.controller;
 
-import javax.validation.Valid;
-
-import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 import glp.services.UtilisateurService;
 
@@ -14,13 +11,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+@RequestMapping("/utilisateur")
 public class MyController {
 
 	@Autowired
 	private UtilisateurService utilisateurService;
 	
 	
-	@RequestMapping("uti_form")
+	@RequestMapping("/")
+	public ModelAndView getIndex() {
+		return new ModelAndView("index");
+	}
+	
+	@RequestMapping("/new")
 	public ModelAndView getAnnForm(@ModelAttribute Utilisateur uti) {
 		return new ModelAndView("uti_form");
 	}

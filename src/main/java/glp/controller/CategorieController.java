@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value="/categorie")
 public class CategorieController {
 	@Autowired
 	private CategorieService categorieService;
 	
-	@RequestMapping("cat_form")
+	@RequestMapping("new")
 	public ModelAndView getCatForm(@ModelAttribute Categorie cat) {
 		return new ModelAndView("cat_form");
 	}
@@ -27,7 +28,7 @@ public class CategorieController {
 		return new ModelAndView("redirect:cat_list");
 	}
 
-	@RequestMapping("cat_list")
+	@RequestMapping("list")
 	public ModelAndView getCatList() {
 		List<Categorie> catList = categorieService.getList();
 		return new ModelAndView("cat_list", "catList", catList);

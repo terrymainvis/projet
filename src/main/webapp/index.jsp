@@ -11,12 +11,12 @@
 	<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
 	<%@ include file="WEB-INF/templates/header.jsp"%>
 	<h2>Lille 1 Community</h2>
-	<a href="cat_list">Liste des categories</a>
-	<a href="cat_form">formulaire création categorie</a>
+	<a href="categorie/list">Liste des categories</a>
+	<a href="categorie/new">formulaire creation categorie</a>
 	<br>
-	<a href="ann_list">Liste des annonces</a>
-	<a href="ann_form">formulaire création annonce</a>
+	<a href="<c:url value="annonce/list" />">Liste des annonce</a>
+	<a href="annonce/new">formulaire creation annonce</a>
 	<br>
-	<a href="uti_form">Creer user</a>
+	<a href="utilisateur/new">Creer user</a>
 </body>
 </html>

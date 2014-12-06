@@ -67,9 +67,6 @@
    <value>.jsp</value>  
   </property>  
  </bean>  
-  
-  
-
 
  <bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />  
  <bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />  

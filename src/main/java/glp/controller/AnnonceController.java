@@ -17,10 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value = "/annonce")
 public class AnnonceController {
 	@Autowired
 	private AnnonceService annonceService;
@@ -32,7 +32,7 @@ public class AnnonceController {
 	private UtilisateurService utilisateurService;
 
 	
-	@RequestMapping(value = "ann_form")
+	@RequestMapping(value = "new")
 	public ModelAndView getAnnForm(@ModelAttribute Annonce ann) {
 		Utilisateur user = utilisateurService.getUserInSession();
 		List<Categorie> catList = categorieService.getList();
@@ -48,7 +48,7 @@ public class AnnonceController {
 		return new ModelAndView("redirect:ann_list");
 	}
 
-	@RequestMapping("ann_list")
+	@RequestMapping("list")
 	public ModelAndView getAnnList() {
 		List<Annonce> annList = annonceService.getList();
 		return new ModelAndView("ann_list", "annList", annList);
