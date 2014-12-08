@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet" href="resources/css/form.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
-	href="http://cdn.foundation5.zurb.com/foundation.css">
+	href="<c:url value='/resources/css/foundation.min.css'/>">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
@@ -59,19 +59,23 @@
 		<div class="large-4 columns">
 			<div class="panel callout radius">
 				<h5>Vos coordonnées</h5>
-				<form id="updateUtiForm"
+				
+				<form:form id="updateUtiForm" commandName="utilisateur"
 					method="post" action="updateMailUtilisateur">
 					<div>
 						<div>
-							<input id="maiMail" type="radio" name="mail"  value="lille1" />
+							<form:radiobutton path="contactAutreMail" id="maiMail" name="mail"  value="false" />
 							${current_user.mailLille1}
-							<br><input id="autreMail" type="radio" name="mail" value="autre"  />
+							<br>
+							<form:radiobutton path="contactAutreMail" id="autreMail" name="mail" value="true"  />
 							Autre adresse mail
-							<div id="SecondeAdresseMail"></div>
+							<div id="SecondeAdresseMail">
+							
+							</div>
 							<input name="secondMail" class="button small" type="submit" value="Mettre à jour" />
 						</div>
 					</div>
-				</form>
+				</form:form>
 			</div>
 		</div>
 	</div>
@@ -81,13 +85,28 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
 $(document).ready(function() {
+	
+    var frm = $('#updateUtiForm');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+            }
+        });
+
+        ev.preventDefault();
+    });
+	
 	 $('#autreMail').click(function(){
-		 document.getElementById("SecondeAdresseMail").innerHTML =" <input type='text' placeholder='Autre addresse mail:' />";
+		 document.getElementById("SecondeAdresseMail").innerHTML =" <input id='secondMail' name='mailAutre' type='text' placeholder='Autre addresse mail' />";
+		 var elem = document.getElementById("secondMail");
+		 elem.value = "${current_user.mailAutre}";
 	 });
 	 $('#maiMail').click(function(){
 		 document.getElementById("SecondeAdresseMail").innerHTML ="";
 	 });
-
 
 
 	$(function() {
@@ -98,8 +117,8 @@ $(document).ready(function() {
 </script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript"
-	src="resources/js/foundation/foundation.js"></script>
-<script type="text/javascript" src="resources/js/datepicker-fr.js">
+	src="<c:url value="/resources/js/foundation/foundation.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/datepicker-fr.js" />">
 	
 </script>
 </html>

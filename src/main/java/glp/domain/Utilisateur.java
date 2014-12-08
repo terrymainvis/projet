@@ -2,6 +2,7 @@ package glp.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,10 @@ import org.springframework.beans.factory.annotation.Value;
 public class Utilisateur {
 	
 	@Id
+	@GeneratedValue
+	@Column(name="uti_id")
+	private int id;
+	
 	@Column(name="uti_mail_lille1")
 	private String mailLille1;
 	
@@ -84,6 +89,16 @@ public class Utilisateur {
 	public void setContactAutreMail(boolean contactAutreMail) {
 		this.contactAutreMail = contactAutreMail;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 	
 }

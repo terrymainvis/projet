@@ -6,14 +6,16 @@ import java.util.List;
 
 public interface UtilisateurDao {
 	
-	public String insertRow(Utilisateur utilisateur);
+	public Integer insertRow(Utilisateur utilisateur);
 	
 	public List<Utilisateur> getList();
 	
-	public Utilisateur getRowByMailLille1(String mailLille1);
+	public Utilisateur getRowById(Integer id);
 	
-	public String updateRow(Utilisateur utilisateur);
+	public Integer updateRow(Utilisateur utilisateur);
 	
-	public String deleteRow(String mailLille1);
+	public Integer deleteRow(Integer id);
+	
+	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail);
 
 }

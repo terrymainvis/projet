@@ -1,12 +1,12 @@
-<link rel="stylesheet" href="resources/css/header.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<link rel="stylesheet" href="<c:url value="/resources/css/header.css" />	">
 <nav class="top-bar" data-topbar role="navigation">
 	<section class="top-bar-section">
 
 		<ul class="title-area">
 			<li class="name">
 				<h1>
-					<a href="<c:url value="index.jsp" />">Accueil L1C</a>
+					<a href="<c:url value="/" />">Accueil L1C</a>
 				</h1>
 			</li>
 		</ul>

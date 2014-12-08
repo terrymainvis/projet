@@ -15,11 +15,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	SessionFactory sessionFactory;  
 
 	@Override
-	public String insertRow(Utilisateur u) {
+	public Integer insertRow(Utilisateur u) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(u);
-		Serializable mail = session.getIdentifier(u);
-		return (String) mail;
+		Serializable id = session.getIdentifier(u);
+		return (Integer) id;
 	}
 
 	@Override
@@ -31,27 +31,34 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public Utilisateur getRowByMailLille1(String mailLille1) {
+	public Utilisateur getRowById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		Utilisateur u = (Utilisateur) session.load(Utilisateur.class, mailLille1);
+		Utilisateur u = (Utilisateur) session.load(Utilisateur.class, id);
 		return u;
 	}
 
 	@Override
-	public String updateRow(Utilisateur u) {
+	public Integer updateRow(Utilisateur u) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(u);
-		Serializable mail = session.getIdentifier(u);
-		return (String) mail;
+		Serializable id = session.getIdentifier(u);
+		return (Integer) id;
 	}
 
 	@Override
-	public String deleteRow(String mailLille1) {
+	public Integer deleteRow(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		Utilisateur u = (Utilisateur) session.load(Utilisateur.class, mailLille1);
+		Utilisateur u = (Utilisateur) session.load(Utilisateur.class, id);
 		session.delete(u);
-		Serializable mail = session.getIdentifier(u);
-		return (String) mail;
+		Serializable iduti = session.getIdentifier(u);
+		return (Integer) iduti;
+	}
+
+	@Override
+	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail) {
+		Session session = sessionFactory.getCurrentSession();
+		u.setContactAutreMail(contactAutreMail);
+		session.saveOrUpdate(u);
 	}
 
 

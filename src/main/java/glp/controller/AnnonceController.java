@@ -14,9 +14,12 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -34,12 +37,24 @@ public class AnnonceController {
 	
 	@RequestMapping(value = "new")
 	public ModelAndView getAnnForm(@ModelAttribute Annonce ann) {
-		Utilisateur user = utilisateurService.getUserInSession();
+		Utilisateur utilisateur = utilisateurService.getUserInSession();
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("catList", catList); myModel.put("current_user", user);
+		myModel.put("catList", catList); myModel.put("utilisateur", utilisateur);
 		
 		return new ModelAndView("ann_form", myModel);
+	}
+	
+	@RequestMapping(value = "/updateMailUtilisateur", method=RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	public void updateMailUser(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+		Utilisateur u = utilisateurService.getUserInSession();
+		
+		u.setMailAutre(utilisateur.getMailAutre());
+		u.setContactAutreMail(utilisateur.isContactAutreMail());
+
+		utilisateurService.updateRow(u);
+//		return "redirect:/";
 	}
 
 	@RequestMapping("/addAnn")

@@ -21,7 +21,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	
 	@Override
 	@Transactional
-	public String insertRow(Utilisateur utilisateur) {
+	public Integer insertRow(Utilisateur utilisateur) {
 		System.out.println("Service" + utilisateur.getMailLille1());
 		httpSession.setAttribute("current_user", utilisateur);
 		return utilisateurDao.insertRow(utilisateur);
@@ -35,24 +35,30 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 
 	@Override
 	@Transactional
-	public Utilisateur getRowByMailLille1(String mailLille1) {
-		return utilisateurDao.getRowByMailLille1(mailLille1);
+	public Utilisateur getRowByMailLille1(Integer id) {
+		return utilisateurDao.getRowById(id);
 	}
 
 	@Override
 	@Transactional
-	public String updateRow(Utilisateur utilisateur) {
+	public Integer updateRow(Utilisateur utilisateur) {
 		return utilisateurDao.updateRow(utilisateur);
 	}
 
 	@Override
 	@Transactional
-	public String deleteRow(String mailLille1) {
-		return utilisateurDao.deleteRow(mailLille1);
+	public Integer deleteRow(Integer id) {
+		return utilisateurDao.deleteRow(id);
 	}
 	
 	public Utilisateur getUserInSession(){
 		return (Utilisateur) httpSession.getAttribute("current_user");
+	}
+
+	@Override
+	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail) {
+		utilisateurDao.updateContactAutreMail(u, contactAutreMail);
+		
 	}
 
 }
