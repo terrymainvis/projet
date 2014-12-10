@@ -15,4 +15,6 @@ public interface AnnonceDao {
 	
 	public int deleteRow(int id);
 
+	public List<Annonce> getListByCat(int catId);
+
 }

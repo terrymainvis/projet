@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AnnonceDaoImpl implements AnnonceDao {
 
 	 @Autowired  
-	 SessionFactory sessionFactory;  
+	 private SessionFactory sessionFactory;  
 	
 	@Override
 	public int insertRow(Annonce ann) {
@@ -52,6 +52,14 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		session.delete(ann);
 		Serializable idann = session.getIdentifier(ann);
 		return (Integer) idann;
+	}
+
+	@Override
+	public List<Annonce> getListByCat(int catId) {
+		Session session =sessionFactory.openSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID").setParameter("catID", catId).list();
+		return annonceList;
 	}
 
 }

@@ -14,5 +14,7 @@ public interface AnnonceService {
 	public int updateRow(Annonce cat);
 	
 	public int deleteRow(int id);
+	
+	public List <Annonce> getListByCat(int catId);
 
 }

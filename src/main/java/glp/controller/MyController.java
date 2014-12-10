@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/utilisateur")
+@RequestMapping("/myutilisateur")
 public class MyController {
 
 	@Autowired

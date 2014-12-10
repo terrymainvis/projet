@@ -45,4 +45,9 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public int deleteRow(int id) {
 		return annonceDao.deleteRow(id);
 	}
+
+	@Override
+	public List<Annonce> getListByCat(int catId) {
+		return annonceDao.getListByCat(catId);
+	}
 }
