@@ -9,7 +9,7 @@
 <body>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
-	<%@ include file="WEB-INF/templates/header.jsp"%>
+	<%@ include file="../templates/header.jsp"%>
 	<h2>Lille 1 Community</h2>
 	<a href="categorie/list">Liste des categories</a>
 	<a href="categorie/new">formulaire creation categorie</a>
