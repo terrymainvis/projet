@@ -63,6 +63,16 @@ public class Categorie {
 	public String toString(){
 		return lib;
 	}
+
+	public Set<Champ> getChamps() {
+		return champs;
+	}
+
+	public void setChamps(Set<Champ> champs) {
+		this.champs = champs;
+	}
+	
+	
 	
 
 }

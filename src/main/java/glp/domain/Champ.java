@@ -18,4 +18,32 @@ public class Champ {
 	@ManyToOne
 	@JoinColumn(name="cat_id")
 	private Categorie cat;
+
+	public Champ() {
+		super();
+	}
+
+	public Champ(int id, Categorie cat) {
+		super();
+		this.id = id;
+		this.cat = cat;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Categorie getCat() {
+		return cat;
+	}
+
+	public void setCat(Categorie cat) {
+		this.cat = cat;
+	}
+	
+	
 }
