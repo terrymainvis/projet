@@ -38,6 +38,7 @@
                 <value>glp.domain.Annonce</value>
                 <value>glp.domain.Categorie</value>   
                	<value>glp.domain.Utilisateur</value>   
+               	<value>glp.domain.Champ</value>
             </list>    
         </property>   
   <property name="hibernateProperties">  

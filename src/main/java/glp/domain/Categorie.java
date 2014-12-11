@@ -1,9 +1,13 @@
 package glp.domain;
 
+
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Categorie {
@@ -18,6 +22,9 @@ public class Categorie {
 	
 	@Column(name="cat_desc")
 	private String desc;
+	
+	@OneToMany(mappedBy="cat")
+	private Set<Champ> champs;
 	
 	public Categorie(){
 		
