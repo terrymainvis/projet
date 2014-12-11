@@ -15,5 +15,4 @@ public interface CategorieDao {
 	public int updateRow(Categorie cat);
 	
 	public int deleteRow(int id);
-
 }
