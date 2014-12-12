@@ -28,7 +28,7 @@
       <li class="has-form"><input type="text" placeholder="Search"></li>
       <li class="has-dropdown">
       
-        <a href="#">Categories</a>
+        <a href="#">ListeCatégorie</a>
         <ul class="dropdown">
         
         <c:forEach items="${catList}" var="cat">  

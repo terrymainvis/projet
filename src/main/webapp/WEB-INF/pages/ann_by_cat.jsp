@@ -34,7 +34,7 @@
 						<span> ${ann.date_fin } </span>
 					</div>
 					<div class="small-2 medium-2 large-2 columns">
-						<a href="#" class="button round">Voir l'annonce</a>
+						<a href="#" class="button round">Voirl'annonce</a>
 					</div>
 				</div>
 			</div>
