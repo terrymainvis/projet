@@ -27,7 +27,7 @@
   <property name="driverClassName" value="${database.driver}" />  
   <property name="url" value="${database.url}" />  
   <property name="username" value="${database.user}" />  
-  <property name="password" value="${database.password}" />  
+  <property name="password" value="thomas" />  
  </bean>  
   
  <bean id="sessionFactory"  
@@ -67,7 +67,7 @@
   <property name="suffix">  
    <value>.jsp</value>  
   </property>  
- </bean>  
+ </bean> 
 
  <bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />  
  <bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />  
@@ -75,5 +75,7 @@
  <bean id="categorieServiceImpl" class="glp.services.CategorieServiceImpl" />  
  <bean id="annonceDaoImpl" class="glp.dao.AnnonceDaoImpl" />  
  <bean id="annonceServiceImpl" class="glp.services.AnnonceServiceImpl" />  
+ <bean id="champDaoImpl" class="glp.dao.ChampDaoImpl" />  
+ <bean id="champServiceImpl" class="glp.services.ChampServiceImpl" /> 
   
 </beans>  
