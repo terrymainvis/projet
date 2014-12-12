@@ -24,7 +24,7 @@ public class IndexController {
 	@Autowired
 	private AnnonceService annonceService;
 
-	@RequestMapping("/ok")
+	@RequestMapping("/")
 	public ModelAndView getIndex() {
 		System.out.println("test");
 		Map<String, Object> modelIndex = new HashMap<String, Object>();
@@ -35,7 +35,7 @@ public class IndexController {
 		modelIndex.put("annList", annList);
 		modelIndex.put("catList", listeCat);
 
-		return new ModelAndView("redirect:/", modelIndex);
+		return new ModelAndView("../index", modelIndex);
 	}
 
 //	public ModelAndView getIndex(HttpServletRequest request) {
