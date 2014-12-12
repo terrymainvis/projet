@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <title></title>
 <link rel="stylesheet"
@@ -17,6 +19,41 @@
 	<a href="<c:url value="annonce/list" />">Liste des annonce</a>
 	<a href="annonce/new">formulaire creation annonce</a>
 	<br>
-	<a href="utilisateur/new">Creer user</a>
+	<a href="utilisateur/new">Créer user</a>
+
+
+	<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2">
+		<li>
+			<div class="panel ">
+				<h5>Annonce</h5>
+				<c:forEach items="${annList}" var="ann">
+					<div class="row">
+						<img height="50" width="auto"
+							src="<c:url value="/resources/img/chat.png" />">
+							 <span> ${ann.titre} </span>
+							 <span> ${ann.desc} </span>
+					</div>
+
+				</c:forEach>
+			</div>
+		</li>
+		<li>
+			<div class="panel">
+				<h5>Covoiturage</h5>
+			</div>
+		</li>
+		<li>
+			<div class="panel">
+				<h5>Job étudiant</h5>
+			</div>
+		</li>
+		<li>
+			<div class="panel">
+				<h5>Forum</h5>
+			</div>
+		</li>
+	</ul>
+
+
 </body>
 </html>

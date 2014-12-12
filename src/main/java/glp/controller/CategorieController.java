@@ -31,7 +31,7 @@ public class CategorieController {
 	@RequestMapping("/addCat")
 	public ModelAndView addCategorie(@ModelAttribute Categorie cat) {
 		categorieService.insertRow(cat);
-		return new ModelAndView("redirect:cat_list");
+		return new ModelAndView("redirect:/");
 	}
 
 	@RequestMapping("list")

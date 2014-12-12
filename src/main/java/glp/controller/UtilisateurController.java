@@ -17,11 +17,10 @@ public class UtilisateurController {
 	@Autowired
 	private UtilisateurService utilisateurService;
 	
-	
-	@RequestMapping("/")
-	public ModelAndView getIndex() {
-		return new ModelAndView("index");
-	}
+//	@RequestMapping("/")
+//	public ModelAndView getIndex() {
+//		return new ModelAndView("index");
+//	}
 	
 	@RequestMapping("new")
 	public ModelAndView getAnnForm(@ModelAttribute Utilisateur uti) {
@@ -33,8 +32,4 @@ public class UtilisateurController {
 		utilisateurService.insertRow(uti);
 		return new ModelAndView("redirect:/");
 	}
-	
-
-
-
 }

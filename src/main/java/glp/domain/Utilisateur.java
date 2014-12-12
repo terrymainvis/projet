@@ -4,10 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.beans.factory.annotation.Value;
 
 @Entity
+@Table(uniqueConstraints=@UniqueConstraint(columnNames={"uti_mail_lille1"}))
 public class Utilisateur {
 	
 	@Id
@@ -33,6 +36,8 @@ public class Utilisateur {
 	@Column(name="uti_bool_contact")
 	@Value("false")
 	private boolean contactAutreMail;
+	
+	
 	
 	public Utilisateur(){}
 	

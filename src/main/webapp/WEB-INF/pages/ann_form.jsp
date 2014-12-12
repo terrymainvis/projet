@@ -108,7 +108,6 @@ $(document).ready(function() {
 		 document.getElementById("SecondeAdresseMail").innerHTML ="";
 	 });
 
-
 	$(function() {
 		$("#datepicker").datepicker($.datepicker.regional['fr']);
 	});

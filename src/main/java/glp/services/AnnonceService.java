@@ -16,5 +16,7 @@ public interface AnnonceService {
 	public int deleteRow(int id);
 	
 	public List <Annonce> getListByCat(int catId);
+	
+	public List<Annonce> getListOfLastTen();
 
 }

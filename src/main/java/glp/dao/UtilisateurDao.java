@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface UtilisateurDao {
 	
-	public Integer insertRow(Utilisateur utilisateur);
-	
+	public Integer insertRow(Utilisateur utilisateur);	
 	public List<Utilisateur> getList();
 	
 	public Utilisateur getRowById(Integer id);

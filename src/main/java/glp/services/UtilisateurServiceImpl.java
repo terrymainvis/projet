@@ -12,17 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UtilisateurServiceImpl implements UtilisateurService{
-	
+public class UtilisateurServiceImpl implements UtilisateurService {
+
 	@Autowired
 	UtilisateurDao utilisateurDao;
 	@Autowired
 	HttpSession httpSession;
-	
+
 	@Override
 	@Transactional
 	public Integer insertRow(Utilisateur utilisateur) {
-		System.out.println("Service" + utilisateur.getMailLille1());
 		httpSession.setAttribute("current_user", utilisateur);
 		return utilisateurDao.insertRow(utilisateur);
 	}
@@ -50,15 +49,15 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	public Integer deleteRow(Integer id) {
 		return utilisateurDao.deleteRow(id);
 	}
-	
-	public Utilisateur getUserInSession(){
+
+	public Utilisateur getUserInSession() {
 		return (Utilisateur) httpSession.getAttribute("current_user");
 	}
 
 	@Override
 	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail) {
 		utilisateurDao.updateContactAutreMail(u, contactAutreMail);
-		
+
 	}
 
 }

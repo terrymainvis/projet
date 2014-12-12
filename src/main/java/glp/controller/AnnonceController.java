@@ -46,7 +46,7 @@ public class AnnonceController {
 	}
 	
 	@RequestMapping(value = "/updateMailUtilisateur", method=RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseStatus(value = HttpStatus.OK) /*permet l'appel AJAX */
 	public void updateMailUser(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
 		Utilisateur u = utilisateurService.getUserInSession();
 		
@@ -54,13 +54,12 @@ public class AnnonceController {
 		u.setContactAutreMail(utilisateur.isContactAutreMail());
 
 		utilisateurService.updateRow(u);
-//		return "redirect:/";
 	}
 
 	@RequestMapping("/addAnn")
 	public ModelAndView addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann) {
 		annonceService.insertRow(ann);
-		return new ModelAndView("redirect:ann_list");
+		return new ModelAndView("redirect:/");
 	}
 
 	@RequestMapping("list")

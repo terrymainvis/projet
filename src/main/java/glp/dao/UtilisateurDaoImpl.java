@@ -10,23 +10,29 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
-	
-	@Autowired  
-	SessionFactory sessionFactory;  
+
+	@Autowired
+	SessionFactory sessionFactory;
 
 	@Override
-	public Integer insertRow(Utilisateur u) {
+	public Integer insertRow(Utilisateur u) /*throws HibernateException */{
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(u);
-		Serializable id = session.getIdentifier(u);
-		return (Integer) id;
+		/*try {*/
+			session.saveOrUpdate(u);
+			Serializable id = session.getIdentifier(u);
+			return (Integer) id;
+		/*} catch (ConstraintViolationException e) {
+
+		}*/
+
 	}
 
 	@Override
 	public List<Utilisateur> getList() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Utilisateur> utilisateursList = session.createQuery("from Utilisateur").list();
+		List<Utilisateur> utilisateursList = session.createQuery(
+				"from Utilisateur").list();
 		return utilisateursList;
 	}
 
@@ -60,6 +66,5 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		u.setContactAutreMail(contactAutreMail);
 		session.saveOrUpdate(u);
 	}
-
 
 }
