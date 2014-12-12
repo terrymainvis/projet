@@ -16,8 +16,7 @@
 <%@ include file="../templates/header.jsp" %>
 	<div class=" large-offset-3 large-6 colums panel">
 		<h2>Créez votre categorie !</h2>
-		<form:form id="addCatForm" modelAttribute="categorie" method="post"
-			action="addCat">
+		<form:form id="addCatForm" modelAttribute="categorie" method="post" action="addCat">
 			<div class="row">
 				<div class="large-offset-3 large-6 colums">
 					<form:input path="lib" placeholder="Libelle" />

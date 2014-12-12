@@ -33,8 +33,10 @@ public class AnnonceDaoImpl implements AnnonceDao {
 
 	@Override
 	public Annonce getRowById(int id) {
+				
 		Session session = sessionFactory.getCurrentSession();
-		Annonce ann = (Annonce) session.load(Annonce.class, id);
+		Annonce ann = (Annonce) session.load(Annonce.class, new Integer(id));
+		System.out.println(ann.getTitre());
 		return ann;
 	}
 
