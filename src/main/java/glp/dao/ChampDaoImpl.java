@@ -3,6 +3,7 @@ package glp.dao;
 import glp.domain.Champ;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,6 +44,14 @@ public class ChampDaoImpl implements ChampDao {
 		session.delete(champ);
 		Serializable idch = session.getIdentifier(champ);
 		return (Integer) idch;
+	}
+
+	@Override
+	public List<Champ> getListByCat(int idcat) {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Champ> champList = session.createQuery("from Champ where cat_id= :catID").setParameter("catID", idcat).list();
+		return champList;
 	}
 
 }

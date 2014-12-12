@@ -1,5 +1,7 @@
 package glp.dao;
 
+import java.util.List;
+
 import glp.domain.Champ;
 
 public interface ChampDao {
@@ -11,4 +13,6 @@ public interface ChampDao {
 	public int updateRow(Champ champ);
 	
 	public int deleteRow(int id);
+	
+	public List<Champ> getListByCat(int idcat);
 }
