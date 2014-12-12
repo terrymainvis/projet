@@ -24,18 +24,20 @@
 
 	<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2">
 		<li>
-			<div class="panel ">
-				<h5>Annonce</h5>
-				<c:forEach items="${annList}" var="ann">
-					<div class="row">
-						<img height="50" width="auto"
-							src="<c:url value="/resources/img/chat.png" />">
-							 <span> ${ann.titre} </span>
-							 <span> ${ann.desc} </span>
-					</div>
-
-				</c:forEach>
-			</div>
+				<div class="panel ">
+					<h5>Annonce</h5>
+					<c:forEach begin="0" end="9" items="${annList}" var="ann">
+						<div class="row">
+							<div class="small-2 columns"><img height="50" width="auto"
+								src="<c:url value="/resources/img/chat.png" />"></div>
+								 <div class="small-10 columns">
+									 <span> ${ann.titre} </span>
+									 <span> ${ann.desc} </span>
+								 </div>
+						</div>
+	
+					</c:forEach>
+				</div>
 		</li>
 		<li>
 			<div class="panel">
