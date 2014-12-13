@@ -36,7 +36,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 				
 		Session session = sessionFactory.getCurrentSession();
 		Annonce ann = (Annonce) session.load(Annonce.class, new Integer(id));
-		System.out.println(ann.getTitre());
+		System.out.println(ann.getTitre()); // VIRER CE CODE, NE PAS OUBLIER /!\
 		return ann;
 	}
 

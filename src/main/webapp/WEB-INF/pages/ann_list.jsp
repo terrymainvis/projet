@@ -35,10 +35,6 @@
 					</div>
 					<div class="small-2 medium-2 large-2 columns">
 						<a href="<c:url value='/annonce/${ann.id}' />" class="button round">Voir l'annonce</a>
-						<form id="consulterAnnonce"  method="post" action="consulterAnnonce">
-							<input type="hidden" name="idAnnonceSelected" value="${ann.id}"></input>
-							<button type="button"> voir annonce </button>
-						</form>
 					</div>
 				</div>
 			</div>
