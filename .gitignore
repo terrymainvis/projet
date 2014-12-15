@@ -46,5 +46,4 @@ Temporary Items
 target/m2e-wtp/web-resources/META-INF/maven/glp/lille1community/pom.properties
 *.MF
 /target/
-.gitignore
 *.class
