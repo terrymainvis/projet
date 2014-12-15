@@ -1,54 +1,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true" %>
+<%@ page session="true"%>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/header.css" />	">
-<!-- <nav class="top-bar" data-topbar role="navigation">
-	<section class="top-bar-section">
-		<ul class="right">
-
-			<li class="has-form"><input type="text" placeholder="Search"></li>
-
-			<li class="has-dropdown not-click"><a href="#">Dropdown</a>
-				<ul class="dropdown">
-					<li class="title back js-generated">kjkjkj</li>
-
-				</ul></li>
-
-			<li class="has-form"><a href="#" class="alert button expand">Search</a>
-			</li>
-		</ul>
-	</section>
-</nav> -->
+<link rel="stylesheet"
+	href="http://cdn.foundation5.zurb.com/foundation.css">
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
 
 <nav class="top-bar" data-topbar role="navigation">
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="center">
-      <li class="has-form"><input type="text" placeholder="Search"></li>
-      <li class="has-dropdown">
-      
-        <a href="#">ListeCatégorie</a>
-        <ul class="dropdown">
-        
-        <c:forEach items="${catList}" var="cat">  
-        
-          
-                <li ><a href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out value='${cat.lib}' /> </a></li>  
-          
-    
-          
-        </c:forEach> 
-    
-        </ul>
-      </li>
-      			<li class="has-form"><a href="#" class="alert button expand">Search</a>
-      
-    </ul>
+	<section class="top-bar-section">
+		<!-- Right Nav Section -->
+		<ul class="center">
+			<li class="has-form"><input type="text" placeholder="Search"></li>
+			<li class="has-dropdown"><a href="#">ListeCatégorie</a>
+				<ul class="dropdown">
 
-    <!-- Left Nav Section -->
-    
-  </section>
+					<c:forEach items="${catList}" var="cat">
+
+
+						<li><a
+							href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out
+									value='${cat.lib}' /> </a></li>
+					</c:forEach>
+
+				</ul></li>
+			<li class="has-form"><a href="#" class="alert button expand">Search</a>
+		</ul>
+
+		<!-- Left Nav Section -->
+
+	</section>
 </nav>
 
 
@@ -66,8 +48,20 @@
 			</li>
 		</ul>
 		<ul class="right">
-			<li><a href="#">Covoiturage</a></li>
-			<li><a href="#">Petites annonce</a></li>
+			<li class="has-dropdown"><a href="#">Covoiturage</a>
+				<ul class="dropdown">
+					<li><a href="<c:url value="/annonce/new"  />">Créez votre
+							covoit'</a></li>
+					<li><a href="<c:url value="/annonce/list" />">Trouvez un
+							covoit' </a></li>
+				</ul></li>
+			<li class="has-dropdown"><a href="#">Petites annonce</a>
+				<ul class="dropdown">
+					<li><a href="<c:url value="/annonce/new"  />">Créez votre
+							petite annonce</a></li>
+					<li><a href="<c:url value="/annonce/list" />">Recherche </a></li>
+				</ul></li>
+
 			<li><a href="#">Job</a></li>
 			<li><a href="#">Forum</a></li>
 		</ul>
@@ -77,3 +71,6 @@
 		</ul>
 	</section>
 </nav>
+<script>
+	$(document).foundation();
+</script>

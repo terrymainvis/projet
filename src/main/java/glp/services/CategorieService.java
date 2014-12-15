@@ -14,4 +14,6 @@ public interface CategorieService {
 	public int updateRow(Categorie cat);
 	
 	public int deleteRow(int id);
+	
+	public int getIdByLib(String lib);
 }

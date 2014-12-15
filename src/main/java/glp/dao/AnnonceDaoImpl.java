@@ -66,17 +66,21 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	}
 
 	@Override
-	public List<Annonce> getListOfLastTen() {
+	public List<Annonce> getListRecent(int catId) {
 		Session session =sessionFactory.openSession();
-		String sql = "FROM Annonce ORDER BY ann_date_debut";
-		Query q = session.createQuery(sql);
-//		q.setFirstResult(0);
-//		q.setMaxResults(10); // on obtient les 10 dernières annonces
+		String sql = "FROM Annonce where cat_id= :catID ORDER BY ann_date_debut";
+		Query q = session.createQuery(sql).setParameter("catID", catId);
+		q.setFirstResult(0);
+		q.setMaxResults(5); // on obtient les 10 dernières annonces
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = q.list();
 		System.out.println("taille " + annonceList.size() );
 		return annonceList;
 	}
+
+
+	
+	
 	
 	
 

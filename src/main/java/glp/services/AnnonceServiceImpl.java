@@ -54,7 +54,14 @@ public class AnnonceServiceImpl implements AnnonceService {
 
 	@Override
 	@Transactional
-	public List<Annonce> getListOfLastTen() {
-		return annonceDao.getListOfLastTen();
+	public List<Annonce> getListRecent(int catId) {
+		return annonceDao.getListRecent(catId);
+	}
+
+	@Override
+	@Transactional
+	public int getIdByLib(String lib) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

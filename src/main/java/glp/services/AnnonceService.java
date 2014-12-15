@@ -17,6 +17,8 @@ public interface AnnonceService {
 	
 	public List <Annonce> getListByCat(int catId);
 	
-	public List<Annonce> getListOfLastTen();
+	public List<Annonce> getListRecent(int catId);
+	
+	public int getIdByLib(String lib);
 
 }

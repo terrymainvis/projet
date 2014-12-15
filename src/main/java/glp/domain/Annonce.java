@@ -33,21 +33,24 @@ public class Annonce {
 	@JoinColumn(name="cat_id")
 	private Categorie categorie;
 	
-	@Column(name="cat_type")
+	@Column(name="ann_type")
 	private String type; // l'user "propose" ou "demande"
 	
-	
+	@ManyToOne
+	@JoinColumn(name="uti_id")
+	private Utilisateur auteur;
 	
 	public Annonce(){
 		
 	}
 	
-	public Annonce(String titre, String desc, Date date, Categorie cat){
+	public Annonce(String titre, String desc, Date date, Categorie cat, Utilisateur uti){
 		this.titre = titre;
 		this.desc = desc;
 		this.date_fin = date;
 		this.categorie = cat;
 		this.date_deb = new Date();
+		this.auteur = uti;
 	}
 
 	public int getId() {
@@ -105,5 +108,12 @@ public class Annonce {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
+	public Utilisateur getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(Utilisateur auteur) {
+		this.auteur = auteur;
+	}
 }

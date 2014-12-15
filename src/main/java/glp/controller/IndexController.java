@@ -4,6 +4,7 @@ import glp.domain.Annonce;
 import glp.domain.Categorie;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
+import glp.util.IdBasicCategorie;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,9 +30,11 @@ public class IndexController {
 		System.out.println("test");
 		Map<String, Object> modelIndex = new HashMap<String, Object>();
 		List<Categorie> listeCat = categorieService.getList();
-		List<Annonce> annList = annonceService.getListOfLastTen(); // get 10
-																	// dernières
-																	// annonces
+		// get les annonces les plus récentes
+		List<Annonce> annList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.ANNONCE)); 
+		List<Annonce> covoitList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.COVOIT)); 
+
+		modelIndex.put("covoitList", covoitList);
 		modelIndex.put("annList", annList);
 		modelIndex.put("catList", listeCat);
 
