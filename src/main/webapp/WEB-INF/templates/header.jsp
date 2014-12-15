@@ -7,31 +7,31 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
 
-<nav class="top-bar" data-topbar role="navigation">
+<!-- <nav class="top-bar" data-topbar role="navigation"> -->
 
-	<section class="top-bar-section">
-		<!-- Right Nav Section -->
-		<ul class="center">
-			<li class="has-form"><input type="text" placeholder="Search"></li>
-			<li class="has-dropdown"><a href="#">ListeCatégorie</a>
-				<ul class="dropdown">
+<!-- 	<section class="top-bar-section"> -->
+<!-- 		<!-- Right Nav Section -->
+<!-- 		<ul class="center"> -->
+<!-- 			<li class="has-form"><input type="text" placeholder="Search"></li> -->
+<!-- 			<li class="has-dropdown"><a href="#">ListeCatégorie</a> -->
+<!-- 				<ul class="dropdown"> -->
 
-					<c:forEach items="${catList}" var="cat">
+<%-- 					<c:forEach items="${catList}" var="cat"> --%>
 
 
-						<li><a
-							href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out
-									value='${cat.lib}' /> </a></li>
-					</c:forEach>
+<!-- 						<li><a -->
+<%-- 							href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out --%>
+<%-- 									value='${cat.lib}' /> </a></li> --%>
+<%-- 					</c:forEach> --%>
 
-				</ul></li>
-			<li class="has-form"><a href="#" class="alert button expand">Search</a>
-		</ul>
+<!-- 				</ul></li> -->
+<!-- 			<li class="has-form"><a href="#" class="alert button expand">Search</a> -->
+<!-- 		</ul> -->
 
-		<!-- Left Nav Section -->
+<!-- 		<!-- Left Nav Section --> 
 
-	</section>
-</nav>
+<!-- 	</section> -->
+<!-- </nav> -->
 
 
 
@@ -47,7 +47,8 @@
 				</h1>
 			</li>
 		</ul>
-		<ul class="right">
+		<ul class="left">
+			<li><a href="#">Mon compte</a></li>
 			<li class="has-dropdown"><a href="#">Covoiturage</a>
 				<ul class="dropdown">
 					<li><a href="<c:url value="/annonce/new"  />">Créez votre
@@ -65,10 +66,24 @@
 			<li><a href="#">Job</a></li>
 			<li><a href="#">Forum</a></li>
 		</ul>
+		<ul class="right">
+			<li class="has-form"><input type="text" placeholder="Search"></li>
+			<li class="has-dropdown"><a href="#">ListeCatégorie</a>
+				<ul class="dropdown">
 
-		<ul class="left">
-			<li><a href="#">Mon compte</a></li>
+					<c:forEach items="${catList}" var="cat">
+
+
+						<li><a
+							href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out
+									value='${cat.lib}' /> </a></li>
+					</c:forEach>
+
+				</ul></li>
+			<li class="has-form"><a href="#" class="alert button expand">Search</a>
 		</ul>
+
+
 	</section>
 </nav>
 <script>
