@@ -18,8 +18,8 @@ public class AnnonceServiceImpl implements AnnonceService {
 	
 	@Override
 	@Transactional
-	public int insertRow(Annonce cat) {
-		return annonceDao.insertRow(cat);
+	public int insertRow(Annonce ann) {
+		return annonceDao.insertRow(ann);
 	}
 
 	@Override

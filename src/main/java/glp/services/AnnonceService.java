@@ -5,7 +5,7 @@ import glp.domain.Annonce;
 import java.util.List;
 
 public interface AnnonceService {
-	public int insertRow(Annonce cat);
+	public int insertRow(Annonce ann);
 	
 	public List<Annonce> getList();
 	
