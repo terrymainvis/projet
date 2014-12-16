@@ -2,6 +2,10 @@
 <%@ page session="true"%>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/header.css" />	">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/foundation.min.css" />	">
+	<link rel="stylesheet"
+	href="<c:url value="/resources/css/form.css" />	">
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 

@@ -7,9 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="resources/css/form.css">
-<link rel="stylesheet"
-	href="http://cdn.foundation5.zurb.com/foundation.css">
+
 <title>Creation categorie</title>
 </head>
 <body>
