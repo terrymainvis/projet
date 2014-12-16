@@ -2,40 +2,8 @@
 <%@ page session="true"%>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/header.css" />	">
-<link rel="stylesheet"
-	href="http://cdn.foundation5.zurb.com/foundation.css">
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
-
-<!-- <nav class="top-bar" data-topbar role="navigation"> -->
-
-<!-- 	<section class="top-bar-section"> -->
-<!-- 		<!-- Right Nav Section -->
-<!-- 		<ul class="center"> -->
-<!-- 			<li class="has-form"><input type="text" placeholder="Search"></li> -->
-<!-- 			<li class="has-dropdown"><a href="#">ListeCatégorie</a> -->
-<!-- 				<ul class="dropdown"> -->
-
-<%-- 					<c:forEach items="${catList}" var="cat"> --%>
-
-
-<!-- 						<li><a -->
-<%-- 							href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out --%>
-<%-- 									value='${cat.lib}' /> </a></li> --%>
-<%-- 					</c:forEach> --%>
-
-<!-- 				</ul></li> -->
-<!-- 			<li class="has-form"><a href="#" class="alert button expand">Search</a> -->
-<!-- 		</ul> -->
-
-<!-- 		<!-- Left Nav Section --> 
-
-<!-- 	</section> -->
-<!-- </nav> -->
-
-
-
-
+<script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
+<script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
 <nav class="top-bar" data-topbar role="navigation">
 	<section class="top-bar-section">
