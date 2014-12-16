@@ -80,5 +80,5 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public List<Annonce> getListByCatEtMot(String cat, String motcle) {
 		return annonceDao.getListByCatEtMot(categorieDao.getIdByLib(cat), motcle);
 	}
-	
+
 }

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="true"%>
 <link rel="stylesheet"
-	href="<c:url value="/resources/css/header.css" />	">
+	href="<c:url value="/resources/css/header.css" />    ">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/foundation.min.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />	">
@@ -17,6 +17,7 @@
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
 <nav class="top-bar marginbot" data-topbar role="navigation">
+
 	<section class="top-bar-section">
 
 		<ul class="title-area">
@@ -64,6 +65,7 @@
 			</ul>
 		</form>
 
+
 	</section>
 </nav>
 <script>
@@ -88,4 +90,5 @@
 </script>
 <script>
 	$(document).foundation();
+
 </script>

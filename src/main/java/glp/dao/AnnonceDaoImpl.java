@@ -71,6 +71,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	}
 
 	@Override
+
 	public List<Annonce> getListByMot(String searchText) { 
 		
 	Session session =sessionFactory.getCurrentSession(); 
@@ -79,6 +80,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 			+ " where ann_desc like :searchText or ann_titre like:searchText")
 			.setParameter("searchText","%"+searchText+"%").list();
 	return annonceList;
+
 
 	}
 	

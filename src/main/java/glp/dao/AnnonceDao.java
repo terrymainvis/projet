@@ -19,9 +19,13 @@ public interface AnnonceDao {
 	
 	public List<Annonce> getListRecent(int catId);
 
+
 	List<Annonce> getListByMot(String searchText);
 
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle);
+
+	public List<Annonce> getListByMot(String searchText);
+
 	
 	
 

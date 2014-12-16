@@ -22,7 +22,7 @@ public interface AnnonceService {
 	public int getIdByLib(String lib);
 
 	public List<Annonce> getListByMot(String searchText);
+
 	
 	public List<Annonce> getListByCatEtMot(String cat, String motcle );
-
 }

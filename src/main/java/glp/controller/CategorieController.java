@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,15 +81,20 @@ public class CategorieController {
 		return new ModelAndView("ann_list", "annList", annList);
 	}
 	
+
+	@RequestMapping("/annonceByCate")
+	public ModelAndView getAnnonceListe(@PathVariable("cat_id") int cat_id)
+	{
+		List<Annonce> annList = annonceService.getListByCat(cat_id);
+		return new ModelAndView("ann_list", "annList", annList);
+		
+	}
+	
+	
 	@RequestMapping("annonceByMot")
-	public ModelAndView getAnnListMot(@RequestParam String searchText  ) { 
+	public ModelAndView getAnnListMot(@RequestParam String searchText  ) {
 		List<Annonce> annList = annonceService.getListByMot(searchText);
 		return new ModelAndView("ann_list", "annList", annList);
 	}
-	
-
-	
-	
-	
 
 }
