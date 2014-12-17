@@ -17,4 +17,5 @@ public interface CategorieDao {
 	public int deleteRow(int id);
 	
 	public int getIdByLib(String lib);
+	
 }

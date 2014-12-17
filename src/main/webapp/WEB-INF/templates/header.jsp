@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="true"%>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/header.css" />	">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/foundation.min.css" />	">
-	<link rel="stylesheet"
-	href="<c:url value="/resources/css/form.css" />	">
+<link rel="stylesheet" href="<c:url value="/resources/css/form.css" />	">
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
@@ -38,26 +38,47 @@
 			<li><a href="#">Job</a></li>
 			<li><a href="#">Forum</a></li>
 		</ul>
-		<ul class="right">
-			<li class="has-form"><input type="text" placeholder="Search"></li>
-			<li class="has-dropdown"><a href="#">ListeCatégorie</a>
-				<ul class="dropdown">
+		<form action="annonce/recherche" id="formulaireCat">
+			<ul class="right">
+				<li class="has-form"><input name="motCle" type="text"
+					placeholder="Vélo, Lille, Anglais..." id="inputSearchCat"></li>
+				<li class="has-form"><select name="cat" class="medium"
+					name="listeCategorie" id="idSelectCat">
 
-					<c:forEach items="${catList}" var="cat">
-
-
-						<li><a
-							href="categorie/annonceByCat?idCatSelect=<c:out value='${cat.id}' />"><c:out
-									value='${cat.lib}' /> </a></li>
-					</c:forEach>
-
-				</ul></li>
-			<li class="has-form"><a href="#" class="alert button expand">Search</a>
-		</ul>
-
+						<c:forEach items="${catList}" var="cat">
+							<option id="${cat.id}">${cat.lib}</option>
+						</c:forEach>
+				</select></li>
+				<li class="has-form">
+<!-- 				<a href="#" class="alert button expand" -->
+<!-- 					id="searchCat">Rechercher</a> -->
+					<input class="button success" type="submit" value="Rechercher">
+					</li>
+			</ul>
+		</form>
 
 	</section>
 </nav>
+<script>
+// 	$("#searchCat").click(
+// 			function() {
+// 				if ($("#inputSearchCat").val() !== "") {
+// 					var input = $("<input>").attr("type", "hidden").attr(
+// 							"name", "searchText").val(
+// 							$("#inputSearchCat").val());
+// 					$("#formulaireCat").attr("action",
+// 							"/lille1community/categorie/annonceByMot").append(
+// 							input).submit();
+// 				} else {
+// 					var input = $("<input>").attr("type", "hidden").attr(
+// 							"name", "idCatSelect").val(
+// 							$("#idSelectCat option:selected").attr("id"));
+// 					$("#formulaireCat").attr("action",
+// 							"/lille1community/categorie/annonceByCat").append(
+// 							input).submit();
+// 				}
+// 			});
+</script>
 <script>
 	$(document).foundation();
 </script>

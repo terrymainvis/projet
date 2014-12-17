@@ -57,12 +57,10 @@ public class CategorieDaoImpl implements CategorieDao {
 
 	@Override
 	public int getIdByLib(String lib) {
-		System.out.println(lib);
 		Session session =sessionFactory.getCurrentSession();
 		String sql = "select id FROM Categorie where cat_lib LIKE :catLib";
 		Query q = session.createQuery(sql).setParameter("catLib", lib);
 		int id = (int) q.list().get(0);
-		System.out.println(id);
 		return id;
 	}
 

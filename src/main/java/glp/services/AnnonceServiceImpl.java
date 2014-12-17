@@ -1,6 +1,7 @@
 package glp.services;
 
 import glp.dao.AnnonceDao;
+import glp.dao.CategorieDao;
 import glp.domain.Annonce;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public class AnnonceServiceImpl implements AnnonceService {
 
 	@Autowired
 	AnnonceDao annonceDao;
+	
+	@Autowired
+	CategorieDao categorieDao;
 	
 	@Override
 	@Transactional
@@ -64,4 +68,17 @@ public class AnnonceServiceImpl implements AnnonceService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	@Transactional
+	public List<Annonce> getListByMot(String searchText) { 
+		return annonceDao.getListByMot(searchText);
+	}
+
+	@Override
+	@Transactional
+	public List<Annonce> getListByCatEtMot(String cat, String motcle) {
+		return annonceDao.getListByCatEtMot(categorieDao.getIdByLib(cat), motcle);
+	}
+	
 }

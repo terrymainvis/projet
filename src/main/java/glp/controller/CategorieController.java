@@ -46,5 +46,16 @@ public class CategorieController {
 		List<Annonce> annList = annonceService.getListByCat(idCatSelect);
 		return new ModelAndView("ann_list", "annList", annList);
 	}
+	
+	@RequestMapping("annonceByMot")
+	public ModelAndView getAnnListMot(@RequestParam String searchText  ) { 
+		List<Annonce> annList = annonceService.getListByMot(searchText);
+		return new ModelAndView("ann_list", "annList", annList);
+	}
+	
+
+	
+	
+	
 
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -74,6 +75,12 @@ public class AnnonceController {
 		Annonce annonce = annonceService.getRowById(idAnnSelected);
 		System.out.println(annonce.getId());
 		return new ModelAndView("consultAnn","annonce",annonce);
+	}
+	
+	@RequestMapping("recherche")
+	public ModelAndView getAnnListMot(@RequestParam String cat, @RequestParam String motCle  ) { 
+		List<Annonce> annList = annonceService.getListByCatEtMot(cat, motCle);
+		return new ModelAndView("ann_list", "annList", annList);
 	}
 	
 	

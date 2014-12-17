@@ -58,16 +58,8 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	}
 
 	@Override
-	public List<Annonce> getListByCat(int catId) {
-		Session session =sessionFactory.openSession();
-		@SuppressWarnings("unchecked")
-		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID").setParameter("catID", catId).list();
-		return annonceList;
-	}
-
-	@Override
 	public List<Annonce> getListRecent(int catId) {
-		Session session =sessionFactory.openSession();
+		Session session =sessionFactory.getCurrentSession();
 		String sql = "FROM Annonce where cat_id= :catID ORDER BY ann_date_debut";
 		Query q = session.createQuery(sql).setParameter("catID", catId);
 		q.setFirstResult(0);
@@ -78,10 +70,36 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		return annonceList;
 	}
 
+	@Override
+	public List<Annonce> getListByMot(String searchText) { 
+		
+	Session session =sessionFactory.getCurrentSession(); 
+	@SuppressWarnings("unchecked")
+	List<Annonce> annonceList = session.createQuery("from Annonce"
+			+ " where ann_desc like :searchText or ann_titre like:searchText")
+			.setParameter("searchText","%"+searchText+"%").list();
+	return annonceList;
 
+	}
 	
-	
-	
-	
+	@Override
+	public List<Annonce> getListByCat(int catId) {
+		Session session =sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID").setParameter("catID", catId).list();
+		return annonceList;
+	}
 
+	@Override
+	public List<Annonce> getListByCatEtMot(int idCat, String motcle) {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID"
+				+ " and (ann_desc like :searchText or ann_titre like:searchText )")
+				.setParameter("searchText","%"+motcle+"%")
+				.setParameter("catID", idCat)
+				.list();
+		return annonceList;
+	}
+	
 }
