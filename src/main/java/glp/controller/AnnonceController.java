@@ -36,8 +36,10 @@ public class AnnonceController {
 	@Autowired
 	private UtilisateurService utilisateurService;
 
+	public AnnonceController(){
+	}
 	
-	@RequestMapping(value = "new")
+	@RequestMapping(value = "new", method=RequestMethod.GET)
 	public ModelAndView getAnnForm(@ModelAttribute Annonce ann) {
 		Utilisateur utilisateur = utilisateurService.getUserInSession();
 		List<Categorie> catList = categorieService.getList();
@@ -65,7 +67,7 @@ public class AnnonceController {
 		return new ModelAndView("redirect:/");
 	}
 
-	@RequestMapping("list")
+	@RequestMapping(value = "list", method=RequestMethod.GET)
 	public ModelAndView getAnnList() {
 		List<Annonce> annList = annonceService.getList();
 		return new ModelAndView("ann_list", "annList", annList);
@@ -77,7 +79,7 @@ public class AnnonceController {
 		return new ModelAndView("consultAnn","annonce",annonce);
 	}
 	
-	@RequestMapping("recherche")
+	@RequestMapping(value = "recherche", method=RequestMethod.GET)
 	public ModelAndView getAnnListMot(@RequestParam String cat, @RequestParam String motCle  ) { 
 		List<Annonce> annList = annonceService.getListByCatEtMot(cat, motCle);
 		return new ModelAndView("ann_list", "annList", annList);
