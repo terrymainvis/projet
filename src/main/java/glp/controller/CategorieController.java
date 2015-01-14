@@ -35,7 +35,7 @@ public class CategorieController {
 	}
 
 	@RequestMapping("list")
-	public ModelAndView getCatList() {//jhvhfdvhdkh
+	public ModelAndView getCatList() {
 		List<Categorie> catList = categorieService.getList();
 		return new ModelAndView("cat_list", "catList", catList);
 	}
