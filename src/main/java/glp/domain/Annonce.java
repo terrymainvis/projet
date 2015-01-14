@@ -1,6 +1,7 @@
 package glp.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Annonce {
@@ -39,6 +41,9 @@ public class Annonce {
 	@ManyToOne
 	@JoinColumn(name="uti_id")
 	private Utilisateur auteur;
+	
+	@OneToMany(mappedBy="ann")
+	private Set<ChampComplete> champscompletes;
 	
 	public Annonce(){
 		
@@ -116,4 +121,14 @@ public class Annonce {
 	public void setAuteur(Utilisateur auteur) {
 		this.auteur = auteur;
 	}
+
+	public Set<ChampComplete> getChampscompletes() {
+		return champscompletes;
+	}
+
+	public void setChampscompletes(Set<ChampComplete> champscompletes) {
+		this.champscompletes = champscompletes;
+	}
+	
+	
 }
