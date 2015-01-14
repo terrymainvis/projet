@@ -30,7 +30,7 @@
 				</ul></li>
 			<li class="has-dropdown"><a href="#">Petites annonce</a>
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/new"  />">Créez votre
+					<li><a href="<c:url value="/annonce/typechoice"  />">Créez votre
 							petite annonce</a></li>
 					<li><a href="<c:url value="/annonce/list" />">Recherche </a></li>
 				</ul></li>

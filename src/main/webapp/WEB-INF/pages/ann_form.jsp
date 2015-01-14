@@ -40,7 +40,7 @@
 					</div>
 
 					<div>
-						<form:select path="type">
+						<form:select id="select" path="type">
 							<form:option value="Je cherche" itemValue="cherche"
 								itemLabel="cherche" />
 							<form:option value="Je propose" itemValue="propose"
@@ -132,6 +132,30 @@
 						});
 
 					});
+</script>
+<script type="text/javascript">
+	function getUrlParameter(sParam) {
+		var sPageURL = window.location.search.substring(1);
+		var sURLVariables = sPageURL.split('&');
+		for (var i = 0; i < sURLVariables.length; i++) {
+			var sParameterName = sURLVariables[i].split('=');
+			if (sParameterName[0] == sParam) {
+				return sParameterName[1];
+			}
+		}
+	}
+	
+	var choix = getUrlParameter('type');
+	
+	if (choix == "give"){
+		document
+		.getElementById("select").selectedIndex = 1;
+	}
+	else if (choix == "need"){
+		document
+		.getElementById("select").selectedIndex = 0;
+	}
+	
 </script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript"

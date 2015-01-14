@@ -1,0 +1,19 @@
+.panel {
+	height: 25vh;
+	text-align: center;
+}
+
+hr {
+	border-color: black !important;
+}
+
+.button {
+	margin-bottom: 10px;
+	
+}
+
+.row {
+	position: relative;
+	top: 50%;
+	transform: translateY(-70%);
+}
