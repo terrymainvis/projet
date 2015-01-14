@@ -17,7 +17,7 @@
 
 <title>Creation d'une annonce</title>
 </head>
-<body>
+<body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 
 	<div class="row">
@@ -29,16 +29,24 @@
 
 					<div>
 						<form:input path="titre" placeholder="Titre de l'annonce" />
+						<form:errors path="titre" />
 					</div>
 
 
 					<div>
 						<form:select path="categorie">
-							<form:option value="0" label="Selectionnez" />
 							<form:options items="${catList}" itemValue="id" itemLabel="lib" />
 						</form:select>
 					</div>
 
+					<div>
+						<form:select path="type">
+							<form:option value="Je cherche" itemValue="cherche"
+								itemLabel="cherche" />
+							<form:option value="Je propose" itemValue="propose"
+								itemLabel="propose" />
+						</form:select>
+					</div>
 
 					<div>
 						<form:input path="date_fin" type="text" id="datepicker"
@@ -48,6 +56,7 @@
 					<div>
 						<form:textarea path="desc"
 							placeholder="Décrivez votre annonce en quelque mots !" />
+						<form:errors path="desc" />
 					</div>
 					<div>
 						<input class="button" type="submit" value="Ajouter" />
@@ -59,20 +68,20 @@
 		<div class="large-4 columns">
 			<div class="panel callout radius">
 				<h5>Vos coordonnées</h5>
-				
+
 				<form:form id="updateUtiForm" commandName="utilisateur"
 					method="post" action="updateMailUtilisateur">
 					<div>
 						<div>
-							<form:radiobutton path="contactAutreMail" id="maiMail" name="mail"  value="false" />
-							${current_user.mailLille1}
-							<br>
-							<form:radiobutton path="contactAutreMail" id="autreMail" name="mail" value="true"  />
+							<form:radiobutton path="contactAutreMail" id="maiMail"
+								name="mail" value="false" />
+							${current_user.mailLille1} <br>
+							<form:radiobutton path="contactAutreMail" id="autreMail"
+								name="mail" value="true" />
 							Autre adresse mail
-							<div id="SecondeAdresseMail">
-							
-							</div>
-							<input name="secondMail" class="button small" type="submit" value="Mettre à jour" />
+							<div id="SecondeAdresseMail"></div>
+							<input name="secondMail" class="button small" type="submit"
+								value="Mettre à jour" />
 						</div>
 					</div>
 				</form:form>
@@ -84,40 +93,51 @@
 </body>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
-$(document).ready(function() {
-	
-    var frm = $('#updateUtiForm');
-    frm.submit(function (ev) {
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-            }
-        });
+	$(document)
+			.ready(
+					function() {
 
-        ev.preventDefault();
-    });
-	
-	 $('#autreMail').click(function(){
-		 document.getElementById("SecondeAdresseMail").innerHTML =" <input id='secondMail' name='mailAutre' type='text' placeholder='Autre addresse mail' />";
-		 var elem = document.getElementById("secondMail");
-		 elem.value = "${current_user.mailAutre}";
-	 });
-	 $('#maiMail').click(function(){
-		 document.getElementById("SecondeAdresseMail").innerHTML ="";
-	 });
+						var frm = $('#updateUtiForm');
+						frm.submit(function(ev) {
+							$.ajax({
+								type : frm.attr('method'),
+								url : frm.attr('action'),
+								data : frm.serialize(),
+								success : function(data) {
+								}
+							});
 
-	$(function() {
-		$("#datepicker").datepicker($.datepicker.regional['fr']);
-	});
-	 
-});
+							ev.preventDefault();
+						});
+
+						$('#autreMail')
+								.click(
+										function() {
+											document
+													.getElementById("SecondeAdresseMail").innerHTML = " <input id='secondMail' name='mailAutre' type='text' placeholder='Autre addresse mail' />";
+											var elem = document
+													.getElementById("secondMail");
+											elem.value = "${current_user.mailAutre}";
+										});
+						$('#maiMail')
+								.click(
+										function() {
+											document
+													.getElementById("SecondeAdresseMail").innerHTML = "";
+										});
+
+						$(function() {
+							$("#datepicker").datepicker(
+									$.datepicker.regional['fr']);
+						});
+
+					});
 </script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/foundation/foundation.js" />"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/datepicker-fr.js" />">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/datepicker-fr.js" />">
 	
 </script>
 </html>

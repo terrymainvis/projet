@@ -10,7 +10,7 @@
 
 <title>Creation categorie</title>
 </head>
-<body>
+<body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 	<div class=" large-offset-3 large-6 colums panel">
 		<h2>Créez votre compte !</h2>

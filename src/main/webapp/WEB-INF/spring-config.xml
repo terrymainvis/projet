@@ -21,7 +21,7 @@
          </set>
     </property>
 </bean>
-
+<beans:bean id="annonceValidator" class="glp.util.AnnonceValidator" />
  <bean id="dataSource"  
   class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
   <property name="driverClassName" value="${database.driver}" />  

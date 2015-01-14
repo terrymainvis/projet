@@ -5,11 +5,15 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Annonce {
@@ -19,19 +23,22 @@ public class Annonce {
 	@Column(name="ann_id")
 	private int id;
 	
+	@Size(min=4, max=30)
 	@Column(name="ann_titre")
 	private String titre;
 	
+	@Size(min=5, max=300)
 	@Column(name="ann_desc")
 	private String desc;
 	
 	@Column(name="ann_date_debut")
 	private Date date_deb;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="ann_date_fin")
 	private Date date_fin;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="cat_id")
 	private Categorie categorie;
 	

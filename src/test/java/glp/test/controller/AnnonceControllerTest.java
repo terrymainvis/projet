@@ -91,12 +91,12 @@ public class AnnonceControllerTest extends TestCase{
 			.andExpect(view().name("ann_list"));
 	}
 	
-	@Test
-	public void testAddAnnonce() throws Exception{
-		mockMvc.perform(get("/annonce/addAnn"))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("annonce"))
-			.andExpect(view().name("redirect:/"));
-	}
+//	@Test
+//	public void testAddAnnonce() throws Exception{
+//		mockMvc.perform(get("/annonce/addAnn"))
+//			.andExpect(status().isOk())
+//			.andExpect(model().attributeExists("annonce"))
+//			.andExpect(view().name("redirect:/"));
+//	}
 
 }

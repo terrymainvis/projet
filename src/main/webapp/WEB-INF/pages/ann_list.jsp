@@ -27,7 +27,7 @@
 
 <title>List</title>
 </head>
-<body>
+<body class="bg">
 <%@ include file="../templates/header.jsp" %>
 
 	<table id="listeAnnonces" class="display" cellspacing="0" width="100%">

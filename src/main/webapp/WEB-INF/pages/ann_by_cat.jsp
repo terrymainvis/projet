@@ -10,7 +10,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.4.7/css/foundation.min.css">
 <title>List</title>
 </head>
-<body>
+<body class="bg">
 <%@ include file="../templates/header.jsp" %>
 	<c:if test="${!empty annList}">
 		<c:forEach items="${annList}" var="ann">

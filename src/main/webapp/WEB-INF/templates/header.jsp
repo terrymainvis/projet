@@ -9,7 +9,7 @@
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
-<nav class="top-bar" data-topbar role="navigation">
+<nav class="top-bar marginbot" data-topbar role="navigation">
 	<section class="top-bar-section">
 
 		<ul class="title-area">

@@ -46,6 +46,7 @@ public class CategorieServiceImpl implements CategorieService {
 		return categorieDao.deleteRow(id);
 	}
 	
+	@Override
 	@Transactional
 	public int getIdByLib(String lib) {
 		return categorieDao.getIdByLib(lib);

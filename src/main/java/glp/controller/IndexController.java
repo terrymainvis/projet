@@ -27,7 +27,6 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public ModelAndView getIndex() {
-		System.out.println("test");
 		Map<String, Object> modelIndex = new HashMap<String, Object>();
 		List<Categorie> listeCat = categorieService.getList();
 		// get les annonces les plus récentes

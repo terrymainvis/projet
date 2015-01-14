@@ -50,11 +50,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return utilisateurDao.deleteRow(id);
 	}
 
+	@Override
+	@Transactional
 	public Utilisateur getUserInSession() {
 		return (Utilisateur) httpSession.getAttribute("current_user");
 	}
 
 	@Override
+	@Transactional
 	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail) {
 		utilisateurDao.updateContactAutreMail(u, contactAutreMail);
 

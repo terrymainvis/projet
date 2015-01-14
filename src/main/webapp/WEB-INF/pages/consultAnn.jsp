@@ -9,7 +9,7 @@
 <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">
 </head>
-<body>
+<body class="bg">
 <%@ include file="../templates/header.jsp" %>
 <div class="row">
 <div class="large-10 columns">
@@ -18,7 +18,7 @@
 					<div class="row" style="text-align : center">
 						<!-- <div class="large-10 columns"> -->
 							<div class="panel">
-								<span><h4> Titre : ${annonce.titre} </h4> </span>
+								<span><h4> ${annonce.type} :  ${annonce.titre} </h4> </span>
 							</div>
 						<!-- </div> -->
 					</div>
@@ -55,7 +55,7 @@
 																</br>								
 																<div >
 																	<span><h5>Adresse mail</h5></span> 
-																	<span>${current_user.mailLille1} </span>
+																	<span>${current_user.mailAutre} </span>
 																</div>
 																</br>
 																<div>
@@ -71,25 +71,7 @@
 						</div>
 					</div>
 			<!-- </div> -->
-			<div class="panel">
-				<div class="row">
-					<!-- <div class="large-8 columns"> -->
-								
-									<div >
-										 <span><h4>images</h4></span>
-									</div>
-									<div class="small-2 medium-2 large-2 columns">
-										<img height="100" width="auto" src="<c:url value="/resources/img/chat.png" />">
-									</div>	
-									<div class="small-2 medium-2 large-2 columns">
-										<img height="100" width="auto" src="<c:url value="/resources/img/chat.png" />">
-									</div>	
-									<div class="small-2 medium-2 large-2 columns">
-										<img height="100" width="auto" src="<c:url value="/resources/img/chat.png" />">
-									</div>	
-					<!-- </div> -->			
-				</div>
-			</div>	
+	
 			
 			
 		

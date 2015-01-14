@@ -9,7 +9,7 @@
 	href="http://cdn.foundation5.zurb.com/foundation.css">
     <title>List de categorie</title>  
     </head>  
-    <body>  
+    <body class="bg">  
       <%@ include file="../templates/header.jsp" %>
  
       <c:if test="${!empty catList}">  
