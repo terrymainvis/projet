@@ -39,6 +39,7 @@
                 <value>glp.domain.Categorie</value>   
                	<value>glp.domain.Utilisateur</value>   
                	<value>glp.domain.Champ</value>
+               	<value>glp.domain.ChampComplete</value>
             </list>    
         </property>   
   <property name="hibernateProperties">  
