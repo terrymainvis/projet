@@ -40,6 +40,7 @@
                	<value>glp.domain.Utilisateur</value>   
                	<value>glp.domain.Champ</value>
                	<value>glp.domain.ChampComplete</value>
+               	<value>glp.domain.Role</value>
             </list>    
         </property>   
   <property name="hibernateProperties">  
@@ -78,5 +79,7 @@
  <bean id="annonceServiceImpl" class="glp.services.AnnonceServiceImpl" />  
  <bean id="champDaoImpl" class="glp.dao.ChampDaoImpl" />  
  <bean id="champServiceImpl" class="glp.services.ChampServiceImpl" /> 
+ <bean id="roleDaoImpl" class="glp.dao.RoleDaoImpl" />  
+ <bean id="roleServiceImpl" class="glp.services.RoleServiceImpl" /> 
   
 </beans>  

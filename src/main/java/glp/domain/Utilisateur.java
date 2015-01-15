@@ -37,7 +37,8 @@ public class Utilisateur {
 	@Value("false")
 	private boolean contactAutreMail;
 	
-	
+	@Column(name="role_id")
+	private int roleId;
 	
 	public Utilisateur(){}
 	
@@ -45,6 +46,13 @@ public class Utilisateur {
 		this.prenom=prenom;
 		this.nom=nom;
 		this.mailLille1=mailLille1;
+	}
+	
+	public Utilisateur(String prenom, String nom, String mailLille1, int roleId) {
+		this.prenom=prenom;
+		this.nom=nom;
+		this.mailLille1=mailLille1;
+		this.roleId=roleId;
 	}
 
 	public String getPrenom() {
@@ -101,6 +109,14 @@ public class Utilisateur {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 	
 	

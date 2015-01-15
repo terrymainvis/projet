@@ -67,4 +67,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		session.saveOrUpdate(u);
 	}
 
+	@Override
+	public List<Utilisateur> getListByRole(int roleId) {
+		Session session =sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Utilisateur> utilisateurList = session.createQuery("from Utilisateur where role_id= :roleId").setParameter("roleId", roleId).list();
+		return utilisateurList;
+	}
+
 }

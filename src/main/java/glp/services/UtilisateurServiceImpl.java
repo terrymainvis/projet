@@ -63,4 +63,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	}
 
+	@Override
+	@Transactional
+	public List<Utilisateur> getListByRole(int roleId) {
+		return utilisateurDao.getListByRole(roleId);
+	}
+
 }

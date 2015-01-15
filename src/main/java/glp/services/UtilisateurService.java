@@ -19,5 +19,7 @@ public interface UtilisateurService {
 	public Utilisateur getUserInSession();
 	
 	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail);
+	
+	public List<Utilisateur> getListByRole(int roleId);
 
 }
