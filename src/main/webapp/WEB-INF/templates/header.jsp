@@ -6,7 +6,14 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/foundation.min.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />	">
+<%-- <link rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables.css" />"> --%>
+
+
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+	
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
 <nav class="top-bar marginbot" data-topbar role="navigation">
