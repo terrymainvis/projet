@@ -70,6 +70,13 @@
    <value>.jsp</value>  
   </property>  
  </bean> 
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 
+         <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="100000" />
+ 
+    </bean>
 
  <bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />  
  <bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />  

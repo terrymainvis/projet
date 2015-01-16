@@ -8,6 +8,9 @@ import glp.services.CategorieService;
 import glp.services.UtilisateurService;
 import glp.util.AnnonceValidator;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +28,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -33,10 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class AnnonceController {
 	@Autowired
 	private AnnonceService annonceService;
-
 	@Autowired
 	private CategorieService categorieService;
-
 	@Autowired
 	private UtilisateurService utilisateurService;
 
@@ -56,6 +59,7 @@ public class AnnonceController {
 
 		return new ModelAndView("ann_form", myModel);
 	}
+				
 	
 	@RequestMapping(value = "typechoice", method = RequestMethod.GET)
 	public ModelAndView getTypeChoix() {
@@ -93,8 +97,31 @@ public class AnnonceController {
 			return getAnnForm(ann);
 		}
 
+	@RequestMapping("/addAnn")/*@RequestParam(value="file", required = false) MultipartFile file*/
+	public ModelAndView addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,  @RequestParam("file") MultipartFile file) {
 		ann.setAuteur(utilisateurService.getUserInSession());
 		annonceService.insertRow(ann);
+		System.out.println("fffffahkdaoianjazofffffffff"+file.getName());
+		if (!file.isEmpty()) {
+			 try {
+               byte[] bytes = file.getBytes();
+               String rootPath = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img";
+               // Create the file on server
+               String nomImage = file.getName();
+               System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
+               System.out.println(nomImage + " ejkeozjoie boh"+file.getName()+"hellooooooooo chat");
+               File serverFile = new File(rootPath
+                     + File.separator + ann.getId()+".png");
+               System.out.println(serverFile);
+             BufferedOutputStream stream = new BufferedOutputStream(
+                     new FileOutputStream(serverFile));
+             stream.write(bytes);
+             stream.close();
+			 }catch(Exception e){
+			            	e.getMessage();
+			 }
+			
+		}
 		return new ModelAndView("redirect:/");
 		// return "ann_list";
 	}

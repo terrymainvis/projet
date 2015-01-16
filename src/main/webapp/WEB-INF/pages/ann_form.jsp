@@ -24,7 +24,7 @@
 		<div class="large-8 columns">
 			<div class="panel">
 				<form:form id="addAnnForm" modelAttribute="annonce" method="post"
-					action="addAnn">
+					action="addAnn" enctype="multipart/form-data">
 					<h2>Créez votre annonce !</h2>
 
 					<div>
@@ -58,6 +58,7 @@
 							placeholder="Décrivez votre annonce en quelque mots !" />
 						<form:errors path="desc" />
 					</div>
+					<div>File to upload: <input  type="file" name="file"/><br /> </div>
 					<div>
 						<input class="button" type="submit" value="Ajouter" />
 					</div>
@@ -87,6 +88,18 @@
 				</form:form>
 			</div>
 		</div>
+		<%-- <div class="large-4 columns">
+			<div class="panel callout radius">
+				<h5>Images de l'annonce</h5>
+				
+				
+				<form:form method="POST" action="uploadFile" enctype="multipart/form-data">
+					File to upload: <input type="file" name="file"><br /> 
+					Name: <input type="text" name="nameimage" value="image1.png"><br /> <br /> 
+					<input type="submit" value="Upload"> Press here to upload the file!
+				</form:form>
+			</div>
+		</div> --%>
 	</div>
 
 
