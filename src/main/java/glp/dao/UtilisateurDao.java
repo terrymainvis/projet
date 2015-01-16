@@ -19,5 +19,9 @@ public interface UtilisateurDao {
 	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail);
 	
 	public List<Utilisateur> getListByRole(int roleId);
+	
+	public boolean isModerateur(Utilisateur utilisateur);
+	
+	public boolean isAdministrateur(Utilisateur utilisateur);
 
 }

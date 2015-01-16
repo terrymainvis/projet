@@ -16,4 +16,6 @@ public interface RoleDao {
 	
 	public int deleteRow(int id);
 	
+	public Role getRowByNom(String nom);
+	
 }

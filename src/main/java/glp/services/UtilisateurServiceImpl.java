@@ -69,4 +69,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return utilisateurDao.getListByRole(roleId);
 	}
 
+	@Override
+	@Transactional
+	public boolean isModerateur(Utilisateur utilisateur) {
+		return utilisateurDao.isModerateur(utilisateur);
+	}
+
+	@Override
+	@Transactional
+	public boolean isAdministrateur(Utilisateur utilisateur) {
+		return utilisateurDao.isAdministrateur(utilisateur);
+	}
+
 }

@@ -15,5 +15,7 @@ public interface RoleService {
 	public int updateRow(Role role);
 	
 	public int deleteRow(int id);
-
+	
+	public Role getRowByNom(String nom);
+	
 }

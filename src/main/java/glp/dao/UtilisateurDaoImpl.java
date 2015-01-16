@@ -1,5 +1,6 @@
 package glp.dao;
 
+import glp.domain.Role;
 import glp.domain.Utilisateur;
 
 import java.io.Serializable;
@@ -73,6 +74,24 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		@SuppressWarnings("unchecked")
 		List<Utilisateur> utilisateurList = session.createQuery("from Utilisateur where role_id= :roleId").setParameter("roleId", roleId).list();
 		return utilisateurList;
+	}
+
+	@Override
+	public boolean isModerateur(Utilisateur utilisateur) {
+		Session session = sessionFactory.getCurrentSession();
+		Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
+		if(r.getNom().equals("MODERATEUR"))
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean isAdministrateur(Utilisateur utilisateur) {
+		Session session = sessionFactory.getCurrentSession();
+		Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
+		if(r.getNom().equals("ADMINISTRATEUR"))
+			return true;
+		return false;
 	}
 
 }

@@ -5,6 +5,7 @@ import glp.domain.Role;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,15 @@ public class RoleDaoImpl implements RoleDao {
 		session.delete(role);
 		Serializable idRole = session.getIdentifier(role);
 		return (Integer) idRole;
+	}
+
+	@Override
+	public Role getRowByNom(String nom) {
+		Session session =sessionFactory.getCurrentSession();
+		String sql = "select id FROM Role where role_nom LIKE :nom";
+		Query q = session.createQuery(sql).setParameter("nom", nom);
+		int id = (int) q.list().get(0);
+		return getRowById(id);
 	}
 
 }

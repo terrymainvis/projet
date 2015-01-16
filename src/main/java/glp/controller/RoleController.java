@@ -17,12 +17,12 @@ public class RoleController {
 	private RoleService roleService;
 	
 	@RequestMapping("new")
-	public ModelAndView getCatForm(@ModelAttribute Role role) {
+	public ModelAndView getRoleForm(@ModelAttribute Role role) {
 		return new ModelAndView("role_form");
 	}
 	
 	@RequestMapping("/addRole")
-	public ModelAndView addUser(@ModelAttribute("role") Role role) {
+	public ModelAndView addRole(@ModelAttribute("role") Role role) {
 		roleService.insertRow(role);
 		return new ModelAndView("redirect:/");
 	}
