@@ -44,7 +44,7 @@
 				<value>glp.domain.Utilisateur</value>
 				<value>glp.domain.Champ</value>
 				<value>glp.domain.ChampComplete</value>
-               	<value>glp.domain.Role</value>
+				<value>glp.domain.Role</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -75,14 +75,6 @@
 		</property>
 	</bean>
 
-	<bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />
-	<bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />
-	<bean id="categorieDaoImpl" class="glp.dao.CategorieDaoImpl" />
-	<bean id="categorieServiceImpl" class="glp.services.CategorieServiceImpl" />
-	<bean id="annonceDaoImpl" class="glp.dao.AnnonceDaoImpl" />
-	<bean id="annonceServiceImpl" class="glp.services.AnnonceServiceImpl" />
-
-
 	<bean
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
 		id="messageSource">
@@ -104,85 +96,8 @@
 		id="localeResolver">
 		<property name="defaultLocale" value="en"></property>
 	</bean>
-	
-
-
-
-
-
-
-</beans>  
-
-
-
-
-
-
-=======
-  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd" >  
   
- <context:component-scan base-package="glp.controller" />  
- <context:property-placeholder location="classpath:database.properties" />  
- <mvc:annotation-driven conversion-service="conversionService" />
- <mvc:resources mapping="/resources/**" location="/resources/" />
- <tx:annotation-driven transaction-manager="txManager" />
-
- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-    <property name="formatters">
-         <set>
-               <bean class="glp.util.CategorieFormatter"/>
-         </set>
-    </property>
-</bean>
-<beans:bean id="annonceValidator" class="glp.util.AnnonceValidator" />
- <bean id="dataSource"  
-  class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-  <property name="driverClassName" value="${database.driver}" />  
-  <property name="url" value="${database.url}" />  
-  <property name="username" value="${database.user}" />  
-  <property name="password" value="thomas" />  
- </bean>  
-  
- <bean id="sessionFactory"  
-  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
-  <property name="dataSource" ref="dataSource" />  
-  <property name="annotatedClasses">    
-            <list>    
-                <value>glp.domain.Annonce</value>
-                <value>glp.domain.Categorie</value>   
-               	<value>glp.domain.Utilisateur</value>   
-               	<value>glp.domain.Champ</value>
-               	<value>glp.domain.ChampComplete</value>
-               	<value>glp.domain.Role</value>
-            </list>    
-        </property>   
-  <property name="hibernateProperties">  
-   <props>  
-    <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>  
-    <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-    <prop key="hibernate.hbm2ddl.auto">update</prop>
-	<prop key="cache.provider_class">org.hibernate.NoCacheProvider</prop>
-   </props>  
-  </property>  
- </bean>  
-  
- <bean id="txManager"  
-  class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
-  <property name="sessionFactory" ref="sessionFactory" />  
- </bean>  
-  
- <bean id="persistenceExceptionTranslationPostProcessor"  
-  class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />  
-    
- <bean  
-  class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-  <property name="prefix">  
-   <value>/WEB-INF/pages/</value>  
-  </property>  
-  <property name="suffix">  
-   <value>.jsp</value>  
-  </property>  
- </bean> 
+ 
   <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
  
@@ -205,4 +120,3 @@
  <bean id="champCompleteServiceImpl" class="glp.services.ChampCompleteServiceImpl" /> 
   
 </beans>  
->>>>>>> Stashed changes
