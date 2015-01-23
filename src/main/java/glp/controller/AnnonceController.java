@@ -6,7 +6,6 @@ import glp.domain.Utilisateur;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.UtilisateurService;
-import glp.util.AnnonceValidator;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,15 +19,11 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,23 +74,23 @@ public class AnnonceController {
 		utilisateurService.updateRow(u);
 	}
 
-	@RequestMapping(value = "/addAnn", method = RequestMethod.POST)
-	public ModelAndView addAnnonce(
-			@ModelAttribute("annonce") @Valid Annonce ann,
-			BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
+//	@RequestMapping(value = "/addAnn", method = RequestMethod.POST)
+//	public ModelAndView addAnnonce(
+//			@ModelAttribute("annonce") @Valid Annonce ann,
+//			BindingResult bindingResult) {
+//
+//		if (bindingResult.hasErrors()) {
 //			Utilisateur utilisateur = utilisateurService.getUserInSession();
 //			List<Categorie> catList = categorieService.getList();
 //			Map<String, Object> myModel = new HashMap<String, Object>();
 //			myModel.put("catList", catList);
 //			myModel.put("utilisateur", utilisateur);
-			System.out.println(bindingResult.getFieldErrorCount());
-			System.out.println("TEST OK YA DES ERREURS");
+//			System.out.println(bindingResult.getFieldErrorCount());
+//			System.out.println("TEST OK YA DES ERREURS");
 			// return "ann_form";
 //			return new ModelAndView("ann_form", myModel);
-			return getAnnForm(ann);
-		}
+//			return getAnnForm(ann);
+//		}
 
 	@RequestMapping("/addAnn")/*@RequestParam(value="file", required = false) MultipartFile file*/
 	public ModelAndView addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,  @RequestParam("file") MultipartFile file) {
