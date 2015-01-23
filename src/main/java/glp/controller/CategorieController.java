@@ -51,13 +51,9 @@ public class CategorieController {
 	public ModelAndView getAnnForm(@ModelAttribute Champ champ) {
 		List<Categorie> catlist = categorieService.getList();
 		
-		List<TypeChampEnum> typelist = new ArrayList<TypeChampEnum>();
-		for(int i=0 ; i<TypeChampEnum.values().length ; i++)
-			typelist.add(TypeChampEnum.values()[i]);
-		
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("catlist", catlist);
-		myModel.put("typelist", typelist);
+		myModel.put("typelist", TypeChampEnum.values());
 		
 		return new ModelAndView("champ_form", myModel);
 	}

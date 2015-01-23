@@ -5,6 +5,7 @@ import glp.domain.Categorie;
 import glp.domain.Utilisateur;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
+import glp.services.ChampCompleteService;
 import glp.services.UtilisateurService;
 
 import java.io.BufferedOutputStream;
@@ -37,6 +38,8 @@ public class AnnonceController {
 	private CategorieService categorieService;
 	@Autowired
 	private UtilisateurService utilisateurService;
+	@Autowired
+	private ChampCompleteService ccService;
 
 	public AnnonceController() {
 	}
@@ -74,12 +77,21 @@ public class AnnonceController {
 		utilisateurService.updateRow(u);
 	}
 
+
 //	@RequestMapping(value = "/addAnn", method = RequestMethod.POST)
 //	public ModelAndView addAnnonce(
 //			@ModelAttribute("annonce") @Valid Annonce ann,
 //			BindingResult bindingResult) {
 //
 //		if (bindingResult.hasErrors()) {
+	/*
+	@RequestMapping(value = "/addAnn", method = RequestMethod.POST)
+	public ModelAndView addAnnonce(
+			@ModelAttribute("annonce") @Valid Annonce ann,
+			BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+>>>>>>> Stashed changes
 //			Utilisateur utilisateur = utilisateurService.getUserInSession();
 //			List<Categorie> catList = categorieService.getList();
 //			Map<String, Object> myModel = new HashMap<String, Object>();
@@ -89,8 +101,15 @@ public class AnnonceController {
 //			System.out.println("TEST OK YA DES ERREURS");
 			// return "ann_form";
 //			return new ModelAndView("ann_form", myModel);
+<<<<<<< Updated upstream
 //			return getAnnForm(ann);
 //		}
+=======
+			return getAnnForm(ann);
+		}
+		*/
+	
+
 
 	@RequestMapping("/addAnn")/*@RequestParam(value="file", required = false) MultipartFile file*/
 	public ModelAndView addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,  @RequestParam("file") MultipartFile file) {
@@ -120,6 +139,7 @@ public class AnnonceController {
 		return new ModelAndView("redirect:/");
 		// return "ann_list";
 	}
+	
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getAnnList() {
@@ -138,6 +158,7 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annonce", annonce);
 		myModel.put("catList", catList);
+		myModel.put("champscompletes", ccService.getListByAnn(annonce));
 		return new ModelAndView("consultAnn", myModel);
 	}
 
