@@ -1,92 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:beans="http://www.springframework.org/schema/beans"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"  
- xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"  
- xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd  
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
-  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd" >  
-  
- <context:component-scan base-package="glp.controller" />  
- <context:property-placeholder location="classpath:database.properties" />  
- <mvc:annotation-driven conversion-service="conversionService" />
- <mvc:resources mapping="/resources/**" location="/resources/" />
- <tx:annotation-driven transaction-manager="txManager" />
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-    <property name="formatters">
-         <set>
-               <bean class="glp.util.CategorieFormatter"/>
-         </set>
-    </property>
-</bean>
-<beans:bean id="annonceValidator" class="glp.util.AnnonceValidator" />
- <bean id="dataSource"  
-  class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-  <property name="driverClassName" value="${database.driver}" />  
-  <property name="url" value="${database.url}" />  
-  <property name="username" value="${database.user}" />  
-  <property name="password" value="${database.password}" />  
- </bean>  
-  
- <bean id="sessionFactory"  
-  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
-  <property name="dataSource" ref="dataSource" />  
-  <property name="annotatedClasses">    
-            <list>    
-                <value>glp.domain.Annonce</value>
-                <value>glp.domain.Categorie</value>   
-               	<value>glp.domain.Utilisateur</value>   
-               	<value>glp.domain.Champ</value>
-               	<value>glp.domain.ChampComplete</value>
-               	<value>glp.domain.Role</value>
-            </list>    
-        </property>   
-  <property name="hibernateProperties">  
-   <props>  
-    <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>  
-    <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-    <prop key="hibernate.hbm2ddl.auto">update</prop>
-	<prop key="cache.provider_class">org.hibernate.NoCacheProvider</prop>
-   </props>  
-  </property>  
- </bean>  
-  
- <bean id="txManager"  
-  class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
-  <property name="sessionFactory" ref="sessionFactory" />  
- </bean>  
-  
- <bean id="persistenceExceptionTranslationPostProcessor"  
-  class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />  
-    
- <bean  
-  class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-  <property name="prefix">  
-   <value>/WEB-INF/pages/</value>  
-  </property>  
-  <property name="suffix">  
-   <value>.jsp</value>  
-  </property>  
- </bean> 
-  <bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
- 
-         <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="100000" />
- 
-    </bean>
+	<context:component-scan base-package="glp.controller" />
+	<context:property-placeholder location="classpath:database.properties" />
+	<mvc:annotation-driven conversion-service="conversionService" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<tx:annotation-driven transaction-manager="txManager" />
 
- <bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />  
- <bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />  
- <bean id="categorieDaoImpl" class="glp.dao.CategorieDaoImpl" />  
- <bean id="categorieServiceImpl" class="glp.services.CategorieServiceImpl" />  
- <bean id="annonceDaoImpl" class="glp.dao.AnnonceDaoImpl" />  
- <bean id="annonceServiceImpl" class="glp.services.AnnonceServiceImpl" />  
- <bean id="champDaoImpl" class="glp.dao.ChampDaoImpl" />  
- <bean id="champServiceImpl" class="glp.services.ChampServiceImpl" /> 
- <bean id="roleDaoImpl" class="glp.dao.RoleDaoImpl" />  
- <bean id="roleServiceImpl" class="glp.services.RoleServiceImpl" /> 
-  
+
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<bean class="glp.util.CategorieFormatter" />
+			</set>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driver}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.user}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>glp.domain.Annonce</value>
+				<value>glp.domain.Categorie</value>
+				<value>glp.domain.Utilisateur</value>
+				<value>glp.domain.Champ</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="cache.provider_class">org.hibernate.NoCacheProvider</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean id="utilisateurDaoImpl" class="glp.dao.UtilisateurDaoImpl" />
+	<bean id="utilisateurServiceImpl" class="glp.services.UtilisateurServiceImpl" />
+	<bean id="categorieDaoImpl" class="glp.dao.CategorieDaoImpl" />
+	<bean id="categorieServiceImpl" class="glp.services.CategorieServiceImpl" />
+	<bean id="annonceDaoImpl" class="glp.dao.AnnonceDaoImpl" />
+	<bean id="annonceServiceImpl" class="glp.services.AnnonceServiceImpl" />
+
+
+	<bean
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename" value="classpath:messages"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+
+
+
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
+
+
+
+	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+		id="localeResolver">
+		<property name="defaultLocale" value="en"></property>
+	</bean>
+	
+
+
+
+
+
+
 </beans>  
+
+
+
+
+
+
