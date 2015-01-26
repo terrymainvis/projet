@@ -52,6 +52,9 @@ public class Annonce {
 	@OneToMany(mappedBy="ann")
 	private Set<ChampComplete> champscompletes;
 	
+	@Column(name="ann_valide")
+	private Boolean valide;
+	
 	public Annonce(){
 		
 	}
@@ -135,6 +138,14 @@ public class Annonce {
 
 	public void setChampscompletes(Set<ChampComplete> champscompletes) {
 		this.champscompletes = champscompletes;
+	}
+
+	public Boolean getValide() {
+		return valide;
+	}
+
+	public void setValide(boolean valide) {
+		this.valide = valide;
 	}
 	
 	

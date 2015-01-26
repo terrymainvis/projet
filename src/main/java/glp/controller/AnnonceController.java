@@ -2,10 +2,12 @@ package glp.controller;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
+import glp.domain.Role;
 import glp.domain.Utilisateur;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.ChampCompleteService;
+import glp.services.RoleService;
 import glp.services.UtilisateurService;
 
 import java.io.BufferedOutputStream;
@@ -39,6 +41,8 @@ public class AnnonceController {
 	@Autowired
 	private UtilisateurService utilisateurService;
 	@Autowired
+	private RoleService roleService;
+	@Autowired
 	private ChampCompleteService ccService;
 
 	public AnnonceController() {
@@ -54,14 +58,18 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("catList", catList);
 		myModel.put("utilisateur", utilisateur);
-
+		myModel.put("roleList",  roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_form", myModel);
 	}
 				
 	
 	@RequestMapping(value = "typechoice", method = RequestMethod.GET)
 	public ModelAndView getTypeChoix() {
-		return new ModelAndView("ann_type_choix");
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("roleList",  roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		return new ModelAndView("ann_type_choix", myModel);
 	}
 
 	@RequestMapping(value = "/updateMailUtilisateur", method = RequestMethod.POST)
@@ -141,13 +149,27 @@ public class AnnonceController {
 	}
 	
 
+//	@RequestMapping(value = "list", method = RequestMethod.GET)
+//	public ModelAndView getAnnList() {
+//		List<Annonce> annList = annonceService.getList();
+//		List<Categorie> catList = categorieService.getList();
+//		Map<String, Object> myModel = new HashMap<String, Object>();
+//		myModel.put("annList", annList);
+//		myModel.put("catList", catList);
+//		myModel.put("roleList",  roleService.getList());
+//		myModel.put("utilisateur", utilisateurService.getUserInSession());
+//		return new ModelAndView("ann_list",myModel);
+//	}
+	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ModelAndView getAnnList() {
-		List<Annonce> annList = annonceService.getList();
+	public ModelAndView getAnnListValides() {
+		List<Annonce> annList = annonceService.getListValides();
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);
 		myModel.put("catList", catList);
+		myModel.put("roleList",  roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list",myModel);
 	}
 
@@ -159,6 +181,8 @@ public class AnnonceController {
 		myModel.put("annonce", annonce);
 		myModel.put("catList", catList);
 		myModel.put("champscompletes", ccService.getListByAnn(annonce));
+		myModel.put("roleList",  roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("consultAnn", myModel);
 	}
 
@@ -170,6 +194,8 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);
 		myModel.put("catList", catList);
+		myModel.put("roleList",  roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
 

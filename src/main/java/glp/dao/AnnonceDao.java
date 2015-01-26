@@ -23,6 +23,10 @@ public interface AnnonceDao {
 
 	public List<Annonce> getListByMot(String searchText);
 
+	public List<Annonce> getListAModerer();
+
+	public List<Annonce> getListValides();
+
 	
 	
 

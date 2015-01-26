@@ -40,8 +40,8 @@ public class AnnonceServiceImpl implements AnnonceService {
 
 	@Override
 	@Transactional
-	public int updateRow(Annonce cat) {
-		return annonceDao.updateRow(cat);
+	public int updateRow(Annonce annonce) {
+		return annonceDao.updateRow(annonce);
 	}
 
 	@Override
@@ -79,6 +79,18 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Transactional
 	public List<Annonce> getListByCatEtMot(String cat, String motcle) {
 		return annonceDao.getListByCatEtMot(categorieDao.getIdByLib(cat), motcle);
+	}
+	
+	@Override
+	@Transactional
+	public List<Annonce> getListAModerer() {
+		return annonceDao.getListAModerer();
+	}
+	
+	@Override
+	@Transactional
+	public List<Annonce> getListValides() {
+		return annonceDao.getListValides();
 	}
 
 }

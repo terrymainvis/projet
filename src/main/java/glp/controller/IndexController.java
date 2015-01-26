@@ -2,8 +2,11 @@ package glp.controller;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
+import glp.domain.Role;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
+import glp.services.RoleService;
+import glp.services.UtilisateurService;
 import glp.util.IdBasicCategorie;
 
 import java.util.HashMap;
@@ -22,6 +25,12 @@ public class IndexController {
 
 	@Autowired
 	private AnnonceService annonceService;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UtilisateurService utilisateurService;
 
 	@RequestMapping("/")
 	public ModelAndView getIndex() {
@@ -31,11 +40,11 @@ public class IndexController {
 		// get les annonces les plus récentes
 		List<Annonce> annList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.ANNONCE)); 
 		List<Annonce> covoitList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.COVOIT)); 
-
 		modelIndex.put("covoitList", covoitList);
 		modelIndex.put("annList", annList);
-//		modelIndex.put("catList", listeCat);
-//		request.getSession().setAttribute("catList", listeCat);
+		modelIndex.put("roleList",  roleService.getList());
+		modelIndex.put("utilisateur", utilisateurService.getUserInSession());
+		modelIndex.put("catList", listeCat);
 
 
 		return new ModelAndView("../index", modelIndex);

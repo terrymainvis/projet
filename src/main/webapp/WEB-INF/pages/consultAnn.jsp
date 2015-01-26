@@ -12,8 +12,42 @@
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
+	
+	<c:forEach items="${roleList}" var="role">
+	    <c:if test="${utilisateur.roleId==role.id}">
+	    	<c:if test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
+				<div class="row">
+					<div class="large-12 columns">
+						<div class="panel">
+							<a href="<c:url value="/moderation/list"/>"><h3>Modération</h3></a>
+							<p>
+							Statut de l'annonce : <b>
+							<c:choose>
+							  <c:when test="${annonce.valide=='TRUE'}">
+							    Validée
+							  </c:when>
+							  <c:when test="${annonce.valide=='FALSE'}">
+							    Refusée
+							  </c:when>
+							  <c:otherwise>
+							    En attente
+							  </c:otherwise>
+							</c:choose>
+							</b>
+							</p>
+							<p class="text-center">
+								<a href="<c:url value='/moderation/valider/annonce/${annonce.id}' />" class="button success">Valider l'annonce</a>
+								<a href="<c:url value='/moderation/refuser/annonce/${annonce.id}' />" class="button alert">Refuser l'annonce</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</c:if>
+	    </c:if>
+	</c:forEach>
+	
 	<div class="row">
-		<div class="large-10 columns">
+		<div class="large-12 columns">
 			<div class="panel">
 
 				<div class="row" style="text-align: center">

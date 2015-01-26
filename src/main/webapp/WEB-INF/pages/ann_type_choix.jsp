@@ -30,7 +30,7 @@
 				<hr>
 				<p>Je peux rendre certains services ou possède des objets que je
 					veux preter ou vendre</p>
-				<a href="<c:url value="/annonce/new?type)give"/>" class="button round">Proposer</a>
+				<a href="<c:url value="/annonce/new?type=give"/>" class="button round">Proposer</a>
 			</div>
 		</div>
 	</div>

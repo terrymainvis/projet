@@ -32,6 +32,17 @@
 			</li>
 		</ul>
 		<ul class="left">
+		
+		<c:forEach items="${roleList}" var="role">
+<%-- 			<c:out value="${role.nom}"></c:out> --%>
+<%-- 			<c:out value="${utilisateur.roleId}"></c:out> --%>
+		
+		    <c:if test="${utilisateur.roleId==role.id}">
+		    	<c:if test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
+					<li><a href="<c:url value="/moderation/list"/>">Mod&eacuteration</a></li>
+				</c:if>
+		    </c:if>
+		</c:forEach>
 			<li><a href="#">Mon compte</a></li>
 			<li class="has-dropdown"><a href="#">Covoiturage</a>
 				<ul class="dropdown">

@@ -6,6 +6,7 @@ import glp.domain.Utilisateur;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public Integer insertRow(Utilisateur u) /*throws HibernateException */{
 		Session session = sessionFactory.getCurrentSession();
 		/*try {*/
+			String sql = "select id FROM Role where role_nom LIKE :rolenom";
+			Query q = session.createQuery(sql).setParameter("rolenom", "UTILISATEUR");
+			int idRole = (int) q.list().get(0);
+			u.setRoleId(idRole);
 			session.saveOrUpdate(u);
 			Serializable id = session.getIdentifier(u);
 			return (Integer) id;

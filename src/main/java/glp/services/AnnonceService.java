@@ -11,7 +11,7 @@ public interface AnnonceService {
 	
 	public Annonce getRowById(int id);
 	
-	public int updateRow(Annonce cat);
+	public int updateRow(Annonce annonce);
 	
 	public int deleteRow(int id);
 	
@@ -23,6 +23,9 @@ public interface AnnonceService {
 
 	public List<Annonce> getListByMot(String searchText);
 
-	
 	public List<Annonce> getListByCatEtMot(String cat, String motcle );
+	
+	public List<Annonce> getListAModerer();
+	
+	public List<Annonce> getListValides();
 }

@@ -30,6 +30,15 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createQuery("from Annonce").list();
 		return annonceList;
 	}
+	
+	@Override
+	public List<Annonce> getListValides() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		//FALSE = refusée - NULL = en attente - TRUE = validée
+		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=TRUE").list();
+		return annonceList;
+	}
 
 	@Override
 	public Annonce getRowById(int id) {
@@ -103,5 +112,15 @@ public class AnnonceDaoImpl implements AnnonceDao {
 				.list();
 		return annonceList;
 	}
+	
+	@Override
+	public List<Annonce> getListAModerer() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		//FALSE = refusée - NULL = en attente - TRUE = validée
+		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=NULL").list();
+		return annonceList;
+	}
+
 	
 }
