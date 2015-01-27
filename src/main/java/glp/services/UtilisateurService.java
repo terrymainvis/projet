@@ -25,5 +25,7 @@ public interface UtilisateurService {
 	public boolean isModerateur(Utilisateur utilisateur);
 	
 	public boolean isAdministrateur(Utilisateur utilisateur);
+	
+	public Utilisateur getRowById(int id);
 
 }

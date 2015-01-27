@@ -6,9 +6,10 @@ import glp.domain.Utilisateur;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UtilisateurDaoImpl implements UtilisateurDao {
@@ -17,36 +18,33 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	SessionFactory sessionFactory;
 
 	@Override
-	public Integer insertRow(Utilisateur u) /*throws HibernateException */{
+	public Integer insertRow(Utilisateur u) {
 		Session session = sessionFactory.getCurrentSession();
-		/*try {*/
-			String sql = "select id FROM Role where role_nom LIKE :rolenom";
-			Query q = session.createQuery(sql).setParameter("rolenom", "UTILISATEUR");
-			int idRole = (int) q.list().get(0);
-			u.setRoleId(idRole);
+			@SuppressWarnings("unchecked")
+			List<Role> listRoles = session.createCriteria(Role.class)
+			        .add(Restrictions.eq("nom", "UTILISATEUR"))
+			        .list();
+			u.setRoleId(listRoles.get(0).getId());
 			session.saveOrUpdate(u);
 			Serializable id = session.getIdentifier(u);
 			return (Integer) id;
-		/*} catch (ConstraintViolationException e) {
-
-		}*/
-
 	}
 
 	@Override
 	public List<Utilisateur> getList() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Utilisateur> utilisateursList = session.createQuery(
-				"from Utilisateur").list();
+		List<Utilisateur> utilisateursList = session.createCriteria(Utilisateur.class).addOrder(Order.asc("nom")).list();
 		return utilisateursList;
 	}
 
 	@Override
 	public Utilisateur getRowById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		Utilisateur u = (Utilisateur) session.load(Utilisateur.class, id);
-		return u;
+		@SuppressWarnings("unchecked")
+		List<Utilisateur> listUti = session.createCriteria(Utilisateur.class)
+        .add(Restrictions.idEq(id)).list();
+		return listUti.get(0);
 	}
 
 	@Override
@@ -77,26 +75,32 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	public List<Utilisateur> getListByRole(int roleId) {
 		Session session =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Utilisateur> utilisateurList = session.createQuery("from Utilisateur where role_id= :roleId").setParameter("roleId", roleId).list();
+		List<Utilisateur> utilisateurList = session.createCriteria(Utilisateur.class)
+        .add(Restrictions.eq("roleId", roleId))
+        .addOrder(Order.asc("nom"))
+        .list();
 		return utilisateurList;
 	}
 
 	@Override
 	public boolean isModerateur(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
-		Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
-		if(r.getNom().equals("MODERATEUR"))
-			return true;
+		if(utilisateur.getRoleId()!=0) {
+			Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
+			if(r.getNom().equals("MODERATEUR"))
+				return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean isAdministrateur(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
-		Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
-		if(r.getNom().equals("ADMINISTRATEUR"))
-			return true;
+		if(utilisateur.getRoleId()!=0) {
+			Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
+			if(r.getNom().equals("ADMINISTRATEUR"))
+				return true;
+		}
 		return false;
 	}
-
 }

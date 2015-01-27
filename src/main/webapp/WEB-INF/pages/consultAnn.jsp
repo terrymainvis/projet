@@ -17,7 +17,7 @@
 	    <c:if test="${utilisateur.roleId==role.id}">
 	    	<c:if test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
 				<div class="row">
-					<div class="large-12 columns">
+					<div class="small-12 columns">
 						<div class="panel">
 							<a href="<c:url value="/moderation/list"/>"><h3>Modération</h3></a>
 							<p>

@@ -5,9 +5,10 @@ import glp.domain.Role;
 import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class RoleDaoImpl implements RoleDao {
@@ -27,15 +28,17 @@ public class RoleDaoImpl implements RoleDao {
 	public List<Role> getList() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Role> roleList = session.createQuery("from Role").list();
+		List<Role> roleList = session.createCriteria(Role.class).addOrder(Order.asc("nom")).list();
 		return roleList;
 	}
 
 	@Override
 	public Role getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Role role = (Role) session.load(Role.class, id);
-		return role;
+		@SuppressWarnings("unchecked")
+		List<Role> listRoles = session.createCriteria(Role.class)
+        .add(Restrictions.idEq(id)).list();
+		return listRoles.get(0);
 	}
 
 	@Override
@@ -58,10 +61,11 @@ public class RoleDaoImpl implements RoleDao {
 	@Override
 	public Role getRowByNom(String nom) {
 		Session session =sessionFactory.getCurrentSession();
-		String sql = "select id FROM Role where role_nom LIKE :nom";
-		Query q = session.createQuery(sql).setParameter("nom", nom);
-		int id = (int) q.list().get(0);
-		return getRowById(id);
+		@SuppressWarnings("unchecked")
+		List<Role> listRoles = session.createCriteria(Role.class)
+        .add(Restrictions.eq("nom", nom))
+        .list();
+		return listRoles.get(0);
 	}
 
 }

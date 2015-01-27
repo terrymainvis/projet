@@ -36,12 +36,21 @@
 		<c:forEach items="${roleList}" var="role">
 <%-- 			<c:out value="${role.nom}"></c:out> --%>
 <%-- 			<c:out value="${utilisateur.roleId}"></c:out> --%>
-		
-		    <c:if test="${utilisateur.roleId==role.id}">
-		    	<c:if test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
-					<li><a href="<c:url value="/moderation/list"/>">Mod&eacuteration</a></li>
-				</c:if>
-		    </c:if>
+			<c:if test="${utilisateur.roleId==role.id}">
+				<c:choose>
+				  <c:when test="${(role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
+				    <li class="has-dropdown"><a href="#">Administration</a>
+						<ul class="dropdown">
+							 <li><a href="<c:url value="/administration/list"/>">Liste des utilisateurs</a></li>
+							 <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
+						</ul>
+					</li>
+				  </c:when>
+				  <c:when test="${(role.nom=='MODERATEUR')}">
+				    <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
+				  </c:when>
+				</c:choose>
+			</c:if>
 		</c:forEach>
 			<li><a href="#">Mon compte</a></li>
 			<li class="has-dropdown"><a href="#">Covoiturage</a>

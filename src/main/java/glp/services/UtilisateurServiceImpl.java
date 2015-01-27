@@ -80,5 +80,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public boolean isAdministrateur(Utilisateur utilisateur) {
 		return utilisateurDao.isAdministrateur(utilisateur);
 	}
+	
+	@Override
+	@Transactional
+	public Utilisateur getRowById(int id) {
+		return utilisateurDao.getRowById(id);
+	}
 
 }
