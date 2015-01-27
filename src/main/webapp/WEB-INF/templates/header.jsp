@@ -58,7 +58,7 @@
 					<li><a href="<c:url value="/annonce/list" />">Recherche </a></li>
 				</ul></li>
 
-			<li><a href="#">Job</a></li>
+			<li><a href="<c:url value="/job/list" />">Job</a></li>
 			<li><a href="#">Forum</a></li>
 		</ul>
 		<form action="annonce/recherche" id="formulaireCat">

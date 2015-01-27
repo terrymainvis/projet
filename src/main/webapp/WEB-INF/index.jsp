@@ -61,6 +61,23 @@
 			<div class="panel">
 				<h5>Job étudiant</h5>
 				<br>
+				<c:forEach begin="0" end="9" items="${jobList}" var="job">
+					<div class="row">
+						
+						<div class="small-5 columns">
+							<span> ${job.titre} </span> <br> <span>
+								 </span>
+						</div>
+						<div class="small-5 columns">
+							<a href="<c:url value='/job/${job.id}' />"
+								class="button round">Voir l'offre</a>
+						</div>
+					</div>
+
+				</c:forEach>
+				
+				
+				<br>
 			</div>
 		</li>
 		<li>
