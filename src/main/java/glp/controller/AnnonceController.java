@@ -66,10 +66,14 @@ public class AnnonceController {
 	
 	@RequestMapping(value = "typechoice", method = RequestMethod.GET)
 	public ModelAndView getTypeChoix() {
+
+		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("roleList",  roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		myModel.put("catList", catList);
 		return new ModelAndView("ann_type_choix", myModel);
+
 	}
 
 	@RequestMapping(value = "/updateMailUtilisateur", method = RequestMethod.POST)
@@ -85,38 +89,6 @@ public class AnnonceController {
 		utilisateurService.updateRow(u);
 	}
 
-
-//	@RequestMapping(value = "/addAnn", method = RequestMethod.POST)
-//	public ModelAndView addAnnonce(
-//			@ModelAttribute("annonce") @Valid Annonce ann,
-//			BindingResult bindingResult) {
-//
-//		if (bindingResult.hasErrors()) {
-	/*
-	@RequestMapping(value = "/addAnn", method = RequestMethod.POST)
-	public ModelAndView addAnnonce(
-			@ModelAttribute("annonce") @Valid Annonce ann,
-			BindingResult bindingResult) {
-
-		if (bindingResult.hasErrors()) {
->>>>>>> Stashed changes
-//			Utilisateur utilisateur = utilisateurService.getUserInSession();
-//			List<Categorie> catList = categorieService.getList();
-//			Map<String, Object> myModel = new HashMap<String, Object>();
-//			myModel.put("catList", catList);
-//			myModel.put("utilisateur", utilisateur);
-//			System.out.println(bindingResult.getFieldErrorCount());
-//			System.out.println("TEST OK YA DES ERREURS");
-			// return "ann_form";
-//			return new ModelAndView("ann_form", myModel);
-<<<<<<< Updated upstream
-//			return getAnnForm(ann);
-//		}
-=======
-			return getAnnForm(ann);
-		}
-		*/
-	
 
 
 	@RequestMapping("/addAnn")/*@RequestParam(value="file", required = false) MultipartFile file*/

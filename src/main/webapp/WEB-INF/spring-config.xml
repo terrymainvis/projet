@@ -119,7 +119,7 @@
  <bean id="roleServiceImpl" class="glp.services.RoleServiceImpl" /> 
  <bean id="champCompleteDaoImpl" class="glp.dao.ChampCompleteDaoImpl" />  
  <bean id="champCompleteServiceImpl" class="glp.services.ChampCompleteServiceImpl" /> 
-  <bean id="JobDaoImpl" class="glp.dao.RoleDaoImpl" />  
- <bean id="JobServiceImpl" class="glp.services.RoleServiceImpl" /> 
+  <bean id="jobDaoImpl" class="glp.dao.JobDaoImpl" />  
+ <bean id="jobServiceImpl" class="glp.services.JobServiceImpl" /> 
   
 </beans>  
