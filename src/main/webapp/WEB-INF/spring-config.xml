@@ -45,7 +45,7 @@
 				<value>glp.domain.Champ</value>
 				<value>glp.domain.ChampComplete</value>
 				<value>glp.domain.Role</value>
-					<value>glp.domain.job</value>
+					<value>glp.domain.Job</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
