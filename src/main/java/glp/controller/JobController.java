@@ -57,8 +57,9 @@ public class JobController {
 		
 		@RequestMapping("{id}")
 		public ModelAndView getJob(@PathVariable("id") int idJobSelected) {
+			System.out.println("l'identifiant c'est "+idJobSelected);
 			Job job = jobService.getRowById(idJobSelected);
-			//System.out.println("joooooooooob"+job.getTitre()+" "+ job.getDesc());
+			System.out.println("joooooooooob"+job.getTitre()+" "+ job.getDesc());
 			
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("job", job);

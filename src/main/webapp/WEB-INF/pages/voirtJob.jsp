@@ -19,7 +19,7 @@
 				<div class="row" style="text-align: center">
 					<!-- <div class="large-10 columns"> -->
 					<div class="panel">
-						<span><h4>${job.desc}</h4> </span>
+						<span><h4>${job.titre}</h4> </span>
 					</div>
 					<!-- </div> -->
 				</div>
