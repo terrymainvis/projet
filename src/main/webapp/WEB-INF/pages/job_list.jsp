@@ -43,8 +43,8 @@
 							<tr>
 								<th>Titre</th>
 								<th>description</th>
-								<th>date du debut</th>
-								<th>date du fin</th>
+								<th>Prix</th>
+								
 								<th></th>
 								<th></th>
 							</tr>
@@ -66,6 +66,7 @@
 										<td>
 											<table border="0" cellspacing="0" cellpadding="0">
 												<tr>
+											
 													<td width="500" height="80" style="word-break:break-all;"><i>${job.desc.toString().substring(0,50)}</i>...</td>
 												</tr>
 											</table>
@@ -73,24 +74,14 @@
 										<td>
 											<table border="0" cellspacing="0" cellpadding="0">
 												<tr>
-													<td width="270" height="80" >${job.date_deb.toString().substring(0,10)}</td>
+													<td width="270" height="80" >${job.prix}</td>
 												</tr>
 											</table>
 
 
 										</td>
-										<td>
-											<table border="0" cellspacing="0" cellpadding="0"
-												width="100%">
-												<tr>
-													<td width="250" height="80" >${job.date_fin.toString().substring(0,10)}</td>
-												</tr>
-											</table>
-
-
-										</td>
-
-										<td><a href="<c:url value='/job/${job.id}' />"
+									
+										<td><a href="<c:url value='/job/${job.id}'/>"
 											class="button round">Details</a></td>
 									</tr>
 								</c:forEach>
@@ -104,7 +95,7 @@
 
 	<br>
 <!-- 	il faut que ça soit accessible que pour l'admin,prof(tous sauf les étudiants) -->	
-<a href="job_form">Ajout une nouvelle offre de job</a>
+<a href="<c:url value="/job/new"  />">Ajout une nouvelle offre de job</a>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#listejobs').DataTable({});

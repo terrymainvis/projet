@@ -1,5 +1,6 @@
 package glp.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,12 @@ import glp.services.UtilisateurService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -40,11 +43,16 @@ public class JobController {
 		}
 		
 		
-		@RequestMapping("/addjob")/*@RequestParam(value="file", required = false) MultipartFile file*/
-		public ModelAndView addJob(@ModelAttribute("job") @Valid Job job) {
+		@RequestMapping(value="addjob")/*@RequestParam(value="file", required = false) MultipartFile file*/
+		public ModelAndView addJob(Model model ,@RequestParam String titre,
+												@RequestParam String desc,
+												@RequestParam Date date_fin,
+												@RequestParam String prix) {
+			Job job = new Job(titre, desc, date_fin, prix);
 			job.setAuteur(utilisateurService.getUserInSession());
 			jobService.insertRow(job);
 			return new ModelAndView("redirect:/");
+			//return new ModelAndView("redirect:/");
 		}
 		
 		@RequestMapping(value = "list", method = RequestMethod.GET)
@@ -59,7 +67,6 @@ public class JobController {
 		public ModelAndView getJob(@PathVariable("id") int idJobSelected) {
 			System.out.println("l'identifiant c'est "+idJobSelected);
 			Job job = jobService.getRowById(idJobSelected);
-			System.out.println("joooooooooob"+job.getTitre()+" "+ job.getDesc());
 			
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("job", job);

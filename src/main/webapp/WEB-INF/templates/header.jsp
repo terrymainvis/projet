@@ -98,26 +98,26 @@
     |  
     <a href="<c:url value="?lang=en"/>">EN</a>  
 </span>
-<script>
-// 	$("#searchCat").click(
-// 			function() {
-// 				if ($("#inputSearchCat").val() !== "") {
-// 					var input = $("<input>").attr("type", "hidden").attr(
-// 							"name", "searchText").val(
-// 							$("#inputSearchCat").val());
-// 					$("#formulaireCat").attr("action",
-// 							"/lille1community/categorie/annonceByMot").append(
-// 							input).submit();
-// 				} else {
-// 					var input = $("<input>").attr("type", "hidden").attr(
-// 							"name", "idCatSelect").val(
-// 							$("#idSelectCat option:selected").attr("id"));
-// 					$("#formulaireCat").attr("action",
-// 							"/lille1community/categorie/annonceByCat").append(
-// 							input).submit();
-// 				}
-// 			});
-</script>
+<!-- <script>
+ 	$("#searchCat").click(
+ 			function() {
+ 				if ($("#inputSearchCat").val() !== "") {
+					var input = $("<input>").attr("type", "hidden").attr(
+ 							"name", "searchText").val(
+ 							$("#inputSearchCat").val());
+ 					$("#formulaireCat").attr("action",
+ 							"/lille1community/categorie/annonceByMot").append(
+ 							input).submit();
+ 				} else {
+ 					var input = $("<input>").attr("type", "hidden").attr(
+ 							"name", "idCatSelect").val(
+ 							$("#idSelectCat option:selected").attr("id"));
+ 					$("#formulaireCat").attr("action",
+ 							"/lille1community/categorie/annonceByCat").append(
+							input).submit();
+				}
+			});
+</script> -->
 <script>
 	$(document).foundation();
 

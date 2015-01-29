@@ -19,6 +19,7 @@ public class JobDaoImpl implements JobDao{
 	@Override
 	public int insertRow(Job job) {
 		Session session = sessionFactory.getCurrentSession();
+		//session.beginTransaction();
 		session.saveOrUpdate(job);
 		Serializable id = session.getIdentifier(job);
 		return (Integer) id;
@@ -37,6 +38,7 @@ public class JobDaoImpl implements JobDao{
 	public Job getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Job job = (Job) session.load(Job.class, new Integer(id));
+		System.out.println(job.getDesc());
 		return job;
 	}
 

@@ -9,6 +9,21 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">
+	
+	<style type="text/css">
+	#global
+	{
+		
+		margin: 0 auto;
+		width: 200px;
+	}
+	#backg
+	{
+		background-color: #E6E6E6;
+	}
+	
+	
+	</style>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
@@ -16,10 +31,10 @@
 		<div class="large-10 columns">
 			<div class="panel">
 
-				<div class="row" style="text-align: center">
+				<div   class="row" style="text-align: center">
 					<!-- <div class="large-10 columns"> -->
-					<div class="panel">
-						<span><h4>${job.titre}</h4> </span>
+					<div  class="panel">
+						<span><h4><b>${job.titre}</b></h4> </span>
 					</div>
 					<!-- </div> -->
 				</div>
@@ -30,34 +45,33 @@
 					<div class="span">
 						<!-- <div class="large-8 columns"> -->
 						<ul
-							class="small-block-grid-2 medium-block-grid-2 large-block-grid-2">
+							class="large-12 columns">
 							<li>
 								<div class="panel">
-									<span><h4>Les détails de l'offre :</h4></span>
+									<span><h4>Détail de l'offre :</h4></span>
 									<p>${job.desc }</p>
 								</div> 
+								<div class="panel">
+									<span><h4>Prix:</h4></span>
+									<p>${job.prix }</p>
+								</div> 
 									
-								
-							</li>
-							<li>
-								<!-- <div class="large-8 columns"> -->
 								<div class="panel callout radius">
-									<h4>Contact</h4>
+									
 									<div>
 										<div>
-											<span><h5>Telephone:</h5> 060000000 </span> <span></span> </br>
-											<div>
-												<span><h5>Adresse mail</h5></span> <span>${current_user.mailAutre}
-												</span>
-											</div>
-											</br>
-											<div>
+										
+											<div id="global" >
 												<input name="secondMail" class="button small" type="submit"
-													value="Envoyer un message" />
+													value="Postuler" />
 											</div>
 										</div>
 									</div>
 								</div> <!-- </div> -->
+							</li>
+							<li>
+								<!-- <div class="large-8 columns"> -->
+								
 							</li>
 						</ul>
 						<!-- </div> -->

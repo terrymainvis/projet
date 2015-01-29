@@ -39,20 +39,23 @@ public class Job {
 	@JoinColumn(name="uti_id")
 	private Utilisateur auteur;
 	
-
+	@Size(min=4, max=30)
+	@Column(name="job_prix")
+	private String prix;
 	
 	public Job(){
 		
 	}
 	
 	
-	public Job(String titre, String desc, Date date, Utilisateur uti){
+	public Job(String titre, String desc, Date date, String prix){
 		this.titre = titre;
 		this.desc = desc;
 		this.date_fin = date;
-		this.date_deb = new Date();
-		this.auteur = uti;
+		this.prix=prix;
 	}
+
+	
 
 	public int getId() {
 		return id;
@@ -103,6 +106,16 @@ public class Job {
 
 	public void setAuteur(Utilisateur auteur) {
 		this.auteur = auteur;
+	}
+
+
+	public String getPrix() {
+		return prix;
+	}
+
+
+	public void setPrix(String prix) {
+		this.prix = prix;
 	}
 
 
