@@ -11,9 +11,11 @@ import org.springframework.validation.Validator;
 public class AnnonceValidator implements Validator {
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public boolean supports(Class clazz) {
+		// TODO Auto-generated method stub
 		return Annonce.class.equals(clazz);
 	}
+	
 
 	@Override
 	@Transactional
@@ -36,5 +38,9 @@ public class AnnonceValidator implements Validator {
 		}
 
 	}
+
+
+
+
 
 }

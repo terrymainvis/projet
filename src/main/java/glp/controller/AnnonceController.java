@@ -2,7 +2,6 @@ package glp.controller;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
-import glp.domain.Role;
 import glp.domain.Utilisateur;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
@@ -170,5 +169,46 @@ public class AnnonceController {
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
+	
+	@RequestMapping("/{id}/contact")
+	public ModelAndView getContactForm() {
+		System.out.println("okok");
+		return new ModelAndView("contact_form");
+	}
+	
+//	@RequestMapping("/{id}/sendmail")
+//	public ModelAndView sendMail(@PathVariable("id") int idAnnSelected) {
+//		Annonce annonce = annonceService.getRowById(idAnnSelected);
+//		sendMail(annonce.getAuteur().getMailLille1()
+//				, utilisateurService.getUserInSession().getMailLille1()
+//				, "Interet pour l'annonce " + annonce.getId()  + " : " + annonce.getTitre()
+//				,"COUCOU");
+//		System.out.println(annonce.getAuteur().getMailLille1());
+//		System.out.println("test");
+//		return new ModelAndView("redirect:/");
+//	}
+//	
+//	private void sendMail(String mailTo, String mailFrom, String content, String subject){
+//		SimpleMailMessage mail = new SimpleMailMessage()
+//		
+//		mail.setTo(mailTo);
+//		mail.setFrom(mailFrom);
+//		mail.setSubject(subject);
+//		mail.setText(content);
+//		
+//		
+//		
+//		
+//		 MailSender mailSender;
+//		 SimpleMailMessage msg = new SimpleMailMessage();
+//	        msg.setTo(mailTo);
+//	        msg.setText(content);
+//	        try{
+//	            mailSender.send(msg);
+//	        }
+//	        catch (MailException ex) {
+//	            System.err.println(ex.getMessage());
+//	        }
+//	}
 
 }
