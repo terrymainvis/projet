@@ -45,7 +45,9 @@
 				<value>glp.domain.Champ</value>
 				<value>glp.domain.ChampComplete</value>
 				<value>glp.domain.Role</value>
-					<value>glp.domain.Job</value>
+				<value>glp.domain.Job</value>
+				<value>glp.domain.Forum</value>
+
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -118,7 +120,11 @@
  <bean id="roleDaoImpl" class="glp.dao.RoleDaoImpl" />  
  <bean id="roleServiceImpl" class="glp.services.RoleServiceImpl" /> 
  <bean id="champCompleteDaoImpl" class="glp.dao.ChampCompleteDaoImpl" />  
- <bean id="champCompleteServiceImpl" class="glp.services.ChampCompleteServiceImpl" />
-  <bean id="JobDaoImpl" class="glp.dao.JobDaoImpl" />  
+  <bean id="champCompleteServiceImpl" class="glp.services.ChampCompleteServiceImpl" /> 
+ <bean id="JobDaoImpl" class="glp.dao.JobDaoImpl" />  
  <bean id="JobServiceImpl" class="glp.services.JobServiceImpl" />  
+ <bean id="forumDaoImpl" class="glp.dao.ForumDaoImpl" />  
+ <bean id="forumServiceImpl" class="glp.services.ForumServiceImpl" />  
+  
+
 </beans>  

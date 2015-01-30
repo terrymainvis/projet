@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/annonce")
-public class AnnonceController {
+public class AnnonceController implements ServletContextAware{
 	@Autowired
 	private AnnonceService annonceService;
 	@Autowired
@@ -43,6 +45,8 @@ public class AnnonceController {
 	private RoleService roleService;
 	@Autowired
 	private ChampCompleteService ccService;
+	
+	private ServletContext servletContext;
 
 	public AnnonceController() {
 	}
@@ -99,15 +103,16 @@ public class AnnonceController {
 			 try {
                byte[] bytes = file.getBytes();
                String rootPath = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img";
+               String rootPath1 = servletContext.getRealPath("resources/img");
                // Create the file on server
                String nomImage = file.getName();
                System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
                System.out.println(nomImage + " ejkeozjoie boh"+file.getName()+"hellooooooooo chat");
-               File serverFile = new File(rootPath
-                     + File.separator + ann.getId()+".png");
+               File serverFile = new File(rootPath1 + File.separator + ann.getId()+".png");
                System.out.println(serverFile);
              BufferedOutputStream stream = new BufferedOutputStream(
                      new FileOutputStream(serverFile));
+             System.out.println("IMAGE CREEE");
              stream.write(bytes);
              stream.close();
 			 }catch(Exception e){
@@ -210,5 +215,13 @@ public class AnnonceController {
 //	            System.err.println(ex.getMessage());
 //	        }
 //	}
+
+
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+		// TODO Auto-generated method stub
+		this.servletContext = servletContext;
+		
+	}
 
 }
