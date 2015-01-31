@@ -1,7 +1,7 @@
 package glp.domain;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +50,7 @@ public class Annonce {
 	private Utilisateur auteur;
 	
 	@OneToMany(mappedBy="ann")
-	private Set<ChampComplete> champscompletes;
+	private List<ChampComplete> champscompletes;
 	
 	@Column(name="ann_valide")
 	private Boolean valide;
@@ -132,11 +132,11 @@ public class Annonce {
 		this.auteur = auteur;
 	}
 
-	public Set<ChampComplete> getChampscompletes() {
+	public List<ChampComplete> getChampscompletes() {
 		return champscompletes;
 	}
 
-	public void setChampscompletes(Set<ChampComplete> champscompletes) {
+	public void setChampscompletes(List<ChampComplete> champscompletes) {
 		this.champscompletes = champscompletes;
 	}
 

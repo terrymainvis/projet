@@ -1,9 +1,7 @@
 package glp.dao;
 
-import glp.domain.Champ;
 import glp.domain.ChampComplete;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -16,11 +14,9 @@ public class ChampCompleteDaoImpl  implements ChampCompleteDao {
 	 private SessionFactory sessionFactory; 
 	
 	@Override
-	public int insertRow(ChampComplete cc) {
+	public void insertRow(ChampComplete cc) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(cc);
-		Serializable id = session.getIdentifier(cc);
-		return (Integer) id;
 	}
 
 	@Override
@@ -31,20 +27,16 @@ public class ChampCompleteDaoImpl  implements ChampCompleteDao {
 	}
 
 	@Override
-	public int updateRow(ChampComplete cc) {
+	public void updateRow(ChampComplete cc) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(cc);
-		Serializable id = session.getIdentifier(cc);
-		return (Integer) id;
 	}
 
 	@Override
-	public int deleteRow(int id) {
+	public void deleteRow(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		ChampComplete cc = (ChampComplete) session.load(ChampComplete.class, id);
 		session.delete(cc);
-		Serializable idcc = session.getIdentifier(cc);
-		return (Integer) idcc;
 	}
 
 	@Override

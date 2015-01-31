@@ -35,6 +35,7 @@ public class CategorieDaoImpl implements CategorieDao {
 	public Categorie getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Categorie cat = (Categorie) session.load(Categorie.class, id);
+		System.out.println(cat.getLib()); // VIRER CE CODE, NE PAS OUBLIER /!\
 		return cat;
 	}
 

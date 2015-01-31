@@ -37,6 +37,11 @@
 				</form:select>
 			</div>
 			
+			<div>
+				<form:checkbox path="requis" /> Champ obligatoire
+			</div>
+			
+			<br/>
 			<input class="button" type="submit" value="Ajouter" />
 
 		</form:form>

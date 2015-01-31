@@ -1,9 +1,13 @@
 package glp.services;
 
 import glp.dao.ChampCompleteDao;
+import glp.dao.ChampDao;
 import glp.domain.Annonce;
+import glp.domain.Champ;
 import glp.domain.ChampComplete;
+import glp.form.AnnonceForm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,10 +21,13 @@ public class ChampCompleteServiceImpl implements ChampCompleteService {
 	@Autowired
 	ChampCompleteDao ccDao;
 	
+	@Autowired
+	ChampDao champDao;
+	
 	@Override
 	@Transactional
-	public int insertRow(ChampComplete cc) {
-		return ccDao.insertRow(cc); 
+	public void insertRow(ChampComplete cc) {
+		ccDao.insertRow(cc); 
 	}
 
 	@Override
@@ -37,14 +44,32 @@ public class ChampCompleteServiceImpl implements ChampCompleteService {
 
 	@Override
 	@Transactional
-	public int updateRow(ChampComplete cc) {
-		return ccDao.updateRow(cc);
+	public void updateRow(ChampComplete cc) {
+		ccDao.updateRow(cc);
 	}
 
 	@Override
 	@Transactional
-	public int deleteRow(int id) {
-		return ccDao.deleteRow(id);
+	public void deleteRow(int id) {
+		ccDao.deleteRow(id);
+	}
+
+	@Override
+	@Transactional
+	public AnnonceForm generateForAnnForm(AnnonceForm annform) {
+		List<Champ> champs = champDao.getListByCat(annform.getCat_choisie().getId());
+		ArrayList<ChampComplete> ccs = new ArrayList<ChampComplete>();
+		
+		if(annform.getAnnonce()==null)
+			annform.setAnnonce(new Annonce());
+		
+		for(Champ c : champs) {
+			ccs.add(new ChampComplete(annform.getAnnonce(), c, ""));
+		}
+		
+		annform.getAnnonce().setChampscompletes(ccs);
+		
+		return annform;
 	}
 	
 

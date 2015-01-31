@@ -2,18 +2,21 @@ package glp.services;
 
 import glp.domain.Annonce;
 import glp.domain.ChampComplete;
+import glp.form.AnnonceForm;
 
 import java.util.List;
 
 public interface ChampCompleteService {
 
-	public int insertRow(ChampComplete cc);
+	public void insertRow(ChampComplete cc);
 	
 	public List<ChampComplete> getListByAnn(Annonce ann);
 	
 	public ChampComplete getRowById(int id);
 	
-	public int updateRow(ChampComplete cc);
+	public void updateRow(ChampComplete cc);
 	
-	public int deleteRow(int id);
+	public void deleteRow(int id);
+	
+	public AnnonceForm generateForAnnForm(AnnonceForm annform);
 }

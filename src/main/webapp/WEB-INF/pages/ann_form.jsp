@@ -14,7 +14,6 @@
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
 
-
 <title>Creation d'une annonce</title>
 </head>
 <body class="bg">
@@ -23,24 +22,21 @@
 	<div class="row">
 		<div class="large-8 columns">
 			<div class="panel">
-				<form:form id="addAnnForm" modelAttribute="annonce" method="post"
+			
+			<div><i>Catégorie choisie : ${annform.cat_choisie.lib}</i></div>
+			
+			<br/>
+				<form:form id="addAnnForm" modelAttribute="annform" method="get"
 					action="addAnn" enctype="multipart/form-data">
 					<h2>Créez votre annonce !</h2>
-
+					
 					<div>
-						<form:input path="titre" placeholder="Titre de l'annonce" />
-						<form:errors path="titre" />
+						<form:input path="annonce.titre" placeholder="Titre de l'annonce" />
+						<form:errors path="annonce.titre" />
 					</div>
-
-
+					
 					<div>
-						<form:select path="categorie">
-							<form:options items="${catList}" itemValue="id" itemLabel="lib" />
-						</form:select>
-					</div>
-
-					<div>
-						<form:select id="select" path="type">
+						<form:select id="select" path="annonce.type">
 							<form:option value="Je cherche" itemValue="cherche"
 								itemLabel="cherche" />
 							<form:option value="Je propose" itemValue="propose"
@@ -49,20 +45,61 @@
 					</div>
 
 					<div>
-						<form:input path="date_fin" type="text" id="datepicker"
+						<form:input path="annonce.date_fin" type="text" id="datepicker"
 							placeholder="Fin de votre annonce:" />
 					</div>
 
 					<div>
-						<form:textarea path="desc"
+						<form:textarea path="annonce.desc"
 							placeholder="Décrivez votre annonce en quelque mots !" />
-						<form:errors path="desc" />
+						<form:errors path="annonce.desc" />
 					</div>
+					
+					<c:forEach var="cc" items="${annform.annonce.champscompletes}" varStatus="status" >
+						<form:input type="hidden" path="annonce.champscompletes[${status.index }].champ.id" value="${cc.champ.id }" />
+						<div>	
+							<c:choose>
+								<c:when test='${cc.champ.type == "NUMERIQUE"}'>
+								
+									<c:if test="${cc.champ.requis}">
+										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="number" required="required" />	
+									</c:if>
+									
+									<c:if test="${!cc.champ.requis}">
+										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="number" />			
+									</c:if>	
+								</c:when>
+								
+								<c:when test='${cc.champ.type == "DESCRIPTION"}'>
+									<c:if test="${cc.champ.requis}">
+										<form:textarea path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }" required="required" />	
+									</c:if>
+									
+									<c:if test="${!cc.champ.requis}">
+										<form:textarea path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }" />			
+									</c:if>	
+								</c:when>
+								
+								<c:otherwise>
+									<c:if test="${cc.champ.requis}">
+										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="text" required="required" />	
+									</c:if>
+									
+									<c:if test="${!cc.champ.requis}">
+										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="text" />			
+									</c:if>	
+								</c:otherwise>								
+							</c:choose>		
+						</div>
+					</c:forEach>
+					
+					
+					
 					<div>File to upload: <input  type="file" name="file"/><br /> </div>
 					<div>
 						<input class="button" type="submit" value="Ajouter" />
 					</div>
-
+					
 				</form:form>
 			</div>
 		</div>

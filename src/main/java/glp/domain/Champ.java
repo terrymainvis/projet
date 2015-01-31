@@ -33,17 +33,21 @@ public class Champ {
 	
 	@Column(name="nom")
 	private String nom;
+	
+	@Column(name="requis")
+	private boolean requis;
 
 	public Champ() {
 		super();
 	}
 
-	public Champ(int id, String nom, Categorie cat, TypeChampEnum type) {
+	public Champ(int id, String nom, Categorie cat, TypeChampEnum type, boolean requis) {
 		super();
 		this.id = id;
 		this.nom = nom;
 		this.cat = cat;
 		this.type = type;
+		this.requis = requis;
 	}
 
 	public int getId() {
@@ -84,6 +88,14 @@ public class Champ {
 
 	public void setChampscompletes(Set<ChampComplete> champscompletes) {
 		this.champscompletes = champscompletes;
+	}
+
+	public boolean isRequis() {
+		return requis;
+	}
+
+	public void setRequis(boolean requis) {
+		this.requis = requis;
 	}
 	
 	
