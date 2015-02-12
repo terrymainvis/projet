@@ -19,7 +19,7 @@
 			<div class="row">
 				<div>
 					<form:select path="cat">
-						<form:option value="0" label="Categorie" />
+						
 						<form:options items="${catlist}" itemValue="id" itemLabel="lib" />
 					</form:select>
 				</div>

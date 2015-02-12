@@ -95,8 +95,8 @@
 											</div>
 											</br>
 											<div>
-												<input name="secondMail" class="button small" type="submit"
-													value="Envoyer un message" />
+											<a href="<c:url value='/annonce/${annonce.id}/contact' />" class="button small">Envoyer un message</a>
+												
 											</div>
 										</div>
 									</div>
