@@ -1,6 +1,7 @@
 package glp.dao;
 
 import glp.domain.Annonce;
+import glp.domain.Categorie;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AnnonceDaoImpl implements AnnonceDao {
@@ -35,7 +37,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	public List<Annonce> getListValides() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		//FALSE = refusée - NULL = en attente - TRUE = validée
+		//FALSE = refusï¿½e - NULL = en attente - TRUE = validï¿½e
 		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=TRUE").list();
 		return annonceList;
 	}
@@ -100,6 +102,36 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID").setParameter("catID", catId).list();
 		return annonceList;
 	}
+	
+	@Override
+	public List<Annonce> getListByCatName(String catName) {
+		Session session = sessionFactory.getCurrentSession();
+		if(catName.compareToIgnoreCase("Covoiturage") == 0 || catName.compareToIgnoreCase("Job") == 0){
+			@SuppressWarnings("unchecked")
+			List<Annonce> annonceList = session.createCriteria(Annonce.class)
+										.add(Restrictions.in("categorie", 
+													session.createCriteria(Categorie.class)
+													.add(Restrictions.eq("lib", catName))
+													.list())
+										).list();
+			return annonceList;
+		}
+		else{
+			@SuppressWarnings("unchecked")
+			List<Annonce> annonceList = session.createCriteria(Annonce.class)
+										.add(Restrictions.not(
+												Restrictions.or(
+													Restrictions.in("categorie",
+														session.createCriteria(Categorie.class)
+														.add(Restrictions.eq("lib", "Covoiturage")).list())
+													,Restrictions.in("categorie",
+														session.createCriteria(Categorie.class)
+														.add(Restrictions.eq("lib", "Jobs")).list())
+												)
+										)).list();
+			return annonceList;
+		}
+	}
 
 	@Override
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle) {
@@ -117,7 +149,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	public List<Annonce> getListAModerer() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		//FALSE = refusée - NULL = en attente - TRUE = validée
+		//FALSE = refusï¿½e - NULL = en attente - TRUE = validï¿½e
 		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=NULL").list();
 		return annonceList;
 	}

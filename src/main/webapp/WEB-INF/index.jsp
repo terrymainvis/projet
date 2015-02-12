@@ -14,7 +14,7 @@
 	<ul class="small-block-grid-2 medium-block-grid-2 large-block-grid-2">
 		<li>
 			<div class="panel ">
-				<h5>Dernière annonces</h5>
+				<h5><spring:message code="accueil.dernieresAnnonces"></spring:message></h5>
 				<br>
 				<c:forEach begin="0" end="9" items="${annList}" var="ann">
 					<div class="row">
@@ -27,7 +27,7 @@
 						</div>
 						<div class="small-5 columns">
 							<a href="<c:url value='/annonce/${ann.id}' />"
-								class="button round">Voir l'annonce</a>
+								class="button round"><spring:message code="accueil.voirAnnonce"></spring:message></a>
 						</div>
 					</div>
 
@@ -36,7 +36,7 @@
 		</li>
 		<li>
 			<div class="panel">
-				<h5>Covoiturage</h5>
+				<h5><spring:message code="accueil.covoiturage"></spring:message></h5>
 				<br>
 				<c:forEach begin="0" end="9" items="${covoitList}" var="covoit">
 					<div class="row">
@@ -50,7 +50,7 @@
 						</div>
 						<div class="small-5 columns">
 							<a href="<c:url value='/annonce/${covoit.id}' />"
-								class="button round">Voir l'annonce</a>
+								class="button round"><spring:message code="accueil.voirAnnonce"></spring:message></a>
 						</div>
 					</div>
 
@@ -59,7 +59,7 @@
 		</li>
 		<li>
 			<div class="panel">
-				<h5>Job étudiant</h5>
+				<h5><spring:message code="accueil.jobs"></spring:message></h5>
 				<br>
 				<c:forEach begin="0" end="9" items="${jobList}" var="job">
 					<div class="row">
@@ -70,7 +70,7 @@
 						</div>
 						<div class="small-5 columns">
 							<a href="<c:url value='/job/${job.id}' />"
-								class="button round">Voir l'offre</a>
+								class="button round"><spring:message code="accueil.voirAnnonce"></spring:message></a>
 						</div>
 					</div>
 
@@ -84,23 +84,6 @@
 			<div class="panel">
 				<h5>Forum</h5>
 				<br>
-				<c:forEach begin="0" end="9" items="${forumList}" var="forum">
-					<div class="row">
-						<div class="small-2 columns">
-							<%-- <img height="50" width="auto"
-								src="<c:url value="/resources/img/chat.png" />"> --%>
-						</div>
-						<div class="small-6 columns">
-							<span> ${forum.titre} </span> <br> <span>
-								${forum.desc} </span>
-						</div>
-						<div class="small-5 columns">
-							<a href=""
-								class="button round">Voir la discussion </a>
-						</div>
-					</div>
-
-				</c:forEach>
 			</div>
 		</li>
 	</ul>

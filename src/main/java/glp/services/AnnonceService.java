@@ -17,6 +17,8 @@ public interface AnnonceService {
 	
 	public List <Annonce> getListByCat(int catId);
 	
+	public List<Annonce> getListByCatName(String catName);
+	
 	public List<Annonce> getListRecent(int catId);
 	
 	public int getIdByLib(String lib);

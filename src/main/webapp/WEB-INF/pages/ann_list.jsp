@@ -17,7 +17,7 @@
 		<div class="large-12 columns">
 			<div class="panel" style="text-align: center">
 
-				<b><b>liste des annonces</b></b><br> <br>
+				<b><b><spring:message code="annList.listeAnnonces"></spring:message></b></b><br> <br>
 
 				<div class="row" style="text-align: center">
 
@@ -47,44 +47,46 @@
 		<tbody id="lignes">
 			<c:if test="${!empty annList}">
 				<c:forEach items="${annList}" var="ann">
-					<tr>
-					<td><table border="0" cellspacing="0" cellpadding="0"><tr><td width="400" height="100" colspan="2">
-						<img height="100" width="auto"
-							src="<c:url value="/resources/img/chat.png" />"></td></tr></table>
-
-						<td><table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td width="400" height="100" colspan="2">${ann.titre}</td>
-								</tr>
-							</table></td>
-
-						<td><table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td width="400" height="100" colspan="2">${ann.categorie.lib}</td>
-								</tr>
-							</table></td>
-						<td><table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td width="400" height="100" colspan="2">${ann.date_fin.toString().substring(0,10)}</td>
-								</tr>
-							</table></td>
-
-						<td><table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td><a href="<c:url value='/annonce/${ann.id}' />"
-										class="button round">Voir l'annonce</a></td>
-								</tr>
-							</table></td>
-
-
-
-						<%-- <td>
-						<td>${ann.titre}</td>
-						<td>${ann.categorie.lib}</td>
-						<td>${ann.date_fin.toString().substring(0,10)}</td>
-						<td><a href="<c:url value='/annonce/${ann.id}' />"
-							class="button round">Voir l'annonce</a></td> --%>
-					</tr>
+					<c:if test="${ann.valide}">
+						<tr>
+						<td><table border="0" cellspacing="0" cellpadding="0"><tr><td width="400" height="100" colspan="2">
+							<img height="100" width="auto"
+								src="<c:url value="/resources/img/chat.png" />"></td></tr></table>
+	
+							<td><table border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="400" height="100" colspan="2">${ann.titre}</td>
+									</tr>
+								</table></td>
+	
+							<td><table border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="400" height="100" colspan="2">${ann.categorie.lib}</td>
+									</tr>
+								</table></td>
+							<td><table border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td width="400" height="100" colspan="2">${ann.date_fin.toString().substring(0,10)}</td>
+									</tr>
+								</table></td>
+	
+							<td><table border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td><a href="<c:url value='/annonce/${ann.id}' />"
+											class="button round">Voir l'annonce</a></td>
+									</tr>
+								</table></td>
+	
+	
+	
+							<%-- <td>
+							<td>${ann.titre}</td>
+							<td>${ann.categorie.lib}</td>
+							<td>${ann.date_fin.toString().substring(0,10)}</td>
+							<td><a href="<c:url value='/annonce/${ann.id}' />"
+								class="button round">Voir l'annonce</a></td> --%>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</c:if>
 		</tbody>

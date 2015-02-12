@@ -54,7 +54,7 @@ public class AnnonceController {
 
 	
 	/**
-	 * pour la création d'une annonce
+	 * pour la crï¿½ation d'une annonce
 	 * 1er form qui demande d'abord la categorie
 	 * @return
 	 */
@@ -70,12 +70,12 @@ public class AnnonceController {
 	/**
 	 * 
 	 * @param annform
-	 * @return le formulaire de création d'une annonce, après que l'on ait choisi une catégorie
+	 * @return le formulaire de crï¿½ation d'une annonce, aprï¿½s que l'on ait choisi une catï¿½gorie
 	 */
 	@RequestMapping("new/form")
 	public ModelAndView getForm(@ModelAttribute("annform") AnnonceForm annform) {
 		
-		//si on arrive sur le formulaire sans passer par le choix de catégorie --> redirige
+		//si on arrive sur le formulaire sans passer par le choix de catï¿½gorie --> redirige
 		if(annform.getCat_choisie()==null)
 			return getCategorieChoice();
 		
@@ -192,10 +192,22 @@ public class AnnonceController {
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getAnnList() {
-		List<Annonce> annList = annonceService.getList();
+		List<Annonce> annList = annonceService.getListByCatName("PetitesAnnonces");
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);
+		myModel.put("catList", catList);
+		myModel.put("roleList",  roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		return new ModelAndView("ann_list",myModel);
+	}
+	
+	@RequestMapping(value = "listCov", method = RequestMethod.GET)
+	public ModelAndView getCovList() {
+		List<Annonce> covList = annonceService.getListByCatName("Covoiturage");
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annList", covList);
 		myModel.put("catList", catList);
 		myModel.put("roleList",  roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());

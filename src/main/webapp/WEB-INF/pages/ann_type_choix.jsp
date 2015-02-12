@@ -16,21 +16,24 @@
 
 		<div class="medium-4 large-5 columns">
 			<div class="panel">
-				<h4>J'ai besoin de quelque chose</h4>
+				<h4><spring:message code="typeChoix.trouverTitre"></spring:message></h4>
 				<hr>
-				<p>Je suis à la recherche d’un service ou d'un objet</p>
-				<a href="<c:url value="/annonce/new?type=need"/>" class="button round">Trouver</a>
+				<p><spring:message code="typeChoix.trouverDescription"></spring:message></p>
+				<a href="<c:url value="/annonce/new?type=need"/>" class="button round">
+					<spring:message code="typeChoix.trouverBouton"></spring:message>
+				</a>
 			</div>
 		</div>
 
 
 		<div class="medium-5 medium-offset-1 large-5 columns">
 			<div class="panel">
-				<h4>Je propose quelque chose</h4>
+				<h4><spring:message code="typeChoix.proposerTitre"></spring:message></h4>
 				<hr>
-				<p>Je peux rendre certains services ou possède des objets que je
-					veux preter ou vendre</p>
-				<a href="<c:url value="/annonce/new?type=give"/>" class="button round">Proposer</a>
+				<p><spring:message code="typeChoix.proposerDescription"></spring:message></p>
+				<a href="<c:url value="/annonce/new?type=give"/>" class="button round">
+					<spring:message code="typeChoix.proposerBouton"></spring:message>
+				</a>
 			</div>
 		</div>
 	</div>

@@ -52,28 +52,35 @@
 				</c:choose>
 			</c:if>
 		</c:forEach>
-			<li><a href="#">Mon compte</a></li>
-			<li class="has-dropdown"><a href="#">Covoiturage</a>
+			<li><a href="#"><spring:message code="header.monCompte"></spring:message></a></li>
+			<li class="has-dropdown"><a href="#"><spring:message code="header.covoiturage"></spring:message></a>
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/new"  />">Créez votre
-							covoit'</a></li>
-					<li><a href="<c:url value="/annonce/list" />">Trouvez un
-							covoit' </a></li>
+					<li><a href="<c:url value="/annonce/new"  />">
+						<spring:message code="header.creerCovoiturage"></spring:message>
+					</a></li>
+					<li><a href="<c:url value="/annonce/listCov" />">
+						<spring:message code="header.trouverCovoiturage"></spring:message>
+					</a></li>
 				</ul></li>
-			<li class="has-dropdown"><a href="#">Petites annonce</a>
+			<li class="has-dropdown"><a href="#"><spring:message code="header.petitesAnnonces"></spring:message></a>
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/typechoice"  />">Créez votre
-							petite annonce</a></li>
-					<li><a href="<c:url value="/annonce/list" />">Recherche </a></li>
+					<li><a href="<c:url value="/annonce/typechoice"  />">
+						<spring:message code="header.creerAnnonce"></spring:message>
+					</a></li>
+					<li><a href="<c:url value="/annonce/list" />">
+						<spring:message code="header.rechercherAnnonce"></spring:message>
+					</a></li>
 				</ul></li>
 
-			<li><a href="<c:url value="/job/list" />">Job</a></li>
+			<li><a href="<c:url value="/job/list" />">
+					<spring:message code="header.Job"></spring:message>
+				</a></li>
 			<li><a href="#">Forum</a></li>
 		</ul>
 		<form action="annonce/recherche" id="formulaireCat">
 			<ul class="right">
 				<li class="has-form"><input name="motCle" type="text"
-					placeholder="Vélo, Lille, Anglais..." id="inputSearchCat"></li>
+					placeholder="<spring:message code="header.hintRecherche"></spring:message>" id="inputSearchCat"></li>
 				<li class="has-form"><select name="cat" class="medium"
 					name="listeCategorie" id="idSelectCat">
 
@@ -84,7 +91,7 @@
 				<li class="has-form">
 <!-- 				<a href="#" class="alert button expand" -->
 <!-- 					id="searchCat">Rechercher</a> -->
-					<input class="button success" type="submit" value="Rechercher">
+					<input class="button success" type="submit" value="<spring:message code="header.rechercher"></spring:message>">
 					</li>
 			</ul>
 		</form>
