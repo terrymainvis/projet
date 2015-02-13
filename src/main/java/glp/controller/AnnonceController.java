@@ -55,7 +55,7 @@ public class AnnonceController {
 	}
 
 	/**
-	 * pour la cr�ation d'une annonce 1er form qui demande d'abord la categorie
+	 * pour la crï¿½ation d'une annonce 1er form qui demande d'abord la categorie
 	 * 
 	 * @return
 	 */
@@ -71,13 +71,13 @@ public class AnnonceController {
 	/**
 	 * 
 	 * @param annform
-	 * @return le formulaire de cr�ation d'une annonce, apr�s que l'on ait
-	 *         choisi une cat�gorie
+	 * @return le formulaire de crï¿½ation d'une annonce, aprï¿½s que l'on ait
+	 *         choisi une catï¿½gorie
 	 */
 	@RequestMapping("new/form")
 	public ModelAndView getForm(@ModelAttribute("annform") AnnonceForm annform) {
 
-		// si on arrive sur le formulaire sans passer par le choix de cat�gorie
+		// si on arrive sur le formulaire sans passer par le choix de catï¿½gorie
 		// --> redirige
 		if (annform.getCat_choisie() == null)
 			return getCategorieChoice();
@@ -90,9 +90,7 @@ public class AnnonceController {
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("annform", annform);
 			myModel.put("roleList", roleService.getList());
-			myModel.put("utilisateur", new Utilisateur());
-			// myModel.put("utilisateur",
-			// utilisateurService.getUserInSession());
+			myModel.put("utilisateur", utilisateurService.getUserInSession());
 
 			return new ModelAndView("ann_form", myModel);
 		}
@@ -124,7 +122,6 @@ public class AnnonceController {
 	}
 
 	@RequestMapping(value = "new/addAnn", method = RequestMethod.GET)
-
 	public ModelAndView addAnnonce(@ModelAttribute("annform") /*@Valid*/ AnnonceForm annform/*, BindingResult bindingResult*/) {
 
 //		if (bindingResult.hasErrors()) {
