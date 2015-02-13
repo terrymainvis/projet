@@ -124,36 +124,63 @@ public class AnnonceController {
 	}
 
 	@RequestMapping(value = "new/addAnn", method = RequestMethod.GET)
-	public ModelAndView addAnnonce(
-			@ModelAttribute("annform")/* @Valid */AnnonceForm annform/*
-																	 * ,
-																	 * BindingResult
-																	 * bindingResult
-																	 */) {
 
-		// if (bindingResult.hasErrors()) {
-		// Utilisateur utilisateur = utilisateurService.getUserInSession();
-		// List<Categorie> catList = categorieService.getList();
-		// Map<String, Object> myModel = new HashMap<String, Object>();
-		// myModel.put("catList", catList);
-		// myModel.put("utilisateur", utilisateur);
-		// System.out.println(bindingResult.getFieldErrorCount());
-		// System.out.println("TEST OK YA DES ERREURS");
-		// return new ModelAndView("ann_form", myModel);
-		// }
-		//
-		// else {
-		Annonce ann_tmp = annform.getAnnonce();
+	public ModelAndView addAnnonce(@ModelAttribute("annform") /*@Valid*/ AnnonceForm annform/*, BindingResult bindingResult*/) {
 
-		// ---- A REMETTRE ---
-		// ann_tmp.setAuteur(utilisateurService.getUserInSession());
+//		if (bindingResult.hasErrors()) {
+//			Utilisateur utilisateur = utilisateurService.getUserInSession();
+//			List<Categorie> catList = categorieService.getList();
+//			Map<String, Object> myModel = new HashMap<String, Object>();
+//			myModel.put("catList", catList);
+//			myModel.put("utilisateur", utilisateur);
+//			System.out.println(bindingResult.getFieldErrorCount());
+//			System.out.println("TEST OK YA DES ERREURS");
+//			return new ModelAndView("ann_form", myModel);
+//		}
 
-		annform.getAnnonce().setAuteur(utilisateurService.getRowById(1));
-		annonceService.insertRow(ann_tmp);
+//		else {
+			Annonce ann_tmp = annform.getAnnonce();
 
-		for (ChampComplete cc : ann_tmp.getChampscompletes()) {
-			cc.setAnn(ann_tmp);
-			ccService.insertRow(cc);
+			ann_tmp.setAuteur(utilisateurService.getUserInSession());		
+			annonceService.insertRow(ann_tmp);
+
+			for(ChampComplete cc : ann_tmp.getChampscompletes())
+			{
+				cc.setAnn(ann_tmp);
+				ccService.insertRow(cc);
+			}
+		
+			return new ModelAndView("redirect:/");
+//		}
+	}
+	
+
+/*
+	@RequestMapping("/addAnn") //@RequestParam(value="file", required = false) MultipartFile file
+	public ModelAndView addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,  @RequestParam("file") MultipartFile file) {
+		ann.setAuteur(utilisateurService.getUserInSession());
+		annonceService.insertRow(ann);
+		
+		System.out.println("fffffahkdaoianjazofffffffff"+file.getName());
+		if (!file.isEmpty()) {
+			 try {
+               byte[] bytes = file.getBytes();
+               String rootPath = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img";
+               // Create the file on server
+               String nomImage = file.getName();
+               System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
+               System.out.println(nomImage + " ejkeozjoie boh"+file.getName()+"hellooooooooo chat");
+               File serverFile = new File(rootPath
+                     + File.separator + ann.getId()+".png");
+               System.out.println(serverFile);
+             BufferedOutputStream stream = new BufferedOutputStream(
+                     new FileOutputStream(serverFile));
+             stream.write(bytes);
+             stream.close();
+			 }catch(Exception e){
+			            	e.getMessage();
+			 }
+
 		}
 
 		return new ModelAndView("redirect:/");

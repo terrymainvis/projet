@@ -31,7 +31,7 @@
 		<property name="driverClassName" value="${database.driver}" />
 		<property name="url" value="${database.url}" />
 		<property name="username" value="${database.user}" />
-		<property name="password" value="${database.password}" />
+		<property name="password" value="thomas" />
 	</bean>
 
 	<bean id="sessionFactory"

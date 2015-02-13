@@ -30,6 +30,8 @@
 					action="addAnn" enctype="multipart/form-data">
 					<h2>Créez votre annonce !</h2>
 					
+					<form:input type="hidden" path="annonce.categorie.id" value="${annform.cat_choisie.id }" />
+					
 					<div>
 						<form:input path="annonce.titre" placeholder="Titre de l'annonce" />
 						<form:errors path="annonce.titre" />
