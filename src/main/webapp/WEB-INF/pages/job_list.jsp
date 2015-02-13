@@ -34,7 +34,7 @@
 		<div class="large-10 columns">
 			<div class="panel" style="text-align: center">
 
-				<b><b>liste des offres de job</b></b><br> <br>
+				<b><b>liste des offres d'emploi</b></b><br> <br>
 
 				<div class="row" style="text-align: center">
 
@@ -43,7 +43,7 @@
 							<tr>
 								<th>Titre</th>
 								<th>description</th>
-								<th>Prix</th>
+								<th>Salaire</th>
 								
 								<th></th>
 								<th></th>
@@ -94,8 +94,11 @@
 	</div>
 
 	<br>
-<!-- 	il faut que ça soit accessible que pour l'admin,prof(tous sauf les étudiants) -->	
+<!-- 	il faut que ça soit accessible que pour les represenatnt de Lille1 -->
+	    <%-- <c:if test="${current_user.roleId==4}"> --%>
 <a href="<c:url value="/job/new"  />">Ajout une nouvelle offre de job</a>
+<%-- </c:if> --%>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#listejobs').DataTable({});

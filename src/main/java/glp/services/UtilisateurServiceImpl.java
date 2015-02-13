@@ -1,6 +1,7 @@
 package glp.services;
 
 import glp.dao.UtilisateurDao;
+import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
 import java.util.List;
@@ -80,11 +81,41 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public boolean isAdministrateur(Utilisateur utilisateur) {
 		return utilisateurDao.isAdministrateur(utilisateur);
 	}
-	
+
 	@Override
 	@Transactional
 	public Utilisateur getRowById(int id) {
 		return utilisateurDao.getRowById(id);
+	}
+
+	@Override
+	public List<Annonce> listAnnoncePublie(Utilisateur utilisateur) {
+		// TODO Auto-generated method stub
+		return utilisateurDao.listAnnoncePublie(utilisateur);
+	}
+
+	@Override
+	public List<Annonce> listAnnonceEnCourModeration(Utilisateur utilisateur) {
+		return utilisateurDao.listAnnonceEnCourModeration(utilisateur);
+	}
+
+	@Override
+	public List<Annonce> listAnnonceEnciennes(Utilisateur utilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Utilisateur updateUser(int id,String nom, String prenom, String tel, String mail,
+			String mailAutre) {
+		return utilisateurDao.updateUser(id, nom, prenom, tel, mail, mailAutre);
+
+	}
+
+	@Override
+	public void supprimerAnnonce(int id) {
+		 utilisateurDao.supprimerAnnonce(id);
+		
 	}
 
 }

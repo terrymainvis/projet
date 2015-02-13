@@ -28,7 +28,7 @@
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 	<div class="row">
-		<div class="large-10 columns">
+		<div class="large-12 columns">
 			<div class="panel">
 
 				<div   class="row" style="text-align: center">
@@ -52,22 +52,14 @@
 									<p>${job.desc }</p>
 								</div> 
 								<div class="panel">
-									<span><h4>Prix:</h4></span>
+									<span><h4>Salaire:</h4></span>
 									<p>${job.prix }</p>
 								</div> 
 									
-								<div class="panel callout radius">
-									
-									<div>
-										<div>
-										
-											<div id="global" >
-												<input name="secondMail" class="button small" type="submit"
-													value="Postuler" />
-											</div>
-										</div>
-									</div>
-								</div> <!-- </div> -->
+								<div class="panel">
+									<span><h4>Mail a contacter:</h4></span>
+									<p>${job.mail }</p>
+								</div>  <!-- </div> -->
 							</li>
 							<li>
 								<!-- <div class="large-8 columns"> -->

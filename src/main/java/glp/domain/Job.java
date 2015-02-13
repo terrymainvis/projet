@@ -43,16 +43,21 @@ public class Job {
 	@Column(name="job_prix")
 	private String prix;
 	
+	@Size(min=4, max=30)
+	@Column(name="job_mail")
+	private String mail;
+	
 	public Job(){
 		
 	}
 	
 	
-	public Job(String titre, String desc, Date date, String prix){
+	public Job(String titre, String desc, Date date, String prix,String mail){
 		this.titre = titre;
 		this.desc = desc;
 		this.date_fin = date;
 		this.prix=prix;
+		this.mail=mail;
 	}
 
 	
@@ -116,6 +121,16 @@ public class Job {
 
 	public void setPrix(String prix) {
 		this.prix = prix;
+	}
+
+
+	public String getMail() {
+		return mail;
+	}
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 

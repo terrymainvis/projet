@@ -7,8 +7,10 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import glp.domain.Categorie;
 import glp.domain.Job;
 import glp.domain.Utilisateur;
+import glp.services.CategorieService;
 import glp.services.JobService;
 import glp.services.UtilisateurService;
 
@@ -30,6 +32,8 @@ public class JobController {
 		@Autowired
 		private JobService jobService;
 		@Autowired
+		private CategorieService categorieService;
+		@Autowired
 		private UtilisateurService utilisateurService;
 		public JobController() {
 		}
@@ -37,8 +41,11 @@ public class JobController {
 		@RequestMapping(value = "new", method = RequestMethod.GET)
 		public ModelAndView getFormulaireJob(@ModelAttribute Job job) {
 			Utilisateur utilisateur = utilisateurService.getUserInSession();
+			List<Categorie> catList = categorieService.getList();
+
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("utilisateur", utilisateur);
+			myModel.put("catList", catList);
 			return new ModelAndView("job_form", myModel);
 		}
 		
@@ -47,8 +54,9 @@ public class JobController {
 		public ModelAndView addJob(Model model ,@RequestParam String titre,
 												@RequestParam String desc,
 												@RequestParam Date date_fin,
-												@RequestParam String prix) {
-			Job job = new Job(titre, desc, date_fin, prix);
+												@RequestParam String prix,
+												@RequestParam String mail) {
+			Job job = new Job(titre, desc, date_fin, prix,mail);
 			job.setAuteur(utilisateurService.getUserInSession());
 			jobService.insertRow(job);
 			return new ModelAndView("redirect:/");
@@ -58,8 +66,11 @@ public class JobController {
 		@RequestMapping(value = "list", method = RequestMethod.GET)
 		public ModelAndView getJobList() {
 			List<Job> jobList = jobService.getList();
+			List<Categorie> catList = categorieService.getList();
+		
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("jobList", jobList);
+			myModel.put("catList", catList);
 			return new ModelAndView("job_list",myModel);	
 		}
 		
@@ -67,9 +78,11 @@ public class JobController {
 		public ModelAndView getJob(@PathVariable("id") int idJobSelected) {
 			System.out.println("l'identifiant c'est "+idJobSelected);
 			Job job = jobService.getRowById(idJobSelected);
-			
+			List<Categorie> catList = categorieService.getList();
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("job", job);
+			myModel.put("catList", catList);
+			
 			return new ModelAndView("voirtJob", myModel);
 		}
 		

@@ -12,7 +12,7 @@
 	href="<c:url value='/resources/css/foundation.min.css'/>">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/foundation/foundation.js" />"></script>
 <script type="text/javascript"
@@ -31,7 +31,7 @@
 			<div class="panel">
 				<form:form id="addjobForm" modelAttribute="job" method="post"
 					action="addjob" enctype="multipart/form-data">
-					<h2>Créez votre offre !</h2>
+					<h2>Créez votre offre d'emploi !</h2>
 
 					<div>
 						<form:input path="titre" placeholder="Titre de l'offre" />
@@ -42,19 +42,25 @@
 							placeholder="Décrivez votre offre en quelque mots !" />
 						<form:errors path="desc" />
 					</div>
-					
+
 					<div>
 						<form:textarea path="prix"
-							placeholder="Donnez votre prix !" />
+							placeholder="Salaire (Mensuel/Horaire/Journalier/Hebdomadaire...) !" />
 						<form:errors path="desc" />
 					</div>
+					
+					<div>
+						<form:textarea path="mail"
+							placeholder="Mail a contacter" />
+						<form:errors path="mail" />
+					</div>
 
-				<div>
+					<div>
 						<form:input path="date_fin" type="text" id="datepicker"
 							placeholder="Fin de votre offre:" />
 					</div>
 
-					
+
 					<div>
 						<input class="button" type="submit" value="Ajouter" />
 					</div>
@@ -62,30 +68,9 @@
 				</form:form>
 			</div>
 		</div>
-		<div class="large-4 columns">
-			<div class="panel callout radius">
-				<h5>Vos coordonnées</h5>
 
-				<form:form id="updateUtiForm" commandName="utilisateur"
-					method="post" action="updateMailUtilisateur">
-					<div>
-						<div>
-							<form:radiobutton path="contactAutreMail" id="maiMail"
-								name="mail" value="false" />
-							${current_user.mailLille1} <br>
-							<form:radiobutton path="contactAutreMail" id="autreMail"
-								name="mail" value="true" />
-							Autre adresse mail
-							<div id="SecondeAdresseMail"></div>
-							<input name="secondMail" class="button small" type="submit"
-								value="Mettre à jour" />
-						</div>
-					</div>
-				</form:form>
-			</div>
-		</div>
 	</div>
-	</body>
+</body>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
 	$(document)

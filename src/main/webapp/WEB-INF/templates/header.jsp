@@ -54,6 +54,7 @@
 		</c:forEach>
 			<li><a href="#"><spring:message code="header.monCompte"></spring:message></a></li>
 			<li class="has-dropdown"><a href="#"><spring:message code="header.covoiturage"></spring:message></a>
+
 				<ul class="dropdown">
 					<li><a href="<c:url value="/annonce/new"  />">
 						<spring:message code="header.creerCovoiturage"></spring:message>
