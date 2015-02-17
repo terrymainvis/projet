@@ -26,7 +26,7 @@ public class EmailSender {
 			msg.setFrom(new InternetAddress(mailFrom));
 
 			msg.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("terry.mainvis@gmail.com", false));
+					InternetAddress.parse(mailTo, false));
 			msg.setSubject("Lille 1 community - " + ann.getId() + "-" + ann.getTitre());
 			msg.setText(content);
 			msg.setSentDate(new Date());
