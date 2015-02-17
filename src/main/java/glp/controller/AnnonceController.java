@@ -75,7 +75,7 @@ public class AnnonceController {
 	 * @return le formulaire de crï¿½ation d'une annonce, aprï¿½s que l'on ait
 	 *         choisi une catï¿½gorie
 	 */
-	@RequestMapping("new/form")
+	@RequestMapping("new")
 	public ModelAndView getForm(@ModelAttribute("annform") AnnonceForm annform) {
 
 		// si on arrive sur le formulaire sans passer par le choix de catï¿½gorie
@@ -268,10 +268,22 @@ public class AnnonceController {
 	@RequestMapping(value = "/{id}/sendmail", method = RequestMethod.POST)
 	public ModelAndView sendMail(@PathVariable("id") int idAnnSelected,
 			HttpServletRequest request) {
+		
 		Annonce annonce = annonceService.getRowById(idAnnSelected);
-		EmailSender.sendMail(annonce.getAuteur().getMailLille1(), utilisateurService
-				.getUserInSession().getMailLille1(), request.getParameter("contentMail"), annonce);
-		return new ModelAndView("redirect:/");
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annonce", annonce);
+		myModel.put("catList", catList);
+		myModel.put("champscompletes", ccService.getListByAnn(annonce));
+		myModel.put("roleList", roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		myModel.put("confirmMail", "mailsent");
+		if (EmailSender.sendMail(annonce.getAuteur().getMailLille1(), utilisateurService
+				.getUserInSession().getMailLille1(), request.getParameter("contentMail"), annonce) == true)
+			myModel.put("confirmMail", "mailsent");
+		else
+			myModel.put("confirmMail", "mailNotsent");
+		return new ModelAndView("consultAnn", myModel);
 	}
 
 	
