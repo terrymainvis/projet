@@ -7,81 +7,101 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
+<script src="<c:url value="/resources/js/foundation.min.js" />"></script>
+<script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
+
 
 <title>Liste des utilisateurs</title>
 </head>
 <body class="bg">
-<%@ include file="../templates/header.jsp" %>
+	<%@ include file="../templates/header.jsp"%>
 
 	<h1>Liste des utilisateurs</h1>
 	<c:if test="${!empty nbAdminInsuffisant}">
 		<div data-alert class="alert-box alert">
-		  Vous ne pouvez pas changer le statut d'un administrateur lorsqu'il n'y en a qu'un
-		  <a href="#" class="close">&times;</a>
+			Vous ne pouvez pas changer le statut d'un administrateur lorsqu'il
+			n'y en a qu'un <a href="#" class="close">&times;</a>
 		</div>
 	</c:if>
-	<c:if test="${!empty changementStatut && !empty utilisateurSelectionne}">
+	<c:if
+		test="${!empty changementStatut && !empty utilisateurSelectionne}">
 		<div data-alert class="alert-box success">
-		  <b><c:out value="${utilisateurSelectionne }"></c:out></b> est maintenant un <b><c:out value="${changementStatut }"></c:out></b>
-		  <a href="#" class="close">&times;</a>
+			<b><c:out value="${utilisateurSelectionne }"></c:out></b> est
+			maintenant un <b><c:out value="${changementStatut }"></c:out></b> <a
+				href="#" class="close">&times;</a>
 		</div>
 	</c:if>
-	
-	<table id="listeUtilisateurs" class="display" cellspacing="0" width="100%">
+
+	<table id="listeUtilisateurs" class="display" cellspacing="0"
+		width="100%">
 		<thead>
-			<tr><th>Pr&eacutenom</th><th>Nom</th><th>Mail</th><th>Statut</th><th></th></tr>
+			<tr>
+				<th>Pr&eacutenom</th>
+				<th>Nom</th>
+				<th>Mail</th>
+				<th>Statut</th>
+				<th></th>
+			</tr>
 		</thead>
-   		<tbody id="lignes">
+		<tbody id="lignes">
 			<c:if test="${!empty listeUtilisateursAdmin}">
-		 		<c:forEach items="${listeUtilisateursAdmin}" var="utilisateur">
-			        <tr>
-		 				<td>${utilisateur.prenom}</td>
+				<c:forEach items="${listeUtilisateursAdmin}" var="utilisateur">
+					<tr>
+						<td>${utilisateur.prenom}</td>
 						<td>${utilisateur.nom}</td>
 						<td>${utilisateur.mailLille1}</td>
 						<td>Administrateur</td>
-						<td>
-						<a href="<c:url value='/administration/modifierEnMod/${utilisateur.id}' />" class="button small">Mettre mod&eacuterateur</a>
-						<a href="<c:url value='/administration/modifierEnUti/${utilisateur.id}' />" class="button small">Mettre utilisateur</a>
-						</td>
-			 		</tr>
-			 	</c:forEach>
+						<td><a
+							href="<c:url value='/administration/modifierEnMod/${utilisateur.id}' />"
+							class="button small">Mettre mod&eacuterateur</a> <a
+							href="<c:url value='/administration/modifierEnUti/${utilisateur.id}' />"
+							class="button small">Mettre utilisateur</a></td>
+					</tr>
+				</c:forEach>
 			</c:if>
 			<c:if test="${!empty listeUtilisateursMod}">
-		 		<c:forEach items="${listeUtilisateursMod}" var="utilisateur">
-			        <tr>
-		 				<td>${utilisateur.prenom}</td>
+				<c:forEach items="${listeUtilisateursMod}" var="utilisateur">
+					<tr>
+						<td>${utilisateur.prenom}</td>
 						<td>${utilisateur.nom}</td>
 						<td>${utilisateur.mailLille1}</td>
 						<td>Mod&eacuterateur</td>
-						<td>
-						<a href="<c:url value='/administration/modifierEnAdmin/${utilisateur.id}' />" class="button small">Mettre administrateur</a>
-						<a href="<c:url value='/administration/modifierEnUti/${utilisateur.id}' />" class="button small">Mettre utilisateur</a>
-						</td>
-			 		</tr>
-			 	</c:forEach>
+						<td><a
+							href="<c:url value='/administration/modifierEnAdmin/${utilisateur.id}' />"
+							class="button small">Mettre administrateur</a> <a
+							href="<c:url value='/administration/modifierEnUti/${utilisateur.id}' />"
+							class="button small">Mettre utilisateur</a></td>
+					</tr>
+				</c:forEach>
 			</c:if>
-   			<c:if test="${!empty listeUtilisateurs}">
-		 		<c:forEach items="${listeUtilisateurs}" var="utilisateur">
-			        <tr>
-		 				<td>${utilisateur.prenom}</td>
+			<c:if test="${!empty listeUtilisateurs}">
+				<c:forEach items="${listeUtilisateurs}" var="utilisateur">
+					<tr>
+						<td>${utilisateur.prenom}</td>
 						<td>${utilisateur.nom}</td>
 						<td>${utilisateur.mailLille1}</td>
 						<td>Utilisateur</td>
-						<td>
-						<a href="<c:url value='/administration/modifierEnAdmin/${utilisateur.id}' />" class="button small">Mettre administrateur</a>
-						<a href="<c:url value='/administration/modifierEnMod/${utilisateur.id}' />" class="button small">Mettre mod&eacuterateur</a>
-						</td>
-			 		</tr>
-			 	</c:forEach>
-			 </c:if>
-        </tbody>
+						<td><a
+							href="<c:url value='/administration/modifierEnAdmin/${utilisateur.id}' />"
+							class="button small">Mettre administrateur</a> <a
+							href="<c:url value='/administration/modifierEnMod/${utilisateur.id}' />"
+							class="button small">Mettre mod&eacuterateur</a></td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
 	</table>
 	<br>
+	<script>
+		$(document).foundation();
+	</script>
+
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#listeUtilisateurs').DataTable({
-			});
+		$(document).ready(function() {
+			$('#listeUtilisateurs').DataTable({});
 		});
 	</script>
+
+
 </body>
 </html>

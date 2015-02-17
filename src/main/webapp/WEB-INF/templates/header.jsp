@@ -53,6 +53,7 @@
 			</c:if>
 		</c:forEach>
 			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message code="header.monCompte"></spring:message></a></li>
+
 			<li class="has-dropdown"><a href="#"><spring:message code="header.covoiturage"></spring:message></a>
 
 				<ul class="dropdown">

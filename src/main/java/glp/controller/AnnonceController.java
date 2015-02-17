@@ -10,6 +10,7 @@ import glp.services.CategorieService;
 import glp.services.ChampCompleteService;
 import glp.services.RoleService;
 import glp.services.UtilisateurService;
+import glp.util.EmailSender;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -268,37 +269,10 @@ public class AnnonceController {
 	public ModelAndView sendMail(@PathVariable("id") int idAnnSelected,
 			HttpServletRequest request) {
 		Annonce annonce = annonceService.getRowById(idAnnSelected);
-		sendMail(annonce.getAuteur().getMailLille1(), utilisateurService
+		EmailSender.sendMail(annonce.getAuteur().getMailLille1(), utilisateurService
 				.getUserInSession().getMailLille1(), request.getParameter("contentMail"), annonce);
 		return new ModelAndView("redirect:/");
 	}
 
-	private void sendMail(String mailTo, String mailFrom, String content,
-			Annonce ann) {
-		Properties props = System.getProperties();
-		props.put("mail.smtps.host", "smtps.univ-lille1.fr");
-		props.put("mail.smtps.auth", "true");
-		Session session = Session.getInstance(props, null);
-		Message msg = new MimeMessage(session);
-		try {
-			msg.setFrom(new InternetAddress(mailFrom));
-
-			msg.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("terry.mainvis@gmail.com", false));
-			msg.setSubject("Lille 1 community - " + ann.getId() + "-" + ann.getTitre());
-			msg.setText(content);
-			msg.setSentDate(new Date());
-			SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
-			t.connect("smtps.univ-lille1.fr", "terry.mainvis@etudiant.univ-lille1.fr",
-					"lille1community@");
-			t.sendMessage(msg, msg.getAllRecipients());
-			System.out.println("Response: " + t.getLastServerResponse());
-			t.close();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		;
-
-	}
-
+	
 }
