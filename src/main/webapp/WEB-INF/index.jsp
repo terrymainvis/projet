@@ -82,7 +82,24 @@
 		</li>
 		<li>
 			<div class="panel">
-				<h5>Forum</h5>
+				<h5>Témoignages</h5>
+				<br>
+				<c:forEach begin="0" end="9" items="${forumListRecent}" var="forum">
+					<div class="row">
+						
+						<div class="small-5 columns">
+							<span> ${forum.titre} </span> <br> <span>
+								 </span>
+						</div>
+						<div class="small-5 columns">
+							<a href="<c:url value='/forum/${forum.id}' />"
+								class="button round">Voir l'éxpérience</a>
+						</div>
+					</div>
+
+				</c:forEach>
+				
+				
 				<br>
 			</div>
 		</li>

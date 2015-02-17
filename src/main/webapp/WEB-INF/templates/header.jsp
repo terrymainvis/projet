@@ -76,7 +76,7 @@
 			<li><a href="<c:url value="/job/list" />">
 					<spring:message code="header.Job"></spring:message>
 				</a></li>
-			<li><a href="#">Forum</a></li>
+			<li><a href="<c:url value="/forum/list" />">Témoignages</a></li>
 		</ul>
 		<form action="annonce/recherche" id="formulaireCat">
 			<ul class="right">

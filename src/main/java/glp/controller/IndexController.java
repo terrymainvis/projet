@@ -62,7 +62,7 @@ public class IndexController {
 		
 
 		//List<Annonce> covoitList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.COVOIT)); 
-		List<Forum> forumList = forumService.getList();
+		List<Forum> forumListRecent = forumService.getListRecent();
 
 		modelIndex.put("covoitList", covoitList);
 		modelIndex.put("annList", annList);
@@ -70,7 +70,7 @@ public class IndexController {
 		modelIndex.put("roleList",  roleService.getList());
 		modelIndex.put("utilisateur", utilisateurService.getUserInSession());
 		modelIndex.put("catList", listeCat);
-		modelIndex.put("forumList", forumList);
+		modelIndex.put("forumListRecent", forumListRecent);
 
 
 		return new ModelAndView("../index", modelIndex);

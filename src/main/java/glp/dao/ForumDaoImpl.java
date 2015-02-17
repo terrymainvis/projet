@@ -57,19 +57,19 @@ public class ForumDaoImpl implements ForumDao{
 	public int deleteRow(int id) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
+	}//SELECT * FROM `forum` order by `forum_date_pub` DESC
 
 	@Override
 	public List<Forum> getListRecent() {
 		Session session =sessionFactory.getCurrentSession();
-		String sql = "FROM Forum ";// ORDER BY ann_date_debut
+		String sql = "FROM Forum ORDER BY forum_date_pub DESC";// ORDER BY ann_date_debut
 		Query q = session.createQuery(sql);
 		q.setFirstResult(0);
-		q.setMaxResults(5); // on obtient les 10 dernières annonces
+		q.setMaxResults(3); // on obtient les 10 dernières annonces
 		@SuppressWarnings("unchecked")
-		List<Forum> forumList = q.list();
-		System.out.println("taille " + forumList.size() );
-		return forumList;
+		List<Forum> forumListRecent = q.list();
+		System.out.println("taille " + forumListRecent.size() );
+		return forumListRecent;
 	}
 
 }

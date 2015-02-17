@@ -47,11 +47,10 @@ public class Forum {
 		
 	}
 	
-	public Forum(String titre, String desc, Date date_pub, Utilisateur uti ){
+	public Forum(String titre, String desc, Date date_pub ){
 		this.titre= titre;
 		this.desc= desc;
 		this.date_pub = new Date();
-		this.auteur = uti;
 	}
 	public int getId(){
 		return id;
