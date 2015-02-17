@@ -1,6 +1,7 @@
 package glp.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import glp.domain.Categorie;
 
@@ -17,5 +18,7 @@ public interface CategorieDao {
 	public int deleteRow(int id);
 	
 	public int getIdByLib(String lib);
+
+	public Map<Integer, Integer> getNbByCategorie();
 	
 }

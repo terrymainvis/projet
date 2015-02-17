@@ -1,13 +1,19 @@
 package glp.dao;
 
+import glp.domain.Annonce;
 import glp.domain.Categorie;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CategorieDaoImpl implements CategorieDao {
@@ -63,6 +69,20 @@ public class CategorieDaoImpl implements CategorieDao {
 		Query q = session.createQuery(sql).setParameter("catLib", lib);
 		int id = (int) q.list().get(0);
 		return id;
+	}
+
+	@Override
+	public Map<Integer, Integer> getNbByCategorie() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Categorie> catList = session.createCriteria(Categorie.class).addOrder(Order.asc("id")).list();
+		Map<Integer, Integer> mapCategorieNbAnnonces = new HashMap<Integer, Integer>();
+		for(Categorie c : catList) {
+			int nbAnnonces = ((Long) session.createCriteria(Annonce.class)
+			        .add(Restrictions.eq("categorie", c)).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+			mapCategorieNbAnnonces.put(c.getId(), nbAnnonces);
+		}
+		return mapCategorieNbAnnonces;
 	}
 
 }

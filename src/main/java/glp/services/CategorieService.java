@@ -3,6 +3,7 @@ package glp.services;
 import glp.domain.Categorie;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CategorieService {
 	public int insertRow(Categorie cat);
@@ -16,4 +17,6 @@ public interface CategorieService {
 	public int deleteRow(int id);
 	
 	public int getIdByLib(String lib);
+
+	public Map<Integer, Integer> getNbByCategorie();
 }

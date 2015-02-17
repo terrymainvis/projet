@@ -34,7 +34,7 @@ public class AdministrationController {
 	@Autowired
 	private CategorieService categorieService;
 	
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public ModelAndView getListeUtilisateurs(Map<String, Object> modelListeUtilisateurs) {
 		if(modelListeUtilisateurs==null)
 			modelListeUtilisateurs = new HashMap<String, Object>();
@@ -81,7 +81,7 @@ public class AdministrationController {
 					return getListeUtilisateurs(modelListeUtilisateurs);
 				}
 			uti.setRoleId(roleService.getRowByNom("MODERATEUR").getId());
-			modelListeUtilisateurs.put("changementStatut", "modérateur");
+			modelListeUtilisateurs.put("changementStatut", "modï¿½rateur");
 			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
 			utilisateurService.updateRow(uti);
 //		}
@@ -106,5 +106,25 @@ public class AdministrationController {
 			utilisateurService.updateRow(uti);
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
+	}
+	
+	@RequestMapping("/listCategories")
+	public ModelAndView getListeCategories() {
+			Map<String, Object> modelListeCategories = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			modelListeCategories.put("roleList", roleService.getList());
+			modelListeCategories.put("utilisateur", utilisateurService.getUserInSession());
+			modelListeCategories.put("catList", categorieService.getList());
+			modelListeCategories.put("mapCategories", categorieService.getNbByCategorie());
+//		}
+		return new ModelAndView("admin_listeCategories", modelListeCategories);
+	}
+	
+	@RequestMapping("/supprimerCategorie/{id}")
+	public ModelAndView supprimerCategorie(@PathVariable("id") int idCategorie) {
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			
+//		}
+		return getListeCategories();
 	}
 }

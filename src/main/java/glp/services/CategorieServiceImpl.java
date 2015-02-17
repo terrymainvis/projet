@@ -4,6 +4,7 @@ import glp.dao.CategorieDao;
 import glp.domain.Categorie;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -50,5 +51,11 @@ public class CategorieServiceImpl implements CategorieService {
 	@Transactional
 	public int getIdByLib(String lib) {
 		return categorieDao.getIdByLib(lib);
+	}
+
+	@Override
+	@Transactional
+	public Map<Integer, Integer> getNbByCategorie() {
+		return categorieDao.getNbByCategorie();
 	}
 }
