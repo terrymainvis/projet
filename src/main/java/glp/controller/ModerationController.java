@@ -3,14 +3,11 @@ package glp.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import glp.domain.Annonce;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.RoleService;
 import glp.services.UtilisateurService;
-import glp.util.EmailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,19 +39,24 @@ public class ModerationController {
 			ann.setValide(true);
 			annonceService.updateRow(ann);
 //		}
-			// string à externaliser dans un fichier afin d'avoir la transaction fr/en
-			String content = "Votre annonce a bien été validée par notre modérateur. A bientot sur Lille 1 Community !";
-			EmailSender.sendMail(ann.getAuteur().getMailLille1(), utilisateurService
-					.getUserInSession().getMailLille1(), content, ann);
 		return getListAnnoncesAModerer();
 	}
 	
 	@RequestMapping("/refuser/annonce/{id}")
-	public ModelAndView refuserAnnonce(@PathVariable("id") int idAnnSelected) {
+	public ModelAndView refuserAnnonce(@PathVariable("id") int idAnnSelected,
+			HttpServletRequest request) {
 //		if(utilisateurService.isModerateur(utilisateurService.getUserInSession()) || utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Annonce ann = annonceService.getRowById(idAnnSelected);
 			ann.setValide(false);
-			annonceService.updateRow(ann);
+			
+			String motif = request.getParameter("motif");
+			String content = ann.getTitre() + " " + ann.getDesc() + " " + motif;
+			
+			EmailSender.sendMail(ann.getAuteur().getMailLille1(), utilisateurService
+					.getUserInSession().getMailLille1(), content, ann);
+			
+			
+			annonceService.deleteRow(ann.getId());
 //		}
 		return getListAnnoncesAModerer();
 	}

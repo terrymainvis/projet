@@ -9,9 +9,6 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">
-<script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
-<script src="<c:url value="/resources/js/foundation.min.js" />"></script>
-<script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
@@ -19,53 +16,52 @@
 	<c:choose>
 		<c:when test="${confirmMail == 'mailsent'}">
 			<div data-alert class="alert-box success">
-				Votre mail a bien été envoyé <a href="#" class="close">&times;</a>
+				Votre mail a bien ï¿½tï¿½ envoyï¿½ <a href="#" class="close">&times;</a>
 			</div>
 		</c:when>
 		<c:when test="${confirmMail == 'mailNotsent'}">
 			<div data-alert class="alert-box alert">
-				Votre mail n'a pas été envoyé, contactez-nous pour nous informer de cette erreur <a href="#" class="close">&times;</a>
+				Votre mail n'a pas ï¿½tï¿½ envoyï¿½, contactez-nous pour nous informer de cette erreur <a href="#" class="close">&times;</a>
 			</div>
 		</c:when>
 	</c:choose>
 
 
 	<c:forEach items="${roleList}" var="role">
-		<c:if test="${utilisateur.roleId==role.id}">
-			<c:if
-				test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
+	    <c:if test="${utilisateur.roleId==role.id}">
+	    	<c:if test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
 				<div class="row">
 					<div class="small-12 columns">
 						<div class="panel">
-							<a href="<c:url value="/moderation/list"/>"><h3>Modération</h3></a>
+							<a href="<c:url value="/moderation/list"/>"><h3>Modï¿½ration</h3></a>
 							<p>
 								Statut de l'annonce : <b> <c:choose>
 										<c:when test="${annonce.valide=='TRUE'}">
-							    Validée
+							    Validï¿½e
 							  </c:when>
 										<c:when test="${annonce.valide=='FALSE'}">
-							    Refusée
+							    Refusï¿½e
 							  </c:when>
-										<c:otherwise>
+							  <c:otherwise>
 							    En attente
 							  </c:otherwise>
-									</c:choose>
-								</b>
+							</c:choose>
+							</b>
 							</p>
 							<p class="text-center">
 								<a
 									href="<c:url value='/moderation/valider/annonce/${annonce.id}' />"
-									class="button success">Valider l'annonce</a> <a
-									href="<c:url value='/moderation/refuser/annonce/${annonce.id}' />"
-									class="button alert">Refuser l'annonce</a>
+									class="button success">Valider l'annonce</a> 
+								<a href="#" class="button alert" id="modalLauncher">Refuser l'annonce</a>
+									
 							</p>
 						</div>
 					</div>
 				</div>
 			</c:if>
-		</c:if>
+	    </c:if>
 	</c:forEach>
-
+	
 	<div class="row">
 		<div class="large-12 columns">
 			<div class="panel">
@@ -73,7 +69,7 @@
 				<div class="row" style="text-align: center">
 					<!-- <div class="large-10 columns"> -->
 					<div class="panel">
-						<span><h4>${annonce.type}:${annonce.titre}</h4> </span>
+						<span><h4>${annonce.type} : ${annonce.titre}</h4> </span>
 					</div>
 					<!-- </div> -->
 				</div>
@@ -87,17 +83,15 @@
 							class="small-block-grid-2 medium-block-grid-2 large-block-grid-2">
 							<li>
 								<div class="panel">
-									<span><h4>La description de l'annonce :</h4></span>
+									<span><h4><spring:message code="consultAnn.description"></spring:message></h4></span>
 									<p>${annonce.desc }</p>
-								</div> <c:if
-									test="${champscompletes != null && champscompletes.size()>0 }">
+								</div> 
+									
+								<c:if test="${champscompletes != null && champscompletes.size()>0 }">	
 									<div class="panel">
 										<c:forEach items="${champscompletes}" var="cc">
-											<span><h4>
-													<c:out value="${cc.champ.nom }" />
-													:
-												</h4></span>
-											<p>
+											<span><h4><c:out value="${cc.champ.nom }" /> :</h4></span>
+											<p>											
 												<c:out value="${cc.valeur }" />
 											</p>
 										</c:forEach>
@@ -110,16 +104,18 @@
 									<h4>Contact</h4>
 									<div>
 										<div>
-											<span><h5>Telephone:</h5> 060000000 </span> <span></span> </br>
+											<span><h5><spring:message code="consultAnn.telephone"></spring:message></h5> 060000000 </span> 
+											<span></span> </br>
 											<div>
-												<span><h5>Adresse mail</h5></span> <span>${current_user.mailAutre}
+												<span><h5><spring:message code="consultAnn.email"></spring:message></h5></span> <span>${current_user.mailAutre}
 												</span>
 											</div>
 											</br>
 											<div>
-												<a href="<c:url value='/annonce/${annonce.id}/contact' />"
-													class="button small">Envoyer un message</a>
-
+											<a href="<c:url value='/annonce/${annonce.id}/contact' />" class="button small">
+												<spring:message code="consultAnn.envoyerMessage"></spring:message>
+											</a>
+												
 											</div>
 										</div>
 									</div>
@@ -130,11 +126,40 @@
 					</div>
 				</div>
 				<!-- </div> -->
+
+
+
+
+
 			</div>
 		</div>
 	</div>
+		
+	<div id="myModal" class="reveal-modal" data-reveal>
+		<h2 style="text-align: center">Refus de l'annonce</h2>
+		<br />
+	  <form method="get" action="<c:url value='/moderation/refuser/annonce/${annonce.id}' />">
+	  	<div class="large-12 columns" >
+	  		<input placeholder="Motif" name="motif" type="text"/>
+	  	</div>
+	  		<br /> 
+	  	<div style="text-align: center">
+	  		To : ${current_user.mailAutre}
+	  	</div>
+	  		<br/>
+	  	<div>
+	  		<input class="button" type="submit" value="Envoyer"/>
+	  	</div>
+	  </form>
+	    <a href="#" class="close-reveal-modal" id="closeModal">&#215;</a>
+	</div>
+		
 </body>
-	<script>
-		$(document).foundation();
+	<script type="text/javascript">
+		$("#modalLauncher").click(function (e) {
+		    $('#myModal').foundation('reveal', 'open');
+		    $('[data-reveal]').foundation('reveal','close')
+		});
+
 	</script>
 </html>

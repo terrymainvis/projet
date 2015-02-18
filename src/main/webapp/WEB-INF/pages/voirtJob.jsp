@@ -48,16 +48,16 @@
 							class="large-12 columns">
 							<li>
 								<div class="panel">
-									<span><h4>Détail de l'offre :</h4></span>
+									<span><h4><spring:message code="voirJob.description"></spring:message></h4></span>
 									<p>${job.desc }</p>
 								</div> 
 								<div class="panel">
-									<span><h4>Salaire:</h4></span>
+									<span><h4><spring:message code="voirJob.salaire"></spring:message></h4></span>
 									<p>${job.prix }</p>
 								</div> 
 									
 								<div class="panel">
-									<span><h4>Mail a contacter:</h4></span>
+									<span><h4><spring:message code="voirJob.contact"></spring:message></h4></span>
 									<p>${job.mail }</p>
 								</div>  <!-- </div> -->
 							</li>

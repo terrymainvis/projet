@@ -15,7 +15,7 @@ import com.sun.mail.smtp.SMTPTransport;
 
 public class EmailSender {
 	
-	public static boolean sendMail(String mailTo, String mailFrom, String content,
+	public static void sendMail(String mailTo, String mailFrom, String content,
 			Annonce ann) {
 		Properties props = System.getProperties();
 		props.put("mail.smtps.host", "smtps.univ-lille1.fr");
@@ -23,7 +23,7 @@ public class EmailSender {
 		Session session = Session.getInstance(props, null);
 		Message msg = new MimeMessage(session);
 		try {
-			msg.setFrom(new InternetAddress("terry.mainvis@etudiant.univ-lille1.fr"));
+			msg.setFrom(new InternetAddress(mailFrom));
 
 			msg.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(mailTo, false));
@@ -36,11 +36,10 @@ public class EmailSender {
 			t.sendMessage(msg, msg.getAllRecipients());
 			System.out.println("Response: " + t.getLastServerResponse());
 			t.close();
-			return true;
 		} catch (MessagingException e) {
 			e.printStackTrace();
-			return false;
 		}
+		;
 
 	}
 
