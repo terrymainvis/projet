@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>	
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page session="true"%>
 
 <link rel="stylesheet"
@@ -15,10 +15,41 @@
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 <link rel="stylesheet" type="text/css"
 	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
+<div id="wrapper">
+	<div id="header-wrapper">
+
+		<div id="header" class="container">
+			<div id="logo" class="medium-6 large-6 columns">
+				<a href="http://localhost:8080/lille1community/"><img
+					src="<c:url value="/resources/img/UL1-BLANC-WEB-2014.png" />"
+					alt="Community Lille 1" /></a>
+			</div>
+
+			<div id="text" class="medium-6 large-6 columns">
+				<h1>Lille 1 Community</h1>
+				<p>Un lieu d'échange et d'entraide pour la communauté Lille 1</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div id="wrapper"> -->
+<!-- 	<div id="header-wrapper" class="row"> -->
+
+<!-- 			<div id="logo" class="small-6 medium-6 large-6 columns"> -->
+<%-- 				<a href="http://localhost:8080/lille1community/"><img src="<c:url value="/resources/img/UL1-BLANC-WEB-2014.png" />" --%>
+<!-- 					alt="Site de Lille 1 Community" /></a> -->
+<!-- 			</div> -->
+
+<!-- 			<div id="text" class="small-6 medium-6 large-6 columns"> -->
+<!-- 				<h1>Lille 1 Community</h1> -->
+<!-- 				<p>Un lieu d'échange et d'entraide pour la communauté Lille 1</p> -->
+<!-- 			</div> -->
+<!-- 	</div> -->
 
 <nav class="top-bar marginbot" data-topbar role="navigation">
 
@@ -27,11 +58,13 @@
 		<ul class="title-area">
 			<li class="name">
 				<h1>
-					<a href="<c:url value="/" />"><spring:message code="header.acceuil"></spring:message></a>
+					<a href="<c:url value="/" />"><spring:message
+							code="header.acceuil"></spring:message></a>
 				</h1>
 			</li>
 		</ul>
 		<ul class="left">
+
 		
 				<c:choose>
 				  <c:when test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}">
@@ -51,33 +84,36 @@
 
 			<li class="has-dropdown"><a href="#"><spring:message code="header.covoiturage"></spring:message></a>
 
+
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/new"  />">
-						<spring:message code="header.creerCovoiturage"></spring:message>
+					<li><a href="<c:url value="/annonce/new"  />"> <spring:message
+								code="header.creerCovoiturage"></spring:message>
 					</a></li>
-					<li><a href="<c:url value="/annonce/listCov" />">
-						<spring:message code="header.trouverCovoiturage"></spring:message>
+					<li><a href="<c:url value="/annonce/listCov" />"> <spring:message
+								code="header.trouverCovoiturage"></spring:message>
 					</a></li>
 				</ul></li>
-			<li class="has-dropdown"><a href="#"><spring:message code="header.petitesAnnonces"></spring:message></a>
+			<li class="has-dropdown"><a href="#"><spring:message
+						code="header.petitesAnnonces"></spring:message></a>
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/typechoice"  />">
-						<spring:message code="header.creerAnnonce"></spring:message>
+					<li><a href="<c:url value="/annonce/typechoice"  />"> <spring:message
+								code="header.creerAnnonce"></spring:message>
 					</a></li>
-					<li><a href="<c:url value="/annonce/list" />">
-						<spring:message code="header.rechercherAnnonce"></spring:message>
+					<li><a href="<c:url value="/annonce/list" />"> <spring:message
+								code="header.rechercherAnnonce"></spring:message>
 					</a></li>
 				</ul></li>
 
-			<li><a href="<c:url value="/job/list" />">
-					<spring:message code="header.Job"></spring:message>
-				</a></li>
+			<li><a href="<c:url value="/job/list" />"> <spring:message
+						code="header.Job"></spring:message>
+			</a></li>
 			<li><a href="<c:url value="/forum/list" />">Témoignages</a></li>
 		</ul>
 		<form action="annonce/recherche" id="formulaireCat">
 			<ul class="right">
 				<li class="has-form"><input name="motCle" type="text"
-					placeholder="<spring:message code="header.hintRecherche"></spring:message>" id="inputSearchCat"></li>
+					placeholder="<spring:message code="header.hintRecherche"></spring:message>"
+					id="inputSearchCat"></li>
 				<li class="has-form"><select name="cat" class="medium"
 					name="listeCategorie" id="idSelectCat">
 
@@ -86,21 +122,19 @@
 						</c:forEach>
 				</select></li>
 				<li class="has-form">
-<!-- 				<a href="#" class="alert button expand" -->
-<!-- 					id="searchCat">Rechercher</a> -->
-					<input class="button success" type="submit" value="<spring:message code="header.rechercher"></spring:message>">
-					</li>
+					<!-- 				<a href="#" class="alert button expand" --> <!-- 					id="searchCat">Rechercher</a> -->
+					<input class="button success" type="submit"
+					value="<spring:message code="header.rechercher"></spring:message>">
+				</li>
 			</ul>
 		</form>
 
 
 	</section>
 </nav>
-
-<span style="float: right;">  
-    <a href="<c:url value="?lang=fr"/>">FR</a>  
-    |  
-    <a href="<c:url value="?lang=en"/>">EN</a>  
+</div>
+<span style="float: right;"> <a href="<c:url value="?lang=fr"/>">FR</a>
+	| <a href="<c:url value="?lang=en"/>">EN</a>
 </span>
 <!-- <script>
  	$("#searchCat").click(
@@ -124,5 +158,4 @@
 </script> -->
 <script>
 	$(document).foundation();
-
 </script>
