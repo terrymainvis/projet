@@ -34,29 +34,29 @@
 					<h2>Créez votre offre d'emploi !</h2>
 
 					<div>
-						<form:input path="titre" placeholder="Titre de l'offre" />
+						<form:input path="titre" placeholder="Titre de l'offre" maxlength="30"  required="required"/>
 						<form:errors path="titre" />
 					</div>
 					<div>
-						<form:textarea path="desc"
-							placeholder="Décrivez votre offre en quelque mots !" />
+						<form:textarea path="desc" 
+							placeholder="Décrivez votre offre en quelque mots !" maxlength="500"/>
 						<form:errors path="desc" />
 					</div>
 
 					<div>
-						<form:textarea path="prix"
+						<form:input path="prix" pattern="\d+(\.\d{2})?"
 							placeholder="Salaire (Mensuel/Horaire/Journalier/Hebdomadaire...) !" />
 						<form:errors path="desc" />
 					</div>
 					
 					<div>
-						<form:textarea path="mail"
-							placeholder="Mail a contacter" />
+						<form:input path="mail" type="email"
+							placeholder="Mail a contacter" required="required"/>
 						<form:errors path="mail" />
 					</div>
 
 					<div>
-						<form:input path="date_fin" type="text" id="datepicker"
+						<form:input path="date_fin" type="text" id="datepicker" pattern="\d{1,2}/\d{1,2}/\d{4}"
 							placeholder="Fin de votre offre:" />
 					</div>
 
