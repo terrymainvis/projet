@@ -21,11 +21,13 @@ public interface UtilisateurService {
 	
 	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail);
 	
-	public List<Utilisateur> getListByRole(int roleId);
+	public List<Utilisateur> getListByRole(String role);
 	
 	public boolean isModerateur(Utilisateur utilisateur);
 	
 	public boolean isAdministrateur(Utilisateur utilisateur);
+	
+	public boolean isRepresentant(Utilisateur utilisateur);
 	
 	public Utilisateur getRowById(int id);
 	

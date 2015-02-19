@@ -28,11 +28,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public Integer insertRow(Utilisateur u) {
 		Session session = sessionFactory.getCurrentSession();
-		if(u.getRole()==null) {
+		if(u.getRoles().isEmpty()) {
 			Role r = (Role) session.createCriteria(Role.class)
 					.add(Restrictions.eq("nom", "UTILISATEUR"))
 					.uniqueResult();
-			u.setRole(r);
+			u.addRole(r);
 		}
 		session.saveOrUpdate(u);
 		Serializable id = session.getIdentifier(u);
@@ -79,33 +79,42 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public List<Utilisateur> getListByRole(int roleId) {
+	public List<Utilisateur> getListByRole(String role) {
 		Session session =sessionFactory.getCurrentSession();
+		
+		
+		
 		@SuppressWarnings("unchecked")
 		List<Utilisateur> utilisateurList = session.createCriteria(Utilisateur.class)
-		.add(Restrictions.eq("role.id", roleId))
-		.addOrder(Order.asc("nom"))
-		.list();
+		 .createAlias( "roles", "r" )
+         .add( Restrictions.eq( "r.nom", role )).addOrder(Order.asc("nom")).list();
 		return utilisateurList;
 	}
 
 	@Override
 	public boolean isModerateur(Utilisateur utilisateur) {
-		if(utilisateur.getRole()!=null) {
-			if(utilisateur.getRole().getNom().equals("MODERATEUR"))
+		if(utilisateur.getRoles()!=null)
+			if(utilisateur.getRoles().containsKey("MODERATEUR"))
 				return true;
-		}
 		return false;
 	}
 
 	@Override
 	public boolean isAdministrateur(Utilisateur utilisateur) {
-		if(utilisateur.getRole()!=null) {
-			if(utilisateur.getRole().getNom().equals("ADMINISTRATEUR"))
+		if(utilisateur.getRoles()!=null)
+			if(utilisateur.getRoles().containsKey("ADMINISTRATEUR"))
 				return true;
-		}
 		return false;
 	}
+	
+	@Override
+	public boolean isRepresentant(Utilisateur utilisateur) {
+		if(utilisateur.getRoles()!=null)
+			if(utilisateur.getRoles().containsKey("REPRESENTANT"))
+				return true;
+		return false;
+	}
+	
 	@Transactional
 	@Override
 	public List<Annonce> listAnnoncePublie(Utilisateur utilisateur) {

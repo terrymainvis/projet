@@ -19,7 +19,7 @@ public interface UtilisateurDao {
 	
 	public void updateContactAutreMail(Utilisateur u, boolean contactAutreMail);
 	
-	public List<Utilisateur> getListByRole(int roleId);
+	public List<Utilisateur> getListByRole(String role);
 	
 	public boolean isModerateur(Utilisateur utilisateur);
 	
@@ -32,6 +32,8 @@ public interface UtilisateurDao {
 	public void supprimerAnnonce (int id);
 
 	public Utilisateur getRowByMailLille1(String mail);
+
+	boolean isRepresentant(Utilisateur utilisateur);
 
 
 	

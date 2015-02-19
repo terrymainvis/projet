@@ -27,13 +27,13 @@
 	<c:if
 		test="${!empty changementStatut && !empty utilisateurSelectionne}">
 		<div data-alert class="alert-box success">
-			<b><c:out value="${utilisateurSelectionne }"></c:out></b> est
-			maintenant <b><c:out value="${changementStatut }"></c:out></b> <a
+			<b><c:out value="${utilisateurSelectionne }"></c:out></b>
+			<c:out value="${changementStatut }"></c:out> <a
 				href="#" class="close">&times;</a>
 		</div>
 	</c:if>
 	<div class="panel radius">
-	<form:form id="addUtilisateurForm" commandName="newUser" method="post" action="/lille1community/administration/nouveauStatut">
+	<form:form modelAttribute="newUser" method="post" action="/lille1community/administration/nouveauStatut">
 		<h4>Modifier les droits d'un utilisateur</h4>
 		
 		<div>
@@ -41,11 +41,8 @@
 			<form:errors path="mailLille1" />
 		</div>
 		<div>
-			<form:select id="select" path="role">
-				<form:option value="Administrateur" />
-				<form:option value="Moderateur"/>
-				<form:option value="Representant"/>
-				<form:option value="Utilisateur"/>
+			<form:select path="" name="roleSelected">
+				<form:options items="${roleList}" />
 			</form:select>
 		</div>
 		<div>
@@ -64,7 +61,7 @@
 				<th>Nom</th>
 				<th>Mail</th>
 				<th>Statut</th>
-				<th></th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody id="lignes">
@@ -74,8 +71,38 @@
 						<td>${utilisateur.prenom}</td>
 						<td>${utilisateur.nom}</td>
 						<td>${utilisateur.mailLille1}</td>
-						<td>${utilisateur.role.nom}</td>
-						<td><a href="<c:url value="/administration/supprimer/utilisateur/"/>${utilisateur.id}" class="button alert small">Supprimer</a></td>
+						<td>
+							<c:forEach items="${utilisateur.roles}" var="role">
+								${role.key} <br/>
+							</c:forEach>
+						</td>
+						<td>
+						<c:choose>
+				    		<c:when test="${not empty utilisateur.roles['ADMINISTRATEUR']}">
+								<a href="<c:url value="/administration/modifierStatutAdmin/"/>${utilisateur.id}" class="button alert tiny">-Admin</a>
+				    		</c:when>
+				    		<c:otherwise>
+								<a href="<c:url value="/administration/modifierStatutAdmin/"/>${utilisateur.id}" class="button success tiny">+Admin</a>
+				    		</c:otherwise>
+				    	</c:choose>
+				    	<c:choose>
+				    		<c:when test="${not empty utilisateur.roles['MODERATEUR']}">
+								<a href="<c:url value="/administration/modifierStatutMod/"/>${utilisateur.id}" class="button alert tiny">-Modérateur</a>
+				    		</c:when>
+				    		<c:otherwise>
+								<a href="<c:url value="/administration/modifierStatutMod/"/>${utilisateur.id}" class="button success tiny">+Modérateur</a>
+				    		</c:otherwise>
+				    	</c:choose>
+				    	<c:choose>
+				    		<c:when test="${not empty utilisateur.roles['REPRESENTANT']}">
+								<a href="<c:url value="/administration/modifierStatutRep/"/>${utilisateur.id}" class="button alert tiny">-Représentant</a>
+				    		</c:when>
+				    		<c:otherwise>
+								<a href="<c:url value="/administration/modifierStatutRep/"/>${utilisateur.id}" class="button success tiny">+Représentant</a>
+				    		</c:otherwise>
+				    	</c:choose>
+						<a href="<c:url value="/administration/supprimer/utilisateur/"/>${utilisateur.id}" class="button alert tiny">Supprimer</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>

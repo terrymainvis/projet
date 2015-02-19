@@ -67,7 +67,7 @@
 
 		
 				<c:choose>
-				  <c:when test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}">
+				  <c:when test="${(not empty utilisateur.roles['ADMINISTRATEUR']) || (not empty utilisateur.roles['UTILISATEUR'])}">
 				    <li class="has-dropdown"><a href="#">Administration</a>
 						<ul class="dropdown">
 							 <li><a href="<c:url value="/administration/list"/>">Admin. des utilisateurs</a></li>
@@ -76,7 +76,7 @@
 						</ul>
 					</li>
 				  </c:when>
-				  <c:when test="${(utilisateur.role.nom=='MODERATEUR')}">
+				  <c:when test="${not empty utilisateur.roles['MODERATEUR']}">
 				    <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
 				  </c:when>
 				</c:choose>

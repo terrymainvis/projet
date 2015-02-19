@@ -38,4 +38,18 @@ public class Role {
 		this.nom = nom;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(o==null)
+			return false;
+		Role r = (Role) o;
+		if(this.getId()==r.getId() && this.getNom().equalsIgnoreCase(r.getNom()))
+			return true;
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNom();
+	}
 }

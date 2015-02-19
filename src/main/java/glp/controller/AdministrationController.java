@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,61 +53,112 @@ public class AdministrationController {
 			listeUtilisateur = utilisateurService.getList();
 			modelListeUtilisateurs.put("listeUtilisateurs", listeUtilisateur);
 			modelListeUtilisateurs.put("utilisateur", utilisateurService.getUserInSession());
+			modelListeUtilisateurs.put("roleList", roleService.getList());
 			modelListeUtilisateurs.put("catList", categorieService.getList());
 			modelListeUtilisateurs.put("newUser", new Utilisateur());
 //		}
 		return new ModelAndView("admin_listeUtilisateurs", modelListeUtilisateurs);
 	}
 	
-	@RequestMapping("/modifierEnAdmin/{id}")
-	public ModelAndView modifierEnAdmin(@PathVariable("id") int idUtilisateur) {
+	/*
+	 *  Changement statut en administrateur
+	 */
+	@RequestMapping("/modifierStatutAdmin/{id}")
+	public ModelAndView modifierStatutAdmin(@PathVariable("id") int idUtilisateur) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
-			uti.setRole(roleService.getRowByNom("ADMINISTRATEUR"));
-			utilisateurService.updateRow(uti);
-			modelListeUtilisateurs.put("changementStatut", "administrateur");
-			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
+			modelListeUtilisateurs=modelModifierStatutAdmin(uti);
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
 	}
 	
-	@RequestMapping("/modifierEnMod/{id}")
-	public ModelAndView modifierEnMod(@PathVariable("id") int idUtilisateur) {
+	/*
+	 * Model fourni par cette methode pour pouvoir l'utiliser dans plusieurs methodes et diminuer le nombre de requetes
+	 */
+	public Map<String, Object> modelModifierStatutAdmin(Utilisateur u) {
+		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			// Il faut laisser au moins 1 administrateur
+			if (utilisateurService.isAdministrateur(u)) {
+				if (utilisateurService.getListByRole("ADMINISTRATEUR").size()<=1) {
+					modelListeUtilisateurs.put("nbAdminInsuffisant", true);
+					return modelListeUtilisateurs;
+				}
+				u.removeRole("ADMINISTRATEUR");
+				modelListeUtilisateurs.put("changementStatut", "n'est plus ADMINISTRATEUR");
+			} else {
+				u.addRole(roleService.getRowByNom("ADMINISTRATEUR"));
+				modelListeUtilisateurs.put("changementStatut", "devient ADMINISTRATEUR");
+			}
+			utilisateurService.updateRow(u);
+			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+//		}			
+	return modelListeUtilisateurs;
+	}
+	
+	/*
+	 *  Changement statut en moderateur
+	 */
+	@RequestMapping("/modifierStatutMod/{id}")
+	public ModelAndView modifierStatutMod(@PathVariable("id") int idUtilisateur) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
-			// Il faut laisser au moins 1 administrateur
-			if (uti.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR"))
-				if (utilisateurService.getListByRole(uti.getRole().getId()).size()<=1) {
-					modelListeUtilisateurs.put("nbAdminInsuffisant", true);
-					return getListeUtilisateurs(modelListeUtilisateurs);
-				}
-			uti.setRole(roleService.getRowByNom("MODERATEUR"));
-			modelListeUtilisateurs.put("changementStatut", "modérateur");
-			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
-			utilisateurService.updateRow(uti);
+			modelListeUtilisateurs=modelModifierStatutMod(uti);
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
 	}
 	
-	@RequestMapping("/modifierEnUti/{id}")
-	public ModelAndView modifierEnUti(@PathVariable("id") int idUtilisateur) {
+	/*
+	 * Model fourni par cette methode pour pouvoir l'utiliser dans plusieurs methodes et diminuer le nombre de requetes
+	 */
+	public Map<String, Object> modelModifierStatutMod(Utilisateur u) {
+		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			if(utilisateurService.isModerateur(u)) {
+				u.removeRole("MODERATEUR");
+				modelListeUtilisateurs.put("changementStatut", "n'est plus MODERATEUR");
+			} else {
+				u.addRole(roleService.getRowByNom("MODERATEUR"));
+				modelListeUtilisateurs.put("changementStatut", "devient MODERATEUR");
+			}
+			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+			utilisateurService.updateRow(u);
+//		}			
+	return modelListeUtilisateurs;
+	}
+	
+	/*
+	 *  Changement statut en representant
+	 */
+	@RequestMapping("/modifierStatutRep/{id}")
+	public ModelAndView modifierStatutRep(@PathVariable("id") int idUtilisateur) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
-			// Il faut laisser au moins 1 administrateur
-			if (uti.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR"))
-				if (utilisateurService.getListByRole(uti.getRole().getId()).size()<=1) {
-					modelListeUtilisateurs.put("nbAdminInsuffisant", true);
-					return getListeUtilisateurs(modelListeUtilisateurs);
-				}
-			uti.setRole(roleService.getRowByNom("UTILISATEUR"));
-			modelListeUtilisateurs.put("changementStatut", "utilisateur");
-			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
-			utilisateurService.updateRow(uti);
+			modelListeUtilisateurs=modelModifierStatutRep(uti);
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
+	}
+	
+	/*
+	 * Model fourni par cette methode pour pouvoir l'utiliser dans plusieurs methodes et diminuer le nombre de requetes
+	 */
+	public Map<String, Object> modelModifierStatutRep(Utilisateur u) {
+		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			if(utilisateurService.isRepresentant(u)) {
+				u.removeRole("REPRESENTANT");
+				modelListeUtilisateurs.put("changementStatut", "n'est plus REPRESENTANT");
+			} else {
+				u.addRole(roleService.getRowByNom("REPRESENTANT"));
+				modelListeUtilisateurs.put("changementStatut", "devient REPRESENTANT");
+			}
+			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+			utilisateurService.updateRow(u);
+//		}			
+		return modelListeUtilisateurs;
 	}
 	
 	@RequestMapping("/listCategories")
@@ -114,8 +166,7 @@ public class AdministrationController {
 		if(modelListeCategories==null)
 			modelListeCategories = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			modelListeCategories.put("roleList", roleService.getList());
-			modelListeCategories.put("utilisateur", utilisateurService.getUserInSession());
+			modelListeCategories.put("current_user", utilisateurService.getUserInSession());
 			modelListeCategories.put("catList", categorieService.getList());
 			modelListeCategories.put("mapCategories", categorieService.getNbByCategorie());
 //		}
@@ -139,46 +190,38 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/nouveauStatut")
-	public ModelAndView changementStatut(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+	public ModelAndView changementStatut(@ModelAttribute("utilisateur") Utilisateur utilisateur, @RequestParam("roleSelected") Role roleSelected) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			if(!utilisateur.getMailLille1().isEmpty()) {
+			if(!utilisateur.getMailLille1().trim().isEmpty()) {
 				Utilisateur u=utilisateurService.getRowByMailLille1(utilisateur.getMailLille1());
-				Role r=roleService.getRowByNom(utilisateur.getRole().getNom());
-				if(u!=null) {
-					System.out.println(!utilisateur.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR"));
-					/*
-					 * Si on veut changer le role d'un administrateur et qu'il n'en reste qu'un
-					 */
-					if (!utilisateur.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR") &&
-						u.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR") &&
-						utilisateurService.getListByRole(u.getRole().getId()).size()<=1) {
-							modelListeUtilisateurs.put("nbAdminInsuffisant", true);
-							return getListeUtilisateurs(modelListeUtilisateurs);
-					} else if(utilisateur.getRole().getNom().equalsIgnoreCase("UTILISATEUR")) {
-						annonceService.supprimerAnnoncesUtilisateur(u);
-						/*
-						 * org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: No Session found for current thread
-						 */
-//						jobService.supprimerJobUtilisateur(u);
-//						forumService.supprimerForumUtilisateur(u);
-						utilisateurService.deleteRow(u.getId());
-						modelListeUtilisateurs.put("changementStatut", "supprimé");
+				Role r=roleService.getRowByNom(roleSelected.getNom());
+				if(r!=null) {
+					if(u!=null) {
+						switch(r.getNom()) {
+						case "ADMINISTRATEUR":
+							return getListeUtilisateurs(modelModifierStatutAdmin(u));
+						case "MODERATEUR":
+							return getListeUtilisateurs(modelModifierStatutMod(u));
+						case "REPRESENTANT":
+							return getListeUtilisateurs(modelModifierStatutRep(u));
+						case "UTILISATEUR":
+							return getListeUtilisateurs(modelSupprimerUtilisateur(u));
+						default:
+							;  break;
+						}
+						
 					} else {
-						u.setRole(r);
-						utilisateurService.updateRow(u);
-						modelListeUtilisateurs.put("changementStatut", utilisateur.getRole().getNom());
-					}
-				} else {
-					if(!utilisateur.getRole().getNom().equalsIgnoreCase("UTILISATEUR")) {
 						u = new Utilisateur();
 						u.setMailLille1(utilisateur.getMailLille1());
-						u.setRole(r);
+						Role rUtilisateur = roleService.getRowByNom("UTILISATEUR");
+						u.addRole(r);
+						u.addRole(rUtilisateur);
 						utilisateurService.insertRow(u);
-						modelListeUtilisateurs.put("changementStatut", utilisateur.getRole().getNom());
+						modelListeUtilisateurs.put("changementStatut", "devient "+r.getNom());
 					}
+					modelListeUtilisateurs.put("utilisateurSelectionne", utilisateur.getMailLille1());
 				}
-				modelListeUtilisateurs.put("utilisateurSelectionne", utilisateur.getMailLille1());
 			}
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
@@ -189,21 +232,34 @@ public class AdministrationController {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur u=utilisateurService.getRowById(idUtilisateur);
-			if (u.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR") &&
-					utilisateurService.getListByRole(u.getRole().getId()).size()<=1) {
-						modelListeUtilisateurs.put("nbAdminInsuffisant", true);
-						return getListeUtilisateurs(modelListeUtilisateurs);
-			}
-			annonceService.supprimerAnnoncesUtilisateur(u);
-			/*
-			 * org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: No Session found for current thread
-			 */
-//			jobService.supprimerJobUtilisateur(u);
-//			forumService.supprimerForumUtilisateur(u);
-			utilisateurService.deleteRow(idUtilisateur);
-			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
-			modelListeUtilisateurs.put("changementStatut", "supprimé");
+			modelListeUtilisateurs=modelSupprimerUtilisateur(u);
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
+	}
+	
+	/*
+	 * Model fourni par cette methode pour pouvoir l'utiliser dans plusieurs methodes et diminuer le nombre de requetes
+	 */
+	public Map<String, Object> modelSupprimerUtilisateur(Utilisateur u) {
+		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			if(u!=null) {
+				if (utilisateurService.isAdministrateur(u) &&
+					utilisateurService.getListByRole("ADMINISTRATEUR").size()<=1) {
+						modelListeUtilisateurs.put("nbAdminInsuffisant", true);
+						return modelListeUtilisateurs;
+				}
+				annonceService.supprimerAnnoncesUtilisateur(u);
+				/*
+				 * org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: No Session found for current thread
+				 */
+//				jobService.supprimerJobUtilisateur(u);
+//				forumService.supprimerForumUtilisateur(u);
+				utilisateurService.deleteRow(u.getId());
+				modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+				modelListeUtilisateurs.put("changementStatut", "est maintenant supprimé");
+			}
+//		}			
+		return modelListeUtilisateurs;
 	}
 }

@@ -66,8 +66,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	@Transactional
-	public List<Utilisateur> getListByRole(int roleId) {
-		return utilisateurDao.getListByRole(roleId);
+	public List<Utilisateur> getListByRole(String role) {
+		return utilisateurDao.getListByRole(role);
 	}
 
 	@Override
@@ -80,6 +80,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Transactional
 	public boolean isAdministrateur(Utilisateur utilisateur) {
 		return utilisateurDao.isAdministrateur(utilisateur);
+	}
+	
+	@Override
+	@Transactional
+	public boolean isRepresentant(Utilisateur utilisateur) {
+		return utilisateurDao.isRepresentant(utilisateur);
 	}
 
 	@Override
