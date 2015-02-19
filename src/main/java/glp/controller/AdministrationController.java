@@ -9,11 +9,14 @@ import glp.domain.Role;
 import glp.domain.Utilisateur;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
+import glp.services.ForumService;
+import glp.services.JobService;
 import glp.services.RoleService;
 import glp.services.UtilisateurService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +27,12 @@ public class AdministrationController {
 	
 	@Autowired
 	private AnnonceService annonceService;
+	
+	@Autowired
+	private JobService jobService;
+	
+	@Autowired
+	private ForumService forumService;
 	
 	@Autowired
 	private UtilisateurService utilisateurService;
@@ -39,18 +48,12 @@ public class AdministrationController {
 		if(modelListeUtilisateurs==null)
 			modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			List<Utilisateur> listeAdmin = new ArrayList<Utilisateur>();
-			List<Utilisateur> listeMod = new ArrayList<Utilisateur>();
 			List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
-			listeAdmin = utilisateurService.getListByRole(roleService.getRowByNom("ADMINISTRATEUR").getId());
-			listeMod = utilisateurService.getListByRole(roleService.getRowByNom("MODERATEUR").getId());
-			listeUtilisateur = utilisateurService.getListByRole(roleService.getRowByNom("UTILISATEUR").getId());
-			modelListeUtilisateurs.put("listeUtilisateursAdmin", listeAdmin);
-			modelListeUtilisateurs.put("listeUtilisateursMod", listeMod);
+			listeUtilisateur = utilisateurService.getList();
 			modelListeUtilisateurs.put("listeUtilisateurs", listeUtilisateur);
-			modelListeUtilisateurs.put("roleList", roleService.getList());
 			modelListeUtilisateurs.put("utilisateur", utilisateurService.getUserInSession());
 			modelListeUtilisateurs.put("catList", categorieService.getList());
+			modelListeUtilisateurs.put("newUser", new Utilisateur());
 //		}
 		return new ModelAndView("admin_listeUtilisateurs", modelListeUtilisateurs);
 	}
@@ -60,7 +63,7 @@ public class AdministrationController {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
-			uti.setRoleId(roleService.getRowByNom("ADMINISTRATEUR").getId());
+			uti.setRole(roleService.getRowByNom("ADMINISTRATEUR"));
 			utilisateurService.updateRow(uti);
 			modelListeUtilisateurs.put("changementStatut", "administrateur");
 			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
@@ -73,15 +76,14 @@ public class AdministrationController {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
-			Role roleAdmin = roleService.getRowByNom("ADMINISTRATEUR");
 			// Il faut laisser au moins 1 administrateur
-			if (uti.getRoleId()==roleAdmin.getId())
-				if (utilisateurService.getListByRole(roleAdmin.getId()).size()<=1) {
+			if (uti.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR"))
+				if (utilisateurService.getListByRole(uti.getRole().getId()).size()<=1) {
 					modelListeUtilisateurs.put("nbAdminInsuffisant", true);
 					return getListeUtilisateurs(modelListeUtilisateurs);
 				}
-			uti.setRoleId(roleService.getRowByNom("MODERATEUR").getId());
-			modelListeUtilisateurs.put("changementStatut", "mod�rateur");
+			uti.setRole(roleService.getRowByNom("MODERATEUR"));
+			modelListeUtilisateurs.put("changementStatut", "modérateur");
 			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
 			utilisateurService.updateRow(uti);
 //		}
@@ -93,14 +95,13 @@ public class AdministrationController {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
-			Role roleAdmin = roleService.getRowByNom("ADMINISTRATEUR");
 			// Il faut laisser au moins 1 administrateur
-			if (uti.getRoleId()==roleAdmin.getId())
-				if (utilisateurService.getListByRole(roleAdmin.getId()).size()<=1) {
+			if (uti.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR"))
+				if (utilisateurService.getListByRole(uti.getRole().getId()).size()<=1) {
 					modelListeUtilisateurs.put("nbAdminInsuffisant", true);
 					return getListeUtilisateurs(modelListeUtilisateurs);
 				}
-			uti.setRoleId(roleService.getRowByNom("UTILISATEUR").getId());
+			uti.setRole(roleService.getRowByNom("UTILISATEUR"));
 			modelListeUtilisateurs.put("changementStatut", "utilisateur");
 			modelListeUtilisateurs.put("utilisateurSelectionne", uti.getMailLille1());
 			utilisateurService.updateRow(uti);
@@ -109,8 +110,9 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/listCategories")
-	public ModelAndView getListeCategories() {
-			Map<String, Object> modelListeCategories = new HashMap<String, Object>();
+	public ModelAndView getListeCategories(Map<String, Object> modelListeCategories) {
+		if(modelListeCategories==null)
+			modelListeCategories = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			modelListeCategories.put("roleList", roleService.getList());
 			modelListeCategories.put("utilisateur", utilisateurService.getUserInSession());
@@ -120,11 +122,88 @@ public class AdministrationController {
 		return new ModelAndView("admin_listeCategories", modelListeCategories);
 	}
 	
-	@RequestMapping("/supprimerCategorie/{id}")
+	@RequestMapping("/supprimer/categorie/{id}")
 	public ModelAndView supprimerCategorie(@PathVariable("id") int idCategorie) {
+		Map<String, Object> modelListeCategories = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			
+			if(categorieService.getRowById(idCategorie)!=null) {
+				modelListeCategories.put("categorieSupprimee", categorieService.getRowById(idCategorie).getLib());
+				if(categorieService.getNbByCategorie().get(idCategorie)==0) {
+					categorieService.deleteRow(idCategorie);
+					modelListeCategories.put("isCategorieSupprimee", true);
+				} else 
+					modelListeCategories.put("isCategorieSupprimee", false);
+			}
 //		}
-		return getListeCategories();
+		return getListeCategories(modelListeCategories);
+	}
+	
+	@RequestMapping("/nouveauStatut")
+	public ModelAndView changementStatut(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			if(!utilisateur.getMailLille1().isEmpty()) {
+				Utilisateur u=utilisateurService.getRowByMailLille1(utilisateur.getMailLille1());
+				Role r=roleService.getRowByNom(utilisateur.getRole().getNom());
+				if(u!=null) {
+					System.out.println(!utilisateur.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR"));
+					/*
+					 * Si on veut changer le role d'un administrateur et qu'il n'en reste qu'un
+					 */
+					if (!utilisateur.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR") &&
+						u.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR") &&
+						utilisateurService.getListByRole(u.getRole().getId()).size()<=1) {
+							modelListeUtilisateurs.put("nbAdminInsuffisant", true);
+							return getListeUtilisateurs(modelListeUtilisateurs);
+					} else if(utilisateur.getRole().getNom().equalsIgnoreCase("UTILISATEUR")) {
+						annonceService.supprimerAnnoncesUtilisateur(u);
+						/*
+						 * org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: No Session found for current thread
+						 */
+//						jobService.supprimerJobUtilisateur(u);
+//						forumService.supprimerForumUtilisateur(u);
+						utilisateurService.deleteRow(u.getId());
+						modelListeUtilisateurs.put("changementStatut", "supprimé");
+					} else {
+						u.setRole(r);
+						utilisateurService.updateRow(u);
+						modelListeUtilisateurs.put("changementStatut", utilisateur.getRole().getNom());
+					}
+				} else {
+					if(!utilisateur.getRole().getNom().equalsIgnoreCase("UTILISATEUR")) {
+						u = new Utilisateur();
+						u.setMailLille1(utilisateur.getMailLille1());
+						u.setRole(r);
+						utilisateurService.insertRow(u);
+						modelListeUtilisateurs.put("changementStatut", utilisateur.getRole().getNom());
+					}
+				}
+				modelListeUtilisateurs.put("utilisateurSelectionne", utilisateur.getMailLille1());
+			}
+//		}
+		return getListeUtilisateurs(modelListeUtilisateurs);
+	}
+	
+	@RequestMapping("/supprimer/utilisateur/{id}")
+	public ModelAndView supprimerUtilisateur(@PathVariable("id") int idUtilisateur) {
+		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
+//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Utilisateur u=utilisateurService.getRowById(idUtilisateur);
+			if (u.getRole().getNom().equalsIgnoreCase("ADMINISTRATEUR") &&
+					utilisateurService.getListByRole(u.getRole().getId()).size()<=1) {
+						modelListeUtilisateurs.put("nbAdminInsuffisant", true);
+						return getListeUtilisateurs(modelListeUtilisateurs);
+			}
+			annonceService.supprimerAnnoncesUtilisateur(u);
+			/*
+			 * org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: No Session found for current thread
+			 */
+//			jobService.supprimerJobUtilisateur(u);
+//			forumService.supprimerForumUtilisateur(u);
+			utilisateurService.deleteRow(idUtilisateur);
+			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+			modelListeUtilisateurs.put("changementStatut", "supprimé");
+//		}
+		return getListeUtilisateurs(modelListeUtilisateurs);
 	}
 }

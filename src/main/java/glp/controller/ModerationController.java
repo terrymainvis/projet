@@ -3,11 +3,14 @@ package glp.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import glp.domain.Annonce;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.RoleService;
 import glp.services.UtilisateurService;
+import glp.util.EmailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +67,6 @@ public class ModerationController {
 	@RequestMapping("list")
 	public ModelAndView getListAnnoncesAModerer() {
 		Map<String, Object> modelAnnoncesAModerer = new HashMap<String, Object>();
-		modelAnnoncesAModerer.put("roleList", roleService.getList());
 		modelAnnoncesAModerer.put("utilisateur", utilisateurService.getUserInSession());
 		modelAnnoncesAModerer.put("catList", categorieService.getList());
 //		if(utilisateurService.isModerateur(utilisateurService.getUserInSession()) || utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {

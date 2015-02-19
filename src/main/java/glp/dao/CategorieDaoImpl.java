@@ -40,8 +40,7 @@ public class CategorieDaoImpl implements CategorieDao {
 	@Override
 	public Categorie getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Categorie cat = (Categorie) session.load(Categorie.class, id);
-		System.out.println(cat.getLib()); // VIRER CE CODE, NE PAS OUBLIER /!\
+		Categorie cat = (Categorie) session.createCriteria(Categorie.class).add(Restrictions.idEq(id)).uniqueResult();
 		return cat;
 	}
 

@@ -16,39 +16,65 @@
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 
-	<h1>Liste des catégories</h1>
-	
-	<a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
-
-<div id="myModal" class="reveal-modal" data-reveal>
-  <h2>Awesome. I have it.</h2>
-  <p class="lead">Your couch.  It is mine.</p>
-  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-	
-	<table id="listeCategories" class="display" cellspacing="0" width="50%">
+<div class="row">
+	<h2>Administration des catégories</h2>
+	<c:if test="${!empty categorieSupprimee && !empty isCategorieSupprimee}">
+		<c:choose>
+    		<c:when test="${isCategorieSupprimee == true}">
+    			<div data-alert class="alert-box success">
+					La catégorie <b><c:out value="${categorieSupprimee }"></c:out></b> a été supprimée <b>
+					<a href="#" class="close">&times;</a>
+				</div>
+    		</c:when>
+    		<c:when test="${isCategorieSupprimee == false}">
+    			<div data-alert class="alert-box alert">
+					La catégorie <b><c:out value="${categorieSupprimee }"></c:out></b> n'a pas été supprimée <b>
+					<a href="#" class="close">&times;</a>
+				</div>
+    		</c:when>
+    	</c:choose>
+		
+	</c:if>
+	<div class="panel radius">
+	<h4>Liste des catégories</h4>
+	<table id="listeCategories">
 		<thead>
 			<tr>
-				<th>Libellé</th>
-				<th>Nombre d'annonces</th>
-				<th></th>
+				<th class="text-center">Libellé</th>
+				<th class="text-center">Description</th>
+				<th class="text-center">Nombre d'annonces</th>
+				<th class="text-center">Actions</th>
 			</tr>
 		</thead>
 		<tbody id="lignes">
 			<c:if test="${!empty catList && !empty mapCategories}">
 				<c:forEach items="${catList}" var="categorie">
 					<tr>
-						<td>${categorie.lib}</td>
-						<td><c:out value="${mapCategories[categorie.id]}"/></td>
-						<td><a href="<c:url value='/administration/supprimerCategorie/${categorie.id}' />"
-							class="button alert small">Supprimer catégorie</a></td>
+						<td class="text-center">${categorie.lib}</td>
+						<td class="text-center">${categorie.desc}</td>
+						<td class="text-center"><c:out value="${mapCategories[categorie.id]}"/></td>
+						<td class="text-center">
+							<c:choose>
+    							<c:when test="${mapCategories[categorie.id] == 0}">
+							<a href="<c:url value='/administration/supprimer/categorie/${categorie.id}' />"
+							class="button alert small">Supprimer la catégorie</a>
+								</c:when>
+								<c:when test="${mapCategories[categorie.id] != 0}">
+							<button class="secondary small disabled">Supprimer la catégorie</button>
+								</c:when>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 			
 		</tbody>
 	</table>
-	<br>
+	<a href="<c:url value='/categorie/new' />" class="button  small">Ajouter une catégorie</a>
+	</div>
+	</div>
+	<script>
+		$(document).foundation();
+	</script>
 </body>
 </html>

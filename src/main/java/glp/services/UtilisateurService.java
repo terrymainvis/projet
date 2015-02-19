@@ -11,7 +11,7 @@ public interface UtilisateurService {
 	
 	public List<Utilisateur> getList();
 	
-	public Utilisateur getRowByMailLille1(Integer id);
+	public Utilisateur getRowByMailLille1(String mail);
 	
 	public Integer updateRow(Utilisateur utilisateur);
 	

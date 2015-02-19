@@ -1,8 +1,7 @@
 package glp.dao;
 
-
-
 import glp.domain.Forum;
+import glp.domain.Utilisateur;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ForumDaoImpl implements ForumDao{
@@ -38,8 +38,7 @@ public class ForumDaoImpl implements ForumDao{
 	@Override
 	public Forum getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Forum forum = (Forum) session.load(Forum.class, new Integer(id));
-		System.out.println(forum.getTitre()); // VIRER CE CODE, NE PAS OUBLIER /!\
+		Forum forum = (Forum) session.createCriteria(Forum.class).add(Restrictions.idEq(id)).uniqueResult();
 		return forum;
 		
 	}
@@ -70,6 +69,24 @@ public class ForumDaoImpl implements ForumDao{
 		List<Forum> forumListRecent = q.list();
 		System.out.println("taille " + forumListRecent.size() );
 		return forumListRecent;
+	}
+
+	@Override
+	public void supprimerForumUtilisateur(Utilisateur u) {
+		List<Forum> listeForum = getListByUtilisateur(u);
+		if(listeForum!=null)
+			for(Forum f : listeForum)
+				deleteRow(f.getId());
+	}
+
+	@Override
+	public List<Forum> getListByUtilisateur(Utilisateur u) {
+		Session session =sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Forum> forumList = session.createCriteria(Forum.class)
+		        .add(Restrictions.eq("auteur", u))
+		        .list();
+		return forumList;
 	}
 
 }

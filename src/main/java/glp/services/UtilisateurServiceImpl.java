@@ -35,8 +35,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	@Transactional
-	public Utilisateur getRowByMailLille1(Integer id) {
-		return utilisateurDao.getRowById(id);
+	public Utilisateur getRowByMailLille1(String mail) {
+		return utilisateurDao.getRowByMailLille1(mail);
 	}
 
 	@Override

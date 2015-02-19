@@ -90,7 +90,6 @@ public class AnnonceController {
 
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("annform", annform);
-			myModel.put("roleList", roleService.getList());
 			myModel.put("utilisateur", utilisateurService.getUserInSession());
 
 			return new ModelAndView("ann_form", myModel);
@@ -102,7 +101,6 @@ public class AnnonceController {
 
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("roleList", roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		myModel.put("catList", catList);
 		return new ModelAndView("ann_type_choix", myModel);
@@ -217,7 +215,6 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);
 		myModel.put("catList", catList);
-		myModel.put("roleList", roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
@@ -229,7 +226,6 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", covList);
 		myModel.put("catList", catList);
-		myModel.put("roleList", roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
@@ -242,7 +238,6 @@ public class AnnonceController {
 		myModel.put("annonce", annonce);
 		myModel.put("catList", catList);
 		myModel.put("champscompletes", ccService.getListByAnn(annonce));
-		myModel.put("roleList", roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("consultAnn", myModel);
 	}
@@ -255,7 +250,6 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);
 		myModel.put("catList", catList);
-		myModel.put("roleList", roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}

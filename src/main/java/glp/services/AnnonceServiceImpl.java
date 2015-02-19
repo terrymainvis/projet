@@ -3,6 +3,7 @@ package glp.services;
 import glp.dao.AnnonceDao;
 import glp.dao.CategorieDao;
 import glp.domain.Annonce;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -97,6 +98,18 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Transactional
 	public List<Annonce> getListValides() {
 		return annonceDao.getListValides();
+	}
+
+	@Override
+	@Transactional
+	public void supprimerAnnoncesUtilisateur(Utilisateur u) {
+		annonceDao.supprimerAnnoncesUtilisateur(u);
+	}
+
+	@Override
+	@Transactional
+	public void supprimerAnnoncesCategorie(int catId) {
+		annonceDao.supprimerAnnoncesCategorie(catId);
 	}
 
 }

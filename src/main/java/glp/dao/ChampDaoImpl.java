@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ChampDaoImpl implements ChampDao {
@@ -25,7 +26,7 @@ public class ChampDaoImpl implements ChampDao {
 	@Override
 	public Champ getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Champ champ = (Champ) session.load(Champ.class, id);
+		Champ champ = (Champ) session.createCriteria(Champ.class).add(Restrictions.idEq(id)).uniqueResult();
 		return champ;
 	}
 

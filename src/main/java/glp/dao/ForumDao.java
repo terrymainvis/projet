@@ -1,6 +1,7 @@
 package glp.dao;
 
 import glp.domain.Forum;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -17,5 +18,9 @@ public int insertRow(Forum forum);
 	public int deleteRow(int id);
 
 	public List<Forum> getListRecent();
+	
+	public void supprimerForumUtilisateur(Utilisateur u);
+	
+	public List<Forum> getListByUtilisateur(Utilisateur u);
 
 }

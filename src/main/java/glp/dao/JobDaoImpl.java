@@ -1,7 +1,7 @@
 package glp.dao;
 
-import glp.domain.Annonce;
 import glp.domain.Job;
+import glp.domain.Utilisateur;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class JobDaoImpl implements JobDao{
@@ -37,7 +38,7 @@ public class JobDaoImpl implements JobDao{
 	@Override
 	public Job getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Job job = (Job) session.load(Job.class, new Integer(id));
+		Job job = (Job) session.createCriteria(Job.class).add(Restrictions.idEq(id)).uniqueResult();
 		System.out.println(job.getDesc());
 		return job;
 	}
@@ -64,4 +65,21 @@ public class JobDaoImpl implements JobDao{
 		return jobList;
 	}
 
+	@Override
+	public void supprimerJobUtilisateur(Utilisateur u) {
+		List<Job> listeJob = getListByUtilisateur(u);
+		if(listeJob!=null)
+			for(Job f : listeJob)
+				deleteRow(f.getId());
+	}
+
+	@Override
+	public List<Job> getListByUtilisateur(Utilisateur u) {
+		Session session =sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Job> jobList = session.createCriteria(Job.class)
+		        .add(Restrictions.eq("auteur", u))
+		        .list();
+		return jobList;
+	}
 }

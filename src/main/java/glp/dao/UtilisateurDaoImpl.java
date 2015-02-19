@@ -9,10 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +28,12 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public Integer insertRow(Utilisateur u) {
 		Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Role> listRoles = session.createCriteria(Role.class)
-		.add(Restrictions.eq("nom", "UTILISATEUR"))
-		.list();
-		u.setRoleId(listRoles.get(0).getId());
+		if(u.getRole()==null) {
+			Role r = (Role) session.createCriteria(Role.class)
+					.add(Restrictions.eq("nom", "UTILISATEUR"))
+					.uniqueResult();
+			u.setRole(r);
+		}
 		session.saveOrUpdate(u);
 		Serializable id = session.getIdentifier(u);
 		return (Integer) id;
@@ -51,10 +50,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public Utilisateur getRowById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Utilisateur> listUti = session.createCriteria(Utilisateur.class)
-		.add(Restrictions.idEq(id)).list();
-		return listUti.get(0);
+		Utilisateur uti = (Utilisateur) session.createCriteria(Utilisateur.class).add(Restrictions.idEq(id)).uniqueResult();
+		return uti;
 	}
 
 	@Override
@@ -86,7 +83,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		Session session =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Utilisateur> utilisateurList = session.createCriteria(Utilisateur.class)
-		.add(Restrictions.eq("roleId", roleId))
+		.add(Restrictions.eq("role.id", roleId))
 		.addOrder(Order.asc("nom"))
 		.list();
 		return utilisateurList;
@@ -94,10 +91,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public boolean isModerateur(Utilisateur utilisateur) {
-		Session session = sessionFactory.getCurrentSession();
-		if(utilisateur.getRoleId()!=0) {
-			Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
-			if(r.getNom().equals("MODERATEUR"))
+		if(utilisateur.getRole()!=null) {
+			if(utilisateur.getRole().getNom().equals("MODERATEUR"))
 				return true;
 		}
 		return false;
@@ -105,10 +100,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public boolean isAdministrateur(Utilisateur utilisateur) {
-		Session session = sessionFactory.getCurrentSession();
-		if(utilisateur.getRoleId()!=0) {
-			Role r = (Role) session.load(Role.class, utilisateur.getRoleId());
-			if(r.getNom().equals("ADMINISTRATEUR"))
+		if(utilisateur.getRole()!=null) {
+			if(utilisateur.getRole().getNom().equals("ADMINISTRATEUR"))
 				return true;
 		}
 		return false;
@@ -204,6 +197,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 				.setParameter("id", id).executeUpdate();
 		
 		
+	}
+	
+	@Transactional
+	@Override
+	public Utilisateur getRowByMailLille1(String mail) {
+		Session session = sessionFactory.getCurrentSession();
+		Utilisateur uti = (Utilisateur) session.createCriteria(Utilisateur.class).add(Restrictions.eq("mailLille1", mail)).uniqueResult();
+		return uti;
 	}
 	
 		

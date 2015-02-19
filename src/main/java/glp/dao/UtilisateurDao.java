@@ -31,6 +31,8 @@ public interface UtilisateurDao {
 	public Utilisateur updateUser(int id,String nom, String prenom,String tel,String mail,String mailAutre);
 	public void supprimerAnnonce (int id);
 
+	public Utilisateur getRowByMailLille1(String mail);
+
 
 	
 	

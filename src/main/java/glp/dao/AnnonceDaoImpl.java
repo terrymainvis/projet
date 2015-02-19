@@ -2,6 +2,7 @@ package glp.dao;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
+import glp.domain.Utilisateur;
 
 import java.io.Serializable;
 import java.util.List;
@@ -44,10 +45,8 @@ public class AnnonceDaoImpl implements AnnonceDao {
 
 	@Override
 	public Annonce getRowById(int id) {
-				
 		Session session = sessionFactory.getCurrentSession();
-		Annonce ann = (Annonce) session.load(Annonce.class, new Integer(id));
-		System.out.println(ann.getTitre()); // VIRER CE CODE, NE PAS OUBLIER /!\
+		Annonce ann = (Annonce) session.createCriteria(Annonce.class).add(Restrictions.idEq(id)).uniqueResult();
 		return ann;
 	}
 
@@ -99,7 +98,19 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	public List<Annonce> getListByCat(int catId) {
 		Session session =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID").setParameter("catID", catId).list();
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+		        .add(Restrictions.eq("categorie", catId))
+		        .list();
+		return annonceList;
+	}
+	
+	@Override
+	public List<Annonce> getListByUtilisateur(Utilisateur u) {
+		Session session =sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+		        .add(Restrictions.eq("auteur", u))
+		        .list();
 		return annonceList;
 	}
 	
@@ -152,6 +163,22 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		//FALSE = refus�e - NULL = en attente - TRUE = valid�e
 		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=NULL").list();
 		return annonceList;
+	}
+
+	@Override
+	public void supprimerAnnoncesUtilisateur(Utilisateur u) {
+		List<Annonce> listeAnnonces = getListByUtilisateur(u);
+		if(listeAnnonces!=null)
+			for(Annonce a : listeAnnonces)
+				deleteRow(a.getId());
+	}
+
+	@Override
+	public void supprimerAnnoncesCategorie(int catId) {
+		List<Annonce> listeAnnonces = getListByCat(catId);
+		if(listeAnnonces!=null)
+			for(Annonce a : listeAnnonces)
+				deleteRow(a.getId());
 	}
 
 	

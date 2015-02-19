@@ -33,25 +33,20 @@
 		</ul>
 		<ul class="left">
 		
-		<c:forEach items="${roleList}" var="role">
-<%-- 			<c:out value="${role.nom}"></c:out> --%>
-<%-- 			<c:out value="${utilisateur.roleId}"></c:out> --%>
-			<c:if test="${utilisateur.roleId==role.id}">
 				<c:choose>
-				  <c:when test="${(role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
+				  <c:when test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}">
 				    <li class="has-dropdown"><a href="#">Administration</a>
 						<ul class="dropdown">
-							 <li><a href="<c:url value="/administration/list"/>">Liste des utilisateurs</a></li>
+							 <li><a href="<c:url value="/administration/list"/>">Admin. des utilisateurs</a></li>
+							  <li><a href="<c:url value="/administration/listCategories"/>">Admin. des catégories</a></li>
 							 <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
 						</ul>
 					</li>
 				  </c:when>
-				  <c:when test="${(role.nom=='MODERATEUR')}">
+				  <c:when test="${(utilisateur.role.nom=='MODERATEUR')}">
 				    <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
 				  </c:when>
 				</c:choose>
-			</c:if>
-		</c:forEach>
 			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message code="header.monCompte"></spring:message></a></li>
 
 			<li class="has-dropdown"><a href="#"><spring:message code="header.covoiturage"></spring:message></a>

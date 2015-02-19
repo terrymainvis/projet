@@ -1,6 +1,7 @@
 package glp.services;
 
 import glp.domain.Annonce;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -30,4 +31,8 @@ public interface AnnonceService {
 	public List<Annonce> getListAModerer();
 	
 	public List<Annonce> getListValides();
+	
+	public void supprimerAnnoncesUtilisateur(Utilisateur u);
+	
+	public void supprimerAnnoncesCategorie(int catId);
 }

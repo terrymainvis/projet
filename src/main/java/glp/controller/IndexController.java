@@ -4,15 +4,11 @@ import glp.domain.Annonce;
 import glp.domain.Categorie;
 
 import glp.domain.Job;
-import glp.domain.Role;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.JobService;
 
 import glp.domain.Forum;
-import glp.domain.Role;
-import glp.services.AnnonceService;
-import glp.services.CategorieService;
 import glp.services.ForumService;
 
 import glp.services.RoleService;
@@ -67,7 +63,6 @@ public class IndexController {
 		modelIndex.put("covoitList", covoitList);
 		modelIndex.put("annList", annList);
 		modelIndex.put("jobList", jobList);
-		modelIndex.put("roleList",  roleService.getList());
 		modelIndex.put("utilisateur", utilisateurService.getUserInSession());
 		modelIndex.put("catList", listeCat);
 		modelIndex.put("forumListRecent", forumListRecent);

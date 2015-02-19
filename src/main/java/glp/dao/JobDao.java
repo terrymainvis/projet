@@ -1,7 +1,7 @@
 package glp.dao;
 
-import glp.domain.Annonce;
 import glp.domain.Job;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -16,6 +16,10 @@ public interface JobDao {
 	public int deleteRow(int id);
 
 	public List<Job> getListRecent();
+	
+	public void supprimerJobUtilisateur(Utilisateur u);
+	
+	public List<Job> getListByUtilisateur(Utilisateur u);
 
 
 }

@@ -1,8 +1,8 @@
 package glp.services;
 
-import glp.dao.AnnonceDao;
 import glp.dao.JobDao;
 import glp.domain.Job;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -44,6 +44,16 @@ public class JobServiceImpl implements JobService{
 	public int insertRow(Job job) {
 		return jobDao.insertRow(job);
 		
+	}
+
+	@Override
+	public void supprimerJobUtilisateur(Utilisateur u) {
+		jobDao.supprimerJobUtilisateur(u);
+	}
+
+	@Override
+	public List<Job> getListByUtilisateur(Utilisateur u) {
+		return jobDao.getListByUtilisateur(u);
 	}
 
 }

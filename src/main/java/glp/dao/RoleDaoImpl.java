@@ -35,10 +35,8 @@ public class RoleDaoImpl implements RoleDao {
 	@Override
 	public Role getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Role> listRoles = session.createCriteria(Role.class)
-        .add(Restrictions.idEq(id)).list();
-		return listRoles.get(0);
+		Role role = (Role) session.createCriteria(Role.class).add(Restrictions.idEq(id)).uniqueResult();
+		return role;
 	}
 
 	@Override

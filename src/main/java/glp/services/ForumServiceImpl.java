@@ -2,6 +2,7 @@ package glp.services;
 
 import glp.dao.ForumDao;
 import glp.domain.Forum;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -55,6 +56,16 @@ public class ForumServiceImpl implements ForumService{
 	public int deleteRow(int id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void supprimerForumUtilisateur(Utilisateur u) {
+		forumDao.supprimerForumUtilisateur(u);
+	}
+
+	@Override
+	public List<Forum> getListByUtilisateur(Utilisateur u) {
+		return forumDao.getListByUtilisateur(u);
 	}
 
 	

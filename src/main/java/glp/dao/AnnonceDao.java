@@ -1,6 +1,7 @@
 package glp.dao;
 
 import glp.domain.Annonce;
+import glp.domain.Utilisateur;
 
 import java.util.List;
 
@@ -28,6 +29,12 @@ public interface AnnonceDao {
 	public List<Annonce> getListAModerer();
 
 	public List<Annonce> getListValides();
+
+	public void supprimerAnnoncesUtilisateur(Utilisateur u);
+
+	public void supprimerAnnoncesCategorie(int catId);
+
+	public List<Annonce> getListByUtilisateur(Utilisateur u);
 
 	
 	

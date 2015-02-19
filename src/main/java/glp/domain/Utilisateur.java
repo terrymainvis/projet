@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -37,8 +39,9 @@ public class Utilisateur {
 	@Value("false")
 	private boolean contactAutreMail;
 	
-	@Column(name="role_id")
-	private int roleId;
+	@ManyToOne
+	@JoinColumn(name="role_id")
+	private Role role;
 	
 	public Utilisateur(){}
 	
@@ -48,11 +51,11 @@ public class Utilisateur {
 		this.mailLille1=mailLille1;
 	}
 	
-	public Utilisateur(String prenom, String nom, String mailLille1, int roleId) {
+	public Utilisateur(String prenom, String nom, String mailLille1, Role roleId) {
 		this.prenom=prenom;
 		this.nom=nom;
 		this.mailLille1=mailLille1;
-		this.roleId=roleId;
+		this.role=roleId;
 	}
 
 	public String getPrenom() {
@@ -111,12 +114,12 @@ public class Utilisateur {
 		this.id = id;
 	}
 
-	public int getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

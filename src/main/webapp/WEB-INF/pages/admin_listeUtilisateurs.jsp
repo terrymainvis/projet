@@ -16,7 +16,8 @@
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 
-	<h1>Liste des utilisateurs</h1>
+<div class="row">
+	<h2>Administration des utilisateurs</h2>
 	<c:if test="${!empty nbAdminInsuffisant}">
 		<div data-alert class="alert-box alert">
 			Vous ne pouvez pas changer le statut d'un administrateur lorsqu'il
@@ -27,11 +28,34 @@
 		test="${!empty changementStatut && !empty utilisateurSelectionne}">
 		<div data-alert class="alert-box success">
 			<b><c:out value="${utilisateurSelectionne }"></c:out></b> est
-			maintenant un <b><c:out value="${changementStatut }"></c:out></b> <a
+			maintenant <b><c:out value="${changementStatut }"></c:out></b> <a
 				href="#" class="close">&times;</a>
 		</div>
 	</c:if>
-
+	<div class="panel radius">
+	<form:form id="addUtilisateurForm" commandName="newUser" method="post" action="/lille1community/administration/nouveauStatut">
+		<h4>Modifier les droits d'un utilisateur</h4>
+		
+		<div>
+			<form:input path="mailLille1" placeholder="Mail de l'utilisateur" />
+			<form:errors path="mailLille1" />
+		</div>
+		<div>
+			<form:select id="select" path="role">
+				<form:option value="Administrateur" />
+				<form:option value="Moderateur"/>
+				<form:option value="Representant"/>
+				<form:option value="Utilisateur"/>
+			</form:select>
+		</div>
+		<div>
+			<input class="button" type="submit" value="Modifier" />
+		</div>		
+	</form:form>
+	
+	</div>
+	<div class="panel radius">
+	<h4>Liste des utilisateurs</h4>
 	<table id="listeUtilisateurs" class="display" cellspacing="0"
 		width="100%">
 		<thead>
@@ -44,48 +68,14 @@
 			</tr>
 		</thead>
 		<tbody id="lignes">
-			<c:if test="${!empty listeUtilisateursAdmin}">
-				<c:forEach items="${listeUtilisateursAdmin}" var="utilisateur">
-					<tr>
-						<td>${utilisateur.prenom}</td>
-						<td>${utilisateur.nom}</td>
-						<td>${utilisateur.mailLille1}</td>
-						<td>Administrateur</td>
-						<td><a
-							href="<c:url value='/administration/modifierEnMod/${utilisateur.id}' />"
-							class="button small">Mettre mod&eacuterateur</a> <a
-							href="<c:url value='/administration/modifierEnUti/${utilisateur.id}' />"
-							class="button small">Mettre utilisateur</a></td>
-					</tr>
-				</c:forEach>
-			</c:if>
-			<c:if test="${!empty listeUtilisateursMod}">
-				<c:forEach items="${listeUtilisateursMod}" var="utilisateur">
-					<tr>
-						<td>${utilisateur.prenom}</td>
-						<td>${utilisateur.nom}</td>
-						<td>${utilisateur.mailLille1}</td>
-						<td>Mod&eacuterateur</td>
-						<td><a
-							href="<c:url value='/administration/modifierEnAdmin/${utilisateur.id}' />"
-							class="button small">Mettre administrateur</a> <a
-							href="<c:url value='/administration/modifierEnUti/${utilisateur.id}' />"
-							class="button small">Mettre utilisateur</a></td>
-					</tr>
-				</c:forEach>
-			</c:if>
 			<c:if test="${!empty listeUtilisateurs}">
 				<c:forEach items="${listeUtilisateurs}" var="utilisateur">
 					<tr>
 						<td>${utilisateur.prenom}</td>
 						<td>${utilisateur.nom}</td>
 						<td>${utilisateur.mailLille1}</td>
-						<td>Utilisateur</td>
-						<td><a
-							href="<c:url value='/administration/modifierEnAdmin/${utilisateur.id}' />"
-							class="button small">Mettre administrateur</a> <a
-							href="<c:url value='/administration/modifierEnMod/${utilisateur.id}' />"
-							class="button small">Mettre mod&eacuterateur</a></td>
+						<td>${utilisateur.role.nom}</td>
+						<td><a href="<c:url value="/administration/supprimer/utilisateur/"/>${utilisateur.id}" class="button alert small">Supprimer</a></td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -101,7 +91,9 @@
 			$('#listeUtilisateurs').DataTable({});
 		});
 	</script>
-
+	
+	</div>
+</div>
 
 </body>
 </html>
