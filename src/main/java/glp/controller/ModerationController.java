@@ -53,10 +53,13 @@ public class ModerationController {
 			ann.setValide(false);
 			
 			String motif = request.getParameter("motif");
-			String content = ann.getTitre() + " " + ann.getDesc() + " " + motif;
+			String content = "Bonjour, votre annonce intitulée : " + ann.getTitre() + "\n\n"
+					 + "dont la description est la suivante \n\n" + ann.getDesc() + "\n\n\n"
+					 + "a été modérée pour le motif suivant : " + motif;
 			
-			EmailSender.sendMail(ann.getAuteur().getMailLille1(), utilisateurService
-					.getUserInSession().getMailLille1(), content, ann);
+			
+			
+			EmailSender.sendMail(ann.getAuteur().getMailLille1(), "Lille1Community", content, ann);
 			
 			
 			annonceService.deleteRow(ann.getId());

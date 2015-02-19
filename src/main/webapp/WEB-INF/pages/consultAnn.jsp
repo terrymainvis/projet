@@ -16,12 +16,12 @@
 	<c:choose>
 		<c:when test="${confirmMail == 'mailsent'}">
 			<div data-alert class="alert-box success">
-				Votre mail a bien �t� envoy� <a href="#" class="close">&times;</a>
+				Votre mail a bien &eacute;t&eacute; envoy&eacute;. <a href="#" class="close">&times;</a>
 			</div>
 		</c:when>
 		<c:when test="${confirmMail == 'mailNotsent'}">
 			<div data-alert class="alert-box alert">
-				Votre mail n'a pas �t� envoy�, contactez-nous pour nous informer de cette erreur <a href="#" class="close">&times;</a>
+				Votre mail n'a pas &eacute;t&eacute; envoy&eacute;, contactez-nous pour nous informer de cette erreur. <a href="#" class="close">&times;</a>
 			</div>
 		</c:when>
 	</c:choose>
@@ -33,7 +33,7 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<div class="panel">
-							<a href="<c:url value="/moderation/list"/>"><h3>Mod�ration</h3></a>
+							<a href="<c:url value="/moderation/list"/>"><h3>Mod&eacute;ration</h3></a>
 							<p>
 								Statut de l'annonce : <b> <c:choose>
 										<c:when test="${annonce.valide=='TRUE'}">
@@ -107,7 +107,7 @@
 											<span><h5><spring:message code="consultAnn.telephone"></spring:message></h5> 060000000 </span> 
 											<span></span> </br>
 											<div>
-												<span><h5><spring:message code="consultAnn.email"></spring:message></h5></span> <span>${current_user.mailAutre}
+												<span><h5><spring:message code="consultAnn.email"></spring:message></h5></span> <span>${annonce.auteur.mailLille1}
 												</span>
 											</div>
 											</br>
@@ -144,7 +144,7 @@
 	  	</div>
 	  		<br /> 
 	  	<div style="text-align: center">
-	  		To : ${current_user.mailAutre}
+	  		To : ${annonce.auteur.mailLille1}
 	  	</div>
 	  		<br/>
 	  	<div>
