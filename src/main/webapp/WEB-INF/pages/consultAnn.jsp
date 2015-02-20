@@ -27,40 +27,36 @@
 	</c:choose>
 
 
-	<c:forEach items="${roleList}" var="role">
-	    <c:if test="${utilisateur.roleId==role.id}">
-	    	<c:if test="${(role.nom=='MODERATEUR') || (role.nom=='ADMINISTRATEUR') || (role.nom=='UTILISATEUR')}">
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="panel">
-							<a href="<c:url value="/moderation/list"/>"><h3>Mod&eacute;ration</h3></a>
-							<p>
-								Statut de l'annonce : <b> <c:choose>
-										<c:when test="${annonce.valide=='TRUE'}">
-							    Valid�e
-							  </c:when>
-										<c:when test="${annonce.valide=='FALSE'}">
-							    Refus�e
-							  </c:when>
-							  <c:otherwise>
-							    En attente
-							  </c:otherwise>
-							</c:choose>
-							</b>
-							</p>
-							<p class="text-center">
-								<a
-									href="<c:url value='/moderation/valider/annonce/${annonce.id}' />"
-									class="button success">Valider l'annonce</a> 
-								<a href="#" class="button alert" id="modalLauncher">Refuser l'annonce</a>
-									
-							</p>
-						</div>
-					</div>
+	<c:if test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}">
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<a href="<c:url value="/moderation/list"/>"><h3>Mod&eacute;ration</h3></a>
+					<p>
+						Statut de l'annonce : <b> <c:choose>
+								<c:when test="${annonce.valide=='TRUE'}">
+					    Valid�e
+					  </c:when>
+								<c:when test="${annonce.valide=='FALSE'}">
+					    Refus�e
+					  </c:when>
+					  <c:otherwise>
+					    En attente
+					  </c:otherwise>
+					</c:choose>
+					</b>
+					</p>
+					<p class="text-center">
+						<a
+							href="<c:url value='/moderation/valider/annonce/${annonce.id}' />"
+							class="button success">Valider l'annonce</a> 
+						<a href="#" class="button alert" id="modalLauncher">Refuser l'annonce</a>
+							
+					</p>
 				</div>
-			</c:if>
-	    </c:if>
-	</c:forEach>
+			</div>
+		</div>
+	</c:if>
 	
 	<div class="row">
 		<div class="large-12 columns">

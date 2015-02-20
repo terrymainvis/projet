@@ -27,7 +27,7 @@ public class EmailSender {
 
 			msg.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(mailTo, false));
-			msg.setSubject("Lille 1 community - " + ann.getId() + "-" + ann.getTitre());
+			msg.setSubject("Lille 1 community - " + "Votre annonce " + ann.getTitre());
 			msg.setText(content);
 			msg.setSentDate(new Date());
 			SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
