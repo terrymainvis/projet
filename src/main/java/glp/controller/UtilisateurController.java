@@ -84,10 +84,33 @@ public class UtilisateurController {
 
 	
 	@RequestMapping(value = "SupprimerAnnonceUtilisateur", method = RequestMethod.GET)
-	public ModelAndView SupprimerAnnonceUtilisateur(@RequestParam(required =false) String idAnnonce) {
+	public ModelAndView SupprimerAnnonceUtilisateur(@RequestParam(required =false) String idAnnonce,@RequestParam(required =false) String date_fin) {
 		Utilisateur util =utilisateurService.getRowById(1);
-int identifiant = Integer.parseInt(idAnnonce);
+		int identifiant = Integer.parseInt(idAnnonce);
+		
+		if(date_fin==null)
+		{
 		utilisateurService.supprimerAnnonce(identifiant);
+		}
+		else
+			
+		{
+		String date =date_fin;
+		System.out.println("la date "+ date);
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+			Date d = null;
+			
+			
+			try {
+				d = sdf.parse(date);
+				//System.out.println("La date "+d);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//utilisateurService.updateDate(identifiant,d);
+		}
+			
 		List <Annonce> listePublie = utilisateurService.listAnnoncePublie(util);
 		List <Annonce> listeAmoderer=utilisateurService.listAnnonceEnCourModeration(util);
 		List<Categorie> catList = categorieService.getList();
@@ -102,6 +125,7 @@ int identifiant = Integer.parseInt(idAnnonce);
 
 		
 	}
+
 	
 	
 	@RequestMapping(value="update")/*@RequestParam(value="file", required = false) MultipartFile file*/

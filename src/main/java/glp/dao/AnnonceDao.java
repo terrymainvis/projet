@@ -35,6 +35,8 @@ public interface AnnonceDao {
 	public void supprimerAnnoncesCategorie(int catId);
 
 	public List<Annonce> getListByUtilisateur(Utilisateur u);
+	public int nbAnnonceEnLigne();
+	public Map<String, Integer> getNbByCategorie();
 
 	
 	

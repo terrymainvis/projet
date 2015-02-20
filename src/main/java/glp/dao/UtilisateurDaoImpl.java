@@ -136,6 +136,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		//				.setParameter("utiID", utilisateurService.getUserInSession().getId())
 		//				.setParameter("d", d)
 		//				.list(); 
+		
+		//	List<Annonce> annonceList = session.createCriteria(Annonce.class).add( Restrictions.ge("date_fin", d)).add(Restrictions.like("ann_valide", false)).add(Restrictions.like("utiID", 1)).list();
+
 
 		return annonceList;
 	}
@@ -214,6 +217,33 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		Session session = sessionFactory.getCurrentSession();
 		Utilisateur uti = (Utilisateur) session.createCriteria(Utilisateur.class).add(Restrictions.eq("mailLille1", mail)).uniqueResult();
 		return uti;
+	}
+	
+	
+	@Transactional
+	@Override
+	public void updateDate(int id, Date d ) {
+		Session session = sessionFactory.getCurrentSession();
+		Annonce annonce = (Annonce)session.get(Annonce.class, id);
+		annonce.setDate_fin(d);
+		System.out.println("la date fin est "+annonce.getDate_fin());
+		
+	}
+	@Transactional
+	@Override
+	public int nbUtilisateur() {
+		Session session = sessionFactory.getCurrentSession();
+//		Criteria crit = session.createCriteria(Utilisateur.class);
+//		
+//		List<Utilisateur> utilisateur = crit.list();
+//		Integer count = utilisateur.size();
+	
+		int nbuser = ((Long) session.createCriteria(Utilisateur.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		
+//		  int count = (int) session.createCriteria("Utilisateur").setProjection(Projections.rowCount()).uniqueResult();
+			System.out.println("Nombre d'utlisateur "+nbuser);	
+		  return nbuser;
+		//return count;
 	}
 	
 		

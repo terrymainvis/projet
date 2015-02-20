@@ -3,6 +3,7 @@ package glp.dao;
 import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UtilisateurDao {
@@ -34,6 +35,8 @@ public interface UtilisateurDao {
 	public Utilisateur getRowByMailLille1(String mail);
 
 	boolean isRepresentant(Utilisateur utilisateur);
+	public void updateDate(int id,Date d);
+	public int nbUtilisateur();
 
 
 	

@@ -111,5 +111,14 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public void supprimerAnnoncesCategorie(int catId) {
 		annonceDao.supprimerAnnoncesCategorie(catId);
 	}
+	@Override
+	public int nbAnnonceEnLigne() {
+		return annonceDao.nbAnnonceEnLigne();
+	}
+
+	@Override
+	public Map<String, Integer> getNbByCategorie() {
+		return annonceDao.getNbByCategorie();
+	}
 
 }

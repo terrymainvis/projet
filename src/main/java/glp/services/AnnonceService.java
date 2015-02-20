@@ -35,4 +35,6 @@ public interface AnnonceService {
 	public void supprimerAnnoncesUtilisateur(Utilisateur u);
 	
 	public void supprimerAnnoncesCategorie(int catId);
+	public int nbAnnonceEnLigne();
+	public Map<String, Integer> getNbByCategorie();
 }

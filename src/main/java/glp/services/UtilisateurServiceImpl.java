@@ -4,6 +4,7 @@ import glp.dao.UtilisateurDao;
 import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -124,4 +125,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		
 	}
 
+	@Override
+	public void updateDate(int id, Date d) {
+		utilisateurDao.updateDate(id,d);
+		
+	}
+
+	@Override
+	public int nbUtilisateur() {
+		
+		return utilisateurDao.nbUtilisateur();
+	}
 }

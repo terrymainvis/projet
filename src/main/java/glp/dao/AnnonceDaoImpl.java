@@ -180,6 +180,30 @@ public class AnnonceDaoImpl implements AnnonceDao {
 			for(Annonce a : listeAnnonces)
 				deleteRow(a.getId());
 	}
+	
+	@Transactional
+	@Override
+	public int nbAnnonceEnLigne() {
+		Session session = sessionFactory.getCurrentSession();
+Date d = new Date();
+		int nbAnnonces = ((Long) session.createCriteria(Annonce.class) .add(Restrictions.ge("date_fin", d)).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		System.out.println("nombre d'annoce en ligne "+nbAnnonces);
+		return nbAnnonces;
+	}
+@Transactional
+@Override
+	public Map<String, Integer> getNbByCategorie() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Categorie> catList = session.createCriteria(Categorie.class).addOrder(Order.asc("id")).list();
+		Map<String, Integer> mapCategorieNbAnnonces = new HashMap<String, Integer>();
+		for(Categorie c : catList) {
+			int nbAnnonces = ((Long) session.createCriteria(Annonce.class)
+			        .add(Restrictions.eq("categorie", c)).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+			mapCategorieNbAnnonces.put(c.getLib(), nbAnnonces);
+		}
+		return mapCategorieNbAnnonces;
+	}
 
 	
 }
