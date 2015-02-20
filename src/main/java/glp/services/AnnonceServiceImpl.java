@@ -6,6 +6,7 @@ import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 

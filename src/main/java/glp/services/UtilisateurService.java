@@ -3,6 +3,7 @@ package glp.services;
 import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UtilisateurService {

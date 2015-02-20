@@ -1,5 +1,7 @@
 package glp.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -101,13 +103,16 @@ public class UtilisateurController {
 			Date d = null;
 			
 			
-			try {
-				d = sdf.parse(date);
+			
+				try {
+					d = sdf.parse(date);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				//System.out.println("La date "+d);
-			} catch (ParseException e) {
+			
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			//utilisateurService.updateDate(identifiant,d);
 		}
 			

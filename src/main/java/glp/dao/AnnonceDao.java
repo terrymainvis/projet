@@ -4,6 +4,7 @@ import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AnnonceDao {
 	public int insertRow(Annonce ann);
