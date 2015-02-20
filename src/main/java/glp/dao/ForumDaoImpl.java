@@ -31,7 +31,7 @@ public class ForumDaoImpl implements ForumDao{
 	public List<Forum> getList() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Forum> forumList = session.createQuery("from Forum").list();
+		List<Forum> forumList = session.createQuery("from Forum ORDER BY forum_id DESC").list();
 		return forumList;
 	}
 

@@ -2,16 +2,16 @@ package glp.controller;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
-
 import glp.domain.Job;
+import glp.domain.Role;
+import glp.domain.Signalisation;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.JobService;
-
 import glp.domain.Forum;
 import glp.services.ForumService;
-
 import glp.services.RoleService;
+import glp.services.SignalisationService;
 import glp.services.UtilisateurService;
 import glp.util.IdBasicCategorie;
 
@@ -40,6 +40,9 @@ public class IndexController {
 	
 	@Autowired
 	private JobService jobService;
+	
+	@Autowired
+	private SignalisationService signalService;	
 
 	@Autowired
 	private ForumService forumService;
@@ -60,12 +63,15 @@ public class IndexController {
 		//List<Annonce> covoitList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.COVOIT)); 
 		List<Forum> forumListRecent = forumService.getListRecent();
 
+		List<Signalisation> signalList = signalService.getListRecent();
+		
 		modelIndex.put("covoitList", covoitList);
 		modelIndex.put("annList", annList);
 		modelIndex.put("jobList", jobList);
 		modelIndex.put("utilisateur", utilisateurService.getUserInSession());
 		modelIndex.put("catList", listeCat);
 		modelIndex.put("forumListRecent", forumListRecent);
+		modelIndex.put("signalList", signalList);
 
 
 		return new ModelAndView("../index", modelIndex);

@@ -48,7 +48,7 @@ public class ForumController {
 		Utilisateur utilisateur = utilisateurService.getUserInSession();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("utilisateur", utilisateur);
-		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		//myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("forum_form", myModel);
 	}
 	
@@ -76,11 +76,10 @@ public class ForumController {
 	}
 	@RequestMapping("{id}")
 	public ModelAndView getForum(@PathVariable("id") int idForumSelected) {
-		System.out.println("l'identifiant c'est "+idForumSelected);
 		Forum forum = forumService.getRowById(idForumSelected);
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("forum", forum);
-		return new ModelAndView("ConsultForum", myModel);
+		return new ModelAndView("consult_forum", myModel);
 	}
 
 }

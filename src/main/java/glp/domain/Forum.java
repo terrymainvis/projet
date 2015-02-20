@@ -25,7 +25,7 @@ public class Forum {
 	@Column(name="forum_titre")
 	private String titre;
 	
-	@Size(min=5, max=300)
+	@Size(min=5, max=500)
 	@Column(name="forum_desc")
 	private String desc;
 	
@@ -47,10 +47,11 @@ public class Forum {
 		
 	}
 	
-	public Forum(String titre, String desc, Date date_pub ){
+	public Forum(String titre, String desc, Date date_pub,Utilisateur uti ){
 		this.titre= titre;
 		this.desc= desc;
 		this.date_pub = new Date();
+		this.auteur=uti;
 	}
 	public int getId(){
 		return id;

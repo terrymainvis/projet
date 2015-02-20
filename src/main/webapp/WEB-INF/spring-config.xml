@@ -47,6 +47,7 @@
 				<value>glp.domain.Role</value>
 				<value>glp.domain.Job</value>
 				<value>glp.domain.Forum</value>
+				<value>glp.domain.Signalisation</value>
 
 			</list>
 		</property>
@@ -125,6 +126,8 @@
  <bean id="JobServiceImpl" class="glp.services.JobServiceImpl" />  
  <bean id="forumDaoImpl" class="glp.dao.ForumDaoImpl" />  
  <bean id="forumServiceImpl" class="glp.services.ForumServiceImpl" />  
+  <bean id="signalisationDaoImpl" class="glp.dao.SignalisationDaoImpl" />  
+ <bean id="signalisationServiceImpl" class="glp.services.SignalisationServiceImpl" />  
   
 
 </beans>  
