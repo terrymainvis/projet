@@ -13,10 +13,6 @@
 
 
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
-<link rel="stylesheet" type="text/css"
-	href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/css/jquery.dataTables.css">
-<script
-	src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
 
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 
@@ -32,7 +28,7 @@
 
 			<div id="text" class="medium-6 large-6 columns">
 				<h1>Lille 1 Community</h1>
-				<p>Un lieu d'échange et d'entraide pour la communauté Lille 1</p>
+				<p>Un lieu d'échanges et d'entraide pour la communauté Lille 1</p>
 			</div>
 		</div>
 	</div>

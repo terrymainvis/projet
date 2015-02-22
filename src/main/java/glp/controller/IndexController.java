@@ -2,14 +2,13 @@ package glp.controller;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
+import glp.domain.Forum;
 import glp.domain.Job;
-import glp.domain.Role;
 import glp.domain.Signalisation;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
-import glp.services.JobService;
-import glp.domain.Forum;
 import glp.services.ForumService;
+import glp.services.JobService;
 import glp.services.RoleService;
 import glp.services.SignalisationService;
 import glp.services.UtilisateurService;
@@ -71,7 +70,7 @@ public class IndexController {
 		modelIndex.put("utilisateur", utilisateurService.getUserInSession());
 		modelIndex.put("catList", listeCat);
 		modelIndex.put("forumListRecent", forumListRecent);
-		modelIndex.put("signalList", signalList);
+//		modelIndex.put("signalList", signalList);
 
 
 		return new ModelAndView("../index", modelIndex);
