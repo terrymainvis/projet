@@ -16,12 +16,14 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,33 +38,52 @@ public class CategorieController {
 	@Autowired
 	private ChampService champService;
 	
+	/**
+	 * 
+	 * @param cat
+	 * @return le formulaire de creation de catégorie
+	 */
 	@RequestMapping("new")
-	public ModelAndView getCatForm(@ModelAttribute Categorie cat) {
-		return new ModelAndView("cat_form");
-	}
-
-	@RequestMapping("/addCat")
-	public ModelAndView addCategorie(@ModelAttribute Categorie cat) {
-		categorieService.insertRow(cat);
-		return new ModelAndView("redirect:/");
-	}
-	
-	@RequestMapping(value = "newChamp", method=RequestMethod.GET)
-	public ModelAndView getAnnForm(@ModelAttribute Champ champ) {
-		List<Categorie> catlist = categorieService.getList();
-		
+	public ModelAndView getCatForm(@ModelAttribute("categorie") Categorie cat) {
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("catlist", catlist);
 		myModel.put("typelist", TypeChampEnum.values());
 		
-		return new ModelAndView("champ_form", myModel);
+		return new ModelAndView("cat_form", myModel);
 	}
-	
-	@RequestMapping("/addChamp")
-	public ModelAndView addAnnonce(@ModelAttribute("champ") @Valid Champ champ) {
-		champService.insertRow(champ);
+
+	/**
+	 * enregistre en base la catégorie et ses champs qui ont été complétés dans le formulaire
+	 * @param cat
+	 * @return
+	 */
+	@RequestMapping("/addCat")
+	@ResponseStatus(value = HttpStatus.OK)
+	public ModelAndView addCategorie(@ModelAttribute("categorie") Categorie cat) {
+		
+		//supprime les champs déchets (champs null générés par le javascript)
+		//et valide l'association
+		ArrayList<Champ> champs_tmp = new ArrayList<Champ>();
+		
+		for(Champ c : cat.getChamps()) {
+			if(c.getNom()!=null) {
+				c.setCat(cat);
+				champs_tmp.add(c);
+			}
+		}
+		
+		cat.setChamps(champs_tmp);
+				
+		//ajoute la catégorie
+		categorieService.insertRow(cat);
+		
+		//ajoute les champs
+		for(Champ c : cat.getChamps()) {
+			champService.insertRow(c);
+		}
+		
 		return new ModelAndView("redirect:/");
 	}
+		
 
 	@RequestMapping("list")
 	public ModelAndView getCatList() {
