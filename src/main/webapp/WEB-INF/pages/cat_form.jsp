@@ -26,14 +26,17 @@
 					<form:textarea path="desc" placeholder="Description" />
 				</div>
 				
+				<br/>
+					<a href="#" id="addchamp" class="button" >Ajouter un champ</a>
+					<a href="#" id="removechamp" class="button" >Enlever un champ</a>
+				<br/>
+				
 				<div class="inputs">
 				</div>
 				
-				<br/>
-				<input id="addchamp" class="button" value="+" />
-				<br/>
-				
-				<input class="button" type="submit" value="Ajouter" />
+				<div class="small-3 small-centered columns">
+					<input class="button" type="submit" value="Ajouter la catégorie" />
+				</div>
 			</div>
 
 		</form:form>
@@ -41,14 +44,13 @@
 	<a href="cat_list">Liste des categories</a>
 </body>
 
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
-
-
+		
 		var i = $('input').size() + 1;
 		
 		$('#addchamp').click(function() {
-			$('<div><input type="text" name="champs[' + i + '].nom" placeholder="Nom du champ" />'
+			$('<div id="ch'+i+'"><input type="text" name="champs[' + i + '].nom" placeholder="Nom du champ" />'
 			+ '<select name="champs[' + i + '].type" >'
 			+ '<option value="0" label="Type de champ" />'
 			+ '<c:forEach var="item" items="${typelist}">'
@@ -56,15 +58,18 @@
         	+ '</c:forEach>'
 			+ '</select>'
 			+ '<input type="checkbox" name="champs[' + i + '].requis" /> Champ obligatoire'
-        	+ '</div><br/>').fadeIn('slow').appendTo('.inputs');
+        	+ '<br/><br/></div>').fadeIn('slow').appendTo('.inputs');
 			i++;
+			return false;
 		});
 		
-		$('#remove').click(function() {
-		if(i > 1) {
-			$('.field:last').remove();
-			i--; 
-		}
+		$('#removechamp').click(function() {
+			if(i > 1) {
+				var element = document.getElementById('ch'+(i-1));			
+				element.parentNode.removeChild(element);
+				i--; 
+				return false;
+			}
 		});
 	});
 	

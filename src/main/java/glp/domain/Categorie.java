@@ -1,7 +1,7 @@
 package glp.domain;
 
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Categorie {
 	private String desc;
 	
 	@OneToMany(mappedBy="cat")
-	private Set<Champ> champs;
+	private List<Champ> champs;
 	
 	public Categorie(){
 		
@@ -64,11 +64,11 @@ public class Categorie {
 		return lib;
 	}
 
-	public Set<Champ> getChamps() {
+	public List<Champ> getChamps() {
 		return champs;
 	}
 
-	public void setChamps(Set<Champ> champs) {
+	public void setChamps(List<Champ> champs) {
 		this.champs = champs;
 	}
 	
