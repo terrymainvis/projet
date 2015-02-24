@@ -28,9 +28,9 @@
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 	<div class="row">
-		<div class="large-10 columns">
+		<div class="large-10 large-offset-1 columns">
 			<div class="panel" style="text-align: center">
-				<b><b>liste des éxpériences à l'étranger</b></b><br> <br>
+				<b><b>Liste des expériences à l'étranger</b></b><br> <br>
 				<div class="row" style="text-align: center">
 					<table id="listeforums" class="display" cellspacing="0" width="100%">
 						<thead>
@@ -40,7 +40,7 @@
 								<th>Date de publication</th>
 								
 								<th></th>
-								<th></th>
+								<th>Signalements</th>
 							</tr>
 							<tr></tr>
 						</thead>
@@ -61,7 +61,7 @@
 											<table border="0" cellspacing="0" cellpadding="0">
 												<tr>
 											
-													<td width="300" height="80" style="word-break:break-all;"><i>${forum.desc.toString()}</i>...</td>
+													<td width="300" height="80" style="word-break:break-all;"><i>${forum.desc.substring(0,30)}</i>...</td>
 												</tr>
 											</table>
 										</td>
@@ -77,7 +77,27 @@
 										</td>
 									
 										<td><a href="<c:url value='/forum/${forum.id}'/>"
-											class="button round">Details</a></td>
+											class="button round">Details</a>
+										</td>
+										
+										<td>
+											<table border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td width="300" height="80" style="word-break:break-all;text-align:center">
+														<c:choose>
+															<c:when test="${forum.signalements == 0}">
+																${forum.signalements}
+															</c:when>
+															<c:otherwise>
+																<a href="<c:url value='/forum/signalements/${forum.id}' />">
+																	${forum.signalements}
+																</a>
+															</c:otherwise>
+														</c:choose>
+													</td>
+												</tr>
+											</table>
+										</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -88,6 +108,8 @@
 			</div>
 		</div>
 	</div>
-<a href="<c:url value="/forum/new"  />">Ajout un nouveau témoignage</a>
+	
+	<a href="<c:url value="/forum/new"  />">Ajout un nouveau t&eacute;moignage</a>
+		
 </body>
 </html>

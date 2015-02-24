@@ -8,13 +8,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import glp.domain.Annonce;
 import glp.domain.Forum;
+import glp.domain.Signalisation;
 import glp.domain.Utilisateur;
 import glp.services.ForumService;
+import glp.services.SignalisationService;
 import glp.services.UtilisateurService;
+import glp.util.EmailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +40,8 @@ public class ForumController {
 	private ForumService forumService;
 	@Autowired
 	private UtilisateurService utilisateurService;
+	@Autowired
+	private SignalisationService signalisationService;
 	
 	
 	public ForumController(){
@@ -72,6 +78,7 @@ public class ForumController {
 		List<Forum> forumList = forumService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("forumList", forumList);
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("forum_list",myModel);	
 	}
 	@RequestMapping("{id}")
@@ -80,6 +87,26 @@ public class ForumController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("forum", forum);
 		return new ModelAndView("consult_forum", myModel);
+	}
+	
+	@RequestMapping("/signalements/{id}")
+	public ModelAndView getSignalements(@PathVariable("id") int idTemoignage){
+		Forum forum = forumService.getRowById(idTemoignage);
+		List<Signalisation> listSignalisations = signalisationService.getListSignalements(forum);
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("forum", forum);
+		myModel.put("signalements", listSignalisations);
+		return new ModelAndView("forum_signalements", myModel);
+	}
+	
+	@RequestMapping("/supprimer/{id}")
+	public ModelAndView deleteForum(@PathVariable("id") int idForumSelected,
+			HttpServletRequest request){
+		forumService.deleteRow(idForumSelected);
+		List<Forum> forumList = forumService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("forumList", forumList);
+		return new ModelAndView("forum_list", myModel);
 	}
 
 }

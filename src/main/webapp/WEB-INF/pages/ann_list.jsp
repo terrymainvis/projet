@@ -28,19 +28,19 @@
 	<table id="listeAnnonces" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th>Image</th>
-				<th>Titre</th>
-				<th>Cat&eacute;gorie</th>
-				<th>Date</th>
+				<th><spring:message code="annList.image"></spring:message></th>
+				<th><spring:message code="annList.titre"></spring:message></th>
+				<th><spring:message code="annList.categorie"></spring:message></th>
+				<th><spring:message code="annList.date"></spring:message></th>
 				<th></th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<th>Image</th>
-				<th>Titre</th>
-				<th>Cat&eacute;gorie</th>
-				<th>Date</th>
+				<th><spring:message code="annList.image"></spring:message></th>
+				<th><spring:message code="annList.titre"></spring:message></th>
+				<th><spring:message code="annList.categorie"></spring:message></th>
+				<th><spring:message code="annList.date"></spring:message></th>
 				<th></th>
 			</tr>
 		</tfoot>
@@ -73,7 +73,9 @@
 							<td><table border="0" cellspacing="0" cellpadding="0">
 									<tr>
 										<td><a href="<c:url value='/annonce/${ann.id}' />"
-											class="button round">Voir l'annonce</a></td>
+											class="button round">
+											<spring:message code="annList.voirAnnonce"></spring:message>
+											</a></td>
 									</tr>
 								</table></td>
 	

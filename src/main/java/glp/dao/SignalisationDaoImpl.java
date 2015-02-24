@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import glp.domain.Forum;
@@ -33,6 +34,17 @@ public class SignalisationDaoImpl implements SignalisationDao{
 		@SuppressWarnings("unchecked")
 		List<Signalisation> signalList = session.createQuery("from Forum ORDER BY forum_id DESC").list();
 		return signalList;
+	}
+
+
+	@Override
+	public List<Signalisation> getListSignalements(Forum forum) {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Signalisation> listSignalements = session.createCriteria(Signalisation.class)
+				.add(Restrictions.eq("forum", forum))
+				.list();
+		return listSignalements;
 	}
 
 }

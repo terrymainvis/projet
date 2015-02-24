@@ -27,7 +27,7 @@
 	</c:choose>
 
 
-	<c:if test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}">
+<%-- 	<c:if test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}"> --%>
 		<div class="row">
 			<div class="small-12 columns">
 				<div class="panel">
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 		</div>
-	</c:if>
+<%-- 	</c:if> --%>
 	
 	<div class="row">
 		<div class="large-12 columns">

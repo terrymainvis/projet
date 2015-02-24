@@ -31,4 +31,11 @@ public class SignalisationServiceImpl implements SignalisationService{
 		return signalDao.getListRecent();
 	}
 
+	@Override
+	@Transactional
+	public List<Signalisation> getListSignalements(Forum forum) {
+		// TODO Auto-generated method stub
+		return signalDao.getListSignalements(forum);
+	}
+
 }

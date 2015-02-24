@@ -18,7 +18,7 @@
 		<form:form id="addCatForm" commandName="categorie" method="post" action="addCat">
 			<div class="row">
 				<div class="large-offset-3 large-6 colums">
-					<form:input path="lib" placeholder="Libelle" required="required" />
+					<form:input path="lib" placeholder="Libellé" required="required" />
 				</div>
 			</div>
 			<div class="row">
@@ -48,7 +48,7 @@
 		var i = $('input').size() + 1;
 		
 		$('#addchamp').click(function() {
-			$('<div><input type="text" name="champs[' + i + '].nom" placeholder="nom champ" />'
+			$('<div><input type="text" name="champs[' + i + '].nom" placeholder="Nom du champ" />'
 			+ '<select name="champs[' + i + '].type" >'
 			+ '<option value="0" label="Type de champ" />'
 			+ '<c:forEach var="item" items="${typelist}">'
@@ -56,7 +56,7 @@
         	+ '</c:forEach>'
 			+ '</select>'
 			+ '<input type="checkbox" name="champs[' + i + '].requis" /> Champ obligatoire'
-        	+ '</div>').fadeIn('slow').appendTo('.inputs');
+        	+ '</div><br/>').fadeIn('slow').appendTo('.inputs');
 			i++;
 		});
 		

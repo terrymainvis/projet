@@ -43,6 +43,9 @@ public class Forum {
 	@Column(name="forum_valide")
 	private Boolean valide;
 	
+	@Column(name="signalements")
+	private int signalements;
+	
 	public Forum(){
 		
 	}
@@ -100,5 +103,15 @@ public class Forum {
 	public void setValide(boolean valide) {
 		this.valide = valide;
 	}
+
+	public int getSignalements() {
+		return signalements;
+	}
+
+	public void setSignalements(int signalements) {
+		this.signalements = signalements;
+	}
+	
+	
 	
 }

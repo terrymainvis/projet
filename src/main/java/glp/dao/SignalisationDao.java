@@ -2,6 +2,7 @@ package glp.dao;
 
 import java.util.List;
 
+import glp.domain.Forum;
 import glp.domain.Signalisation;
 
 public interface SignalisationDao {
@@ -10,5 +11,5 @@ public interface SignalisationDao {
 
 	public List<Signalisation> getListRecent();
 	
-
+	public List<Signalisation> getListSignalements(Forum forum);
 }

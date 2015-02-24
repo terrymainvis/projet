@@ -1,5 +1,6 @@
 package glp.dao;
 
+import glp.domain.Annonce;
 import glp.domain.Forum;
 import glp.domain.Utilisateur;
 
@@ -54,8 +55,11 @@ public class ForumDaoImpl implements ForumDao{
 
 	@Override
 	public int deleteRow(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Session session = sessionFactory.getCurrentSession();
+		Forum forum = (Forum) session.load(Forum.class, id);
+		session.delete(forum);
+		Serializable idforum = session.getIdentifier(forum);
+		return (Integer) idforum;
 	}//SELECT * FROM `forum` order by `forum_date_pub` DESC
 
 	@Override

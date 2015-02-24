@@ -71,6 +71,8 @@ public class SignalisationController {
 		signal.setForum(forum);
 		System.out.println(signal.getforum().getId());
 		signalService.insertRow(signal);
+		forum.setSignalements(forum.getSignalements() + 1);
+		forumService.updateRow(forum);
 		return new ModelAndView("redirect:/");
 	}
 
