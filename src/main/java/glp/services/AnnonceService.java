@@ -38,4 +38,6 @@ public interface AnnonceService {
 	public void supprimerAnnoncesCategorie(int catId);
 	public int nbAnnonceEnLigne();
 	public Map<String, Integer> getNbByCategorie();
+	
+	public int updateDateAnnonce(int id, String date);
 }

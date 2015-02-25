@@ -107,7 +107,7 @@ public class AnnonceController {
 
 	}
 
-	@RequestMapping(value = "/updateMailUtilisateur", method = RequestMethod.POST)
+	@RequestMapping(value = "/new/updateMailUtilisateur", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	/* permet l'appel AJAX */
 	public void updateMailUser(
@@ -267,6 +267,9 @@ public class AnnonceController {
 				.getUserInSession().getMailLille1(), request.getParameter("contentMail"), annonce);
 		return new ModelAndView("redirect:/");
 	}
+	
+	
+
 
 	
 }

@@ -5,6 +5,10 @@ import glp.dao.CategorieDao;
 import glp.domain.Annonce;
 import glp.domain.Utilisateur;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +22,10 @@ public class AnnonceServiceImpl implements AnnonceService {
 
 	@Autowired
 	AnnonceDao annonceDao;
-	
+
 	@Autowired
 	CategorieDao categorieDao;
-	
+
 	@Override
 	@Transactional
 	public int insertRow(Annonce ann) {
@@ -57,7 +61,7 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public List<Annonce> getListByCat(int catId) {
 		return annonceDao.getListByCat(catId);
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Annonce> getListByCatName(String catName) {
@@ -76,25 +80,26 @@ public class AnnonceServiceImpl implements AnnonceService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	@Transactional
-	public List<Annonce> getListByMot(String searchText) { 
+	public List<Annonce> getListByMot(String searchText) {
 		return annonceDao.getListByMot(searchText);
 	}
 
 	@Override
 	@Transactional
 	public List<Annonce> getListByCatEtMot(String cat, String motcle) {
-		return annonceDao.getListByCatEtMot(categorieDao.getIdByLib(cat), motcle);
+		return annonceDao.getListByCatEtMot(categorieDao.getIdByLib(cat),
+				motcle);
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Annonce> getListAModerer() {
 		return annonceDao.getListAModerer();
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Annonce> getListValides() {
@@ -112,14 +117,33 @@ public class AnnonceServiceImpl implements AnnonceService {
 	public void supprimerAnnoncesCategorie(int catId) {
 		annonceDao.supprimerAnnoncesCategorie(catId);
 	}
+
 	@Override
+	@Transactional
 	public int nbAnnonceEnLigne() {
 		return annonceDao.nbAnnonceEnLigne();
 	}
 
 	@Override
+	@Transactional
 	public Map<String, Integer> getNbByCategorie() {
 		return annonceDao.getNbByCategorie();
+	}
+
+	@Override
+	@Transactional
+	public int updateDateAnnonce(int id, String date) {
+		Annonce annonce = this.getRowById(id);
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		Date newdate;
+		try {
+			newdate = format.parse(date);
+			annonce.setDate_fin(newdate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 }
