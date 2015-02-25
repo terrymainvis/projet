@@ -68,5 +68,13 @@ public class ChampDaoImpl implements ChampDao {
 			for(Champ c : listeChamp)
 				deleteRow(c.getId());
 	}
+	
+	@Override
+	public List<Champ> getList() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Champ> champList = (List<Champ>) session.createCriteria(Champ.class).list();
+		return champList;
+	}
 
 }

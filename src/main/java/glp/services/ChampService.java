@@ -18,4 +18,6 @@ public int insertRow(Champ champ);
 	public int deleteRow(int id);
 	
 	public void supprimerChampCategorie(int catId);
+
+	public List<Champ> getList();
 }

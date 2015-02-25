@@ -17,4 +17,6 @@ public interface ChampDao {
 	public List<Champ> getListByCat(int idcat);
 
 	public void supprimerChampCategorie(int catId);
+	
+	public List<Champ> getList();
 }

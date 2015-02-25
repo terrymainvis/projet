@@ -55,5 +55,12 @@ public class ChampServiceImpl implements ChampService {
 		champDao.supprimerChampCategorie(catId);
 	}
 
+
+	@Override
+	@Transactional
+	public List<Champ> getList() {
+		return champDao.getList();
+	}
+
 	
 }
