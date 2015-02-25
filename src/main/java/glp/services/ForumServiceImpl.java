@@ -55,7 +55,7 @@ public class ForumServiceImpl implements ForumService{
 	@Transactional
 	public int deleteRow(int id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return forumDao.deleteRow(id);
 	}
 
 	@Override

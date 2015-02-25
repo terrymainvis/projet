@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import glp.domain.Annonce;
 import glp.domain.Forum;
 import glp.domain.Signalisation;
 
@@ -25,6 +26,15 @@ public class SignalisationDaoImpl implements SignalisationDao{
 		session.saveOrUpdate(signal);
 		Serializable id = session.getIdentifier(signal);
 		return (Integer) id;
+	}
+	
+	@Override
+	public int deleteRow(int id) {
+		Session session = sessionFactory.getCurrentSession();
+		Signalisation signalisation = (Signalisation) session.load(Signalisation.class, id);
+		session.delete(signalisation);
+		Serializable idSign = session.getIdentifier(signalisation);
+		return (Integer) idSign;
 	}
 
 

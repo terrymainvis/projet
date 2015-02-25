@@ -40,7 +40,9 @@
 								<th>Date de publication</th>
 								
 								<th></th>
-								<th>Signalements</th>
+								<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
+									<th>Signalements</th>
+								</c:if>
 							</tr>
 							<tr></tr>
 						</thead>
@@ -80,24 +82,27 @@
 											class="button round">Details</a>
 										</td>
 										
-										<td>
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-													<td width="300" height="80" style="word-break:break-all;text-align:center">
-														<c:choose>
-															<c:when test="${forum.signalements == 0}">
-																${forum.signalements}
-															</c:when>
-															<c:otherwise>
-																<a href="<c:url value='/forum/signalements/${forum.id}' />">
+																				
+										<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
+											<td>
+												<table border="0" cellspacing="0" cellpadding="0">
+													<tr>
+														<td width="300" height="80" style="word-break:break-all;text-align:center">
+															<c:choose>
+																<c:when test="${forum.signalements == 0}">
 																	${forum.signalements}
-																</a>
-															</c:otherwise>
-														</c:choose>
-													</td>
-												</tr>
-											</table>
-										</td>
+																</c:when>
+																<c:otherwise>
+																	<a href="<c:url value='/forum/signalements/${forum.id}' />">
+																		${forum.signalements}
+																	</a>
+																</c:otherwise>
+															</c:choose>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</c:if>

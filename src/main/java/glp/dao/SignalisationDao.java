@@ -8,6 +8,8 @@ import glp.domain.Signalisation;
 public interface SignalisationDao {
 	
 	public int insertRow(Signalisation signal);
+	
+	public int deleteRow(int id);
 
 	public List<Signalisation> getListRecent();
 	

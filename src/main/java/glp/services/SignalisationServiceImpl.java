@@ -26,6 +26,13 @@ public class SignalisationServiceImpl implements SignalisationService{
 
 	@Override
 	@Transactional
+	public int deleteRow(int id) {
+		// TODO Auto-generated method stub
+		return signalDao.deleteRow(id);
+	}
+	
+	@Override
+	@Transactional
 	public List<Signalisation> getListRecent() {
 		// TODO Auto-generated method stub
 		return signalDao.getListRecent();
@@ -37,5 +44,7 @@ public class SignalisationServiceImpl implements SignalisationService{
 		// TODO Auto-generated method stub
 		return signalDao.getListSignalements(forum);
 	}
+
+
 
 }

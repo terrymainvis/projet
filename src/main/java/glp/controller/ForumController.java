@@ -1,24 +1,20 @@
 package glp.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-import glp.domain.Annonce;
+
 import glp.domain.Forum;
 import glp.domain.Signalisation;
 import glp.domain.Utilisateur;
 import glp.services.ForumService;
 import glp.services.SignalisationService;
 import glp.services.UtilisateurService;
-import glp.util.EmailSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -102,6 +98,11 @@ public class ForumController {
 	@RequestMapping("/supprimer/{id}")
 	public ModelAndView deleteForum(@PathVariable("id") int idForumSelected,
 			HttpServletRequest request){
+		Forum forum = forumService.getRowById(idForumSelected);
+		List<Signalisation> lesSignalisations = signalisationService.getListSignalements(forum);
+		for (Signalisation signalement : lesSignalisations){
+			signalisationService.deleteRow(signalement.getId());
+		}
 		forumService.deleteRow(idForumSelected);
 		List<Forum> forumList = forumService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();

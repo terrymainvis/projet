@@ -59,9 +59,11 @@
 						<div class="large-5 columns">
 							<a href="<c:url value="/forum/list"  />" class="button radius">Retour aux témoignages</a>
 						</div>
-						<div class="large-5  columns">
-							<a href="#" class="button alert" id="modalLauncher">Supprimer le t&eacute;moignage</a>
-						</div>
+						<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
+							<div class="large-5  columns">
+								<a href="#" class="button alert" id="modalLauncher">Supprimer le t&eacute;moignage</a>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

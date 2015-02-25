@@ -8,6 +8,7 @@ import glp.form.AnnonceForm;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.ChampCompleteService;
+import glp.services.ChampService;
 import glp.services.RoleService;
 import glp.services.UtilisateurService;
 import glp.util.EmailSender;
@@ -51,6 +52,8 @@ public class AnnonceController {
 	private RoleService roleService;
 	@Autowired
 	private ChampCompleteService ccService;
+	@Autowired
+	private ChampService champService;
 
 	public AnnonceController() {
 	}
@@ -65,6 +68,7 @@ public class AnnonceController {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("catlist", categorieService.getList());
 		myModel.put("annform", new AnnonceForm());
+		myModel.put("champs", champService.getList());
 
 		return new ModelAndView("ann_form_select_cat", myModel);
 	}
