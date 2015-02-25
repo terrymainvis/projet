@@ -146,4 +146,10 @@ public class AnnonceServiceImpl implements AnnonceService {
 		return id;
 	}
 
+	@Override
+	@Transactional
+	public List<Annonce> getListByUtilisateur(Utilisateur u) {
+		return annonceDao.getListByUtilisateur(u);
+	}
+
 }

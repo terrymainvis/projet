@@ -40,4 +40,6 @@ public interface AnnonceService {
 	public Map<String, Integer> getNbByCategorie();
 	
 	public int updateDateAnnonce(int id, String date);
+	
+	public List<Annonce> getListByUtilisateur(Utilisateur u);
 }

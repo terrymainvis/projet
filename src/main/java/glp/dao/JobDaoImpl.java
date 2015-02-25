@@ -6,6 +6,8 @@ import glp.domain.Utilisateur;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +18,7 @@ public class JobDaoImpl implements JobDao{
 
 	 @Autowired  
 	 private SessionFactory sessionFactory;  
-	
+	 
 	@Override
 	public int insertRow(Job job) {
 		Session session = sessionFactory.getCurrentSession();
@@ -65,6 +67,7 @@ public class JobDaoImpl implements JobDao{
 		return jobList;
 	}
 
+	@Transactional
 	@Override
 	public void supprimerJobUtilisateur(Utilisateur u) {
 		List<Job> listeJob = getListByUtilisateur(u);
@@ -73,6 +76,7 @@ public class JobDaoImpl implements JobDao{
 				deleteRow(f.getId());
 	}
 
+	@Transactional
 	@Override
 	public List<Job> getListByUtilisateur(Utilisateur u) {
 		Session session =sessionFactory.getCurrentSession();

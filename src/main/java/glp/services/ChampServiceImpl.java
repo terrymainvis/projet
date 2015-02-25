@@ -49,5 +49,11 @@ public class ChampServiceImpl implements ChampService {
 		return champDao.getListByCat(cat.getId());
 	}
 
+
+	@Override
+	public void supprimerChampCategorie(int catId) {
+		champDao.supprimerChampCategorie(catId);
+	}
+
 	
 }

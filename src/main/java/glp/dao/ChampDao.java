@@ -15,4 +15,6 @@ public interface ChampDao {
 	public int deleteRow(int id);
 	
 	public List<Champ> getListByCat(int idcat);
+
+	public void supprimerChampCategorie(int catId);
 }

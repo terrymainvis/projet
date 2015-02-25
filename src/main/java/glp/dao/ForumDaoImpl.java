@@ -7,6 +7,8 @@ import glp.domain.Utilisateur;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,7 +20,7 @@ public class ForumDaoImpl implements ForumDao{
 	
 	@Autowired  
 	 private SessionFactory sessionFactory;  
-	
+
 	@Override
 	public int insertRow(Forum forum) {
 		Session session = sessionFactory.getCurrentSession();
@@ -75,6 +77,7 @@ public class ForumDaoImpl implements ForumDao{
 		return forumListRecent;
 	}
 
+	@Transactional
 	@Override
 	public void supprimerForumUtilisateur(Utilisateur u) {
 		List<Forum> listeForum = getListByUtilisateur(u);
@@ -83,6 +86,7 @@ public class ForumDaoImpl implements ForumDao{
 				deleteRow(f.getId());
 	}
 
+	@Transactional
 	@Override
 	public List<Forum> getListByUtilisateur(Utilisateur u) {
 		Session session =sessionFactory.getCurrentSession();

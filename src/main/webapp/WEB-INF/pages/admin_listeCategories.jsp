@@ -22,21 +22,28 @@
 		<c:choose>
     		<c:when test="${isCategorieSupprimee == true}">
     			<div data-alert class="alert-box success">
-					La catégorie <b><c:out value="${categorieSupprimee }"></c:out></b> a été supprimée <b>
+					La catégorie <b><c:out value="${categorieSupprimee }"></c:out></b> a été supprimée
 					<a href="#" class="close">&times;</a>
 				</div>
     		</c:when>
     		<c:when test="${isCategorieSupprimee == false}">
     			<div data-alert class="alert-box alert">
-					La catégorie <b><c:out value="${categorieSupprimee }"></c:out></b> n'a pas été supprimée <b>
+					La catégorie <b><c:out value="${categorieSupprimee }"></c:out></b> n'a pas été supprimée
 					<a href="#" class="close">&times;</a>
 				</div>
     		</c:when>
     	</c:choose>
 		
 	</c:if>
+	<div id="modalSuppression" class="reveal-modal" data-reveal>
+  		<h2>Suppression d'une catégorie</h2><a class="close-reveal-modal">&#215;</a>
+  		<p>Voulez-vous vraiment supprimer la catégorie <b id="categ"></b>? Cela supprimera toutes les annonces de cette catégorie s'il y en a.</p>
+  		<a id="lienSuppression" class="button alert" href="">Supprimer</a>
+	</div>
 	<div class="panel radius">
 	<h4>Liste des catégories</h4>
+	<c:choose>
+	<c:when test="${!empty catList && !empty mapCategories}">
 	<table id="listeCategories">
 		<thead>
 			<tr>
@@ -47,34 +54,33 @@
 			</tr>
 		</thead>
 		<tbody id="lignes">
-			<c:if test="${!empty catList && !empty mapCategories}">
 				<c:forEach items="${catList}" var="categorie">
 					<tr>
 						<td class="text-center">${categorie.lib}</td>
 						<td class="text-center">${categorie.desc}</td>
 						<td class="text-center"><c:out value="${mapCategories[categorie.id]}"/></td>
 						<td class="text-center">
-							<c:choose>
-    							<c:when test="${mapCategories[categorie.id] == 0}">
-							<a href="<c:url value='/administration/supprimer/categorie/${categorie.id}' />"
-							class="button alert small">Supprimer la catégorie</a>
-								</c:when>
-								<c:when test="${mapCategories[categorie.id] != 0}">
-							<button class="secondary small disabled">Supprimer la catégorie</button>
-								</c:when>
-							</c:choose>
+							<button data-reveal-id="modalSuppression" class="alert small" onclick='confirmerSuppression("${categorie.lib}","${categorie.id}")'>Supprimer la catégorie</button>
 						</td>
 					</tr>
 				</c:forEach>
-			</c:if>
-			
 		</tbody>
 	</table>
+	</c:when>
+	<c:otherwise>
+		Aucune catégorie dans la base <br/>
+	</c:otherwise>
+	</c:choose>
 	<a href="<c:url value='/categorie/new' />" class="button  small">Ajouter une catégorie</a>
 	</div>
 	</div>
 	<script>
 		$(document).foundation();
-	</script>
+		function confirmerSuppression(nomCateg, idCateg) {
+			document.getElementById("categ").innerHTML = nomCateg;
+		    document.getElementById("lienSuppression").href = "/lille1community/administration/supprimer/categorie/"+idCateg;
+		    return false;
+		} 
+		</script>
 </body>
 </html>

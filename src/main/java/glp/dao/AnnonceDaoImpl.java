@@ -23,7 +23,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 
 	 @Autowired  
 	 private SessionFactory sessionFactory;  
-	
+
 	@Override
 	public int insertRow(Annonce ann) {
 		Session session = sessionFactory.getCurrentSession();
@@ -105,11 +105,13 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		Session session =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-		        .add(Restrictions.eq("categorie", catId))
+				.createAlias( "categorie", "c" )
+		         .add( Restrictions.eq( "c.id", catId ))
 		        .list();
 		return annonceList;
 	}
 	
+	@Transactional
 	@Override
 	public List<Annonce> getListByUtilisateur(Utilisateur u) {
 		Session session =sessionFactory.getCurrentSession();
@@ -171,6 +173,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		return annonceList;
 	}
 
+	@Transactional
 	@Override
 	public void supprimerAnnoncesUtilisateur(Utilisateur u) {
 		List<Annonce> listeAnnonces = getListByUtilisateur(u);
@@ -179,6 +182,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 				deleteRow(a.getId());
 	}
 
+	@Transactional
 	@Override
 	public void supprimerAnnoncesCategorie(int catId) {
 		List<Annonce> listeAnnonces = getListByCat(catId);

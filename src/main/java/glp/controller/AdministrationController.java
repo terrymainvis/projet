@@ -9,6 +9,7 @@ import glp.domain.Role;
 import glp.domain.Utilisateur;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
+import glp.services.ChampService;
 import glp.services.ForumService;
 import glp.services.JobService;
 import glp.services.RoleService;
@@ -44,6 +45,9 @@ public class AdministrationController {
 	
 	@Autowired
 	private CategorieService categorieService;
+	
+	@Autowired
+	private ChampService champService;
 	
 	@RequestMapping("/list")
 	public ModelAndView getListeUtilisateurs(Map<String, Object> modelListeUtilisateurs) {
@@ -180,11 +184,13 @@ public class AdministrationController {
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			if(categorieService.getRowById(idCategorie)!=null) {
 				modelListeCategories.put("categorieSupprimee", categorieService.getRowById(idCategorie).getLib());
-				if(categorieService.getNbByCategorie().get(idCategorie)==0) {
+//				if(categorieService.getNbByCategorie().get(idCategorie)==0) {
+					annonceService.supprimerAnnoncesCategorie(idCategorie);
+					champService.supprimerChampCategorie(idCategorie);
 					categorieService.deleteRow(idCategorie);
 					modelListeCategories.put("isCategorieSupprimee", true);
-				} else 
-					modelListeCategories.put("isCategorieSupprimee", false);
+//				} else 
+//					modelListeCategories.put("isCategorieSupprimee", false);
 			}
 //		}
 		return getListeCategories(modelListeCategories);
@@ -207,7 +213,7 @@ public class AdministrationController {
 						case "REPRESENTANT":
 							return getListeUtilisateurs(modelModifierStatutRep(u));
 						case "UTILISATEUR":
-							return getListeUtilisateurs(modelSupprimerUtilisateur(u));
+							return getListeUtilisateurs(modelSupprimerRolesUtilisateur(u));
 						default:
 							;  break;
 						}
@@ -229,11 +235,11 @@ public class AdministrationController {
 	}
 	
 	@RequestMapping("/supprimer/utilisateur/{id}")
-	public ModelAndView supprimerUtilisateur(@PathVariable("id") int idUtilisateur) {
+	public ModelAndView supprimerRolesUtilisateur(@PathVariable("id") int idUtilisateur) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			Utilisateur u=utilisateurService.getRowById(idUtilisateur);
-			modelListeUtilisateurs=modelSupprimerUtilisateur(u);
+			modelListeUtilisateurs=modelSupprimerRolesUtilisateur(u);
 //		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
 	}
@@ -241,7 +247,7 @@ public class AdministrationController {
 	/*
 	 * Model fourni par cette methode pour pouvoir l'utiliser dans plusieurs methodes et diminuer le nombre de requetes
 	 */
-	public Map<String, Object> modelSupprimerUtilisateur(Utilisateur u) {
+	public Map<String, Object> modelSupprimerRolesUtilisateur(Utilisateur u) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			if(u!=null) {
@@ -250,15 +256,17 @@ public class AdministrationController {
 						modelListeUtilisateurs.put("nbAdminInsuffisant", true);
 						return modelListeUtilisateurs;
 				}
-				annonceService.supprimerAnnoncesUtilisateur(u);
-				/*
-				 * org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: No Session found for current thread
-				 */
-//				jobService.supprimerJobUtilisateur(u);
-//				forumService.supprimerForumUtilisateur(u);
-				utilisateurService.deleteRow(u.getId());
-				modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
-				modelListeUtilisateurs.put("changementStatut", "est maintenant supprimé");
+				if(annonceService.getListByUtilisateur(u).isEmpty() && forumService.getListByUtilisateur(u).isEmpty() && jobService.getListByUtilisateur(u).isEmpty()) {
+					utilisateurService.deleteRow(u.getId());
+					modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+					modelListeUtilisateurs.put("changementStatut", "est maintenant supprimé");
+				} else {
+					Role r=roleService.getRowByNom("UTILISATEUR");
+					u.setRoles(r);
+					utilisateurService.updateRow(u);
+					modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+					modelListeUtilisateurs.put("changementStatut", "n'a plus de rôles spéciaux");
+				}
 			}
 //		}			
 		return modelListeUtilisateurs;

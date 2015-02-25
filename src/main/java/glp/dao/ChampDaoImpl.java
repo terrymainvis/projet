@@ -5,6 +5,8 @@ import glp.domain.Champ;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -49,10 +51,22 @@ public class ChampDaoImpl implements ChampDao {
 
 	@Override
 	public List<Champ> getListByCat(int idcat) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Champ> champList = session.createQuery("from Champ where cat_id= :catID").setParameter("catID", idcat).list();
+		List<Champ> champList = session.createCriteria(Champ.class)
+				.createAlias( "cat", "c" )
+		         .add( Restrictions.eq( "c.id", idcat ))
+		        .list();
 		return champList;
+	}
+
+	@Transactional
+	@Override
+	public void supprimerChampCategorie(int catId) {
+		List<Champ> listeChamp = getListByCat(catId);
+		if(listeChamp!=null)
+			for(Champ c : listeChamp)
+				deleteRow(c.getId());
 	}
 
 }

@@ -11,13 +11,13 @@
 <script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
 
 
-<title>Liste des utilisateurs</title>
+<title>Administration des rôles</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 
 <div class="row">
-	<h2>Administration des utilisateurs</h2>
+	<h2>Administration des rôles</h2>
 	<c:if test="${!empty nbAdminInsuffisant}">
 		<div data-alert class="alert-box alert">
 			Vous ne pouvez pas changer le statut d'un administrateur lorsqu'il
@@ -34,7 +34,7 @@
 	</c:if>
 	<div class="panel radius">
 	<form:form modelAttribute="newUser" method="post" action="/lille1community/administration/nouveauStatut">
-		<h4>Modifier les droits d'un utilisateur</h4>
+		<h4>Ajouter un utilisateur</h4>
 		
 		<div>
 			<form:input path="mailLille1" placeholder="Mail de l'utilisateur" />
@@ -46,7 +46,7 @@
 			</form:select>
 		</div>
 		<div>
-			<input class="button" type="submit" value="Modifier" />
+			<input class="button success" type="submit" value="Modifier" />
 		</div>		
 	</form:form>
 	
@@ -57,7 +57,7 @@
 		width="100%">
 		<thead>
 			<tr>
-				<th>Pr&eacutenom</th>
+				<th>Prénom</th>
 				<th>Nom</th>
 				<th>Mail</th>
 				<th>Statut</th>
