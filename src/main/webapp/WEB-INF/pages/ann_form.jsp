@@ -183,12 +183,16 @@
 													.getElementById("SecondeAdresseMail").innerHTML = "";
 										});
 						$(function() {
-							$("#datepicker").datepicker(
-									$.datepicker.regional['fr']);
+							$.datepicker.setDefaults($.datepicker.regional['fr'] );
+							
+							$("#datepicker").datepicker({
+									minDate: '+1D', 
+									maxDate: '+${duree_vie_ann}D'
+								});
 						});
 						
 						$('.datepick').each(function(){
-						    $(this).datepicker($.datepicker.regional['fr']);
+						    $(this).datepicker({minDate: '+0D'});
 						});
 					});
 </script>

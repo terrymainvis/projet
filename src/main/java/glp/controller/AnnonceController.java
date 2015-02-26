@@ -95,6 +95,7 @@ public class AnnonceController {
 			Map<String, Object> myModel = new HashMap<String, Object>();
 			myModel.put("annform", annform);
 			myModel.put("utilisateur", utilisateurService.getUserInSession());
+			myModel.put("duree_vie_ann", annonceService.getStats().getNb_jours_fin_annonce());
 
 			return new ModelAndView("ann_form", myModel);
 		}
