@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import glp.domain.Forum;
@@ -46,6 +47,24 @@ public class SignalisationController {
 //		myModel.put("listForum", listForum);
 //		return new ModelAndView("signal_form", myModel);
 //	}
+	
+	@RequestMapping("newModal/{id}")//@ModelAttribute Signalisation signal
+	public ModelAndView getsignalForm(@PathVariable("id") int id,HttpServletRequest request){
+		System.out.println("idididdidididdididididididid"+id);
+		String motif = request.getParameter("motif");
+		Forum forum = forumService.getRowById(id);
+		Signalisation signal = new Signalisation(motif, forum);
+		//signal.setForum(forum);
+		//System.out.println(signal.getforum().getId());
+//		Map<String, Object> myModel = new HashMap<String, Object>();
+//		myModel.put("signal", signal);
+//		myModel.put("forum", forum);
+		signalService.insertRow(signal);
+		forum.setSignalements(forum.getSignalements() + 1);
+		forumService.updateRow(forum);
+		return new ModelAndView("redirect:/forum/"+id+"?estSignalee=true");
+	}
+	//pour signal sans modal
 	@RequestMapping("new/{id}")//@ModelAttribute Signalisation signal
 	public ModelAndView getsignalForm(@PathVariable("id") int id){
 		System.out.println("idididdidididdididididididid"+id);

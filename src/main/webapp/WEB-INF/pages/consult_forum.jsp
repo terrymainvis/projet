@@ -32,9 +32,13 @@
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
+	
 	<div class="row">
 		<div class="large-10 columns">
 			<div class="panel">
+			<c:if test="${ !empty param[' estSignale ']}">
+		ce témoignage a été bien signalé.
+	</c:if>
 
 				<div   class="row" style="text-align: center">
 					<!-- <div class="large-10 columns"> -->
@@ -62,7 +66,7 @@
          								   value="${forum.date_pub }"/> </p>
 								</div> 
 									
-								<!-- </div> -->
+								<!-- </div> --> 
 							</li>
 							
 						</ul>
@@ -74,38 +78,37 @@
 		 <div class="small-5 columns">
 				<a href="<c:url value='/signalisation/new/${forum.id}' />"
 				class="button round">signaler</a>
+				<a href="#" class="button alert" id="modalLauncher">signaler</a>
+						
 		</div> 
+		<div id="myModal" class="reveal-modal" data-reveal>
+		<h2 style="text-align: center">Entrez le motif de cette signalisation !!</h2>
+		<br />
+	  <form method="get" action="<c:url value='/signalisation/newModal/${forum.id}' />">
+	  	<div style="text-align: center">
+	  	 	 ${forum.titre } 
+	  	</div>
+	  	<div class="large-12 columns" >
+	  		<input placeholder="Motif" name="motif" type="text"/>
+	  	</div>
+	  		<br /> 
+	  	
+	  		<br/>
+	  	<div>
+	  		<input class="button" type="submit" value="Envoyer"/>
+	  	</div>
+	  </form>
+	    <a href="#" class="close-reveal-modal" id="closeModal">&#215;</a>
+	</div>
 		
-		<!-- ajoute le modal ici cccccccccccccc-->
-		<a href="#" class="button alert" id="modalLauncher">signaler</a>
-		<form:form id="addsignal" command="signal" method="post" action="">	
-			<div id="myModal" class="reveal-modal">
-			    <h2 style="text-align: center">Refus de l'annonce</h2>
-			    <br />
-			    <div class="large-12 columns" >
-			         <input path="desc" placeholder="Motif" id="motif" type="text"/> 
-			    </div>
-			    <br />
-			    <div style="text-align: center">
-			      
-			    </div>
-			    <br/>
-			    <div>
-			        <input class="button" type="submit" value="Envoyer"/>
-			    </div>
-			    <a class="close-reveal-modal">&#215;</a>
-			</div>
-		</form:form>
-		<!-- ajoute le modalFIN MODAL cccccccccccccc-->
 	</div>
 	
-	<!--ajoute le script ici  -->
-	<script type="text/javascript">
-    $("#modalLauncher").click(function (e) {
-    $('#myModal').foundation('reveal', 'open');
-    });
-</script>
-	
 </body>
+<script type="text/javascript">
+		$("#modalLauncher").click(function (e) {
+		    $('#myModal').foundation('reveal', 'open');
+		    $('[data-reveal]').foundation('reveal','close')
+		});
 
+	</script>
 </html>

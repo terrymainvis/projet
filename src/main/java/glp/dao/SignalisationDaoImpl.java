@@ -23,7 +23,7 @@ public class SignalisationDaoImpl implements SignalisationDao{
 	@Override
 	public int insertRow(Signalisation signal) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(signal);
+		session.save(signal);
 		Serializable id = session.getIdentifier(signal);
 		return (Integer) id;
 	}
