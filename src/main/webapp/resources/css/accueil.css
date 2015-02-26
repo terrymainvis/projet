@@ -20,3 +20,7 @@ button, .button {
 	background-color: #ae2573 !important;
 	border-color: #ae2573 !important;
 }
+
+label > select {
+    width: 35%!important;
+}

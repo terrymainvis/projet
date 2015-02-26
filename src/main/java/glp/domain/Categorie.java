@@ -72,7 +72,9 @@ public class Categorie {
 		this.champs = champs;
 	}
 	
-	
+	public void addChamp(Champ champ) {
+		this.champs.add(champ);
+	}
 	
 
 }

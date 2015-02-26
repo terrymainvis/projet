@@ -49,6 +49,13 @@ public class Champ {
 		this.type = type;
 		this.requis = requis;
 	}
+	public Champ( String nom, Categorie cat, TypeChampEnum type, boolean requis) {
+		super();
+		this.nom = nom;
+		this.cat = cat;
+		this.type = type;
+		this.requis = requis;
+	}
 
 	public int getId() {
 		return id;

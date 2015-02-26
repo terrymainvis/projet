@@ -127,18 +127,6 @@ public class AnnonceController {
 	@RequestMapping(value = "new/addAnn", method = RequestMethod.GET)
 	public ModelAndView addAnnonce(@ModelAttribute("annform") /*@Valid*/ AnnonceForm annform/*, BindingResult bindingResult*/) {
 
-//		if (bindingResult.hasErrors()) {
-//			Utilisateur utilisateur = utilisateurService.getUserInSession();
-//			List<Categorie> catList = categorieService.getList();
-//			Map<String, Object> myModel = new HashMap<String, Object>();
-//			myModel.put("catList", catList);
-//			myModel.put("utilisateur", utilisateur);
-//			System.out.println(bindingResult.getFieldErrorCount());
-//			System.out.println("TEST OK YA DES ERREURS");
-//			return new ModelAndView("ann_form", myModel);
-//		}
-
-//		else {
 			Annonce ann_tmp = annform.getAnnonce();
 
 			ann_tmp.setAuteur(utilisateurService.getUserInSession());		
@@ -151,7 +139,6 @@ public class AnnonceController {
 			}
 		
 			return new ModelAndView("redirect:/");
-//		}
 	}
 	
 
@@ -213,8 +200,7 @@ public class AnnonceController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getAnnList() {
-		List<Annonce> annList = annonceService
-				.getListByCatName("PetitesAnnonces");
+		List<Annonce> annList = annonceService.getListByCat(categorieService.getIdByLib("Petite annonce"));
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);
@@ -225,7 +211,7 @@ public class AnnonceController {
 
 	@RequestMapping(value = "listCov", method = RequestMethod.GET)
 	public ModelAndView getCovList() {
-		List<Annonce> covList = annonceService.getListByCatName("Covoiturage");
+		List<Annonce> covList = annonceService.getListByCat(categorieService.getIdByLib("Covoiturage"));
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", covList);

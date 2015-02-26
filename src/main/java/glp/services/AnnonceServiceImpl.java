@@ -63,11 +63,6 @@ public class AnnonceServiceImpl implements AnnonceService {
 		return annonceDao.getListByCat(catId);
 	}
 
-	@Override
-	@Transactional
-	public List<Annonce> getListByCatName(String catName) {
-		return annonceDao.getListByCatName(catName);
-	}
 
 	@Override
 	@Transactional

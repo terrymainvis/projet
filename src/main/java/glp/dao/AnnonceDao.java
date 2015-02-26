@@ -18,9 +18,7 @@ public interface AnnonceDao {
 	public int deleteRow(int id);
 
 	public List<Annonce> getListByCat(int catId);
-	
-	public List<Annonce> getListByCatName(String catName);
-	
+		
 	public List<Annonce> getListRecent(int catId);
 
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle);

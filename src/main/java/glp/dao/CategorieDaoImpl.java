@@ -2,13 +2,15 @@ package glp.dao;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
+import glp.domain.Champ;
+import glp.domain.TypeChampEnum;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -23,6 +25,12 @@ public class CategorieDaoImpl implements CategorieDao {
 	
 	@Override
 	public int insertRow(Categorie cat) {
+		List<Champ> listChamps = new ArrayList<Champ>();
+		listChamps.add(new Champ("Titre", cat, TypeChampEnum.TEXTE, true));
+		listChamps.add(new Champ("Description", cat, TypeChampEnum.DESCRIPTION, true));
+		listChamps.add(new Champ("Date fin", cat, TypeChampEnum.DATE, true));
+		listChamps.addAll(cat.getChamps());
+		cat.setChamps(listChamps);
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(cat);
 		Serializable id = session.getIdentifier(cat);

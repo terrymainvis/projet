@@ -9,12 +9,16 @@
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/foundation.min.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />	">
-<%-- <link rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables.css" />"> --%>
 <link rel="stylesheet" href="<c:url value="/resources/css/flag.css" />	">
+<link rel="stylesheet"
+	href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 <script src="<c:url value="/resources/js/lang.js" />"></script>
+
+<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js" /></script>
+
 
 <div id="wrapper">
 	<div id="header-wrapper">
@@ -67,17 +71,20 @@
 					test="${(not empty utilisateur.roles['ADMINISTRATEUR']) || (not empty utilisateur.roles['UTILISATEUR'])}">
 					<li class="has-dropdown"><a href="#">Administration</a>
 						<ul class="dropdown">
-							 <li><a href="<c:url value="/administration/list"/>">Admin. des rôles</a></li>
-							  <li><a href="<c:url value="/administration/listCategories"/>">Admin. des catégories</a></li>
-							 <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
-						</ul>
-					</li>
-				  </c:when>
-				  <c:when test="${not empty utilisateur.roles['MODERATEUR']}">
-				    <li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
-				  </c:when>
-				</c:choose>
-			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message code="header.monCompte"></spring:message></a></li>
+							<li><a href="<c:url value="/administration/list"/>">Admin.
+									des rôles</a></li>
+							<li><a
+								href="<c:url value="/administration/listCategories"/>">Admin.
+									des catégories</a></li>
+							<li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
+						</ul></li>
+				</c:when>
+				<c:when test="${not empty utilisateur.roles['MODERATEUR']}">
+					<li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
+				</c:when>
+			</c:choose>
+			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message
+						code="header.monCompte"></spring:message></a></li>
 
 			<li class="has-dropdown"><a href="#"><spring:message
 						code="header.covoiturage"></spring:message></a>
@@ -138,26 +145,27 @@
 </div>
 
 <script type="text/javascript">
-		$(document).ready(function() {
-			//user hovers on the social button  
-			$('#share-wrapper li').hover(function() {
-				var hoverEl = $(this); //get element
+	$(document).ready(function() {
+		//user hovers on the social button  
+		$('#share-wrapper li').hover(function() {
+			var hoverEl = $(this); //get element
 
-				//browsers with width > 699 get button slide effect
-				if ($(window).width() > 699) {
-					if (hoverEl.hasClass('visible')) {
-						hoverEl.animate({
-							"margin-left" : "-110px"
-						}, "fast").removeClass('visible');
-					} else {
-						hoverEl.animate({
-							"margin-left" : "0px"
-						}, "fast").addClass('visible');
-					}
+			//browsers with width > 699 get button slide effect
+			if ($(window).width() > 699) {
+				if (hoverEl.hasClass('visible')) {
+					hoverEl.animate({
+						"margin-left" : "-110px"
+					}, "fast").removeClass('visible');
+				} else {
+					hoverEl.animate({
+						"margin-left" : "0px"
+					}, "fast").addClass('visible');
 				}
-			});
+			}
 		});
-	</script>
+	});
+</script>
 <script>
+
 	$(document).foundation();
 </script>

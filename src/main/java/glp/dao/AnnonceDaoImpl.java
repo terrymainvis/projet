@@ -123,39 +123,6 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		return annonceList;
 	}
 
-	@Override
-	public List<Annonce> getListByCatName(String catName) {
-		Session session = sessionFactory.getCurrentSession();
-		if (catName.compareToIgnoreCase("Covoiturage") == 0
-				|| catName.compareToIgnoreCase("Job") == 0) {
-			@SuppressWarnings("unchecked")
-			List<Annonce> annonceList = session
-					.createCriteria(Annonce.class)
-					.add(Restrictions.in(
-							"categorie",
-							session.createCriteria(Categorie.class)
-									.add(Restrictions.eq("lib", catName))
-									.list())).list();
-			return annonceList;
-		} else {
-			@SuppressWarnings("unchecked")
-			List<Annonce> annonceList = session
-					.createCriteria(Annonce.class)
-					.add(Restrictions.not(Restrictions.or(Restrictions.in(
-							"categorie",
-							session.createCriteria(Categorie.class)
-									.add(Restrictions.eq("lib", "Covoiturage"))
-									.list()),
-							Restrictions
-									.in("categorie",
-											session.createCriteria(
-													Categorie.class)
-													.add(Restrictions.eq("lib",
-															"Jobs")).list()))))
-					.list();
-			return annonceList;
-		}
-	}
 
 	@Override
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle) {
