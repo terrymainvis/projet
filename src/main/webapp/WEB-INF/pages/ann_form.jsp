@@ -72,6 +72,17 @@
 									</c:if>	
 								</c:when>
 								
+								<c:when test='${cc.champ.type == "DATE"}'>
+								
+									<c:if test="${cc.champ.requis}">
+										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="text" class="datepick" required="required" />	
+									</c:if>
+									
+									<c:if test="${!cc.champ.requis}">
+										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="text" class="datepick" />			
+									</c:if>	
+								</c:when>
+								
 								<c:when test='${cc.champ.type == "DESCRIPTION"}'>
 									<c:if test="${cc.champ.requis}">
 										<form:textarea path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }" required="required" />	
@@ -94,7 +105,6 @@
 							</c:choose>		
 						</div>
 					</c:forEach>
-					
 					
 					<div>
 						<input class="button" type="submit" value="Ajouter" />
@@ -146,7 +156,6 @@
 	$(document)
 			.ready(
 					function() {
-
 						var frm = $('#updateUtiForm');
 						frm.submit(function(ev) {
 							$.ajax({
@@ -156,10 +165,8 @@
 								success : function(data) {
 								}
 							});
-
 							ev.preventDefault();
 						});
-
 						$('#autreMail')
 								.click(
 										function() {
@@ -175,12 +182,14 @@
 											document
 													.getElementById("SecondeAdresseMail").innerHTML = "";
 										});
-
 						$(function() {
 							$("#datepicker").datepicker(
 									$.datepicker.regional['fr']);
 						});
-
+						
+						$('.datepick').each(function(){
+						    $(this).datepicker($.datepicker.regional['fr']);
+						});
 					});
 </script>
 <script type="text/javascript">
