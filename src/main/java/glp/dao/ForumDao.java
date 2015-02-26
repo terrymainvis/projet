@@ -22,5 +22,7 @@ public int insertRow(Forum forum);
 	public void supprimerForumUtilisateur(Utilisateur u);
 	
 	public List<Forum> getListByUtilisateur(Utilisateur u);
+	
+	public void incrementNbForumsCrees();
 
 }

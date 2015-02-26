@@ -20,6 +20,8 @@ public interface JobDao {
 	public void supprimerJobUtilisateur(Utilisateur u);
 	
 	public List<Job> getListByUtilisateur(Utilisateur u);
+	
+	public void incrementNbJobsCrees();
 
 
 }

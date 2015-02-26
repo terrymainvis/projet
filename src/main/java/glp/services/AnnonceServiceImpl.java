@@ -3,6 +3,7 @@ package glp.services;
 import glp.dao.AnnonceDao;
 import glp.dao.CategorieDao;
 import glp.domain.Annonce;
+import glp.domain.Stats;
 import glp.domain.Utilisateur;
 
 import java.text.DateFormat;
@@ -146,12 +147,12 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Transactional
 	public List<Annonce> getListByUtilisateur(Utilisateur u) {
 		return annonceDao.getListByUtilisateur(u);
-	}
+	}	
 
 	@Override
 	@Transactional
-	public int nbAnnCrees() {
-		return annonceDao.getNbAnnCrees();
+	public Stats getStats() {
+		return annonceDao.getStats();
 	}
 
 }

@@ -200,24 +200,10 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	public void incrementNbAnnCrees() {
 		Session session = sessionFactory.getCurrentSession();
 		
-		int nb_ann_crees = this.getNbAnnCrees();
-
-		Query query;
-		if (nb_ann_crees <= 0) {
-			Stats stat = new Stats(1, new Date(), 1);
-			/*query = session
-					.createQuery("INSERT INTO Stats(stats_nb_ann_crees) VALUES(1)");
-			query.executeUpdate();*/
-			session.saveOrUpdate(stat);
-		}
-
-		else {
-			query = session
+		Query query = session
 					.createQuery(
-							"UPDATE Stats SET stats_nb_ann_crees=stats_nb_ann_crees+1 where stats_nb_ann_crees= :nba")
-					.setParameter("nba", nb_ann_crees);
+							"UPDATE Stats SET stats_nb_ann_crees=stats_nb_ann_crees+1");
 			query.executeUpdate();
-		}
 	}
 
 	@Override
@@ -232,4 +218,11 @@ public class AnnonceDaoImpl implements AnnonceDao {
 			return (Integer) query.uniqueResult();
 	}
 
+	@Override
+	public Stats getStats() {
+		Session session = sessionFactory.getCurrentSession();
+		Stats stat = (Stats) session.createCriteria(Stats.class)
+				.add(Restrictions.idEq(1)).uniqueResult();
+		return stat;
+	}	
 }

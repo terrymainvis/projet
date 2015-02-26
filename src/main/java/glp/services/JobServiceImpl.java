@@ -42,6 +42,7 @@ public class JobServiceImpl implements JobService{
 	@Override
 	@Transactional
 	public int insertRow(Job job) {
+		jobDao.incrementNbJobsCrees();
 		return jobDao.insertRow(job);
 		
 	}

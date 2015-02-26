@@ -1,6 +1,7 @@
 package glp.dao;
 
 import glp.domain.Annonce;
+import glp.domain.Stats;
 import glp.domain.Utilisateur;
 
 import java.util.List;
@@ -41,5 +42,5 @@ public interface AnnonceDao {
 	
 	public int getNbAnnCrees();
 	
-
+	public Stats getStats();
 }

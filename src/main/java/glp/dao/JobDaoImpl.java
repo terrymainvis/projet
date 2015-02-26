@@ -86,4 +86,14 @@ public class JobDaoImpl implements JobDao{
 		        .list();
 		return jobList;
 	}
+
+	@Override
+	public void incrementNbJobsCrees() {		
+		Session session = sessionFactory.getCurrentSession();
+		
+		Query query = session
+					.createQuery(
+							"UPDATE Stats SET stats_nb_jobs_crees=stats_nb_jobs_crees+1");
+			query.executeUpdate();
+	}
 }

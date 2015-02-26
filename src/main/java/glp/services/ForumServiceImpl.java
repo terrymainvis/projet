@@ -21,7 +21,7 @@ public class ForumServiceImpl implements ForumService{
 	@Override
 	@Transactional
 	public int insertRow(Forum forum) {
-		// TODO Auto-generated method stub
+		forumDao.incrementNbForumsCrees();
 		return forumDao.insertRow(forum);
 	}
 

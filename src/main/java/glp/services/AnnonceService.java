@@ -1,6 +1,7 @@
 package glp.services;
 
 import glp.domain.Annonce;
+import glp.domain.Stats;
 import glp.domain.Utilisateur;
 
 import java.util.List;
@@ -41,5 +42,5 @@ public interface AnnonceService {
 	
 	public List<Annonce> getListByUtilisateur(Utilisateur u);
 	
-	public int nbAnnCrees();
+	public Stats getStats();
 }

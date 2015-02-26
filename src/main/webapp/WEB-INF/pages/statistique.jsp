@@ -54,16 +54,24 @@
 			
 
 					<table id=stat class="display">
-						<tr>
-							
+						<tr>							
 							<td width="300" height="80" colspan="2">Nombre d'utilisateurs </td>
 							<td width="300" height="80" colspan="2">${nbUser}</td>
 						</tr>
-						<tr>
-							
-							<td width="300" height="80" colspan="2">Nombre d'annonces créés </td>
-							<td width="300" height="80" colspan="2">${nbAnnCrees}</td>
-						</tr>
+						<c:if test="${!empty stats}">
+							<tr>								
+								<td width="300" height="80" colspan="2">Nombre d'annonces créés </td>
+								<td width="300" height="80" colspan="2">${stats.stats_nb_ann_crees}</td>
+							</tr>
+							<tr>								
+								<td width="300" height="80" colspan="2">Nombre de jobs créés </td>
+								<td width="300" height="80" colspan="2">${stats.stats_nb_jobs_crees}</td>
+							</tr>
+							<tr>								
+								<td width="300" height="80" colspan="2">Nombre de forums créés </td>
+								<td width="300" height="80" colspan="2">${stats.stats_nb_forums_crees}</td>
+							</tr>
+						</c:if>
 						<tr>
 							<td width="300" height="80" colspan="2">Nombre d'annonces en ligne</td>
 							<td width="300" height="80" colspan="2">${nbAnnonceEnligne}</td>

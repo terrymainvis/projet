@@ -19,41 +19,92 @@ public class Stats {
 	@Column(name = "stats_nb_ann_crees")
 	private int stats_nb_ann_crees;
 	
+	@Column(name="nb_jours_fin_annonce")
+	private int nb_jours_fin_annonce;
 	
+	@Column(name="stats_nb_jobs_crees")
+	private int stats_nb_jobs_crees;
+	
+	@Column(name="stats_nb_forums_crees")
+	private int stats_nb_forums_crees;
 
 	public Stats() {
 		super();
 	}
 
-	public Stats(int id, Date date, int nb_ann_crees) {
+	
+	public Stats(int stats_id, Date stats_date, int stats_nb_ann_crees,
+			int nb_jours_fin_annonce, int stats_nb_jobs_crees,
+			int stats_nb_forums_crees) {
 		super();
-		this.stats_date = date;
-		this.stats_nb_ann_crees = nb_ann_crees;
-		this.stats_id = id;
+		this.stats_id = stats_id;
+		this.stats_date = stats_date;
+		this.stats_nb_ann_crees = stats_nb_ann_crees;
+		this.nb_jours_fin_annonce = nb_jours_fin_annonce;
+		this.stats_nb_jobs_crees = stats_nb_jobs_crees;
+		this.stats_nb_forums_crees = stats_nb_forums_crees;
 	}
 
-	public Date getDate() {
-		return stats_date;
-	}
 
-	public void setDate(Date date) {
-		this.stats_date = date;
-	}
-
-	public int getNb_ann_crees() {
-		return stats_nb_ann_crees;
-	}
-
-	public void setNb_ann_crees(int nb_ann_crees) {
-		this.stats_nb_ann_crees = nb_ann_crees;
-	}
-
-	public int getId() {
+	public int getStats_id() {
 		return stats_id;
 	}
 
-	public void setId(int id) {
-		this.stats_id = id;
+
+	public void setStats_id(int stats_id) {
+		this.stats_id = stats_id;
 	}
+
+
+	public Date getStats_date() {
+		return stats_date;
+	}
+
+
+	public void setStats_date(Date stats_date) {
+		this.stats_date = stats_date;
+	}
+
+
+	public int getStats_nb_ann_crees() {
+		return stats_nb_ann_crees;
+	}
+
+
+	public void setStats_nb_ann_crees(int stats_nb_ann_crees) {
+		this.stats_nb_ann_crees = stats_nb_ann_crees;
+	}
+
+
+	public int getNb_jours_fin_annonce() {
+		return nb_jours_fin_annonce;
+	}
+
+
+	public void setNb_jours_fin_annonce(int nb_jours_fin_annonce) {
+		this.nb_jours_fin_annonce = nb_jours_fin_annonce;
+	}
+
+
+	public int getStats_nb_jobs_crees() {
+		return stats_nb_jobs_crees;
+	}
+
+
+	public void setStats_nb_jobs_crees(int stats_nb_jobs_crees) {
+		this.stats_nb_jobs_crees = stats_nb_jobs_crees;
+	}
+
+
+	public int getStats_nb_forums_crees() {
+		return stats_nb_forums_crees;
+	}
+
+
+	public void setStats_nb_forums_crees(int stats_nb_forums_crees) {
+		this.stats_nb_forums_crees = stats_nb_forums_crees;
+	}
+	
+	
 
 }
