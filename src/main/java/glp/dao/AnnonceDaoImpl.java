@@ -123,7 +123,6 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		return annonceList;
 	}
 
-
 	@Override
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle) {
 		Session session = sessionFactory.getCurrentSession();
@@ -199,11 +198,10 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	@Override
 	public void incrementNbAnnCrees() {
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		Query query = session
-					.createQuery(
-							"UPDATE Stats SET stats_nb_ann_crees=stats_nb_ann_crees+1");
-			query.executeUpdate();
+				.createQuery("UPDATE Stats SET stats_nb_ann_crees=stats_nb_ann_crees+1");
+		query.executeUpdate();
 	}
 
 	@Override
@@ -224,5 +222,14 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		Stats stat = (Stats) session.createCriteria(Stats.class)
 				.add(Restrictions.idEq(1)).uniqueResult();
 		return stat;
-	}	
+	}
+
+	@Override
+	public void setDureeVieAnnonce(int duree_vie) {
+		Session session = sessionFactory.getCurrentSession();
+
+		Query query = session
+				.createQuery("UPDATE Stats SET nb_jours_fin_annonce= :duree_vie").setParameter("duree_vie", duree_vie);
+		query.executeUpdate();
+	}
 }

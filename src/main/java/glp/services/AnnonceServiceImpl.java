@@ -155,4 +155,10 @@ public class AnnonceServiceImpl implements AnnonceService {
 		return annonceDao.getStats();
 	}
 
+	@Override
+	@Transactional
+	public void setDureeVieAnnonce(int duree_vie) {
+		annonceDao.setDureeVieAnnonce(duree_vie);
+	}
+
 }

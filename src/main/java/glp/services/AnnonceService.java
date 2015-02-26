@@ -43,4 +43,6 @@ public interface AnnonceService {
 	public List<Annonce> getListByUtilisateur(Utilisateur u);
 	
 	public Stats getStats();
+	
+	public void setDureeVieAnnonce(int duree_vie);
 }

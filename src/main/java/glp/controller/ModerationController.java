@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -97,5 +98,9 @@ public class ModerationController {
 		return new ModelAndView("statistique", myModel);
 	}
 	
-
+	@RequestMapping(value="setDureeVieAnn", method=RequestMethod.GET)
+	public ModelAndView setDureeVieAnnonce(@RequestParam("duree_vie") int duree_vie_ann) {
+		annonceService.setDureeVieAnnonce(duree_vie_ann);
+		return afficheStatistique();
+	}
 }

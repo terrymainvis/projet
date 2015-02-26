@@ -33,11 +33,10 @@
 	width: 200px;
 }
 
-<style type="text/css"> 
-  td { 
-    word-wrap: break-word; 
-  } 
-
+<
+style type ="text/css">td {
+	word-wrap: break-word;
+}
 </style>
 <title>Statistiques</title>
 </head>
@@ -51,49 +50,66 @@
 
 				<b><b>Statistiques</b></b><br> <br>
 
-			
 
-					<table id=stat class="display">
-						<tr>							
-							<td width="300" height="80" colspan="2">Nombre d'utilisateurs </td>
-							<td width="300" height="80" colspan="2">${nbUser}</td>
-						</tr>
-						<c:if test="${!empty stats}">
-							<tr>								
-								<td width="300" height="80" colspan="2">Nombre d'annonces créées </td>
-								<td width="300" height="80" colspan="2">${stats.stats_nb_ann_crees}</td>
-							</tr>
-							<tr>								
-								<td width="300" height="80" colspan="2">Nombre de jobs créés </td>
-								<td width="300" height="80" colspan="2">${stats.stats_nb_jobs_crees}</td>
-							</tr>
-							<tr>								
-								<td width="300" height="80" colspan="2">Nombre de forums créés </td>
-								<td width="300" height="80" colspan="2">${stats.stats_nb_forums_crees}</td>
-							</tr>
-						</c:if>
+
+				<table id=stat class="display">
+					<tr>
+						<td width="300" height="80" colspan="2">Nombre d'utilisateurs
+						</td>
+						<td width="300" height="80" colspan="2">${nbUser}</td>
+					</tr>
+					<c:if test="${!empty stats}">
 						<tr>
-							<td width="300" height="80" colspan="2">Nombre d'annonces en ligne</td>
-							<td width="300" height="80" colspan="2">${nbAnnonceEnligne}</td>
+							<td width="300" height="80" colspan="2">Nombre d'annonces
+								créées</td>
+							<td width="300" height="80" colspan="2">${stats.stats_nb_ann_crees}</td>
 						</tr>
+						<tr>
+							<td width="300" height="80" colspan="2">Nombre de jobs créés
+							</td>
+							<td width="300" height="80" colspan="2">${stats.stats_nb_jobs_crees}</td>
+						</tr>
+						<tr>
+							<td width="300" height="80" colspan="2">Nombre de forums
+								créés</td>
+							<td width="300" height="80" colspan="2">${stats.stats_nb_forums_crees}</td>
+						</tr>
+					</c:if>
+					<tr>
+						<td width="300" height="80" colspan="2">Nombre d'annonces en
+							ligne</td>
+						<td width="300" height="80" colspan="2">${nbAnnonceEnligne}</td>
+					</tr>
 
-						<c:if test="${!empty annonceByCat}">
-							<c:forEach items="${annonceByCat}" var="ann">
-								<tr>
+					<c:if test="${!empty annonceByCat}">
+						<c:forEach items="${annonceByCat}" var="ann">
+							<tr>
 
-									<td width="300" height="80" colspan="2">nombre d'annonces "${ann.key}"</td>
-									<td width="300" height="80" colspan="2">${ann.value}</td>
-								</tr>
+								<td width="300" height="80" colspan="2">nombre d'annonces
+									"${ann.key}"</td>
+								<td width="300" height="80" colspan="2">${ann.value}</td>
+							</tr>
 
-								<br>
-							</c:forEach>
-						
-							</c:if>
-							</table>
-							</div>
-							</div>
-							
-							</div>
-							
+							<br>
+						</c:forEach>
+
+					</c:if>
+				</table>
+			</div>
+		</div>
+		
+		<div class="large-6 columns">
+			<div class="panel" style="text-align: center">
+				<h3>Changer la durée de vie d'une annonce</h3>
+				<br/>
+				<form action="moderation/setDureeVieAnn" action="get">
+					<input type="number" name="duree_vie" placeholder="Durée de vie (en jours)" required="required"/>
+					<input class="button" type="submit" value="Changer"/>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
 </body>
 </html>

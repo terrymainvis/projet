@@ -43,4 +43,6 @@ public interface AnnonceDao {
 	public int getNbAnnCrees();
 	
 	public Stats getStats();
+	
+	public void setDureeVieAnnonce(int duree_vie);
 }
