@@ -19,23 +19,25 @@
 				<img src="<c:url value="/resources/img/carpool.jpg" />">
 			</div>
 			<div class="large-6 columns">
-				<h4>Rendez vos trajets habituels moins solitaires</h4>
+				<h4 style="text-align:center"><spring:message code="index.covoiturageTitre"></spring:message></h4>
 				<div class="row">
 					<div class="large-6 columns">
-						<p>En covoiturant ensemble, allez en fac en économisant le
-							coût de vos trajets ainsi qu'en faisant de nouvelles rencontres.</p>
+						<p><spring:message code="index.covoiturageProposeDesc"></spring:message></p>
 					</div>
 					<div class="large-6 columns">
-						<p>Marre des transports en commun ? Trouvez un conducteur près de chez vous !</p>
-
+						<p><spring:message code="index.covoiturageChercheDesc"></spring:message></p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/demande/listCov" class="button small">Proposez un covoiturage</a>
+						<a href="/lille1community/annonce/demande/listCov" class="button small">
+							<spring:message code="index.covoiturageProposeBouton"></spring:message>
+						</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/propose/listCov" class="button small">Chercher un covoiturage</a>
+						<a href="/lille1community/annonce/propose/listCov" class="button small">
+							<spring:message code="index.covoiturageChercheBouton"></spring:message>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -51,28 +53,25 @@
 					src="<c:url value="/resources/img/cuisine.jpg" />">
 			</div>
 			<div class="large-6 columns">
-				<h4>Rendez-vous service mutuellement</h4>
+				<h4 style="text-align:center"><spring:message code="index.annoncesTitre"></spring:message></h4>
 				<div class="row">
 					<div class="large-6 columns">
-						<p>Vous êtes un crack en mathématiques mais avez besoin d'aide
-							en sociologie ? Proposez votre aide tout en cherchant une personne
-							pouvant vous rendre service à son tour.</p>
+						<p><spring:message code="index.annoncesProposeDesc"></spring:message></p>
 					</div>
 					<div class="large-6 columns">
-						<p>Vous cuisinez toujours pour deux plus de personne que
-							prévu, partagez vos talents culinaires avec vos voisins de
-							résidence ! Vous avez du petit bricolage à faire mais vous n'avez pas
-							les outils ? Quelqu'un dans la communauté Lille 1 pourra vous
-							dépanner. </p>
-
+						<p><spring:message code="index.annoncesChercheDesc"></spring:message></p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/demande/list" class="button small">Proposez vos services</a>
+						<a href="/lille1community/annonce/demande/list" class="button small">
+							<spring:message code="index.annoncesProposeBouton"></spring:message>
+						</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/propose/list" class="button small">Demandez de l'aide</a>
+						<a href="/lille1community/annonce/propose/list" class="button small">
+							<spring:message code="index.annoncesChercheBouton"></spring:message>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -86,27 +85,25 @@
 				<img src="<c:url value="/resources/img/voyage.jpg" />">
 			</div>
 			<div class="large-6 columns">
-				<h4>Partagez votre expérience</h4>
+				<h4 style="text-align:center"><spring:message code="index.experiencesTitre"></spring:message></h4>
 				<div class="row">
 					<div class="large-6 columns">
-						<p>Vous envisagez en semestre à l'étranger ? Un stage au
-							sommet du Mont Blanc ? Profitez de l'expérience des personnes de
-							la communité Lille 1.</p>
+						<p><spring:message code="index.experiencesDecouvreDesc"></spring:message></p>
 					</div>
 					<div class="large-6 columns">
-						<p>De retour d'une expérience extraordinaire ? Venez en
-							parler afin de donner envie à d'autres
-							personnes de suivre vos pas.</p>
-
+						<p><spring:message code="index.experiencesRaconteDesc"></spring:message></p>
 					</div>
 				</div>
 				<div class="row">					
 					<div class="large-6 columns">
-						<a href="<c:url value="/forum/list" />" class="button small">Découvrir d'extraordinaires
-							expériences</a>
+						<a href="<c:url value="/forum/list" />" class="button small">
+							<spring:message code="index.experiencesDecouvreBouton"></spring:message>
+						</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="<c:url value="/forum/new"/>" class="button small">Racontez votre histoire</a>
+						<a href="<c:url value="/forum/new"/>" class="button small">
+							<spring:message code="index.experiencesRaconteBouton"></spring:message>
+						</a>
 					</div>
 				</div>
 			</div>

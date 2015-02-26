@@ -12,7 +12,7 @@
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 	<div class=" large-offset-3 large-6 colums panel">
-		<h2>Nouvelle annonce</h2>
+		<h2 style="text-align:center"><spring:message code="annFormSelectCat.nouvelleAnnonce"></spring:message></h2>
 		
 		<!-- l'action dirige vers la fonction annonce/new/form -->
 		<form:form id="catchoice" modelAttribute="annform" method="get"
@@ -20,7 +20,7 @@
 		
 			<form:input type="hidden" path="annonce.type" value="${annonce.type }" />
 			<div>
-				<h4>Choisissez d'abord la catégorie de votre annonce</h4><br/>
+				<h4 style="text-align:center"><spring:message code="annFormSelectCat.selection"></spring:message></h4><br/>
 				<form:select path="cat_choisie">					
 					<form:options items="${catList}" itemValue="id" itemLabel="lib" />
 				</form:select>				

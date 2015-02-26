@@ -117,7 +117,9 @@
 			<li><a href="<c:url value="/job/list" />"> <spring:message
 						code="header.Job"></spring:message>
 			</a></li>
-			<li><a href="<c:url value="/forum/list" />">Témoignages</a></li>
+			<li><a href="<c:url value="/forum/list" />"> <spring:message
+						code="header.temoignages"></spring:message>
+			</a></li>
 		</ul>
 		<form action="/lille1community/annonce/recherche" id="formulaireCat">
 			<ul class="right">
@@ -145,7 +147,7 @@
 
 <div id="share-wrapper">
 	<ul class="share-inner-wrp">
-		<li id="flag" class="lang button-wrap"><a onclick="switchLang()"><span>Traduire</span></a></li>
+		<li id="flag" class="lang button-wrap"><a onclick="switchLang()"><span><spring:message code="header.tranduire"></spring:message></span></a></li>
 	</ul>
 </div>
 

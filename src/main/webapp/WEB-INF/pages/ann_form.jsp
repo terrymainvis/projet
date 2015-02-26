@@ -23,12 +23,12 @@
 		<div class="large-8 columns">
 			<div class="panel">
 			
-			<div><i>Catégorie choisie : ${annform.cat_choisie.lib}</i></div>
+			<div><i><spring:message code="annForm.catChoisie"></spring:message> : ${annform.cat_choisie.lib}</i></div>
 			
 			<br/>
 				<form:form id="addAnnForm" modelAttribute="annform" method="get"
 					action="addAnn" enctype="multipart/form-data">
-					<h2>Créez votre annonce !</h2>
+					<h2><spring:message code="annForm.creezAnnonce"></spring:message></h2>
 					
 					<form:input type="hidden" path="annonce.categorie.id" value="${annform.cat_choisie.id }" />
 					
@@ -40,9 +40,9 @@
 					<div>
 						<form:select id="select" path="annonce.type">
 							<form:option value="demande" itemValue="demande"
-								itemLabel="demande" >Je cherche </form:option>
+								itemLabel="demande" ><spring:message code="annForm.chercheAnnonce"></spring:message></form:option>
 							<form:option value="propose" itemValue="propose"
-								itemLabel="propose" >Je propose  </form:option>
+								itemLabel="propose" ><spring:message code="annForm.proposeAnnonce"></spring:message></form:option>
 						</form:select>
 					</div>
 
@@ -115,7 +115,7 @@
 		</div>
 		<div class="large-4 columns">
 			<div class="panel callout radius">
-				<h5>Vos coordonnées</h5>
+				<h5><spring:message code="annForm.coordonnees"></spring:message></h5>
 
 				<form:form id="updateUtiForm" commandName="utilisateur"
 					method="post" action="updateMailUtilisateur">
@@ -126,7 +126,7 @@
 							${current_user.mailLille1} <br>
 							<form:radiobutton path="contactAutreMail" id="autreMail"
 								name="mail" value="true" />
-							Autre adresse mail
+							<spring:message code="annForm.autreMail"></spring:message>
 							<div id="SecondeAdresseMail"></div>
 							<input name="secondMail" class="button small" type="submit"
 								value="Mettre à jour" />
