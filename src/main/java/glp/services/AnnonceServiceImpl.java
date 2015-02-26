@@ -29,6 +29,7 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Override
 	@Transactional
 	public int insertRow(Annonce ann) {
+		annonceDao.incrementNbAnnCrees();
 		return annonceDao.insertRow(ann);
 	}
 
@@ -150,6 +151,12 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Transactional
 	public List<Annonce> getListByUtilisateur(Utilisateur u) {
 		return annonceDao.getListByUtilisateur(u);
+	}
+
+	@Override
+	@Transactional
+	public int nbAnnCrees() {
+		return annonceDao.getNbAnnCrees();
 	}
 
 }

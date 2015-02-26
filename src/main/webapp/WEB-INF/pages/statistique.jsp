@@ -39,7 +39,7 @@
   } 
 
 </style>
-<title>Statistique</title>
+<title>Statistiques</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
@@ -49,18 +49,23 @@
 		<div class="large-6 columns">
 			<div class="panel" style="text-align: center">
 
-				<b><b>Statistique</b></b><br> <br>
+				<b><b>Statistiques</b></b><br> <br>
 
 			
 
 					<table id=stat class="display">
 						<tr>
 							
-							<td width="300" height="80" colspan="2">Nombre d'utilisateur </td>
+							<td width="300" height="80" colspan="2">Nombre d'utilisateurs </td>
 							<td width="300" height="80" colspan="2">${nbUser}</td>
 						</tr>
 						<tr>
-							<td width="300" height="80" colspan="2">Nombre d'annonce en ligne</td>
+							
+							<td width="300" height="80" colspan="2">Nombre d'annonces créés </td>
+							<td width="300" height="80" colspan="2">${nbAnnCrees}</td>
+						</tr>
+						<tr>
+							<td width="300" height="80" colspan="2">Nombre d'annonces en ligne</td>
 							<td width="300" height="80" colspan="2">${nbAnnonceEnligne}</td>
 						</tr>
 
@@ -68,7 +73,7 @@
 							<c:forEach items="${annonceByCat}" var="ann">
 								<tr>
 
-									<td width="300" height="80" colspan="2">nombre de ${ann.key}</td>
+									<td width="300" height="80" colspan="2">nombre d'annonces "${ann.key}"</td>
 									<td width="300" height="80" colspan="2">${ann.value}</td>
 								</tr>
 

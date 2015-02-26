@@ -39,7 +39,9 @@ public interface AnnonceDao {
 	public int nbAnnonceEnLigne();
 	public Map<String, Integer> getNbByCategorie();
 
+	public void incrementNbAnnCrees();
 	
+	public int getNbAnnCrees();
 	
 
 }

@@ -2,6 +2,7 @@ package glp.dao;
 
 import glp.domain.Annonce;
 import glp.domain.Categorie;
+import glp.domain.Stats;
 import glp.domain.Utilisateur;
 
 import java.io.Serializable;
@@ -21,8 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class AnnonceDaoImpl implements AnnonceDao {
 
-	 @Autowired  
-	 private SessionFactory sessionFactory;  
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Override
 	public int insertRow(Annonce ann) {
@@ -39,20 +40,22 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createQuery("from Annonce").list();
 		return annonceList;
 	}
-	
+
 	@Override
 	public List<Annonce> getListValides() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		//FALSE = refus�e - NULL = en attente - TRUE = valid�e
-		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=TRUE").list();
+		// FALSE = refus�e - NULL = en attente - TRUE = valid�e
+		List<Annonce> annonceList = session.createQuery(
+				"FROM Annonce WHERE ann_valide=TRUE").list();
 		return annonceList;
 	}
 
 	@Override
 	public Annonce getRowById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Annonce ann = (Annonce) session.createCriteria(Annonce.class).add(Restrictions.idEq(id)).uniqueResult();
+		Annonce ann = (Annonce) session.createCriteria(Annonce.class)
+				.add(Restrictions.idEq(id)).uniqueResult();
 		return ann;
 	}
 
@@ -75,79 +78,81 @@ public class AnnonceDaoImpl implements AnnonceDao {
 
 	@Override
 	public List<Annonce> getListRecent(int catId) {
-		Session session =sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		String sql = "FROM Annonce where cat_id= :catID ORDER BY ann_date_debut";
 		Query q = session.createQuery(sql).setParameter("catID", catId);
 		q.setFirstResult(0);
 		q.setMaxResults(5); // on obtient les 10 dernières annonces
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = q.list();
-		System.out.println("taille " + annonceList.size() );
+		System.out.println("taille " + annonceList.size());
 		return annonceList;
 	}
 
 	@Override
+	public List<Annonce> getListByMot(String searchText) {
 
-	public List<Annonce> getListByMot(String searchText) { 
-		
-	Session session =sessionFactory.getCurrentSession(); 
-	@SuppressWarnings("unchecked")
-	List<Annonce> annonceList = session.createQuery("from Annonce"
-			+ " where ann_desc like :searchText or ann_titre like:searchText")
-			.setParameter("searchText","%"+searchText+"%").list();
-	return annonceList;
-
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session
+				.createQuery(
+						"from Annonce"
+								+ " where ann_desc like :searchText or ann_titre like:searchText")
+				.setParameter("searchText", "%" + searchText + "%").list();
+		return annonceList;
 
 	}
-	
+
 	@Override
 	public List<Annonce> getListByCat(int catId) {
-		Session session =sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-				.createAlias( "categorie", "c" )
-		         .add( Restrictions.eq( "c.id", catId ))
-		        .list();
+				.createAlias("categorie", "c")
+				.add(Restrictions.eq("c.id", catId)).list();
 		return annonceList;
 	}
-	
+
 	@Transactional
 	@Override
 	public List<Annonce> getListByUtilisateur(Utilisateur u) {
-		Session session =sessionFactory.getCurrentSession();
+		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-		        .add(Restrictions.eq("auteur", u))
-		        .list();
+				.add(Restrictions.eq("auteur", u)).list();
 		return annonceList;
 	}
-	
+
 	@Override
 	public List<Annonce> getListByCatName(String catName) {
 		Session session = sessionFactory.getCurrentSession();
-		if(catName.compareToIgnoreCase("Covoiturage") == 0 || catName.compareToIgnoreCase("Job") == 0){
+		if (catName.compareToIgnoreCase("Covoiturage") == 0
+				|| catName.compareToIgnoreCase("Job") == 0) {
 			@SuppressWarnings("unchecked")
-			List<Annonce> annonceList = session.createCriteria(Annonce.class)
-										.add(Restrictions.in("categorie", 
-													session.createCriteria(Categorie.class)
-													.add(Restrictions.eq("lib", catName))
-													.list())
-										).list();
+			List<Annonce> annonceList = session
+					.createCriteria(Annonce.class)
+					.add(Restrictions.in(
+							"categorie",
+							session.createCriteria(Categorie.class)
+									.add(Restrictions.eq("lib", catName))
+									.list())).list();
 			return annonceList;
-		}
-		else{
+		} else {
 			@SuppressWarnings("unchecked")
-			List<Annonce> annonceList = session.createCriteria(Annonce.class)
-										.add(Restrictions.not(
-												Restrictions.or(
-													Restrictions.in("categorie",
-														session.createCriteria(Categorie.class)
-														.add(Restrictions.eq("lib", "Covoiturage")).list())
-													,Restrictions.in("categorie",
-														session.createCriteria(Categorie.class)
-														.add(Restrictions.eq("lib", "Jobs")).list())
-												)
-										)).list();
+			List<Annonce> annonceList = session
+					.createCriteria(Annonce.class)
+					.add(Restrictions.not(Restrictions.or(Restrictions.in(
+							"categorie",
+							session.createCriteria(Categorie.class)
+									.add(Restrictions.eq("lib", "Covoiturage"))
+									.list()),
+							Restrictions
+									.in("categorie",
+											session.createCriteria(
+													Categorie.class)
+													.add(Restrictions.eq("lib",
+															"Jobs")).list()))))
+					.list();
 			return annonceList;
 		}
 	}
@@ -156,20 +161,22 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle) {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Annonce> annonceList = session.createQuery("from Annonce where cat_id= :catID"
-				+ " and (ann_desc like :searchText or ann_titre like:searchText )")
-				.setParameter("searchText","%"+motcle+"%")
-				.setParameter("catID", idCat)
-				.list();
+		List<Annonce> annonceList = session
+				.createQuery(
+						"from Annonce where cat_id= :catID"
+								+ " and (ann_desc like :searchText or ann_titre like:searchText )")
+				.setParameter("searchText", "%" + motcle + "%")
+				.setParameter("catID", idCat).list();
 		return annonceList;
 	}
-	
+
 	@Override
 	public List<Annonce> getListAModerer() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		//FALSE = refus�e - NULL = en attente - TRUE = valid�e
-		List<Annonce> annonceList = session.createQuery("FROM Annonce WHERE ann_valide=NULL").list();
+		// FALSE = refus�e - NULL = en attente - TRUE = valid�e
+		List<Annonce> annonceList = session.createQuery(
+				"FROM Annonce WHERE ann_valide=NULL").list();
 		return annonceList;
 	}
 
@@ -177,8 +184,8 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	@Override
 	public void supprimerAnnoncesUtilisateur(Utilisateur u) {
 		List<Annonce> listeAnnonces = getListByUtilisateur(u);
-		if(listeAnnonces!=null)
-			for(Annonce a : listeAnnonces)
+		if (listeAnnonces != null)
+			for (Annonce a : listeAnnonces)
 				deleteRow(a.getId());
 	}
 
@@ -186,34 +193,76 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	@Override
 	public void supprimerAnnoncesCategorie(int catId) {
 		List<Annonce> listeAnnonces = getListByCat(catId);
-		if(listeAnnonces!=null)
-			for(Annonce a : listeAnnonces)
+		if (listeAnnonces != null)
+			for (Annonce a : listeAnnonces)
 				deleteRow(a.getId());
 	}
-	
+
 	@Transactional
 	@Override
 	public int nbAnnonceEnLigne() {
 		Session session = sessionFactory.getCurrentSession();
-Date d = new Date();
-		int nbAnnonces = ((Long) session.createCriteria(Annonce.class) .add(Restrictions.ge("date_fin", d)).setProjection(Projections.rowCount()).uniqueResult()).intValue();
-		System.out.println("nombre d'annoce en ligne "+nbAnnonces);
+		Date d = new Date();
+		int nbAnnonces = ((Long) session.createCriteria(Annonce.class)
+				.add(Restrictions.ge("date_fin", d))
+				.setProjection(Projections.rowCount()).uniqueResult())
+				.intValue();
+		System.out.println("nombre d'annonces en ligne " + nbAnnonces);
 		return nbAnnonces;
 	}
-@Transactional
-@Override
+
+	@Transactional
+	@Override
 	public Map<String, Integer> getNbByCategorie() {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Categorie> catList = session.createCriteria(Categorie.class).addOrder(Order.asc("id")).list();
+		List<Categorie> catList = session.createCriteria(Categorie.class)
+				.addOrder(Order.asc("id")).list();
 		Map<String, Integer> mapCategorieNbAnnonces = new HashMap<String, Integer>();
-		for(Categorie c : catList) {
+		for (Categorie c : catList) {
 			int nbAnnonces = ((Long) session.createCriteria(Annonce.class)
-			        .add(Restrictions.eq("categorie", c)).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+					.add(Restrictions.eq("categorie", c))
+					.setProjection(Projections.rowCount()).uniqueResult())
+					.intValue();
 			mapCategorieNbAnnonces.put(c.getLib(), nbAnnonces);
 		}
 		return mapCategorieNbAnnonces;
 	}
 
-	
+	@Override
+	public void incrementNbAnnCrees() {
+		Session session = sessionFactory.getCurrentSession();
+		
+		int nb_ann_crees = this.getNbAnnCrees();
+
+		Query query;
+		if (nb_ann_crees <= 0) {
+			Stats stat = new Stats(1, new Date(), 1);
+			/*query = session
+					.createQuery("INSERT INTO Stats(stats_nb_ann_crees) VALUES(1)");
+			query.executeUpdate();*/
+			session.saveOrUpdate(stat);
+		}
+
+		else {
+			query = session
+					.createQuery(
+							"UPDATE Stats SET stats_nb_ann_crees=stats_nb_ann_crees+1 where stats_nb_ann_crees= :nba")
+					.setParameter("nba", nb_ann_crees);
+			query.executeUpdate();
+		}
+	}
+
+	@Override
+	public int getNbAnnCrees() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("SELECT max(stats_nb_ann_crees) FROM Stats");
+		if (query.uniqueResult() == null)
+			return 0;
+
+		else
+			return (Integer) query.uniqueResult();
+	}
+
 }

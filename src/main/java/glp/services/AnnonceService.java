@@ -42,4 +42,6 @@ public interface AnnonceService {
 	public int updateDateAnnonce(int id, String date);
 	
 	public List<Annonce> getListByUtilisateur(Utilisateur u);
+	
+	public int nbAnnCrees();
 }

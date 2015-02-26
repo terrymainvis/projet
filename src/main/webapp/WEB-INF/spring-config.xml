@@ -48,6 +48,7 @@
 				<value>glp.domain.Job</value>
 				<value>glp.domain.Forum</value>
 				<value>glp.domain.Signalisation</value>
+				<value>glp.domain.Stats</value>
 
 			</list>
 		</property>
