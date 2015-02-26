@@ -69,6 +69,7 @@ public class JobController {
 			List<Categorie> catList = categorieService.getList();
 		
 			Map<String, Object> myModel = new HashMap<String, Object>();
+			myModel.put("utilisateur", utilisateurService.getUserInSession());
 			myModel.put("jobList", jobList);
 			myModel.put("catList", catList);
 			return new ModelAndView("job_list",myModel);	

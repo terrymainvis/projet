@@ -107,9 +107,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public List<Annonce> listAnnonceEnciennes(Utilisateur utilisateur) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Annonce> listAnnoncePerimees(Utilisateur utilisateur) {
+		return utilisateurDao.listAnnoncePerimees(utilisateur);
 	}
 
 	@Override

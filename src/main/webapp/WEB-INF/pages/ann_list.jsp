@@ -11,13 +11,15 @@
 	href="<c:url value="/resources/css/accueil.css" />	">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/listannonce.css" />	">
-<title>List</title>
+<title>Liste des annonces</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 
 	<div class="row">
 		<div class="large-8 columns">
+		
+		<h3>Liste des annonces</h3>
 
 			<table id="listeAnnonces" class="display" cellspacing="0"
 				width="100%">
@@ -67,15 +69,10 @@
 				<p>Vous ne trouvez pas ce que vous recherchez ?</p>
 				<p>Indiquez directement aux autres utilisateurs vos besoins en
 					créant votre propre annonce</p>
+					<a class="button success tiny" href="<c:url value="/annonce/new" />">Ajout d'une nouvelle annonce</a>
 			</div>
 		</div>
 	</div>
-
-
-	<br>
-
-	<a href="/job/new">Ajout d'une nouvelle annonce</a>
-
 	<script type="text/javascript">
 		$(document)
 				.ready(

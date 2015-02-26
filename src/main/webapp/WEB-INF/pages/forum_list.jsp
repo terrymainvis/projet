@@ -9,36 +9,20 @@
 
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 
-<title>List</title>
-<style>
-.scroll {
-	padding: 2px; /* équivalent cellpadding */
-	display: inline-block;
-	overflow-y: auto;
-	width: 200px;
-}
-
-<style type="text/css"> 
-  td { 
-    word-wrap: break-word; 
-  } 
-
-</style>
+<title>Liste des témoignages</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 	<div class="row">
-		<div class="large-10 large-offset-1 columns">
-			<div class="panel" style="text-align: center">
-				<b><b>Liste des expériences à l'étranger</b></b><br> <br>
-				<div class="row" style="text-align: center">
+		<div class="large-8 columns">
+		<h2>Liste des témoignages</h2>
+		<c:if test="${!empty forumList}">
 					<table id="listeforums" class="display" cellspacing="0" width="100%">
 						<thead>
 							<tr>
 								<th>Titre</th>
 								<th>description</th>
 								<th>Date de publication</th>
-								
 								<th></th>
 								<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
 									<th>Signalements</th>
@@ -47,74 +31,52 @@
 							<tr></tr>
 						</thead>
 						<tfoot>
-
+							<tr>
+								<th>Titre</th>
+								<th>description</th>
+								<th>Date de publication</th>
+								<th></th>
+								<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
+									<th>Signalements</th>
+								</c:if>
+							</tr>
 						</tfoot>
 						<tbody id="lignes">
-							<c:if test="${!empty forumList}">
 								<c:forEach items="${forumList}" var="forum">
 									<tr>
-										<td><table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-													<td width="200" height="80"  colspan="2"><b><b>${forum.titre}</b></b></td>
-												</tr>
-											</table></td>
-
-										<td>
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-											
-													<td width="300" height="80" style="word-break:break-all;"><i>${forum.desc.substring(0,30)}</i>...</td>
-												</tr>
-											</table>
-										</td>
-										<td>
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-													<td width="100" height="80" ><fmt:formatDate pattern="yyyy-MM-dd" 
-         								   value="${forum.date_pub}"/></td>
-												</tr>
-											</table>
-
-
-										</td>
-									
+										<td>${forum.titre}</td>
+										<td>${forum.desc}</td>
+										<td>${forum.date_pub}</td>
 										<td><a href="<c:url value='/forum/${forum.id}'/>"
-											class="button tiny">Details</a>
+											class="button success tiny">Details</a>
 										</td>
-										
-																				
 										<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
 											<td>
-												<table border="0" cellspacing="0" cellpadding="0">
-													<tr>
-														<td width="300" height="80" style="word-break:break-all;text-align:center">
-															<c:choose>
-																<c:when test="${forum.signalements == 0}">
-																	${forum.signalements}
-																</c:when>
-																<c:otherwise>
-																	<a href="<c:url value='/forum/signalements/${forum.id}' />">
-																		${forum.signalements}
-																	</a>
-																</c:otherwise>
-															</c:choose>
-														</td>
-													</tr>
-												</table>
+												<c:choose>
+													<c:when test="${forum.signalements == 0}">
+														${forum.signalements}
+													</c:when>
+													<c:otherwise>
+														<a href="<c:url value='/forum/signalements/${forum.id}' />">
+															${forum.signalements}
+														</a>
+													</c:otherwise>
+												</c:choose>
 											</td>
 										</c:if>
 									</tr>
 								</c:forEach>
-							</c:if>
 						</tbody>
 					</table>
-					
+					</c:if>
 				</div>
+			<div class="large-4 columns">
+			<div class="panel callout radius">
+				<p>Vous ne trouvez pas ce que vous recherchez ?</p>
+				<p>Partagez votre expérience en publiant un témoignage!</p>
+					<a class="button success tiny" href="<c:url value="/forum/new"  />">Ajout d'un témoignage</a>
 			</div>
 		</div>
 	</div>
-	
-	<a href="<c:url value="/forum/new"  />">Ajout un nouveau t&eacute;moignage</a>
-		
 </body>
 </html>

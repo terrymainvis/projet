@@ -75,22 +75,17 @@ public class UtilisateurController {
 
 	@RequestMapping(value = "monCompte", method = RequestMethod.GET)
 	public ModelAndView getAnnListValides() {
-		Utilisateur util = utilisateurService.getRowById(1);
-		// Utilisateur util =
-		// utilisateurService.getRowById(utilisateurService.getUserInSession().getId());
-		// List <Annonce> listePublie =
-		// utilisateurService.listAnnoncePublie(utilisateurService.getUserInSession());
-
-		List<Annonce> listePublie = utilisateurService.listAnnoncePublie(util);
-		List<Annonce> listeAmoderer = utilisateurService
-				.listAnnonceEnCourModeration(util);
-		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("utilisateurConnecte", util);
-		myModel.put("catList", catList);
-		myModel.put("listePublie", listePublie);
-		myModel.put("listeAmoderer", listeAmoderer);
-
+		myModel.put("catList", categorieService.getList());
+		Utilisateur u = utilisateurService.getUserInSession();
+		if (u!=null) {
+			u= utilisateurService.getRowById(utilisateurService.getUserInSession().getId());
+			myModel.put("utilisateur", u);
+			myModel.put("listeAnnoncesPubliees", utilisateurService.listAnnoncePublie(u));
+			myModel.put("listeAnnoncesAModerer", utilisateurService.listAnnonceEnCourModeration(u));
+			myModel.put("listeAnnoncesPerimees", utilisateurService.listAnnoncePerimees(u));
+		}
+		myModel.put("catList", categorieService.getList());
 		return new ModelAndView("voirCompte", myModel);
 	}
 

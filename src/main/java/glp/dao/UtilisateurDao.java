@@ -28,7 +28,7 @@ public interface UtilisateurDao {
 	
 	public List<Annonce> listAnnoncePublie(Utilisateur utilisateur);
 	public List<Annonce> listAnnonceEnCourModeration(Utilisateur utilisateur);
-	public List<Annonce> listAnnonceEnciennes(Utilisateur utilisateur);
+	public List<Annonce> listAnnoncePerimees(Utilisateur utilisateur);
 	public Utilisateur updateUser(int id,String nom, String prenom,String tel,String mail,String mailAutre);
 	public void supprimerAnnonce (int id);
 
@@ -37,6 +37,7 @@ public interface UtilisateurDao {
 	boolean isRepresentant(Utilisateur utilisateur);
 	public void updateDate(int id,Date d);
 	public int nbUtilisateur();
+
 
 
 	

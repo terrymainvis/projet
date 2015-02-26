@@ -8,23 +8,7 @@
 
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 
-<title>List</title>
-
-
-<style>
-.scroll {
-	padding: 2px; /* équivalent cellpadding */
-	display: inline-block;
-	overflow-y: auto;
-	width: 200px;
-}
-
-<style type="text/css"> 
-  td { 
-    word-wrap: break-word; 
-  } 
-
-</style>
+<title>Liste des offres d'emploi</title>
 
 </head>
 <body class="bg">
@@ -32,72 +16,50 @@
 
 	<div class="row">
 		<div class="large-10 columns">
-			<div class="panel" style="text-align: center">
 
-				<b><b>liste des offres d'emploi</b></b><br> <br>
+				<h3>Liste des offres d'emploi</h3>
 
-				<div class="row" style="text-align: center">
-
-					<table id="listejobs" class="display" cellspacing="0" width="200%">
+				<div class="row">
+				<c:if test="${!empty jobList}">
+					<table id="listejobs" class="display" cellspacing="0"
+				width="100%">
 						<thead>
 							<tr>
 								<th>Titre</th>
 								<th>description</th>
-								<th>Salaire</th>
-								
-								<th></th>
+								<th>Rémunération</th>
 								<th></th>
 							</tr>
-							<tr></tr>
 						</thead>
 						<tfoot>
-
+							<tr>
+								<th>Titre</th>
+								<th>description</th>
+								<th>Rémunération</th>
+								<th></th>
+							</tr>
 						</tfoot>
 						<tbody id="lignes">
-							<c:if test="${!empty jobList}">
+							
 								<c:forEach items="${jobList}" var="job">
-									<tr>
-										<td><table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-													<td width="400" height="80"  colspan="2"><b><b>${job.titre}</b></b></td>
-												</tr>
-											</table></td>
-
-										<td>
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-											
-													<td width="500" height="80" style="word-break:break-all;"><i>${job.desc.toString().substring(0,50)}</i>...</td>
-												</tr>
-											</table>
-										</td>
-										<td>
-											<table border="0" cellspacing="0" cellpadding="0">
-												<tr>
-													<td width="270" height="80" >${job.prix}</td>
-												</tr>
-											</table>
-
-
-										</td>
-									
-										<td><a href="<c:url value='/job/${job.id}'/>"
-											class="button round">Details</a></td>
+								<tr>
+									<td>${job.titre}</td>
+									<td>${job.desc}</td>
+									<td>${job.prix}</td>
+									<td><a href="<c:url value='/job/${job.id}'/>"
+											class="button success tiny">Details</a></td>
 									</tr>
 								</c:forEach>
-							</c:if>
+							
 						</tbody>
 					</table>
+					</c:if>
 				</div>
 			</div>
-		</div>
+			<c:if test="${not empty utilisateur.roles['REPRESENTANT']}">
+				<a href="<c:url value="/job/new"  />" class="button success">Ajouter une nouvelle offre d'emploi</a>
+			</c:if>
 	</div>
-
-	<br>
-<!-- 	il faut que ça soit accessible que pour les represenatnt de Lille1 -->
-	    <%-- <c:if test="${current_user.roleId==4}"> --%>
-<a href="<c:url value="/job/new"  />">Ajout une nouvelle offre de job</a>
-<%-- </c:if> --%>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

@@ -119,71 +119,35 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Transactional
 	@Override
 	public List<Annonce> listAnnoncePublie(Utilisateur utilisateur) {
-		Date d=new Date(); 
-
 		Session session = sessionFactory.getCurrentSession();
+		Date d=new Date(); 
 		@SuppressWarnings("unchecked")
-
-
-		List<Annonce> annonceList = session.createQuery("from Annonce where uti_id =:utiID"+ " and (ann_valide =1)")
-
-		.setParameter("utiID", 1)
-
-		.list(); 
-
-		//		List<Annonce> annonceList = session.createQuery("from Annonce where uti_id =:utiID"
-		//				+ " and (ann_valide =:valide)"+"and (ann_date_fin >:d >)")
-		//				.setParameter("valide",1)
-		//				.setParameter("utiID", utilisateurService.getUserInSession().getId())
-		//				.setParameter("d", d)
-		//				.list(); 
-		
-		//	List<Annonce> annonceList = session.createCriteria(Annonce.class).add( Restrictions.ge("date_fin", d)).add(Restrictions.like("ann_valide", false)).add(Restrictions.like("utiID", 1)).list();
-
-
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.ge("date_fin", d)).add(Restrictions.le("date_deb", d)).addOrder(Order.asc("date_fin")).list();
 		return annonceList;
 	}
+	
 	@Transactional
 	@Override
 	public List<Annonce> listAnnonceEnCourModeration(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-
-
-		List<Annonce> annonceListAmoderer = session.createQuery("from Annonce where uti_id =:utiID"
-				+ " and (ann_valide is null)")
-
-				.setParameter("utiID", 1)
-				.list(); 
-		System.out.println(annonceListAmoderer.size()+" la taille de la liste");
-		return annonceListAmoderer;
-
-	}
-	@Transactional
-	@Override
-	public List<Annonce> listAnnonceEnciennes(Utilisateur utilisateur) {
-		Date d=new Date(); 
-
-		Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-
-
-		List<Annonce> annonceList = session.createQuery("from Annonce where uti_id =:utiID"+ " and (ann_valide =:1)")
-
-		.setParameter("utiID", 1)
-
-
-		.list(); 
-
-		//		List<Annonce> annonceList = session.createQuery("from Annonce where uti_id =:utiID"
-		//				+ " and (ann_valide =:valide)"+"and (ann_date_fin >:d >)")
-		//				.setParameter("valide",1)
-		//				.setParameter("utiID", utilisateurService.getUserInSession().getId())
-		//				.setParameter("d", d)
-		//				.list(); 
-
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+        .add(Restrictions.eq("auteur", utilisateur )).add(Restrictions.isNull("valide")).addOrder(Order.asc("date_fin")).list();
 		return annonceList;
 	}
+	
+	@Transactional
+	@Override
+	public List<Annonce> listAnnoncePerimees(Utilisateur utilisateur) {
+		Session session = sessionFactory.getCurrentSession();
+		Date d=new Date(); 
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.le("date_fin", d)).addOrder(Order.desc("date_fin")).list();
+		return annonceList;
+	}
+	
 	@Transactional
 	@Override
 	public Utilisateur updateUser(int id, String nom, String prenom, String tel,
@@ -246,6 +210,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 		  return nbuser;
 		//return count;
 	}
+
 	
 		
 	}
