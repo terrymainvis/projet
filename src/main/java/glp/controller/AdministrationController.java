@@ -171,7 +171,7 @@ public class AdministrationController {
 		if(modelListeCategories==null)
 			modelListeCategories = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			modelListeCategories.put("current_user", utilisateurService.getUserInSession());
+			modelListeCategories.put("utilisateur", utilisateurService.getUserInSession());
 			modelListeCategories.put("catList", categorieService.getList());
 			modelListeCategories.put("mapCategories", categorieService.getNbByCategorie());
 //		}

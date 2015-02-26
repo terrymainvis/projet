@@ -120,10 +120,10 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public List<Annonce> listAnnoncePublie(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
-		Date d=new Date(); 
+		java.sql.Timestamp d=new java.sql.Timestamp(System.currentTimeMillis()); 
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.ge("date_fin", d)).add(Restrictions.le("date_deb", d)).addOrder(Order.asc("date_fin")).list();
+        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.ge("date_fin", d)).add(Restrictions.eq("valide", true)).add(Restrictions.le("date_deb", d)).addOrder(Order.asc("date_fin")).list();
 		return annonceList;
 	}
 	
@@ -141,10 +141,10 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public List<Annonce> listAnnoncePerimees(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
-		Date d=new Date(); 
+		java.sql.Timestamp d=new java.sql.Timestamp(System.currentTimeMillis()); 
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.le("date_fin", d)).addOrder(Order.desc("date_fin")).list();
+        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.le("date_fin", d)).add(Restrictions.eq("valide", true)).addOrder(Order.desc("date_fin")).list();
 		return annonceList;
 	}
 	

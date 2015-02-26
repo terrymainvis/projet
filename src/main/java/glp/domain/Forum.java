@@ -21,11 +21,9 @@ public class Forum {
 	private int id;
 	
 	
-	@Size(min=4, max=30)
 	@Column(name="forum_titre")
 	private String titre;
 	
-	@Size(min=5, max=500)
 	@Column(name="forum_desc")
 	private String desc;
 	

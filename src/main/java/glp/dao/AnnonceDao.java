@@ -45,4 +45,12 @@ public interface AnnonceDao {
 	public Stats getStats();
 	
 	public void setDureeVieAnnonce(int duree_vie);
+
+	public List<Annonce> getListAnnoncesProposees();
+
+	public List<Annonce> getListAnnoncesDemandees();
+
+	public List<Annonce> getListCovProposes();
+
+	public List<Annonce> getListCovDemandes();
 }

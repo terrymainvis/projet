@@ -112,11 +112,19 @@
 	<script>
 		$(document).foundation();
 	</script>
-
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#listeUtilisateurs').DataTable({});
-		});
+		$(document)
+		.ready(
+				function() {
+					$('#listeUtilisateurs')
+							.DataTable(
+									{
+										"language" : {
+											"url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+										}
+
+									});
+				});
 	</script>
 	
 	</div>

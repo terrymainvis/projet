@@ -14,4 +14,6 @@ public interface SignalisationDao {
 	public List<Signalisation> getListRecent();
 	
 	public List<Signalisation> getListSignalements(Forum forum);
+
+	public List<Signalisation> getList();
 }

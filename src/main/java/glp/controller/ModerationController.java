@@ -5,6 +5,7 @@ import glp.domain.Stats;
 import glp.services.AnnonceService;
 import glp.services.CategorieService;
 import glp.services.RoleService;
+import glp.services.SignalisationService;
 import glp.services.UtilisateurService;
 import glp.util.EmailSender;
 
@@ -37,10 +38,13 @@ public class ModerationController {
 	@Autowired
 	private CategorieService categorieService;
 	
+	@Autowired
+	private SignalisationService signalisationService;
+	
 	
 	@RequestMapping("/valider/annonce/{id}")
 	public ModelAndView validerAnnonce(@PathVariable("id") int idAnnSelected) {
-//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession()) || utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession())) {
 			Annonce ann = annonceService.getRowById(idAnnSelected);
 			ann.setValide(true);
 			annonceService.updateRow(ann);
@@ -51,7 +55,7 @@ public class ModerationController {
 	@RequestMapping("/refuser/annonce/{id}")
 	public ModelAndView refuserAnnonce(@PathVariable("id") int idAnnSelected,
 			HttpServletRequest request) {
-//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession()) || utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession())) {
 			Annonce ann = annonceService.getRowById(idAnnSelected);
 			ann.setValide(false);
 			
@@ -75,7 +79,7 @@ public class ModerationController {
 		Map<String, Object> modelAnnoncesAModerer = new HashMap<String, Object>();
 		modelAnnoncesAModerer.put("utilisateur", utilisateurService.getUserInSession());
 		modelAnnoncesAModerer.put("catList", categorieService.getList());
-//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession()) || utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession())) {
 			modelAnnoncesAModerer.put("annonceList", annonceService.getListAModerer());
 //		}
 		return new ModelAndView("mod_listeAnnonces", modelAnnoncesAModerer);
@@ -83,18 +87,18 @@ public class ModerationController {
 	
 	@RequestMapping(value ="", method = RequestMethod.GET)
 	public ModelAndView afficheStatistique(){
-		int nbUser = utilisateurService.nbUtilisateur();
-		int nbAnnonceEnligne= annonceService.nbAnnonceEnLigne();		
-		Stats stats = annonceService.getStats();
-		
-		 Map<String, Integer> annonceByCat = annonceService.getNbByCategorie();
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("annonceByCat", annonceByCat);
-		myModel.put("nbUser", nbUser);
-		myModel.put("nbAnnonceEnligne", nbAnnonceEnligne);
-		myModel.put("nbAnnCrees", stats.getStats_nb_ann_crees());
-		myModel.put("stats", stats);
-
+//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession())) {
+			int nbUser = utilisateurService.nbUtilisateur();
+			int nbAnnonceEnligne= annonceService.nbAnnonceEnLigne();		
+			Stats stats = annonceService.getStats();
+			Map<String, Integer> annonceByCat = annonceService.getNbByCategorie();
+			myModel.put("annonceByCat", annonceByCat);
+			myModel.put("nbUser", nbUser);
+			myModel.put("nbAnnonceEnligne", nbAnnonceEnligne);
+			myModel.put("nbAnnCrees", stats.getStats_nb_ann_crees());
+			myModel.put("stats", stats);
+// 		}
 		return new ModelAndView("statistique", myModel);
 	}
 	
@@ -103,4 +107,17 @@ public class ModerationController {
 		annonceService.setDureeVieAnnonce(duree_vie_ann);
 		return afficheStatistique();
 	}
+	
+	@RequestMapping("/signalement/list")
+	public ModelAndView getListSignalements() {
+		Map<String, Object> modelAnnoncesAModerer = new HashMap<String, Object>();
+		modelAnnoncesAModerer.put("utilisateur", utilisateurService.getUserInSession());
+		modelAnnoncesAModerer.put("catList", categorieService.getList());
+//		if(utilisateurService.isModerateur(utilisateurService.getUserInSession())) {
+			modelAnnoncesAModerer.put("signalements", signalisationService.getList());
+//		}
+		return new ModelAndView("mod_listeSignalements", modelAnnoncesAModerer);
+	}
+	
+
 }

@@ -39,10 +39,18 @@
 	</table>
 	<br>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			$('#listeAnnonces').DataTable({
-			});
-		});
+		$(document)
+		.ready(
+				function() {
+					$('#listeforums')
+							.DataTable(
+									{
+										"language" : {
+											"url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+										}
+
+									});
+				});
 	</script>
 </body>
 </html>

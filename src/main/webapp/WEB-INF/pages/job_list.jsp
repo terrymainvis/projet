@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,7 +27,8 @@
 						<thead>
 							<tr>
 								<th>Titre</th>
-								<th>description</th>
+								<th>Description</th>
+								<th>Date</th>
 								<th>Rémunération</th>
 								<th></th>
 							</tr>
@@ -34,7 +36,8 @@
 						<tfoot>
 							<tr>
 								<th>Titre</th>
-								<th>description</th>
+								<th>Description</th>
+								<th>Date</th>
 								<th>Rémunération</th>
 								<th></th>
 							</tr>
@@ -45,6 +48,8 @@
 								<tr>
 									<td>${job.titre}</td>
 									<td>${job.desc}</td>
+									<td><fmt:formatDate value="${job.date_fin}"
+											var="dateString" pattern="dd/MM/yyyy" /> ${dateString}</td>
 									<td>${job.prix}</td>
 									<td><a href="<c:url value='/job/${job.id}'/>"
 											class="button success tiny">Details</a></td>
@@ -62,9 +67,18 @@
 	</div>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#listejobs').DataTable({});
-		});
+	$(document)
+	.ready(
+			function() {
+				$('#listejobs')
+						.DataTable(
+								{
+									"language" : {
+										"url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+									}
+
+								});
+			});
 	</script>
 </body>
 </html>

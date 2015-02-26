@@ -22,7 +22,7 @@
 			<div>
 				<h4>Choisissez d'abord la catégorie de votre annonce</h4><br/>
 				<form:select path="cat_choisie">					
-					<form:options items="${catlist}" itemValue="id" itemLabel="lib" />
+					<form:options items="${catList}" itemValue="id" itemLabel="lib" />
 				</form:select>				
 			</div>
 			<br/>

@@ -32,10 +32,10 @@
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="#" class="button small">Proposez un covoiturage</a>
+						<a href="/lille1community/annonce/demande/listCov" class="button small">Proposez un covoiturage</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="#" class="button small">Chercher un covoiturage</a>
+						<a href="/lille1community/annonce/propose/listCov" class="button small">Chercher un covoiturage</a>
 					</div>
 				</div>
 			</div>
@@ -69,10 +69,10 @@
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="#" class="button small">Proposez vos services</a>
+						<a href="/lille1community/annonce/demande/list" class="button small">Proposez vos services</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="#" class="button small">Demandez de l'aide</a>
+						<a href="/lille1community/annonce/propose/list" class="button small">Demandez de l'aide</a>
 					</div>
 				</div>
 			</div>

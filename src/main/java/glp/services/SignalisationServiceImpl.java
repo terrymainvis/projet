@@ -45,6 +45,11 @@ public class SignalisationServiceImpl implements SignalisationService{
 		return signalDao.getListSignalements(forum);
 	}
 
+	@Override
+	public List<Signalisation> getList() {
+		return signalDao.getList();
+	}
+
 
 
 }

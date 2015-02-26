@@ -159,6 +159,25 @@ public class AnnonceServiceImpl implements AnnonceService {
 	@Transactional
 	public void setDureeVieAnnonce(int duree_vie) {
 		annonceDao.setDureeVieAnnonce(duree_vie);
+	}	
+
+	public List<Annonce> getListAnnoncesProposees() {
+		return annonceDao.getListAnnoncesProposees();
+	}
+
+	@Override
+	public List<Annonce> getListAnnoncesDemandees() {
+		return annonceDao.getListAnnoncesDemandees();
+	}
+
+	@Override
+	public List<Annonce> getListCovProposes() {
+		return annonceDao.getListCovProposes();
+	}
+
+	@Override
+	public List<Annonce> getListCovDemandes() {
+		return annonceDao.getListCovDemandes();
 	}
 
 }

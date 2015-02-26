@@ -71,7 +71,7 @@
 		Aucune catégorie dans la base <br/>
 	</c:otherwise>
 	</c:choose>
-	<a href="<c:url value='/categorie/new' />" class="button  small">Ajouter une catégorie</a>
+	<a href="<c:url value='/categorie/new' />" class="button success small">Ajouter une catégorie</a>
 	</div>
 	</div>
 	<script>
@@ -81,6 +81,20 @@
 		    document.getElementById("lienSuppression").href = "/lille1community/administration/supprimer/categorie/"+idCateg;
 		    return false;
 		} 
+		</script>
+		<script>
+		$(document)
+		.ready(
+				function() {
+					$('#listeCategories')
+							.DataTable(
+									{
+										"language" : {
+											"url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+										}
+
+									});
+				});
 		</script>
 </body>
 </html>

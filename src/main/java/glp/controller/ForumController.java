@@ -9,9 +9,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 
+
+
+import glp.domain.Categorie;
 import glp.domain.Forum;
 import glp.domain.Signalisation;
 import glp.domain.Utilisateur;
+import glp.services.CategorieService;
 import glp.services.ForumService;
 import glp.services.SignalisationService;
 import glp.services.UtilisateurService;
@@ -22,8 +26,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -38,7 +40,8 @@ public class ForumController {
 	private UtilisateurService utilisateurService;
 	@Autowired
 	private SignalisationService signalisationService;
-	
+	@Autowired
+	private CategorieService categorieService;
 	
 	public ForumController(){
 		
@@ -74,6 +77,7 @@ public class ForumController {
 		List<Forum> forumList = forumService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("forumList", forumList);
+		myModel.put("catList", categorieService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("forum_list",myModel);	
 	}

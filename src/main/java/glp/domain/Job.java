@@ -20,11 +20,9 @@ public class Job {
 	@Column(name="job_id")
 	private int id;
 	
-	@Size(min=4, max=30)
 	@Column(name="job_titre")
 	private String titre;
 	
-	@Size(min=5, max=300)
 	@Column(name="job_desc")
 	private String desc;
 	
@@ -39,11 +37,9 @@ public class Job {
 	@JoinColumn(name="uti_id")
 	private Utilisateur auteur;
 	
-	@Size(min=4, max=30)
 	@Column(name="job_prix")
 	private String prix;
 	
-	@Size(min=4, max=30)
 	@Column(name="job_mail")
 	private String mail;
 	

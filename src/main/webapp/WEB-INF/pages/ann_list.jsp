@@ -17,7 +17,7 @@
 	<%@ include file="../templates/header.jsp"%>
 
 	<div class="row">
-		<div class="large-8 columns">
+		<div class="large-9 columns">
 		
 		<h3>Liste des annonces</h3>
 
@@ -27,6 +27,7 @@
 					<tr>
 						<th><spring:message code="annList.titre"></spring:message></th>
 						<th><spring:message code="annList.categorie"></spring:message></th>
+						<th>Type</th>
 						<th><spring:message code="annList.date"></spring:message></th>
 						<th></th>
 					</tr>
@@ -35,6 +36,7 @@
 					<tr>
 						<th><spring:message code="annList.titre"></spring:message></th>
 						<th><spring:message code="annList.categorie"></spring:message></th>
+						<th>Type</th>
 						<th><spring:message code="annList.date"></spring:message></th>
 						<th></th>
 					</tr>
@@ -48,6 +50,7 @@
 									<td>${ann.titre}</td>
 
 									<td>${ann.categorie.lib}</td>
+									<td>${ann.type}</td>
 
 									<td><fmt:formatDate value="${ann.date_fin}"
 											var="dateString" pattern="dd/MM/yyyy" /> ${dateString}</td>
@@ -64,12 +67,12 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="large-4 columns">
+		<div class="large-3 columns">
 			<div class="panel callout radius">
 				<p>Vous ne trouvez pas ce que vous recherchez ?</p>
 				<p>Indiquez directement aux autres utilisateurs vos besoins en
 					créant votre propre annonce</p>
-					<a class="button success tiny" href="<c:url value="/annonce/new" />">Ajout d'une nouvelle annonce</a>
+					<a class="button success tiny" href="<c:url value="/annonce/new/categoriechoice" />">Ajout d'une nouvelle annonce</a>
 			</div>
 		</div>
 	</div>

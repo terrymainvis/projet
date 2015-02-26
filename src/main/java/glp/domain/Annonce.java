@@ -23,11 +23,9 @@ public class Annonce {
 	@Column(name="ann_id")
 	private int id;
 	
-	@Size(min=4, max=30)
 	@Column(name="ann_titre")
 	private String titre;
 	
-	@Size(min=5, max=300)
 	@Column(name="ann_desc")
 	private String desc;
 	

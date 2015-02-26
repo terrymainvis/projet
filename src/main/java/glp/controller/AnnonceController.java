@@ -66,9 +66,10 @@ public class AnnonceController {
 	@RequestMapping(value = "new/categoriechoice", method = RequestMethod.GET)
 	public ModelAndView getCategorieChoice() {
 		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("catlist", categorieService.getList());
+		myModel.put("catList", categorieService.getList());
 		myModel.put("annform", new AnnonceForm());
 		myModel.put("champs", champService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
 
 		return new ModelAndView("ann_form_select_cat", myModel);
 	}
@@ -93,6 +94,7 @@ public class AnnonceController {
 			annform = ccService.generateForAnnForm(annform);
 
 			Map<String, Object> myModel = new HashMap<String, Object>();
+			myModel.put("catList", categorieService.getList());
 			myModel.put("annform", annform);
 			myModel.put("utilisateur", utilisateurService.getUserInSession());
 			myModel.put("duree_vie_ann", annonceService.getStats().getNb_jours_fin_annonce());
@@ -132,7 +134,7 @@ public class AnnonceController {
 
 			ann_tmp.setAuteur(utilisateurService.getUserInSession());		
 			annonceService.insertRow(ann_tmp);
-
+			if (ann_tmp.getChampscompletes()!=null)
 			for(ChampComplete cc : ann_tmp.getChampscompletes())
 			{
 				cc.setAnn(ann_tmp);
@@ -259,7 +261,49 @@ public class AnnonceController {
 		return new ModelAndView("redirect:/");
 	}
 	
+	@RequestMapping(value = "/propose/list", method = RequestMethod.GET)
+	public ModelAndView getAnnListPropose() {
+		List<Annonce> annList = annonceService.getListAnnoncesProposees();
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annList", annList);
+		myModel.put("catList", catList);
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		return new ModelAndView("ann_list", myModel);
+	}
 	
+	@RequestMapping(value = "/demande/list", method = RequestMethod.GET)
+	public ModelAndView getAnnListDemande() {
+		List<Annonce> annList = annonceService.getListAnnoncesDemandees();
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annList", annList);
+		myModel.put("catList", catList);
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		return new ModelAndView("ann_list", myModel);
+	}
+	
+	@RequestMapping(value = "/propose/listCov", method = RequestMethod.GET)
+	public ModelAndView getCovListPropose() {
+		List<Annonce> annList = annonceService.getListCovProposes();
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annList", annList);
+		myModel.put("catList", catList);
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		return new ModelAndView("ann_list", myModel);
+	}
+	
+	@RequestMapping(value = "/demande/listCov", method = RequestMethod.GET)
+	public ModelAndView getCovListDemande() {
+		List<Annonce> annList = annonceService.getListCovDemandes();
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annList", annList);
+		myModel.put("catList", catList);
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		return new ModelAndView("ann_list", myModel);
+	}
 
 
 	

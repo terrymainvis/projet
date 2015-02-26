@@ -171,6 +171,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		Date d = new Date();
 		int nbAnnonces = ((Long) session.createCriteria(Annonce.class)
 				.add(Restrictions.ge("date_fin", d))
+				.add(Restrictions.eq("valide", true))
 				.setProjection(Projections.rowCount()).uniqueResult())
 				.intValue();
 		System.out.println("nombre d'annonces en ligne " + nbAnnonces);
@@ -231,5 +232,61 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		Query query = session
 				.createQuery("UPDATE Stats SET nb_jours_fin_annonce= :duree_vie").setParameter("duree_vie", duree_vie);
 		query.executeUpdate();
+	}
+	
+	@Transactional
+	@Override
+	public List<Annonce> getListAnnoncesProposees() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+				.add(Restrictions.eq("valide", true))
+				.add(Restrictions.eq("type", "propose"))
+				.createAlias("categorie", "c")
+				.add(Restrictions.neOrIsNotNull("c.lib", "Covoiturage"))
+				.list();
+		return annonceList;
+	}
+
+	@Transactional
+	@Override
+	public List<Annonce> getListAnnoncesDemandees() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+				.add(Restrictions.eq("valide", true))
+				.add(Restrictions.eq("type", "demande"))
+				.createAlias("categorie", "c")
+				.add(Restrictions.neOrIsNotNull("c.lib", "Covoiturage"))
+				.list();
+		return annonceList;
+	}
+
+	@Transactional
+	@Override
+	public List<Annonce> getListCovProposes() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+				.add(Restrictions.eq("valide", true))
+				.add(Restrictions.eq("type", "propose"))
+				.createAlias("categorie", "c")
+				.add(Restrictions.eq("c.lib", "Covoiturage"))
+				.list();
+		return annonceList;
+	}
+
+	@Transactional
+	@Override
+	public List<Annonce> getListCovDemandes() {
+		Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+				.add(Restrictions.eq("valide", true))
+				.add(Restrictions.eq("type", "demande"))
+				.createAlias("categorie", "c")
+				.add(Restrictions.eq("c.lib", "Covoiturage"))
+				.list();
+		return annonceList;
 	}
 }

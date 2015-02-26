@@ -76,11 +76,16 @@
 							<li><a
 								href="<c:url value="/administration/listCategories"/>">Admin.
 									des catégories</a></li>
-							<li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
-						</ul></li>
+							<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
+						</ul>
+					</li>
 				</c:when>
 				<c:when test="${not empty utilisateur.roles['MODERATEUR']}">
-					<li><a href="<c:url value="/moderation/list"/>">Modération</a></li>
+					<li class="has-dropdown"><a href="#">Modération</a>
+						<ul class="dropdown">
+							<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
+						</ul>
+					</li>
 				</c:when>
 			</c:choose>
 			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message
@@ -91,7 +96,7 @@
 
 
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/new"  />"> <spring:message
+					<li><a href="<c:url value="/annonce/new/categoriechoice"  />"> <spring:message
 								code="header.creerCovoiturage"></spring:message>
 					</a></li>
 					<li><a href="<c:url value="/annonce/listCov" />"> <spring:message
@@ -101,7 +106,7 @@
 			<li class="has-dropdown"><a href="#"><spring:message
 						code="header.petitesAnnonces"></spring:message></a>
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/typechoice"  />"> <spring:message
+					<li><a href="<c:url value="/annonce/new/categoriechoice"  />"> <spring:message
 								code="header.creerAnnonce"></spring:message>
 					</a></li>
 					<li><a href="<c:url value="/annonce/list" />"> <spring:message
@@ -114,7 +119,7 @@
 			</a></li>
 			<li><a href="<c:url value="/forum/list" />">Témoignages</a></li>
 		</ul>
-		<form action="annonce/recherche" id="formulaireCat">
+		<form action="/lille1community/annonce/recherche" id="formulaireCat">
 			<ul class="right">
 				<li class="has-form"><input name="motCle" type="text"
 					placeholder="<spring:message code="header.hintRecherche"></spring:message>"
