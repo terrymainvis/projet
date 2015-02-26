@@ -72,17 +72,6 @@
 									</c:if>	
 								</c:when>
 								
-								<c:when test='${cc.champ.type == "DATE"}'>
-								
-									<c:if test="${cc.champ.requis}">
-										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="text" class="datepick" required="required" />	
-									</c:if>
-									
-									<c:if test="${!cc.champ.requis}">
-										<form:input path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }"  type="text" class="datepick" />			
-									</c:if>	
-								</c:when>
-								
 								<c:when test='${cc.champ.type == "DESCRIPTION"}'>
 									<c:if test="${cc.champ.requis}">
 										<form:textarea path="annonce.champscompletes[${status.index }].valeur" placeholder="${cc.champ.nom }" required="required" />	
@@ -107,8 +96,6 @@
 					</c:forEach>
 					
 					
-					
-					<div>File to upload: <input  type="file" name="file"/><br /> </div>
 					<div>
 						<input class="button" type="submit" value="Ajouter" />
 					</div>
@@ -158,7 +145,6 @@
 <script>
 	$(document)
 			.ready(
-					
 					function() {
 
 						var frm = $('#updateUtiForm');
@@ -194,10 +180,7 @@
 							$("#datepicker").datepicker(
 									$.datepicker.regional['fr']);
 						});
-						
-						$('.datepick').each(function(){
-						    $(this).datepicker($.datepicker.regional['fr']);
-						});
+
 					});
 </script>
 <script type="text/javascript">

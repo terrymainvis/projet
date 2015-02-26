@@ -25,12 +25,12 @@ public class CategorieDaoImpl implements CategorieDao {
 	
 	@Override
 	public int insertRow(Categorie cat) {
-		List<Champ> listChamps = new ArrayList<Champ>();
-		listChamps.add(new Champ("Titre", cat, TypeChampEnum.TEXTE, true));
-		listChamps.add(new Champ("Description", cat, TypeChampEnum.DESCRIPTION, true));
-		listChamps.add(new Champ("Date fin", cat, TypeChampEnum.DATE, true));
-		listChamps.addAll(cat.getChamps());
-		cat.setChamps(listChamps);
+//		List<Champ> listChamps = new ArrayList<Champ>();
+//		listChamps.add(new Champ("Titre", cat, TypeChampEnum.TEXTE, true));
+//		listChamps.add(new Champ("Description", cat, TypeChampEnum.DESCRIPTION, true));
+//		listChamps.add(new Champ("Date fin", cat, TypeChampEnum.DATE, true));
+//		listChamps.addAll(cat.getChamps());
+//		cat.setChamps(listChamps);
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(cat);
 		Serializable id = session.getIdentifier(cat);
