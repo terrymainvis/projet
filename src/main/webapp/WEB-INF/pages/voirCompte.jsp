@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -56,7 +56,11 @@
 							<div class="row">
 								<div class="large-3 columns">${ann.titre}</div>
 								<div class="large-3 columns">${ann.categorie.lib}</div>
-								<div class="large-3 columns">${ann.date_fin}</div>
+								<div class="large-3 columns">
+									<fmt:formatDate value="${ann.date_fin}" var="dateString"
+										pattern="dd/MM/yyyy" />
+									${dateString}
+								</div>
 							</div>
 						</a>
 						<div id="id${ann.id }" class="content">
@@ -105,9 +109,10 @@
 							<div class="row">
 								<div class="large-3 columns">${ann.titre}</div>
 								<div class="large-3 columns">${ann.categorie.lib}</div>
-								<div class="large-3 columns">
-								<fmt:formatDate value="${ann.date_fin}" var="dateString" pattern="dd/MM/yyyy" />
-								${dateString}
+								<div id="dateFinDiv" class="large-3 columns">
+									<fmt:formatDate value="${ann.date_fin}"
+										var="dateString" pattern="dd/MM/yyyy" />
+									${dateString}
 								</div>
 							</div>
 						</a>
@@ -171,13 +176,6 @@
 		});
 	</script>
 
-
-
-
-
-
-
-
 	<script type="text/javascript">
 		$(document).on('click', '#deleteButton', function() {
 			$("input[type=hidden]").each(function(index, element) {
@@ -215,49 +213,40 @@
 	</script>
 
 	<script type="text/javascript">
-	$(document).on('click', '#changeDateButton', function() {
-		$("input[type=hidden]").each(function(index, element) {
-			var $this = $(this);
-			var $form2 = $('#formAnnonceAModerer');
+		$(document).on(
+				'click',
+				'#changeDateButton',
+				function() {
+					$("input[type=hidden]").each(
+							function(index, element) {
+								var $this = $(this);
+								var $form2 = $('#formAnnonceAModerer');
 
-			$form2.submit(function(ev) {
-				if ($this.next('dd').is(".active")) {
-					$('#clicked_button').val("changeaction");
-					$("#idAnn").val($this.val());
-					$("#date_fin").val($this.next('dd').find('.datepick').val());
-					$.ajax({
-						type : $form2.attr('method'),
-						url : $form2.attr('action'),
-						data : $form2.serialize(),
-						success : function(data) {
-						}
-					});
+								$form2.submit(function(ev) {
+									if ($this.next('dd').is(".active")) {
+										$('#clicked_button')
+												.val("changeaction");
+										$("#idAnn").val($this.val());
+										$("#date_fin").val(
+												$this.next('dd').find(
+														'.datepick').val());
+										$.ajax({
+											type : $form2.attr('method'),
+											url : $form2.attr('action'),
+											data : $form2.serialize(),
+											success : function(data) {
+											}
+										});
 
-					ev.preventDefault();
-					return false;
+										ev.preventDefault();
+										return false;
 
-				}
-			});
-		});
+									}
+								});
+							});
 
-	});
+				});
 	</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	<script type="text/javascript">
@@ -297,32 +286,41 @@
 	</script>
 
 	<script type="text/javascript">
-	$(document).on('click', '#changeDateButton2', function() {
-		$("input[type=hidden]").each(function(index, element) {
-			var $this = $(this);
-			var $form4 = $('#formAnnoncePubliees');
+		$(document).on(
+				'click',
+				'#changeDateButton2',
+				function() {
 
-			$form4.submit(function(ev) {
-				if ($this.next('dd').is(".active")) {
-					$('#clicked_button2').val("changeaction");
-					$("#idAnn2").val($this.val());
-					$("#date_fin2").val($this.next('dd').find('.datepick').val());
-					$.ajax({
-						type : $form4.attr('method'),
-						url : $form4.attr('action'),
-						data : $form4.serialize(),
-						success : function(data) {
-						}
-					});
+					$("input[type=hidden]").each(
+							function(index, element) {
+								var $this = $(this);
+								var $form4 = $('#formAnnoncePubliees');
 
-					ev.preventDefault();
-					return false;
+								$form4.submit(function(ev) {
+									if ($this.next('dd').is(".active")) {
+										$('#clicked_button2').val(
+												"changeaction");
+										$("#idAnn2").val($this.val());
+										$("#date_fin2").val(
+												$this.next('dd').find(
+														'.datepick').val());
+					
+										$.ajax({
+											type : $form4.attr('method'),
+											url : $form4.attr('action'),
+											data : $form4.serialize(),
+											success : function(data) {
+											}
+										});
 
-				}
-			});
-		});
+										ev.preventDefault();
+										return false;
 
-	});
+									}
+								});
+							});
+
+				});
 	</script>
 </body>
 </html>

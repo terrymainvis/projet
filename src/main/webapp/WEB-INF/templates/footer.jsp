@@ -1,12 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<!-- <footer> -->
+<!-- 	<div class="container text-center"> -->
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-12"> -->
+<!-- 				<p> -->
+<!-- 					&copy; <strong><a href="http://terry-mainvis.net">Terry -->
+<!-- 							MAINVIS</a></strong> 2014 -->
+<!-- 				</p> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </footer> -->
+<div id="footer">
+	<div id="row ">
+		<p>
+			FIL - Bât. M3 - Cité Scientifique 59655 Villeneuve d'Ascq Cedex Tél.
+			+33 (0) 3.20.43.44.94 | <a
+				href="http://fil.univ-lille1.fr/mentions-legales/">Mentions
+				légales</a> | <a href="mailto:webmaster-fil@univ-lille1.fr"
+				accesskey="7">Webmaster</a>
 
-</body>
-</html>
+		</p>
+	</div>
+</div>

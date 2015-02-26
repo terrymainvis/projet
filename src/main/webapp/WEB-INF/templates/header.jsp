@@ -10,11 +10,11 @@
 	href="<c:url value="/resources/css/foundation.min.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />	">
 <%-- <link rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables.css" />"> --%>
-
+<link rel="stylesheet" href="<c:url value="/resources/css/flag.css" />	">
 
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
-
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
+<script src="<c:url value="/resources/js/lang.js" />"></script>
 
 <div id="wrapper">
 	<div id="header-wrapper">
@@ -61,10 +61,11 @@
 		</ul>
 		<ul class="left">
 
-		
-				<c:choose>
-				  <c:when test="${(not empty utilisateur.roles['ADMINISTRATEUR']) || (not empty utilisateur.roles['UTILISATEUR'])}">
-				    <li class="has-dropdown"><a href="#">Administration</a>
+
+			<c:choose>
+				<c:when
+					test="${(not empty utilisateur.roles['ADMINISTRATEUR']) || (not empty utilisateur.roles['UTILISATEUR'])}">
+					<li class="has-dropdown"><a href="#">Administration</a>
 						<ul class="dropdown">
 							 <li><a href="<c:url value="/administration/list"/>">Admin. des rôles</a></li>
 							  <li><a href="<c:url value="/administration/listCategories"/>">Admin. des catégories</a></li>
@@ -78,7 +79,8 @@
 				</c:choose>
 			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message code="header.monCompte"></spring:message></a></li>
 
-			<li class="has-dropdown"><a href="#"><spring:message code="header.covoiturage"></spring:message></a>
+			<li class="has-dropdown"><a href="#"><spring:message
+						code="header.covoiturage"></spring:message></a>
 
 
 				<ul class="dropdown">
@@ -128,30 +130,34 @@
 
 	</section>
 </nav>
+
+<div id="share-wrapper">
+	<ul class="share-inner-wrp">
+		<li id="flag" class="lang button-wrap"><a onclick="switchLang()"><span>Traduire</span></a></li>
+	</ul>
 </div>
-<span style="float: right;"> <a href="<c:url value="?lang=fr"/>">FR</a>
-	| <a href="<c:url value="?lang=en"/>">EN</a>
-</span>
-<!-- <script>
- 	$("#searchCat").click(
- 			function() {
- 				if ($("#inputSearchCat").val() !== "") {
-					var input = $("<input>").attr("type", "hidden").attr(
- 							"name", "searchText").val(
- 							$("#inputSearchCat").val());
- 					$("#formulaireCat").attr("action",
- 							"/lille1community/categorie/annonceByMot").append(
- 							input).submit();
- 				} else {
- 					var input = $("<input>").attr("type", "hidden").attr(
- 							"name", "idCatSelect").val(
- 							$("#idSelectCat option:selected").attr("id"));
- 					$("#formulaireCat").attr("action",
- 							"/lille1community/categorie/annonceByCat").append(
-							input).submit();
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			//user hovers on the social button  
+			$('#share-wrapper li').hover(function() {
+				var hoverEl = $(this); //get element
+
+				//browsers with width > 699 get button slide effect
+				if ($(window).width() > 699) {
+					if (hoverEl.hasClass('visible')) {
+						hoverEl.animate({
+							"margin-left" : "-110px"
+						}, "fast").removeClass('visible');
+					} else {
+						hoverEl.animate({
+							"margin-left" : "0px"
+						}, "fast").addClass('visible');
+					}
 				}
 			});
-</script> -->
+		});
+	</script>
 <script>
 	$(document).foundation();
 </script>

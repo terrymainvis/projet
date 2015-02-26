@@ -1,7 +1,22 @@
-.panel{
+.panel {
 	margin-bottom: 20px;
 	margin-top: 20px;
 	margin-left: 20px;
 	margin-right: 20px;
 }
 
+button.success, .button.success {
+	background-color: #ae2573 !important;
+	border-color: #ae2573 !important;
+	color: #fff;
+}
+
+button.success:hover, button.success:focus, .button.success:hover,
+	.buton.success:focus {
+	background-color: #941260 !important;
+}
+
+button, .button {
+	background-color: #ae2573 !important;
+	border-color: #ae2573 !important;
+}
