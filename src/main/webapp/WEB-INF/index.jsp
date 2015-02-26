@@ -19,15 +19,14 @@
 				<img src="<c:url value="/resources/img/carpool.jpg" />">
 			</div>
 			<div class="large-6 columns">
-				<h4>Rendez vos trajets habituels moins solitaire.</h4>
+				<h4>Rendez vos trajets habituels moins solitaires</h4>
 				<div class="row">
 					<div class="large-6 columns">
-						<p>En covoiturant ensembles, allez en fac en économisant le
-							coût de vos trajets ainsi qu'en faisant de nouvelles rencontres</p>
+						<p>En covoiturant ensemble, allez en fac en économisant le
+							coût de vos trajets ainsi qu'en faisant de nouvelles rencontres.</p>
 					</div>
 					<div class="large-6 columns">
-						<p>De plus, covoiturer, c'est penser écologie, n'attendez plus
-							!</p>
+						<p>Marre des transports en commun ? Trouvez un conducteur près de chez vous !</p>
 
 					</div>
 				</div>
@@ -56,15 +55,15 @@
 				<div class="row">
 					<div class="large-6 columns">
 						<p>Vous êtes un crack en mathématiques mais avez besoin d'aide
-							en sociologie, proposez votre aide tout en cherchant une personne
-							pouvant vous rendre service à son tour</p>
+							en sociologie ? Proposez votre aide tout en cherchant une personne
+							pouvant vous rendre service à son tour.</p>
 					</div>
 					<div class="large-6 columns">
-						<p>Vous avez du petit bricolage à faire mais vous n'avez pas
-							les outils ? Quelqu'un dans la communauté Lille 1 pourra vous
-							dépanner. Vous cuisinez toujours pour deux plus de personne que
+						<p>Vous cuisinez toujours pour deux plus de personne que
 							prévu, partagez vos talents culinaires avec vos voisins de
-							résidence</p>
+							résidence ! Vous avez du petit bricolage à faire mais vous n'avez pas
+							les outils ? Quelqu'un dans la communauté Lille 1 pourra vous
+							dépanner. </p>
 
 					</div>
 				</div>
@@ -87,27 +86,27 @@
 				<img src="<c:url value="/resources/img/voyage.jpg" />">
 			</div>
 			<div class="large-6 columns">
-				<h4>Partagez vos expérience</h4>
+				<h4>Partagez votre expérience</h4>
 				<div class="row">
 					<div class="large-6 columns">
 						<p>Vous envisagez en semestre à l'étranger ? Un stage au
 							sommet du Mont Blanc ? Profitez de l'expérience des personnes de
-							la communité Lille 1</p>
+							la communité Lille 1.</p>
 					</div>
 					<div class="large-6 columns">
 						<p>De retour d'une expérience extraordinaire ? Venez en
-							parlerà la communauté Lille 1 afin de donner envie à d'autre
-							personne de suivre vos pas.</p>
+							parler afin de donner envie à d'autres
+							personnes de suivre vos pas.</p>
 
 					</div>
 				</div>
-				<div class="row">
-					<div class="large-6 columns">
-						<a href="<c:url value="/forum/new"/>" class="button small">Racontez votre histoire</a>
-					</div>
+				<div class="row">					
 					<div class="large-6 columns">
 						<a href="<c:url value="/forum/list" />" class="button small">Découvrir d'extraordinaires
 							expériences</a>
+					</div>
+					<div class="large-6 columns">
+						<a href="<c:url value="/forum/new"/>" class="button small">Racontez votre histoire</a>
 					</div>
 				</div>
 			</div>
