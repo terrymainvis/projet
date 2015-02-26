@@ -242,6 +242,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
 				.add(Restrictions.eq("valide", true))
 				.add(Restrictions.eq("type", "propose"))
+				.add(Restrictions.ge("date_fin", new Date()))
 				.createAlias("categorie", "c")
 				.add(Restrictions.neOrIsNotNull("c.lib", "Covoiturage"))
 				.list();
@@ -256,6 +257,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
 				.add(Restrictions.eq("valide", true))
 				.add(Restrictions.eq("type", "demande"))
+				.add(Restrictions.ge("date_fin", new Date()))
 				.createAlias("categorie", "c")
 				.add(Restrictions.neOrIsNotNull("c.lib", "Covoiturage"))
 				.list();
@@ -270,6 +272,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
 				.add(Restrictions.eq("valide", true))
 				.add(Restrictions.eq("type", "propose"))
+				.add(Restrictions.ge("date_fin", new Date()))
 				.createAlias("categorie", "c")
 				.add(Restrictions.eq("c.lib", "Covoiturage"))
 				.list();
@@ -284,6 +287,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
 				.add(Restrictions.eq("valide", true))
 				.add(Restrictions.eq("type", "demande"))
+				.add(Restrictions.ge("date_fin", new Date()))
 				.createAlias("categorie", "c")
 				.add(Restrictions.eq("c.lib", "Covoiturage"))
 				.list();

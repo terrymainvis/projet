@@ -39,10 +39,10 @@
 					
 					<div>
 						<form:select id="select" path="annonce.type">
-							<form:option value="Je cherche" itemValue="cherche"
-								itemLabel="cherche" />
-							<form:option value="Je propose" itemValue="propose"
-								itemLabel="propose" />
+							<form:option value="demande" itemValue="demande"
+								itemLabel="demande" >Je cherche </form:option>
+							<form:option value="propose" itemValue="propose"
+								itemLabel="propose" >Je propose  </form:option>
 						</form:select>
 					</div>
 

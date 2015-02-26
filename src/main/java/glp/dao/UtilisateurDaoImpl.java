@@ -6,6 +6,8 @@ import glp.domain.Utilisateur;
 import glp.services.UtilisateurService;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -120,10 +122,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public List<Annonce> listAnnoncePublie(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
-		java.sql.Timestamp d=new java.sql.Timestamp(System.currentTimeMillis()); 
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.ge("date_fin", d)).add(Restrictions.eq("valide", true)).add(Restrictions.le("date_deb", d)).addOrder(Order.asc("date_fin")).list();
+        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.ge("date_fin", new Date())).add(Restrictions.eq("valide", true)).addOrder(Order.asc("date_fin")).list();
 		return annonceList;
 	}
 	
@@ -141,10 +142,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	@Override
 	public List<Annonce> listAnnoncePerimees(Utilisateur utilisateur) {
 		Session session = sessionFactory.getCurrentSession();
-		java.sql.Timestamp d=new java.sql.Timestamp(System.currentTimeMillis()); 
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
-        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.le("date_fin", d)).add(Restrictions.eq("valide", true)).addOrder(Order.desc("date_fin")).list();
+        .add(Restrictions.eq( "auteur", utilisateur )).add(Restrictions.le("date_fin", new Date())).add(Restrictions.eq("valide", true)).addOrder(Order.desc("date_fin")).list();
 		return annonceList;
 	}
 	
