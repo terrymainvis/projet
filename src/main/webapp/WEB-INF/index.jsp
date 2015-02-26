@@ -103,10 +103,10 @@
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="#" class="button small">Racontez votre histoire</a>
+						<a href="<c:url value="/forum/new"/>" class="button small">Racontez votre histoire</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="#" class="button small">Découvrir d'extraordinaires
+						<a href="<c:url value="/forum/list" />" class="button small">Découvrir d'extraordinaires
 							expériences</a>
 					</div>
 				</div>

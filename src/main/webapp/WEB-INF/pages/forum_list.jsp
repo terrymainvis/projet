@@ -79,7 +79,7 @@
 										</td>
 									
 										<td><a href="<c:url value='/forum/${forum.id}'/>"
-											class="button round">Details</a>
+											class="button tiny">Details</a>
 										</td>
 										
 																				

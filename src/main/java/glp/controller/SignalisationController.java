@@ -62,7 +62,7 @@ public class SignalisationController {
 		signalService.insertRow(signal);
 		forum.setSignalements(forum.getSignalements() + 1);
 		forumService.updateRow(forum);
-		return new ModelAndView("redirect:/forum/"+id+"?estSignalee=true");
+		return new ModelAndView("redirect:/forum/"+id+"?estSignale=true");
 	}
 	//pour signal sans modal
 	@RequestMapping("new/{id}")//@ModelAttribute Signalisation signal
