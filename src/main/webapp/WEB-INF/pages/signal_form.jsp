@@ -21,7 +21,7 @@
 </script>
 
 
-<title>Signalisation d'un témoignage</title>
+<title>Signaler un témoignage</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
@@ -31,7 +31,7 @@
 			<div class="panel">
 				<form:form id="addSignalForm" modelAttribute="signal" method="post"
 					action="/lille1community/signalisation/addSignal/${forum.id}" >
-					<h2>Entrer la motif de cette signalisation  !</h2>
+					<h2>Entrer le motif </h2>
 					 ${forum.id}
 					<div>
 						<form:textarea path="desc"

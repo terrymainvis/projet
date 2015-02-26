@@ -21,7 +21,7 @@
 </script>
 
 
-<title>Creation d'une offre de job</title>
+<title>Création d'une offre de job</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>

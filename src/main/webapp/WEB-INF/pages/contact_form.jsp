@@ -24,7 +24,7 @@
 
 				<div>
 					<label> <span>Message *</span> <textarea name="contentMail"
-							placeholder="Indiquez quelles sont vos disponibilité et les informations que vous jugez importantes"
+							placeholder="Indiquez quelles sont vos disponibilités et les informations que vous jugez importantes"
 							tabindex="5" ></textarea>
 					</label>
 				</div>

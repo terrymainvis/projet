@@ -60,7 +60,7 @@
 						</tr>
 						<c:if test="${!empty stats}">
 							<tr>								
-								<td width="300" height="80" colspan="2">Nombre d'annonces créés </td>
+								<td width="300" height="80" colspan="2">Nombre d'annonces créées </td>
 								<td width="300" height="80" colspan="2">${stats.stats_nb_ann_crees}</td>
 							</tr>
 							<tr>								

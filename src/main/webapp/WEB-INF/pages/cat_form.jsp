@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/form.css" />	">
-<title>Creation categorie</title>
+<title>Création catégorie</title>
 </head>
 <body class="bg">
 <%@ include file="../templates/header.jsp" %>
@@ -41,7 +41,7 @@
 
 		</form:form>
 	</div>
-	<a href="cat_list">Liste des categories</a>
+	<a href="cat_list">Liste des catégories</a>
 </body>
 
 <script type="text/javascript">

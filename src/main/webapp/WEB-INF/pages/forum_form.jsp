@@ -21,7 +21,7 @@
 </script>
 
 
-<title>Creation de votre témoignage</title>
+<title>Création de votre témoignage</title>
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
@@ -31,7 +31,7 @@
 			<div class="panel">
 				<form:form id="addForumForm" modelAttribute="forum" method="post"
 					action="addForum" enctype="multipart/form-data">
-					<h2>Créez votre témoignage de votre éxpérience à l'étranger  !</h2>
+					<h2>Créez votre témoignage de votre expérience à l'étranger  !</h2>
 
 					<div>
 						<form:input path="titre" placeholder="Titre du témoignage" />

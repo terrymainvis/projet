@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Consulter l'éxpérience</title>
+<title>Découvrez des expériences</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css"/>
 <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/reveal.css"/>
@@ -37,7 +37,7 @@
 		<div class="large-10 columns">
 			<div class="panel">
 			<c:if test="${ !empty param[' estSignale ']}">
-		ce témoignage a été bien signalé.
+		Ce témoignage a été bien signalé.
 	</c:if>
 
 				<div   class="row" style="text-align: center">
@@ -57,7 +57,7 @@
 							class="large-12 columns">
 							<li>
 								<div class="panel">
-									<span><h4>Détail de l'éxpérience :</h4></span>
+									<span><h4>Détail de l'expérience :</h4></span>
 									<p>${forum.desc }</p>
 								</div> 
 								<div class="panel">
@@ -82,7 +82,7 @@
 						
 		</div> 
 		<div id="myModal" class="reveal-modal" data-reveal>
-		<h2 style="text-align: center">Entrez le motif de cette signalisation !!</h2>
+		<h2 style="text-align: center">Entrez le motif</h2>
 		<br />
 	  <form method="get" action="<c:url value='/signalisation/newModal/${forum.id}' />">
 	  	<div style="text-align: center">

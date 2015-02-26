@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
     <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">
-    <title>List de categorie</title>  
+    <title>Liste des catégories</title>  
     </head>  
     <body class="bg">  
       <%@ include file="../templates/header.jsp" %>
@@ -18,7 +18,7 @@
          style="background-color: teal; color: white; text-align: center;"  
          height="40px">  
            
-         <td>Libelle</td>  
+         <td>Libellé</td>  
          <td>Description</td>  
         </tr>  
         <c:forEach items="${catList}" var="cat">  
@@ -36,6 +36,6 @@
       </c:if>  
       
       
-      <a href="cat_form">Ajout de categorie</a>  
+      <a href="cat_form">Ajouter une catégorie</a>  
     </body>  
     </html>  

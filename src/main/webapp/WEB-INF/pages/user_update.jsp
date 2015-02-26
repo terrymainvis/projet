@@ -16,7 +16,7 @@
 			<div id="global" class="panel" style="text-align: center">
 				<form:form id="updateUserForm" modelAttribute="utilisateur"
 					method="post" action="update" enctype="multipart/form-data">
-					<b><b>Vos cordonnées</b></b>
+					<b><b>Vos coordonnées</b></b>
 					<br>
 					<br>
 					<div class="row" style="text-align: center">
@@ -25,7 +25,7 @@
 								<td>Nom :</td>
 								<td><b> <input type="text" name="nom"
 										value=" ${utilisateurConnecte.nom}"></td>
-								<td>Prenom :</td>
+								<td>Prénom :</td>
 								<td><b> <input type="text" name="prenom"
 										value=" ${utilisateurConnecte.prenom}"></td>
 							</tr>
@@ -38,7 +38,7 @@
 										value=" ${utilisateurConnecte.mailLille1}"></td>
 							</tr>
 							<tr>
-								<td>Deuxiéme mail :</td>
+								<td>Deuxième mail :</td>
 								<td><b> <input type="text" name="mailautre"
 										value=" ${utilisateurConnecte.mailAutre}"></td>
 								<td></td>
