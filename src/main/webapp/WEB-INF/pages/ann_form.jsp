@@ -107,7 +107,7 @@
 					</c:forEach>
 					
 					<div>
-						<input class="button" type="submit" value="Ajouter" />
+						<input class="button success" type="submit" value="Ajouter" />
 					</div>
 					
 				</form:form>
@@ -128,7 +128,7 @@
 								name="mail" value="true" />
 							<spring:message code="annForm.autreMail"></spring:message>
 							<div id="SecondeAdresseMail"></div>
-							<input name="secondMail" class="button small" type="submit"
+							<input name="secondMail" class="button success small" type="submit"
 								value="Mettre à jour" />
 						</div>
 					</div>

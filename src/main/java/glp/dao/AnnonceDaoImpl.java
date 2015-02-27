@@ -28,6 +28,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	@Override
 	public int insertRow(Annonce ann) {
 		Session session = sessionFactory.getCurrentSession();
+		ann.setDate_deb(new Date());
 		session.saveOrUpdate(ann);
 		Serializable id = session.getIdentifier(ann);
 		return (Integer) id;

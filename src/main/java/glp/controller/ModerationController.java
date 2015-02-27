@@ -92,6 +92,7 @@ public class ModerationController {
 			Map<String, Integer> annonceByCat = annonceService.getNbByCategorie();
 			myModel.put("dureeVieAnnonce", stats.getNb_jours_fin_annonce());
 			myModel.put("utilisateur", utilisateurService.getUserInSession());
+			myModel.put("catList", categorieService.getList());
 			myModel.put("annonceByCat", annonceByCat);
 			myModel.put("nbUser", nbUser);
 			myModel.put("nbAnnonceEnligne", nbAnnonceEnligne);
