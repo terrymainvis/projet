@@ -32,7 +32,9 @@
 
 			<div id="text" class="medium-6 large-6 columns">
 				<h1>Lille 1 Community</h1>
-				<p>Un lieu d'échanges et d'entraide pour la communauté Lille 1</p>
+				<p>
+					<spring:message code="header.accroche"></spring:message>
+				</p>
 			</div>
 		</div>
 	</div>
@@ -51,24 +53,26 @@
 <!-- 			</div> -->
 <!-- 	</div> -->
 
+
+
+
 <nav class="top-bar marginbot" data-topbar role="navigation">
 
 	<section class="top-bar-section">
 
-		<ul class="title-area">
-			<li class="name">
-				<h1>
-					<a href="<c:url value="/" />"><spring:message
-							code="header.acceuil"></spring:message></a>
-				</h1>
-			</li>
-		</ul>
+<!-- 		<ul class="title-area"> -->
+<!-- 			<li class="name"> -->
+<!-- 				<h1> -->
+<%-- 					<a href="<c:url value="/" />"><spring:message --%>
+<%-- 							code="header.acceuil"></spring:message></a> --%>
+<!-- 				</h1> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
 		<ul class="left">
 
 
 			<c:choose>
-				<c:when
-					test="${(not empty utilisateur.roles['ADMINISTRATEUR'])}">
+				<c:when test="${(not empty utilisateur.roles['ADMINISTRATEUR'])}">
 					<li class="has-dropdown"><a href="#">Administration</a>
 						<ul class="dropdown">
 							<li><a href="<c:url value="/administration/list"/>">Admin.
@@ -77,28 +81,30 @@
 								href="<c:url value="/administration/listCategories"/>">Admin.
 									des catégories</a></li>
 							<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
-								<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
-								<li><a href="<c:url value="/moderation"/>">Mod. paramètres & stats</a></li>
+								<li><a href="<c:url value="/moderation/list"/>">Mod.
+										annonces</a></li>
+								<li><a href="<c:url value="/moderation"/>">Mod.
+										paramètres & stats</a></li>
 							</c:if>
 							<c:if test="${not empty utilisateur.roles['REPRESENTANT']}">
 								<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
 							</c:if>
-						</ul>
-					</li>
+						</ul></li>
 				</c:when>
 				<c:when test="${not empty utilisateur.roles['MODERATEUR']}">
 					<li class="has-dropdown"><a href="#">Modération</a>
 						<ul class="dropdown">
-							<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
-							<li><a href="<c:url value="/moderation"/>">Mod. paramètres & stats</a></li>
+							<li><a href="<c:url value="/moderation/list"/>">Mod.
+									annonces</a></li>
+							<li><a href="<c:url value="/moderation"/>">Mod.
+									paramètres & stats</a></li>
 							<c:if test="${not empty utilisateur.roles['REPRESENTANT']}">
 								<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
 							</c:if>
-						</ul>
-					</li>
+						</ul></li>
 				</c:when>
 				<c:when test="${not empty utilisateur.roles['REPRESENTANT']}">
-						<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
+					<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
 				</c:when>
 			</c:choose>
 			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message
@@ -109,8 +115,8 @@
 
 
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/new/categoriechoice"  />"> <spring:message
-								code="header.creerCovoiturage"></spring:message>
+					<li><a href="<c:url value="/annonce/new/categoriechoice"  />">
+							<spring:message code="header.creerCovoiturage"></spring:message>
 					</a></li>
 					<li><a href="<c:url value="/annonce/listCov" />"> <spring:message
 								code="header.trouverCovoiturage"></spring:message>
@@ -119,8 +125,8 @@
 			<li class="has-dropdown"><a href="#"><spring:message
 						code="header.petitesAnnonces"></spring:message></a>
 				<ul class="dropdown">
-					<li><a href="<c:url value="/annonce/new/categoriechoice"  />"> <spring:message
-								code="header.creerAnnonce"></spring:message>
+					<li><a href="<c:url value="/annonce/new/categoriechoice"  />">
+							<spring:message code="header.creerAnnonce"></spring:message>
 					</a></li>
 					<li><a href="<c:url value="/annonce/list" />"> <spring:message
 								code="header.rechercherAnnonce"></spring:message>
@@ -160,7 +166,8 @@
 
 <div id="share-wrapper">
 	<ul class="share-inner-wrp">
-		<li id="flag" class="lang button-wrap"><a onclick="switchLang()"><span><spring:message code="header.tranduire"></spring:message></span></a></li>
+		<li id="flag" class="lang button-wrap"><a onclick="switchLang()"><span><spring:message
+						code="header.tranduire"></spring:message></span></a></li>
 	</ul>
 </div>
 
@@ -186,6 +193,5 @@
 	});
 </script>
 <script>
-
 	$(document).foundation();
 </script>

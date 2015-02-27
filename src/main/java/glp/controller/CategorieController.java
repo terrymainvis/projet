@@ -47,7 +47,7 @@ public class CategorieController {
 	public ModelAndView getCatForm(@ModelAttribute("categorie") Categorie cat) {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("typelist", TypeChampEnum.values());
-		
+		myModel.put("catList", categorieService.getList());
 		return new ModelAndView("cat_form", myModel);
 	}
 

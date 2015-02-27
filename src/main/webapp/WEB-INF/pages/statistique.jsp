@@ -100,7 +100,7 @@ style type ="text/css">td {
 				<h3>Changer la durée de vie d'une annonce</h3>
 				<br/>
 				Actuellement : <b>${dureeVieAnnonce}</b> jour(s) <br/>
-				<form action="moderation/setDureeVieAnn" action="get">
+				<form action="setDureeVieAnn" action="get">
 					<input type="number" name="duree_vie" placeholder="Durée de vie (en jours)" required="required"/>
 					<input class="button success" type="submit" value="Changer"/>
 				</form>

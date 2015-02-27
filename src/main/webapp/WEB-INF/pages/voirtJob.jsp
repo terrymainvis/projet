@@ -10,72 +10,36 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">
-	
-	<style type="text/css">
-	#global
-	{
-		
-		margin: 0 auto;
-		width: 200px;
-	}
-	#backg
-	{
-		background-color: #E6E6E6;
-	}
-	
-	
-	</style>
+
 </head>
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
+
+
 	<div class="row">
 		<div class="large-12 columns">
 			<div class="panel">
+				<c:if test="${ !empty param[' estSignale ']}">
+					Ce témoignage a été bien signalé.
+				</c:if>
+				<h3>
+					<b>${job.titre}</b>
+				</h3>
+				<hr>
+				<h4>
+					<spring:message code="voirJob.description"></spring:message>
+				</h4>
+				<p>${job.desc }</p>
 
-				<div   class="row" style="text-align: center">
-					<!-- <div class="large-10 columns"> -->
-					<div  class="panel">
-						<span><h4><b>${job.titre}</b></h4> </span>
-					</div>
-					<!-- </div> -->
-				</div>
+				<h4>
+					<spring:message code="voirJob.salaire"></spring:message>
+				</h4>
+				<p>${job.prix }</p>
 
-				<!-- <div class="panel"> -->
-
-				<div class="row">
-					<div class="span">
-						<!-- <div class="large-8 columns"> -->
-						<ul
-							class="large-12 columns">
-							<li>
-								<div class="panel">
-									<span><h4><spring:message code="voirJob.description"></spring:message></h4></span>
-									<p>${job.desc }</p>
-								</div> 
-								<div class="panel">
-									<span><h4><spring:message code="voirJob.salaire"></spring:message></h4></span>
-									<p>${job.prix }</p>
-								</div> 
-									
-								<div class="panel">
-									<span><h4><spring:message code="voirJob.contact"></spring:message></h4></span>
-									<p>${job.mail }</p>
-								</div>  <!-- </div> -->
-							</li>
-							<li>
-								<!-- <div class="large-8 columns"> -->
-								
-							</li>
-						</ul>
-						<!-- </div> -->
-					</div>
-				</div>
-				<!-- </div> -->
-
-
-
-
-
+				<h4>
+					<spring:message code="voirJob.contact"></spring:message>
+				</h4>
+				<p>${job.mail }</p>
 			</div>
 		</div>
 	</div>

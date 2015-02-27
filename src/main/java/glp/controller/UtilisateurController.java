@@ -101,6 +101,7 @@ public class UtilisateurController {
 					utilisateurService.listAnnonceEnCourModeration(u));
 			myModel.put("listeAnnoncesPerimees",
 					utilisateurService.listAnnoncePerimees(u));
+			myModel.put("duree_vie_ann", annonceService.getStats().getNb_jours_fin_annonce());
 		}
 		myModel.put("catList", categorieService.getList());
 		return new ModelAndView("voirCompte", myModel);

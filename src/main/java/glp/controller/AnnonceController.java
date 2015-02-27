@@ -59,7 +59,8 @@ public class AnnonceController {
 	}
 
 	/**
-	 * pour la crï¿½ation d'une annonce 1er form qui demande d'abord la categorie
+	 * pour la crï¿½ation d'une annonce 1er form qui demande d'abord la
+	 * categorie
 	 * 
 	 * @return
 	 */
@@ -83,7 +84,8 @@ public class AnnonceController {
 	@RequestMapping("new/form")
 	public ModelAndView getForm(@ModelAttribute("annform") AnnonceForm annform) {
 
-		// si on arrive sur le formulaire sans passer par le choix de catï¿½gorie
+		// si on arrive sur le formulaire sans passer par le choix de
+		// catï¿½gorie
 		// --> redirige
 		if (annform.getCat_choisie() == null)
 			return getCategorieChoice();
@@ -97,7 +99,8 @@ public class AnnonceController {
 			myModel.put("catList", categorieService.getList());
 			myModel.put("annform", annform);
 			myModel.put("utilisateur", utilisateurService.getUserInSession());
-			myModel.put("duree_vie_ann", annonceService.getStats().getNb_jours_fin_annonce());
+			myModel.put("duree_vie_ann", annonceService.getStats()
+					.getNb_jours_fin_annonce());
 
 			return new ModelAndView("ann_form", myModel);
 		}
@@ -128,61 +131,59 @@ public class AnnonceController {
 	}
 
 	@RequestMapping(value = "new/addAnn", method = RequestMethod.GET)
-	public ModelAndView addAnnonce(@ModelAttribute("annform") /*@Valid*/ AnnonceForm annform/*, BindingResult bindingResult*/) {
+	public ModelAndView addAnnonce(
+			@ModelAttribute("annform")/* @Valid */AnnonceForm annform/*
+																	 * ,
+																	 * BindingResult
+																	 * bindingResult
+																	 */) {
 
-			Annonce ann_tmp = annform.getAnnonce();
+		Annonce ann_tmp = annform.getAnnonce();
 
-			ann_tmp.setAuteur(utilisateurService.getUserInSession());		
-			annonceService.insertRow(ann_tmp);
-			if (ann_tmp.getChampscompletes()!=null)
-			for(ChampComplete cc : ann_tmp.getChampscompletes())
-			{
+		ann_tmp.setAuteur(utilisateurService.getUserInSession());
+		annonceService.insertRow(ann_tmp);
+		if (ann_tmp.getChampscompletes() != null)
+			for (ChampComplete cc : ann_tmp.getChampscompletes()) {
 				cc.setAnn(ann_tmp);
 				ccService.insertRow(cc);
 			}
-			Map<String, Object> myModel = new HashMap<String, Object>();
-			myModel.put("annonceTitre", annform.getAnnonce().getTitre());
-			myModel.put("annonceCreee", true);
-			return new ModelAndView("redirect:/",myModel);
-	}
-	
-
-/*
-	@RequestMapping("/addAnn") //@RequestParam(value="file", required = false) MultipartFile file
-	public ModelAndView addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,  @RequestParam("file") MultipartFile file) {
-		ann.setAuteur(utilisateurService.getUserInSession());
-		annonceService.insertRow(ann);
-		
-		System.out.println("fffffahkdaoianjazofffffffff"+file.getName());
-		if (!file.isEmpty()) {
-			 try {
-               byte[] bytes = file.getBytes();
-               String rootPath = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img";
-               // Create the file on server
-               String nomImage = file.getName();
-               System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
-               System.out.println(nomImage + " ejkeozjoie boh"+file.getName()+"hellooooooooo chat");
-               File serverFile = new File(rootPath
-                     + File.separator + ann.getId()+".png");
-               System.out.println(serverFile);
-             BufferedOutputStream stream = new BufferedOutputStream(
-                     new FileOutputStream(serverFile));
-             stream.write(bytes);
-             stream.close();
-			 }catch(Exception e){
-			            	e.getMessage();
-			 }
-
-		}
-
-		return new ModelAndView("redirect:/");
-		// }
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annonceTitre", annform.getAnnonce().getTitre());
+		myModel.put("annonceCreee", true);
+		return new ModelAndView("redirect:/", myModel);
 	}
 
 	/*
 	 * @RequestMapping("/addAnn") //@RequestParam(value="file", required =
 	 * false) MultipartFile file public ModelAndView
 	 * addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,
+	 * @RequestParam("file") MultipartFile file) {
+	 * ann.setAuteur(utilisateurService.getUserInSession());
+	 * annonceService.insertRow(ann);
+	 * 
+	 * System.out.println("fffffahkdaoianjazofffffffff"+file.getName()); if
+	 * (!file.isEmpty()) { try { byte[] bytes = file.getBytes(); String rootPath
+	 * = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img"; // Create
+	 * the file on server String nomImage = file.getName();
+	 * System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
+	 * System.out.println(nomImage +
+	 * " ejkeozjoie boh"+file.getName()+"hellooooooooo chat"); File serverFile =
+	 * new File(rootPath + File.separator + ann.getId()+".png");
+	 * System.out.println(serverFile); BufferedOutputStream stream = new
+	 * BufferedOutputStream( new FileOutputStream(serverFile));
+	 * stream.write(bytes); stream.close(); }catch(Exception e){ e.getMessage();
+	 * }
+	 * 
+	 * }
+	 * 
+	 * return new ModelAndView("redirect:/"); // } }
+	 * 
+	 * /*
+	 * 
+	 * @RequestMapping("/addAnn") //@RequestParam(value="file", required =
+	 * false) MultipartFile file public ModelAndView
+	 * addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,
+	 * 
 	 * @RequestParam("file") MultipartFile file) {
 	 * ann.setAuteur(utilisateurService.getUserInSession());
 	 * annonceService.insertRow(ann);
@@ -217,7 +218,8 @@ public class AnnonceController {
 
 	@RequestMapping(value = "listCov", method = RequestMethod.GET)
 	public ModelAndView getCovList() {
-		List<Annonce> covList = annonceService.getListByCat(categorieService.getIdByLib("Covoiturage"));
+		List<Annonce> covList = annonceService.getListByCat(categorieService
+				.getIdByLib("Covoiturage"));
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", covList);
@@ -259,11 +261,23 @@ public class AnnonceController {
 	public ModelAndView sendMail(@PathVariable("id") int idAnnSelected,
 			HttpServletRequest request) {
 		Annonce annonce = annonceService.getRowById(idAnnSelected);
-		EmailSender.sendMail(annonce.getAuteur().getMailLille1(), utilisateurService
-				.getUserInSession().getMailLille1(), request.getParameter("contentMail"), annonce);
-		return new ModelAndView("redirect:/");
+		List<Categorie> catList = categorieService.getList();
+		Map<String, Object> myModel = new HashMap<String, Object>();
+		myModel.put("annonce", annonce);
+		myModel.put("catList", catList);
+		myModel.put("champscompletes", ccService.getListByAnn(annonce));
+		myModel.put("roleList", roleService.getList());
+		myModel.put("utilisateur", utilisateurService.getUserInSession());
+		myModel.put("confirmMail", "mailsent");
+		if (EmailSender.sendMail(annonce.getAuteur().getMailLille1(),
+				utilisateurService.getUserInSession().getMailLille1(),
+				request.getParameter("contentMail"), annonce) == true)
+			myModel.put("confirmMail", "mailsent");
+		else
+			myModel.put("confirmMail", "mailNotsent");
+		return new ModelAndView("consultAnn", myModel);
 	}
-	
+
 	@RequestMapping(value = "/propose/list", method = RequestMethod.GET)
 	public ModelAndView getAnnListPropose() {
 		List<Annonce> annList = annonceService.getListAnnoncesProposees();
@@ -274,7 +288,7 @@ public class AnnonceController {
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
-	
+
 	@RequestMapping(value = "/demande/list", method = RequestMethod.GET)
 	public ModelAndView getAnnListDemande() {
 		List<Annonce> annList = annonceService.getListAnnoncesDemandees();
@@ -285,7 +299,7 @@ public class AnnonceController {
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
-	
+
 	@RequestMapping(value = "/propose/listCov", method = RequestMethod.GET)
 	public ModelAndView getCovListPropose() {
 		List<Annonce> annList = annonceService.getListCovProposes();
@@ -296,7 +310,7 @@ public class AnnonceController {
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		return new ModelAndView("ann_list", myModel);
 	}
-	
+
 	@RequestMapping(value = "/demande/listCov", method = RequestMethod.GET)
 	public ModelAndView getCovListDemande() {
 		List<Annonce> annList = annonceService.getListCovDemandes();
@@ -308,6 +322,4 @@ public class AnnonceController {
 		return new ModelAndView("ann_list", myModel);
 	}
 
-
-	
 }

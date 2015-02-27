@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<c:url value="/resources/css/consultAnn.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
@@ -27,7 +28,7 @@
 	<%@ include file="../templates/header.jsp"%>
 
 	<div class="row">
-		<div class="large-8 columns">
+		<div class="large-offset-2 large-8 columns">
 			<div class="panel">
 				<form:form id="addForumForm" modelAttribute="forum" method="post"
 					action="addForum" enctype="multipart/form-data">
@@ -49,14 +50,14 @@
 						<form:errors path="date_pub" />
 					</div>
  --%>
-				<div>
-						<form:input path="date_fin" type="text" id="datepicker"
-							placeholder="Fin de votre offre:" />
-					</div>
+<!-- 					<div> -->
+<%-- 						<form:input path="date_fin" type="text" id="datepicker" --%>
+<%-- 							placeholder="Fin de votre offre:" /> --%>
+<!-- 					</div> -->
 
-					
+
 					<div>
-						<input class="button" type="submit" value="Ajouter" />
+						<input class="button success" type="submit" value="Ajouter" />
 					</div>
 
 				</form:form>

@@ -5,8 +5,10 @@ import glp.domain.Forum;
 import glp.domain.Utilisateur;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -19,9 +21,15 @@ public class ForumDaoImpl implements ForumDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	HttpSession httpSession;
 
 	@Override
 	public int insertRow(Forum forum) {
+		
+		forum.setDate_deb(new Date());
+//		forum.setAuteur((Utilisateur)httpSession.getAttribute("current_user"));
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(forum);
 		Serializable id = session.getIdentifier(forum);

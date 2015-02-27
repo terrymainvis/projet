@@ -33,7 +33,7 @@
 					<form:input type="hidden" path="annonce.categorie.id" value="${annform.cat_choisie.id }" />
 					
 					<div>
-						<form:input path="annonce.titre" placeholder="Titre de l'annonce" />
+						<form:input path="annonce.titre" placeholder="Titre de l'annonce" required="required"/>
 						<form:errors path="annonce.titre" />
 					</div>
 					

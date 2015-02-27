@@ -9,11 +9,10 @@ button.success:hover, button.success:focus, .button.success:hover,
 	background-color: #941260 !important;
 }
 
-button, .button {
-	background-color: #ae2573 !important;
-	border-color: #ae2573 !important;
-}
-
 h3 {
 	text-align: center;
+}
+
+button.alert:hover, button.alert:focus, .button.alert:hover, .button.alert:focus {
+    background-color: #cf2a0e;
 }

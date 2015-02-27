@@ -11,8 +11,9 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/foundation.min.css'/>">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
+<script src="<c:url value="/resources/js/foundation.min.js" />"></script>
+<script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
 
 
 <title>Mon Compte</title>
@@ -20,12 +21,9 @@
 <body class="bg">
 	<%@ include file="../templates/header.jsp"%>
 
+	<div id="alertMail"></div>
 	<div class="row">
-		<!-- 	<div id="modalModifMail" class="reveal-modal" data-reveal> -->
-		<!--   		<h2>Suppression d'une catégorie</h2><a class="close-reveal-modal">&#215;</a> -->
-		<!--   		<p>Voulez-vous vraiment supprimer la catégorie <b id="categ"></b>? Cela supprimera toutes les annonces de cette catégorie s'il y en a.</p> -->
-		<!--   		<a id="lienSuppression" class="button alert" href="">Supprimer</a> -->
-		<!-- 	</div> -->
+
 		<div class="large-6 columns">
 			<div id="global" class="panel callout">
 				<h3 class="text-center">Mes informations</h3>
@@ -90,20 +88,22 @@
 												<div class="row">${ann.desc}</div>
 												<br>
 												<div class="row">
-													<div class="large-3 columns">
+													<div class="large-8 columns">
 														<span>Changer la date de fin :</span> <input
 															class="datepick" name="date_fin" type="text" />
 													</div>
-													<div class="large-offset-2 large-2 columns end">
-														<br> <input id="changeDateButton2" class="button"
-															name="buttonchangedate" type="submit" value="Modifier" />
+													<div class="large-2 columns end">
+														<br> <input id="changeDateButton2"
+															class="button small success" name="buttonchangedate"
+															type="submit" value="Modifier" />
 													</div>
 												</div>
 												<br>
 												<div class="row">
-													<div class=" large-offset-4">
-														<input id="deleteButton2" name="test" class="button"
-															type="submit" value="Supprimer cette annonce" />
+													<div class=" large-offset-3 large-8 columns">
+														<input id="deleteButton2" name="test"
+															class="button small success" type="submit"
+															value="Supprimer cette annonce" />
 													</div>
 												</div>
 
@@ -155,20 +155,20 @@
 												<div class="row">${ann.desc}</div>
 												<br>
 												<div class="row">
-													<div class="large-3 columns">
+													<div class="large-8 columns">
 														<span>Changer la date de fin :</span> <input
 															class="datepick" name="date_fin" type="text" />
 													</div>
-													<div class="large-offset-2 large-2 columns end">
-														<br> <input id="changeDateButton" class="button"
-															type="submit" value="Modifier" />
+													<div class="large-2 columns end">
+														<br> <input id="changeDateButton"
+															class="button small success" type="submit"
+															value="Modifier" />
 													</div>
 												</div>
-												<br>
 												<div class="row">
-													<div class=" large-offset-4">
-														<input id="deleteButton" class="button" type="submit"
-															value="Supprimer cette annonce" />
+													<div class="large-offset-3 large-8 columns">
+														<input id="deleteButton" class="button small success"
+															type="submit" value="Supprimer cette annonce" />
 													</div>
 												</div>
 
@@ -220,20 +220,22 @@
 												<div class="row">${ann.desc}</div>
 												<br>
 												<div class="row">
-													<div class="large-3 columns">
+													<div class="large-8 columns">
 														<span>Changer la date de fin :</span> <input
 															class="datepick" name="date_fin" type="text" />
 													</div>
-													<div class="large-offset-2 large-2 columns end">
-														<br> <input id="changeDateButton2" class="button"
-															name="buttonchangedate" type="submit" value="Modifier" />
+													<div class="large-2 columns end">
+														<br> <input id="changeDateButton2"
+															class="button small success" name="buttonchangedate"
+															type="submit" value="Modifier" />
 													</div>
 												</div>
 												<br>
 												<div class="row">
-													<div class=" large-offset-4">
-														<input id="deleteButton2" name="test" class="button"
-															type="submit" value="Supprimer cette annonce" />
+													<div class=" large-offset-3 large-8 columns">
+														<input id="deleteButton2" name="test"
+															class="button small success" type="submit"
+															value="Supprimer cette annonce" />
 													</div>
 												</div>
 
@@ -253,15 +255,13 @@
 		</div>
 	</div>
 
-	<script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
 
-	<script type="text/javascript"
-		src="<c:url value="/resources/js/foundation/foundation.js" />"></script>
 	<script type="text/javascript"
 		src="<c:url value="/resources/js/foundation/foundation.accordion.js" />"></script>
 	<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 	<script type="text/javascript"
 		src="<c:url value="/resources/js/datepicker-fr.js" />"></script>
+
 
 	<script>
 		$(document).foundation({
@@ -275,7 +275,6 @@
 	<script>
 		$(document)
 				.ready(
-
 						function() {
 							var frm = $('#updateUtiForm');
 							frm.submit(function(ev) {
@@ -294,21 +293,28 @@
 									.click(
 											function() {
 												document
-														.getElementById("SecondeAdresseMail").innerHTML = "<div class='large-6 columns'> <input id='secondMail' name='mailAutre' type='email' placeholder='Autre addresse mail' required='required' /></div>"
-														+ "<div class='success tiny large-6 columns'> <button id='saveMail' class='success tiny'>Sauvegarder</button></div>";
+														.getElementById("SecondeAdresseMail").innerHTML = "<div id='divInput' class='large-6 columns'> <input id='secondMail' name='mailAutre' type='text' placeholder='Autre addresse mail'  /></div>"
+														+ "<div id='divButton' class='success tiny large-6 columns'> <button id='saveMail' class='success tiny'>Sauvegarder</button></div>";
 												var elem = document
 														.getElementById("secondMail");
 												elem.value = "${current_user.mailAutre}";
 											});
 
-							$('.datepick').each(
-									function() {
-										$(this).datepicker(
-												$.datepicker.regional['fr']);
-									});
+							$(function() {
+								$.datepicker
+										.setDefaults($.datepicker.regional['fr']);
 
-							$("#datepicker").datepicker(
-									$.datepicker.regional['fr']);
+								$("#datepicker").datepicker({
+									minDate : '+1D',
+									maxDate : '+${duree_vie_ann}D'
+								});
+							});
+
+							$('.datepick').each(function() {
+								$(this).datepicker({
+									minDate : '+0D'
+								});
+							});
 						});
 	</script>
 
@@ -319,9 +325,8 @@
 						'#saveMail',
 						function() {
 							var newmail = $("#secondMail").val();
- 							document.getElementById("SecondeAdresseMail").innerHTML = "";
- 							document.getElementById("spanMail").innerHTML = newmail;
-// 									.getElementById("secondMail");
+							document.getElementById("spanMail").innerHTML = newmail;
+							document.getElementById("alertMail").innerHTML = '<div class="row"> <div class="small-12 columns"><div data-alert class="alert-box success"> Votre adresse mail a bien été mise à jour <a href="#" class="close">&times;</a> </div> </div></div>'
 						});
 	</script>
 

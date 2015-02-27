@@ -13,9 +13,10 @@
 	href="<c:url value="/resources/css/formContact.css" />	">
 </head>
 
-<body>
+<body class="bg">
+	<%@ include file="../templates/header.jsp"%>
 	<div class="wrapper">
-		<div  id="main" style="padding: 50px 0 0 0;" >
+		<div id=" main" class="panel">
 
 			<!-- Form -->
 			<form:form action="sendmail" id="contact-form" method="post">
@@ -26,7 +27,7 @@
 				<div>
 					<label> <span>Message *</span> <textarea name="contentMail"
 							placeholder="Indiquez quelles sont vos disponibilités et les informations que vous jugez importantes"
-							tabindex="5" ></textarea>
+							tabindex="5"></textarea>
 					</label>
 				</div>
 				<div>
