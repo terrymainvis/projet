@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 <script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 <script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>

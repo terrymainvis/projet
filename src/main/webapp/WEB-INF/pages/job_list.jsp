@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
 
 <title>Liste des offres d'emploi</title>

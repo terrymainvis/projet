@@ -6,6 +6,7 @@
 <html>
 <head>
 <title>Consulter un job</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">

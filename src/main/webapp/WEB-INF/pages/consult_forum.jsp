@@ -7,6 +7,7 @@
 <html>
 <head>
 <title>Découvrez des expériences</title>
+<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css"/>
 <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/reveal.css"/>

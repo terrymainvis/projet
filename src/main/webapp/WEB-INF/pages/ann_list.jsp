@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/accueil.css" />	">
 <link rel="stylesheet"

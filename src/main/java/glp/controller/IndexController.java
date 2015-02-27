@@ -56,7 +56,7 @@ public class IndexController {
 		List<Annonce> annList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.ANNONCE)); 
 
 		List<Annonce> covoitList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.COVOIT));
-		List<Job> jobList = jobService.getListRecent(); 
+//		List<Job> jobList = jobService.getListRecent(); 
 		
 
 		//List<Annonce> covoitList = annonceService.getListRecent(categorieService.getIdByLib(IdBasicCategorie.COVOIT)); 
@@ -66,7 +66,7 @@ public class IndexController {
 		
 		modelIndex.put("covoitList", covoitList);
 		modelIndex.put("annList", annList);
-		modelIndex.put("jobList", jobList);
+//		modelIndex.put("jobList", jobList);
 		modelIndex.put("utilisateur", utilisateurService.getUserInSession());
 		modelIndex.put("catList", listeCat);
 		modelIndex.put("forumListRecent", forumListRecent);

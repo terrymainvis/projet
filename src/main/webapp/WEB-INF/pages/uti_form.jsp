@@ -18,7 +18,7 @@
 			action="addUser">
 			<div class="row">
 				<div class="large-offset-3 large-6 colums">
-					<form:input path="prenom" placeholder="prenom" />
+					<form:input path="prenom" placeholder="prenom" required="required"/>
 				</div>
 			</div>
 

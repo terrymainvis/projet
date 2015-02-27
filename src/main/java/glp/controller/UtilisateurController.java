@@ -73,17 +73,34 @@ public class UtilisateurController {
 		return new ModelAndView("user_update", myModel);
 	}
 
+	@RequestMapping(value = "/updateMailUtilisateur", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	/* permet l'appel AJAX */
+	public void updateMailUser(
+			@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+		Utilisateur u = utilisateurService.getUserInSession();
+
+		u.setMailAutre(utilisateur.getMailAutre());
+		u.setContactAutreMail(utilisateur.isContactAutreMail());
+
+		utilisateurService.updateRow(u);
+	}
+
 	@RequestMapping(value = "monCompte", method = RequestMethod.GET)
 	public ModelAndView getAnnListValides() {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("catList", categorieService.getList());
 		Utilisateur u = utilisateurService.getUserInSession();
-		if (u!=null) {
-			u= utilisateurService.getRowById(utilisateurService.getUserInSession().getId());
+		if (u != null) {
+			u = utilisateurService.getRowById(utilisateurService
+					.getUserInSession().getId());
 			myModel.put("utilisateur", u);
-			myModel.put("listeAnnoncesPubliees", utilisateurService.listAnnoncePublie(u));
-			myModel.put("listeAnnoncesAModerer", utilisateurService.listAnnonceEnCourModeration(u));
-			myModel.put("listeAnnoncesPerimees", utilisateurService.listAnnoncePerimees(u));
+			myModel.put("listeAnnoncesPubliees",
+					utilisateurService.listAnnoncePublie(u));
+			myModel.put("listeAnnoncesAModerer",
+					utilisateurService.listAnnonceEnCourModeration(u));
+			myModel.put("listeAnnoncesPerimees",
+					utilisateurService.listAnnoncePerimees(u));
 		}
 		myModel.put("catList", categorieService.getList());
 		return new ModelAndView("voirCompte", myModel);
@@ -95,15 +112,14 @@ public class UtilisateurController {
 
 		String action = request.getParameter("clickedbutton");
 		String id = request.getParameter("idAnnonce");
-		
-		if(action.equals("changeaction")){
+
+		if (action.equals("changeaction")) {
 			String datefin = request.getParameter("datefin");
 			annonceService.updateDateAnnonce(Integer.parseInt(id), datefin);
-		}
-		else if (action.equals("deleteaction")){
-			annonceService.deleteRow(Integer.parseInt(request.getParameter("idAnnonce")));
-		}
-		else{
+		} else if (action.equals("deleteaction")) {
+			annonceService.deleteRow(Integer.parseInt(request
+					.getParameter("idAnnonce")));
+		} else {
 			System.out.println("erreur");
 		}
 

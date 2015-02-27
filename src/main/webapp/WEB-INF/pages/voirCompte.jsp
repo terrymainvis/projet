@@ -3,13 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
+<link rel="stylesheet" href="<c:url value="/resources/css/font.css" />	">
 <link rel="stylesheet"
 	href="<c:url value='/resources/css/foundation.min.css'/>">
 <link rel="stylesheet"
@@ -39,7 +38,7 @@
 						<span>${utilisateur.mailLille1}</span>
 						<br>
 						<span>Second mail :</span>
-						<span><c:choose>
+						<span id="spanMail"><c:choose>
 								<c:when test="${empty utilisateur.mailAutre}">
 								Aucun
 								</c:when>
@@ -47,8 +46,11 @@
 			    				${utilisateur.mailAutre}
 			    				</c:otherwise>
 							</c:choose> </span>
-						<div id="SecondeAdresseMail"></div>
-						<button id="modalModifMail" class="success tiny">Modifier</button>
+						<form:form id="updateUtiForm" commandName="utilisateur"
+							method="post" action="updateMailUtilisateur">
+							<div class="row" id="SecondeAdresseMail"></div>
+						</form:form>
+						<button id="ModifMail" class="success tiny">Modifier</button>
 					</c:when>
 					<c:otherwise>
 							Se reconnecter
@@ -271,22 +273,56 @@
 		});
 	</script>
 	<script>
-		$(function() {
-			$('#modalModifMail')
-					.click(
-							function() {
-								document.getElementById("SecondeAdresseMail").innerHTML = " <input id='secondMail' name='mailAutre' type='text' placeholder='Autre addresse mail' />";
-								var elem = document
-										.getElementById("secondMail");
-								elem.value = "${current_user.mailAutre}";
+		$(document)
+				.ready(
+
+						function() {
+							var frm = $('#updateUtiForm');
+							frm.submit(function(ev) {
+								$.ajax({
+									type : frm.attr('method'),
+									url : frm.attr('action'),
+									data : frm.serialize(),
+									success : function(data) {
+									}
+								});
+
+								ev.preventDefault();
 							});
 
-			$('.datepick').each(function() {
-				$(this).datepicker($.datepicker.regional['fr']);
-			});
+							$('#ModifMail')
+									.click(
+											function() {
+												document
+														.getElementById("SecondeAdresseMail").innerHTML = "<div class='large-6 columns'> <input id='secondMail' name='mailAutre' type='email' placeholder='Autre addresse mail' required='required' /></div>"
+														+ "<div class='success tiny large-6 columns'> <button id='saveMail' class='success tiny'>Sauvegarder</button></div>";
+												var elem = document
+														.getElementById("secondMail");
+												elem.value = "${current_user.mailAutre}";
+											});
 
-			$("#datepicker").datepicker($.datepicker.regional['fr']);
-		});
+							$('.datepick').each(
+									function() {
+										$(this).datepicker(
+												$.datepicker.regional['fr']);
+									});
+
+							$("#datepicker").datepicker(
+									$.datepicker.regional['fr']);
+						});
+	</script>
+
+	<script type="text/javascript">
+		$(document)
+				.on(
+						'click',
+						'#saveMail',
+						function() {
+							var newmail = $("#secondMail").val();
+ 							document.getElementById("SecondeAdresseMail").innerHTML = "";
+ 							document.getElementById("spanMail").innerHTML = newmail;
+// 									.getElementById("secondMail");
+						});
 	</script>
 
 	<script type="text/javascript">

@@ -10,6 +10,8 @@
 <!-- 		</div> -->
 <!-- 	</div> -->
 <!-- </footer> -->
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/footer.css" />    ">
 <div id="footer">
 	<div id="row ">
 		<p>
