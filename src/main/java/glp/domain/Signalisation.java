@@ -17,7 +17,6 @@ public class Signalisation {
 	@Column(name="signal_id")
 	private int id;
 	
-	@Size(min=5, max=500)
 	@Column(name="signal_desc")
 	private String desc;
 	

@@ -44,23 +44,18 @@ public class JobController {
 			List<Categorie> catList = categorieService.getList();
 
 			Map<String, Object> myModel = new HashMap<String, Object>();
+			myModel.put("job", new Job());
 			myModel.put("utilisateur", utilisateur);
 			myModel.put("catList", catList);
 			return new ModelAndView("job_form", myModel);
 		}
 		
 		
-		@RequestMapping(value="addjob")/*@RequestParam(value="file", required = false) MultipartFile file*/
-		public ModelAndView addJob(Model model ,@RequestParam String titre,
-												@RequestParam String desc,
-												@RequestParam Date date_fin,
-												@RequestParam String prix,
-												@RequestParam String mail) {
-			Job job = new Job(titre, desc, date_fin, prix,mail);
+		@RequestMapping(value="addjob")
+		public ModelAndView addJob(@ModelAttribute("job") Job job) {
 			job.setAuteur(utilisateurService.getUserInSession());
 			jobService.insertRow(job);
-			return new ModelAndView("redirect:/");
-			//return new ModelAndView("redirect:/");
+			return getJobList();
 		}
 		
 		@RequestMapping(value = "list", method = RequestMethod.GET)

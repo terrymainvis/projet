@@ -31,18 +31,19 @@
 	</c:choose>
 
 
-	<%-- 	<c:if test="${(utilisateur.role.nom=='ADMINISTRATEUR') || (utilisateur.role.nom=='UTILISATEUR')}"> --%>
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="panel">
-				<a href="<c:url value="/moderation/list"/>"><h3>Mod&eacute;ration</h3></a>
-				<p>
-					Statut de l'annonce : <b> <c:choose>
-							<c:when test="${annonce.valide=='TRUE'}">
-					    Valid&eacute;
+
+	<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="panel">
+					<a href="<c:url value="/moderation/list"/>"><h3>Modération</h3></a>
+					<p>
+						Statut de l'annonce : <b> <c:choose>
+								<c:when test="${annonce.valide=='TRUE'}">
+					    Validée
 					  </c:when>
-							<c:when test="${annonce.valide=='FALSE'}">
-					    Refus&eacute;
+								<c:when test="${annonce.valide=='FALSE'}">
+					    Refusée
 					  </c:when>
 							<c:otherwise>
 					    En attente
@@ -59,9 +60,9 @@
 				</p>
 			</div>
 		</div>
-	</div>
-	<%-- 	</c:if> --%>
-
+		</div>
+	</c:if>
+	
 	<div class="row">
 		<div class="large-12 columns">
 			<div class="panel">

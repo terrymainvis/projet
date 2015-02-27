@@ -45,66 +45,64 @@ style type ="text/css">td {
 
 
 	<div class="row">
-		<div class="large-6 columns">
-			<div class="panel" style="text-align: center">
+		<div class="large-8 columns">
+			<div class="panel text-center">
 
-				<b><b>Statistiques</b></b><br> <br>
-
-
-
-				<table id=stat class="display">
+				<h3>Statistiques</h3>
+				<c:choose>
+					<c:when test="${!empty stats}">
+					<table id=stat class="display small-12">
 					<tr>
-						<td width="300" height="80" colspan="2">Nombre d'utilisateurs
+						<td>Nombre d'utilisateurs
 						</td>
-						<td width="300" height="80" colspan="2">${nbUser}</td>
+						<td>${nbUser}</td>
 					</tr>
-					<c:if test="${!empty stats}">
 						<tr>
-							<td width="300" height="80" colspan="2">Nombre d'annonces
+							<td>Nombre d'annonces
 								créées</td>
-							<td width="300" height="80" colspan="2">${stats.stats_nb_ann_crees}</td>
+							<td>${stats.stats_nb_ann_crees}</td>
 						</tr>
 						<tr>
-							<td width="300" height="80" colspan="2">Nombre de jobs créés
+							<td>Nombre de jobs créés
 							</td>
-							<td width="300" height="80" colspan="2">${stats.stats_nb_jobs_crees}</td>
+							<td>${stats.stats_nb_jobs_crees}</td>
 						</tr>
 						<tr>
-							<td width="300" height="80" colspan="2">Nombre de forums
+							<td>Nombre de forums
 								créés</td>
-							<td width="300" height="80" colspan="2">${stats.stats_nb_forums_crees}</td>
+							<td>${stats.stats_nb_forums_crees}</td>
 						</tr>
-					</c:if>
 					<tr>
-						<td width="300" height="80" colspan="2">Nombre d'annonces en
+						<td>Nombre d'annonces en
 							ligne</td>
-						<td width="300" height="80" colspan="2">${nbAnnonceEnligne}</td>
+						<td>${nbAnnonceEnligne}</td>
 					</tr>
-
 					<c:if test="${!empty annonceByCat}">
 						<c:forEach items="${annonceByCat}" var="ann">
 							<tr>
-
-								<td width="300" height="80" colspan="2">nombre d'annonces
+								<td>Nombre d'annonces
 									"${ann.key}"</td>
-								<td width="300" height="80" colspan="2">${ann.value}</td>
+								<td>${ann.value}</td>
 							</tr>
-
-							<br>
 						</c:forEach>
-
 					</c:if>
 				</table>
+					</c:when>
+					<c:otherwise>
+						Aucune statistique à afficher
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		
-		<div class="large-6 columns">
+		<div class="large-4 columns">
 			<div class="panel" style="text-align: center">
 				<h3>Changer la durée de vie d'une annonce</h3>
 				<br/>
+				Actuellement : <b>${dureeVieAnnonce}</b> jour(s) <br/>
 				<form action="moderation/setDureeVieAnn" action="get">
 					<input type="number" name="duree_vie" placeholder="Durée de vie (en jours)" required="required"/>
-					<input class="button" type="submit" value="Changer"/>
+					<input class="button success" type="submit" value="Changer"/>
 				</form>
 			</div>
 		</div>

@@ -30,12 +30,12 @@
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/demande/listCov" class="button small">
+						<a href="/lille1community/annonce/demande/listCov" class="button success small">
 							<spring:message code="index.covoiturageProposeBouton"></spring:message>
 						</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/propose/listCov" class="button small">
+						<a href="/lille1community/annonce/propose/listCov" class="button success small">
 							<spring:message code="index.covoiturageChercheBouton"></spring:message>
 						</a>
 					</div>
@@ -64,12 +64,12 @@
 				</div>
 				<div class="row">
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/demande/list" class="button small">
+						<a href="/lille1community/annonce/demande/list" class="button success small">
 							<spring:message code="index.annoncesProposeBouton"></spring:message>
 						</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="/lille1community/annonce/propose/list" class="button small">
+						<a href="/lille1community/annonce/propose/list" class="button success small">
 							<spring:message code="index.annoncesChercheBouton"></spring:message>
 						</a>
 					</div>
@@ -96,12 +96,12 @@
 				</div>
 				<div class="row">					
 					<div class="large-6 columns">
-						<a href="<c:url value="/forum/list" />" class="button small">
+						<a href="<c:url value="/forum/list" />" class="button success small">
 							<spring:message code="index.experiencesDecouvreBouton"></spring:message>
 						</a>
 					</div>
 					<div class="large-6 columns">
-						<a href="<c:url value="/forum/new"/>" class="button small">
+						<a href="<c:url value="/forum/new"/>" class="button success small">
 							<spring:message code="index.experiencesRaconteBouton"></spring:message>
 						</a>
 					</div>

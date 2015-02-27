@@ -51,9 +51,9 @@ public class AdministrationController {
 	
 	@RequestMapping("/list")
 	public ModelAndView getListeUtilisateurs(Map<String, Object> modelListeUtilisateurs) {
-		if(modelListeUtilisateurs==null)
-			modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			if(modelListeUtilisateurs==null)
+				modelListeUtilisateurs = new HashMap<String, Object>();
 			List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 			listeUtilisateur = utilisateurService.getList();
 			modelListeUtilisateurs.put("listeUtilisateurs", listeUtilisateur);
@@ -61,8 +61,9 @@ public class AdministrationController {
 			modelListeUtilisateurs.put("roleList", roleService.getList());
 			modelListeUtilisateurs.put("catList", categorieService.getList());
 			modelListeUtilisateurs.put("newUser", new Utilisateur());
-//		}
-		return new ModelAndView("admin_listeUtilisateurs", modelListeUtilisateurs);
+			return new ModelAndView("admin_listeUtilisateurs", modelListeUtilisateurs);
+//		}  else
+//			return new ModelAndView("redirect:/");
 	}
 	
 	/*
@@ -70,12 +71,13 @@ public class AdministrationController {
 	 */
 	@RequestMapping("/modifierStatutAdmin/{id}")
 	public ModelAndView modifierStatutAdmin(@PathVariable("id") int idUtilisateur) {
-		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
 			modelListeUtilisateurs=modelModifierStatutAdmin(uti);
-//		}
-		return getListeUtilisateurs(modelListeUtilisateurs);
+			return getListeUtilisateurs(modelListeUtilisateurs);
+//		}  else
+//		return new ModelAndView("redirect:/");
 	}
 	
 	/*
@@ -83,23 +85,21 @@ public class AdministrationController {
 	 */
 	public Map<String, Object> modelModifierStatutAdmin(Utilisateur u) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
-//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			// Il faut laisser au moins 1 administrateur
-			if (utilisateurService.isAdministrateur(u)) {
-				if (utilisateurService.getListByRole("ADMINISTRATEUR").size()<=1) {
-					modelListeUtilisateurs.put("nbAdminInsuffisant", true);
-					return modelListeUtilisateurs;
-				}
-				u.removeRole("ADMINISTRATEUR");
-				modelListeUtilisateurs.put("changementStatut", "n'est plus ADMINISTRATEUR");
-			} else {
-				u.addRole(roleService.getRowByNom("ADMINISTRATEUR"));
-				modelListeUtilisateurs.put("changementStatut", "devient ADMINISTRATEUR");
+		// Il faut laisser au moins 1 administrateur
+		if (utilisateurService.isAdministrateur(u)) {
+			if (utilisateurService.getListByRole("ADMINISTRATEUR").size()<=1) {
+				modelListeUtilisateurs.put("nbAdminInsuffisant", true);
+				return modelListeUtilisateurs;
 			}
-			utilisateurService.updateRow(u);
-			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
-//		}			
-	return modelListeUtilisateurs;
+			u.removeRole("ADMINISTRATEUR");
+			modelListeUtilisateurs.put("changementStatut", "n'est plus ADMINISTRATEUR");
+		} else {
+			u.addRole(roleService.getRowByNom("ADMINISTRATEUR"));
+			modelListeUtilisateurs.put("changementStatut", "devient ADMINISTRATEUR");
+		}
+		utilisateurService.updateRow(u);
+		modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+		return modelListeUtilisateurs;
 	}
 	
 	/*
@@ -107,12 +107,13 @@ public class AdministrationController {
 	 */
 	@RequestMapping("/modifierStatutMod/{id}")
 	public ModelAndView modifierStatutMod(@PathVariable("id") int idUtilisateur) {
-		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
 			modelListeUtilisateurs=modelModifierStatutMod(uti);
-//		}
-		return getListeUtilisateurs(modelListeUtilisateurs);
+			return getListeUtilisateurs(modelListeUtilisateurs);
+//		}  else
+//		return new ModelAndView("redirect:/");
 	}
 	
 	/*
@@ -120,18 +121,16 @@ public class AdministrationController {
 	 */
 	public Map<String, Object> modelModifierStatutMod(Utilisateur u) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
-//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
-			if(utilisateurService.isModerateur(u)) {
-				u.removeRole("MODERATEUR");
-				modelListeUtilisateurs.put("changementStatut", "n'est plus MODERATEUR");
-			} else {
-				u.addRole(roleService.getRowByNom("MODERATEUR"));
-				modelListeUtilisateurs.put("changementStatut", "devient MODERATEUR");
-			}
-			modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
-			utilisateurService.updateRow(u);
-//		}			
-	return modelListeUtilisateurs;
+		if(utilisateurService.isModerateur(u)) {
+			u.removeRole("MODERATEUR");
+			modelListeUtilisateurs.put("changementStatut", "n'est plus MODERATEUR");
+		} else {
+			u.addRole(roleService.getRowByNom("MODERATEUR"));
+			modelListeUtilisateurs.put("changementStatut", "devient MODERATEUR");
+		}
+		modelListeUtilisateurs.put("utilisateurSelectionne", u.getMailLille1());
+		utilisateurService.updateRow(u);
+		return modelListeUtilisateurs;
 	}
 	
 	/*
@@ -139,12 +138,13 @@ public class AdministrationController {
 	 */
 	@RequestMapping("/modifierStatutRep/{id}")
 	public ModelAndView modifierStatutRep(@PathVariable("id") int idUtilisateur) {
-		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 			Utilisateur uti = utilisateurService.getRowById(idUtilisateur);
 			modelListeUtilisateurs=modelModifierStatutRep(uti);
-//		}
-		return getListeUtilisateurs(modelListeUtilisateurs);
+			return getListeUtilisateurs(modelListeUtilisateurs);
+//		}  else
+//		return new ModelAndView("redirect:/");
 	}
 	
 	/*
@@ -168,20 +168,21 @@ public class AdministrationController {
 	
 	@RequestMapping("/listCategories")
 	public ModelAndView getListeCategories(Map<String, Object> modelListeCategories) {
-		if(modelListeCategories==null)
-			modelListeCategories = new HashMap<String, Object>();
-//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			if(modelListeCategories==null)
+				modelListeCategories = new HashMap<String, Object>();
 			modelListeCategories.put("utilisateur", utilisateurService.getUserInSession());
 			modelListeCategories.put("catList", categorieService.getList());
 			modelListeCategories.put("mapCategories", categorieService.getNbByCategorie());
-//		}
-		return new ModelAndView("admin_listeCategories", modelListeCategories);
+			return new ModelAndView("admin_listeCategories", modelListeCategories);
+		} else
+			return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping("/supprimer/categorie/{id}")
 	public ModelAndView supprimerCategorie(@PathVariable("id") int idCategorie) {
-		Map<String, Object> modelListeCategories = new HashMap<String, Object>();
-//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Map<String, Object> modelListeCategories = new HashMap<String, Object>();
 			if(categorieService.getRowById(idCategorie)!=null) {
 				modelListeCategories.put("categorieSupprimee", categorieService.getRowById(idCategorie).getLib());
 //				if(categorieService.getNbByCategorie().get(idCategorie)==0) {
@@ -192,14 +193,15 @@ public class AdministrationController {
 //				} else 
 //					modelListeCategories.put("isCategorieSupprimee", false);
 			}
-//		}
-		return getListeCategories(modelListeCategories);
+			return getListeCategories(modelListeCategories);
+		}  else
+			return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping("/nouveauStatut")
 	public ModelAndView changementStatut(@ModelAttribute("utilisateur") Utilisateur utilisateur, @RequestParam("roleSelected") Role roleSelected) {
-		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 //		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 			if(!utilisateur.getMailLille1().trim().isEmpty()) {
 				Utilisateur u=utilisateurService.getRowByMailLille1(utilisateur.getMailLille1());
 				Role r=roleService.getRowByNom(roleSelected.getNom());
@@ -230,18 +232,21 @@ public class AdministrationController {
 					modelListeUtilisateurs.put("utilisateurSelectionne", utilisateur.getMailLille1());
 				}
 			}
-//		}
 		return getListeUtilisateurs(modelListeUtilisateurs);
+//		}  else
+//			return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping("/supprimer/utilisateur/{id}")
 	public ModelAndView supprimerRolesUtilisateur(@PathVariable("id") int idUtilisateur) {
-		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
-//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
+			Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
 			Utilisateur u=utilisateurService.getRowById(idUtilisateur);
 			modelListeUtilisateurs=modelSupprimerRolesUtilisateur(u);
-//		}
-		return getListeUtilisateurs(modelListeUtilisateurs);
+			return getListeUtilisateurs(modelListeUtilisateurs);
+		}  else
+			return new ModelAndView("redirect:/");
+		
 	}
 	
 	/*
@@ -249,7 +254,6 @@ public class AdministrationController {
 	 */
 	public Map<String, Object> modelSupprimerRolesUtilisateur(Utilisateur u) {
 		Map<String, Object> modelListeUtilisateurs = new HashMap<String, Object>();
-//		if(utilisateurService.isAdministrateur(utilisateurService.getUserInSession())) {
 			if(u!=null) {
 				if (utilisateurService.isAdministrateur(u) &&
 					utilisateurService.getListByRole("ADMINISTRATEUR").size()<=1) {
@@ -268,8 +272,7 @@ public class AdministrationController {
 					modelListeUtilisateurs.put("changementStatut", "n'a plus de rôles spéciaux");
 				}
 			}
-//		}			
-		return modelListeUtilisateurs;
+			return modelListeUtilisateurs;
 	}
 	
 	

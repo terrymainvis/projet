@@ -77,8 +77,8 @@
 			</div>
 		</div>	
 		 <div class="small-5 columns">
-				<a href="<c:url value='/signalisation/new/${forum.id}' />"
-				class="button round">signaler</a>
+<%-- 				<a href="<c:url value='/signalisation/new/${forum.id}' />" --%>
+<!-- 				class="button round">signaler</a> -->
 				<a href="#" class="button alert" id="modalLauncher">signaler</a>
 						
 		</div> 
@@ -96,7 +96,7 @@
 	  	
 	  		<br/>
 	  	<div>
-	  		<input class="button" type="submit" value="Envoyer"/>
+	  		<input class="button alert" type="submit" value="Signaler"/>
 	  	</div>
 	  </form>
 	    <a href="#" class="close-reveal-modal" id="closeModal">&#215;</a>

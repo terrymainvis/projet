@@ -96,6 +96,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public boolean isModerateur(Utilisateur utilisateur) {
+		if(utilisateur==null)
+			return false;
 		if(utilisateur.getRoles()!=null)
 			if(utilisateur.getRoles().containsKey("MODERATEUR"))
 				return true;
@@ -104,6 +106,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
 	@Override
 	public boolean isAdministrateur(Utilisateur utilisateur) {
+		if(utilisateur==null)
+			return false;
 		if(utilisateur.getRoles()!=null)
 			if(utilisateur.getRoles().containsKey("ADMINISTRATEUR"))
 				return true;
@@ -112,6 +116,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 	
 	@Override
 	public boolean isRepresentant(Utilisateur utilisateur) {
+		if(utilisateur==null)
+			return false;
 		if(utilisateur.getRoles()!=null)
 			if(utilisateur.getRoles().containsKey("REPRESENTANT"))
 				return true;

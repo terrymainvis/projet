@@ -140,8 +140,10 @@ public class AnnonceController {
 				cc.setAnn(ann_tmp);
 				ccService.insertRow(cc);
 			}
-		
-			return new ModelAndView("redirect:/");
+			Map<String, Object> myModel = new HashMap<String, Object>();
+			myModel.put("annonceTitre", annform.getAnnonce().getTitre());
+			myModel.put("annonceCreee", true);
+			return new ModelAndView("redirect:/",myModel);
 	}
 	
 
@@ -203,7 +205,8 @@ public class AnnonceController {
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getAnnList() {
-		List<Annonce> annList = annonceService.getListByCat(categorieService.getIdByLib("Petite annonce"));
+		List<Annonce> annList = annonceService.getListAnnoncesProposees();
+		annList.addAll(annonceService.getListAnnoncesDemandees());
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("annList", annList);

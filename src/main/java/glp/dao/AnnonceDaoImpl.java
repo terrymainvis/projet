@@ -108,6 +108,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Annonce> annonceList = session.createCriteria(Annonce.class)
+				.add(Restrictions.ge("date_fin", new Date()))
 				.createAlias("categorie", "c")
 				.add(Restrictions.eq("c.id", catId)).list();
 		return annonceList;
@@ -126,14 +127,26 @@ public class AnnonceDaoImpl implements AnnonceDao {
 	@Override
 	public List<Annonce> getListByCatEtMot(int idCat, String motcle) {
 		Session session = sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Annonce> annonceList = session
-				.createQuery(
-						"from Annonce where cat_id= :catID"
-								+ " and (ann_desc like :searchText or ann_titre like:searchText )")
-				.setParameter("searchText", "%" + motcle + "%")
-				.setParameter("catID", idCat).list();
-		return annonceList;
+//		@SuppressWarnings("unchecked")
+//		List<Annonce> annonceList = session
+//				.createQuery(
+//						"from Annonce where cat_id= :catID"
+//								+ " and (ann_desc like :searchText or ann_titre like:searchText )")
+//				.setParameter("searchText", "%" + motcle + "%")
+//				.setParameter("catID", idCat).list();
+//		return annonceList;
+		
+//		if(!motcle.trim().isEmpty()) {
+			@SuppressWarnings("unchecked")
+			List<Annonce> annonceList = session.createCriteria(Annonce.class)
+					.add(Restrictions.or(Restrictions.ilike("desc", "%"+motcle+"%"), Restrictions.ilike("titre", "%"+motcle+"%")))
+					.add(Restrictions.ge("date_fin", new Date()))
+					.createAlias("categorie", "c")
+					.add(Restrictions.eq("c.id", idCat))
+					.list();
+			return annonceList;
+//		} else
+//			return getListByCat(idCat);
 	}
 
 	@Override

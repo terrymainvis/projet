@@ -68,7 +68,7 @@
 
 			<c:choose>
 				<c:when
-					test="${(not empty utilisateur.roles['ADMINISTRATEUR']) || (not empty utilisateur.roles['UTILISATEUR'])}">
+					test="${(not empty utilisateur.roles['ADMINISTRATEUR'])}">
 					<li class="has-dropdown"><a href="#">Administration</a>
 						<ul class="dropdown">
 							<li><a href="<c:url value="/administration/list"/>">Admin.
@@ -76,7 +76,13 @@
 							<li><a
 								href="<c:url value="/administration/listCategories"/>">Admin.
 									des catégories</a></li>
-							<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
+							<c:if test="${not empty utilisateur.roles['MODERATEUR']}">
+								<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
+								<li><a href="<c:url value="/moderation"/>">Mod. paramètres & stats</a></li>
+							</c:if>
+							<c:if test="${not empty utilisateur.roles['REPRESENTANT']}">
+								<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
+							</c:if>
 						</ul>
 					</li>
 				</c:when>
@@ -84,8 +90,15 @@
 					<li class="has-dropdown"><a href="#">Modération</a>
 						<ul class="dropdown">
 							<li><a href="<c:url value="/moderation/list"/>">Mod. annonces</a></li>
+							<li><a href="<c:url value="/moderation"/>">Mod. paramètres & stats</a></li>
+							<c:if test="${not empty utilisateur.roles['REPRESENTANT']}">
+								<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
+							</c:if>
 						</ul>
 					</li>
+				</c:when>
+				<c:when test="${not empty utilisateur.roles['REPRESENTANT']}">
+						<li><a href="<c:url value="/job/new"/>">Créer un job</a></li>
 				</c:when>
 			</c:choose>
 			<li><a href="<c:url value="/utilisateur/monCompte"  />"><spring:message

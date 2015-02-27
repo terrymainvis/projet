@@ -44,8 +44,8 @@
 					</div>
 
 					<div>
-						<form:input path="prix" pattern="\d+(\.\d{2})?"
-							placeholder="Salaire (Mensuel/Horaire/Journalier/Hebdomadaire...) !" />
+						<form:input path="prix"
+							placeholder="Salaire (Horaire/Journalier/Hebdomadaire/Mensuel... à préciser)" />
 						<form:errors path="desc" />
 					</div>
 					
@@ -56,7 +56,7 @@
 					</div>
 
 					<div>
-						<form:input path="date_fin" type="text" id="datepicker" pattern="\d{1,2}/\d{1,2}/\d{4}"
+						<form:input path="date_fin" type="text" id="datepicker"
 							placeholder="Fin de votre offre:" />
 					</div>
 

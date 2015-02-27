@@ -2,10 +2,12 @@ package glp.services;
 
 import glp.dao.UtilisateurDao;
 import glp.domain.Annonce;
+import glp.domain.Role;
 import glp.domain.Utilisateur;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -43,12 +45,22 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	@Transactional
 	public Integer updateRow(Utilisateur utilisateur) {
+		if (getUserInSession()!=null)
+			if (getUserInSession().getId()==utilisateur.getId())
+				httpSession.setAttribute("current_user", utilisateur);
 		return utilisateurDao.updateRow(utilisateur);
 	}
 
 	@Override
 	@Transactional
 	public Integer deleteRow(Integer id) {
+		if (getUserInSession()!=null)
+			if (getUserInSession().getId()==id) {
+				Utilisateur u = getRowById(id);
+				Map<String,Role> roles = u.getRoles();
+				u.setRoles(roles.get("UTILISATEUR"));
+				httpSession.setAttribute("current_user", u);
+			}
 		return utilisateurDao.deleteRow(id);
 	}
 
