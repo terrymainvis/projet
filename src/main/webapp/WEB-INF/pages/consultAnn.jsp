@@ -38,16 +38,17 @@
 				<div class="panel">
 					<a href="<c:url value="/moderation/list"/>"><h3>Modération</h3></a>
 					<p>
-						Statut de l'annonce : <b> <c:choose>
-								<c:when test="${annonce.valide=='TRUE'}">
-					    Validée
-					  </c:when>
-								<c:when test="${annonce.valide=='FALSE'}">
-					    Refusée
-					  </c:when>
+						Statut de l'annonce : <b> 
+						<c:choose>
+							<c:when test="${annonce.valide=='TRUE'}">
+					    		Validée
+					  		</c:when>
+							<c:when test="${annonce.valide=='FALSE'}">
+					    		Refusée
+					  		</c:when>
 							<c:otherwise>
-					    En attente
-					  </c:otherwise>
+							    En attente
+							  </c:otherwise>
 						</c:choose>
 					</b>
 				</p>
