@@ -44,6 +44,9 @@ public class UtilisateurController {
 
 	@Autowired
 	private AnnonceService annonceService;
+	
+	@Autowired
+	HttpServletRequest request;
 
 	// @RequestMapping("/")
 	// public ModelAndView getIndex() {
@@ -90,6 +93,13 @@ public class UtilisateurController {
 	public ModelAndView getAnnListValides() {
 		Map<String, Object> myModel = new HashMap<String, Object>();
 		myModel.put("catList", categorieService.getList());
+		
+//		AttributePrincipal principal = (AttributePrincipal)request.getUserPrincipal();
+//		Map attributes = principal.getAttributes();
+//		Iterator attributeNames = attributes.keySet().iterator();
+//		
+//		new Utilisateur(prenom, nom, mailLille1)
+//		utilisateurService.insertRow();
 		Utilisateur u = utilisateurService.getUserInSession();
 		if (u != null) {
 			u = utilisateurService.getRowById(utilisateurService
