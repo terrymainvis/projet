@@ -4,6 +4,7 @@ import glp.domain.Annonce;
 import glp.domain.Stats;
 import glp.domain.Utilisateur;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ public interface AnnonceDao {
 	public List<Annonce> getListByUtilisateur(Utilisateur u);
 	public int nbAnnonceEnLigne();
 	public Map<String, Integer> getNbByCategorie();
+	public Date getDateLimite();
 
 	public void incrementNbAnnCrees();
 	

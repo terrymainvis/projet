@@ -210,6 +210,7 @@ public class AnnonceDaoImpl implements AnnonceDao {
 		return mapCategorieNbAnnonces;
 	}
 
+
 	@Override
 	public void incrementNbAnnCrees() {
 		Session session = sessionFactory.getCurrentSession();
@@ -247,6 +248,15 @@ public class AnnonceDaoImpl implements AnnonceDao {
 				.createQuery("UPDATE Stats SET nb_jours_fin_annonce= :duree_vie").setParameter("duree_vie", duree_vie);
 		query.executeUpdate();
 	}
+=======
+@Override
+public Date getDateLimite() {
+	Session session = sessionFactory.getCurrentSession();
+	
+	return null;
+}
+
+
 	
 	@Transactional
 	@Override
