@@ -274,34 +274,5 @@ public class AdministrationController {
 			}
 			return modelListeUtilisateurs;
 	}
-	
-
-	@RequestMapping(value ="statistique", method = RequestMethod.GET)
-	public ModelAndView afficheStatistique(){
-		int nbUser = utilisateurService.nbUtilisateur();
-		int nbAnnonceEnligne= annonceService.nbAnnonceEnLigne();
-		 Map<String, Integer> annonceByCat = annonceService.getNbByCategorie();
-		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("annonceByCat", annonceByCat);
-		myModel.put("nbUser", nbUser);
-		myModel.put("nbAnnonceEnligne", nbAnnonceEnligne);
-
-		return new ModelAndView("statistique", myModel);
-	}
-	
-	
-	
-	@RequestMapping(value ="parametre", method = RequestMethod.GET)
-	public ModelAndView parametre(){
-		int nbUser = utilisateurService.nbUtilisateur();
-		int nbAnnonceEnligne= annonceService.nbAnnonceEnLigne();
-		 Map<String, Integer> annonceByCat = annonceService.getNbByCategorie();
-		Map<String, Object> myModel = new HashMap<String, Object>();
-		myModel.put("annonceByCat", annonceByCat);
-		myModel.put("nbUser", nbUser);
-		myModel.put("nbAnnonceEnligne", nbAnnonceEnligne);
-
-		return new ModelAndView("statistique", myModel);
-	}
 
 }

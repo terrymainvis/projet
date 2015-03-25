@@ -68,7 +68,7 @@ style type ="text/css">td {
 							<td>${stats.stats_nb_jobs_crees}</td>
 						</tr>
 						<tr>
-							<td>Nombre de forums
+							<td>Nombre de témoignages
 								créés</td>
 							<td>${stats.stats_nb_forums_crees}</td>
 						</tr>
@@ -97,10 +97,10 @@ style type ="text/css">td {
 		
 		<div class="large-4 columns">
 			<div class="panel" style="text-align: center">
-				<h3>Changer la durée de vie d'une annonce</h3>
+				<h3>Changer la durée de vie des futures annonces</h3>
 				<br/>
 				Actuellement : <b>${dureeVieAnnonce}</b> jour(s) <br/>
-				<form action="setDureeVieAnn" action="get">
+				<form action="/lille1community/moderation/setDureeVieAnn" action="get">
 					<input type="number" name="duree_vie" placeholder="Durée de vie (en jours)" required="required"/>
 					<input class="button success" type="submit" value="Changer"/>
 				</form>
