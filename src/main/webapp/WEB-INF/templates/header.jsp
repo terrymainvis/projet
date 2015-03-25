@@ -145,13 +145,13 @@
 				<li class="has-form"><input name="motCle" type="text"
 					placeholder="<spring:message code="header.hintRecherche"></spring:message>"
 					id="inputSearchCat"></li>
-				<li class="has-form"><select name="cat" class="medium"
-					name="listeCategorie" id="idSelectCat">
-
-						<c:forEach items="${catList}" var="cat">
-							<option id="${cat.id}">${cat.lib}</option>
-						</c:forEach>
-				</select></li>
+					
+				<li class="has-form">
+					<select id="cat_fr_en" name="cat" class="medium"
+						name="listeCategorie" id="idSelectCat">						
+					</select>
+				</li>
+				
 				<li class="has-form">
 					<!-- 				<a href="#" class="alert button expand" --> <!-- 					id="searchCat">Rechercher</a> -->
 					<input class="button success" type="submit"
@@ -159,8 +159,6 @@
 				</li>
 			</ul>
 		</form>
-
-
 	</section>
 </nav>
 
@@ -194,4 +192,26 @@
 </script>
 <script>
 	$(document).foundation();
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	var query = gup('lang');
+	
+	if (query == null){
+		$('<c:forEach items="${catList}" var="cat">' 
+		+ '<option id="${cat.id}">${cat.lib}</option>'
+		+ '</c:forEach>').appendTo('#cat_fr_en');
+	}
+	
+	else if (query == "en"){
+		$('<c:forEach items="${catList}" var="cat">' 
+				+ '<option id="${cat.id}">${cat.lib_en}</option>'
+				+ '</c:forEach>').appendTo('#cat_fr_en');
+	}
+	else if (query == "fr"){
+		$('<c:forEach items="${catList}" var="cat">' 
+				+ '<option id="${cat.id}">${cat.lib}</option>'
+				+ '</c:forEach>').appendTo('#cat_fr_en');
+	}
+});
 </script>

@@ -64,10 +64,12 @@ public class CategorieController {
 		//et valide l'association
 		ArrayList<Champ> champs_tmp = new ArrayList<Champ>();
 		
-		for(Champ c : cat.getChamps()) {
-			if(c.getNom()!=null) {
-				c.setCat(cat);
-				champs_tmp.add(c);
+		if(cat.getChamps()!=null) {
+			for(Champ c : cat.getChamps()) {
+				if(c.getNom()!=null) {
+					c.setCat(cat);
+					champs_tmp.add(c);
+				}
 			}
 		}
 		
