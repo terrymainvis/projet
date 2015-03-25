@@ -230,6 +230,7 @@ public class AnnonceController {
 
 	@RequestMapping("{id}")
 	public ModelAndView getAnnonce(@PathVariable("id") int idAnnSelected) {
+		
 		Annonce annonce = annonceService.getRowById(idAnnSelected);
 		List<Categorie> catList = categorieService.getList();
 		Map<String, Object> myModel = new HashMap<String, Object>();
