@@ -104,8 +104,7 @@
 							<p>${annonce.desc }</p>
 						</div>
 						<br>
-						<div id="champ_nom">
-						</div>
+						<div id="champ_nom"></div>
 					</div>
 
 					<div class="large-6 columns">
@@ -118,7 +117,12 @@
 											<spring:message code="consultAnn.email"></spring:message>
 											:
 										</h5>
-										<span>${annonce.auteur.mailLille1} </span>
+										<c:if test="${not empty annonce.auteur.mailAutre }">
+											<span>${annonce.auteur.mailAutre} </span>
+										</c:if>
+										<c:if test="${empty annonce.auteur.mailAutre }">
+											<span>${annonce.auteur.mailLille1} </span>
+										</c:if>
 									</div>
 									</br>
 									<div>
@@ -156,8 +160,15 @@
 				<input placeholder="Motif" name="motif" type="text" />
 			</div>
 			<br />
-			<div style="text-align: center">To :
-				${annonce.auteur.mailLille1}</div>
+			<div style="text-align: center">
+				To :
+				<c:if test="${not empty annonce.auteur.mailAutre }" >
+					${annonce.auteur.mailAutre}
+				</c:if>
+				<c:if test="${empty annonce.auteur.mailAutre }" >
+					${annonce.auteur.mailLille1}
+				</c:if>
+			</div>
 			<br />
 			<div>
 				<input class="button" type="submit" value="Envoyer" />
@@ -177,31 +188,38 @@
 	});
 </script>
 <script type="text/javascript">
-	$(document).ready(function() {
-	var query = gup('lang');
-	
-	if (query == null){
-		$('<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
-				+'<c:forEach  items="${champscompletes}" var="cc">'
-					+ '<h4><c:out value="${cc.champ.nom }" /> :</h4>'
-					+ '<p><c:out value="${cc.valeur }" /></p>'
-				+ '</c:forEach></c:if>').appendTo('#champ_nom');
-	}
-	
-	else if (query == "en"){
-		$('<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
-				+'<c:forEach  items="${champscompletes}" var="cc">'
-					+ '<h4><c:out value="${cc.champ.nom_en }" /> :</h4>'
-					+ '<p><c:out value="${cc.valeur }" /></p>'
-				+ '</c:forEach></c:if>').appendTo('#champ_nom');
-	}
-	else if (query == "fr"){
-		$('<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
-				+'<c:forEach  items="${champscompletes}" var="cc">'
-					+ '<h4><c:out value="${cc.champ.nom }" /> :</h4>'
-					+ '<p><c:out value="${cc.valeur }" /></p>'
-				+ '</c:forEach></c:if>').appendTo('#champ_nom');
-	}
-});
+	$(document)
+			.ready(
+					function() {
+						var query = gup('lang');
+
+						if (query == null) {
+							$(
+									'<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
+											+ '<c:forEach  items="${champscompletes}" var="cc">'
+											+ '<h4><c:out value="${cc.champ.nom }" /> :</h4>'
+											+ '<p><c:out value="${cc.valeur }" /></p>'
+											+ '</c:forEach></c:if>').appendTo(
+									'#champ_nom');
+						}
+
+						else if (query == "en") {
+							$(
+									'<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
+											+ '<c:forEach  items="${champscompletes}" var="cc">'
+											+ '<h4><c:out value="${cc.champ.nom_en }" /> :</h4>'
+											+ '<p><c:out value="${cc.valeur }" /></p>'
+											+ '</c:forEach></c:if>').appendTo(
+									'#champ_nom');
+						} else if (query == "fr") {
+							$(
+									'<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
+											+ '<c:forEach  items="${champscompletes}" var="cc">'
+											+ '<h4><c:out value="${cc.champ.nom }" /> :</h4>'
+											+ '<p><c:out value="${cc.valeur }" /></p>'
+											+ '</c:forEach></c:if>').appendTo(
+									'#champ_nom');
+						}
+					});
 </script>
 </html>
