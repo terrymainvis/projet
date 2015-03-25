@@ -153,56 +153,6 @@ public class AnnonceController {
 		return new ModelAndView("redirect:/", myModel);
 	}
 
-	/*
-	 * @RequestMapping("/addAnn") //@RequestParam(value="file", required =
-	 * false) MultipartFile file public ModelAndView
-	 * addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,
-	 * @RequestParam("file") MultipartFile file) {
-	 * ann.setAuteur(utilisateurService.getUserInSession());
-	 * annonceService.insertRow(ann);
-	 * 
-	 * System.out.println("fffffahkdaoianjazofffffffff"+file.getName()); if
-	 * (!file.isEmpty()) { try { byte[] bytes = file.getBytes(); String rootPath
-	 * = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img"; // Create
-	 * the file on server String nomImage = file.getName();
-	 * System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
-	 * System.out.println(nomImage +
-	 * " ejkeozjoie boh"+file.getName()+"hellooooooooo chat"); File serverFile =
-	 * new File(rootPath + File.separator + ann.getId()+".png");
-	 * System.out.println(serverFile); BufferedOutputStream stream = new
-	 * BufferedOutputStream( new FileOutputStream(serverFile));
-	 * stream.write(bytes); stream.close(); }catch(Exception e){ e.getMessage();
-	 * }
-	 * 
-	 * }
-	 * 
-	 * return new ModelAndView("redirect:/"); // } }
-	 * 
-	 * /*
-	 * 
-	 * @RequestMapping("/addAnn") //@RequestParam(value="file", required =
-	 * false) MultipartFile file public ModelAndView
-	 * addAnnonce(@ModelAttribute("annonce") @Valid Annonce ann,
-	 * 
-	 * @RequestParam("file") MultipartFile file) {
-	 * ann.setAuteur(utilisateurService.getUserInSession());
-	 * annonceService.insertRow(ann);
-	 * 
-	 * System.out.println("fffffahkdaoianjazofffffffff"+file.getName()); if
-	 * (!file.isEmpty()) { try { byte[] bytes = file.getBytes(); String rootPath
-	 * = "C:/Users/hadhri/git/projet/src/main/webapp/resources/img"; // Create
-	 * the file on server String nomImage = file.getName();
-	 * System.out.println(ann.getId()+"dknfsfnsfnslfnsflsnlfdfl");
-	 * System.out.println(nomImage +
-	 * " ejkeozjoie boh"+file.getName()+"hellooooooooo chat"); File serverFile =
-	 * new File(rootPath + File.separator + ann.getId()+".png");
-	 * System.out.println(serverFile); BufferedOutputStream stream = new
-	 * BufferedOutputStream( new FileOutputStream(serverFile));
-	 * stream.write(bytes); stream.close(); }catch(Exception e){ e.getMessage();
-	 * }
-	 * 
-	 * } return new ModelAndView("redirect:/"); // return "ann_list"; }
-	 */
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView getAnnList() {
@@ -270,7 +220,13 @@ public class AnnonceController {
 		myModel.put("roleList", roleService.getList());
 		myModel.put("utilisateur", utilisateurService.getUserInSession());
 		myModel.put("confirmMail", "mailsent");
-		if (EmailSender.sendMail(annonce.getAuteur().getMailLille1(),
+		
+		//envoie à l'email renseigné, sinon à l'email lille 1
+		String mailto = annonce.getAuteur().getMailLille1();
+		if(annonce.getAuteur().getMailAutre()!=null && annonce.getAuteur().getMailAutre()!="")
+			mailto = annonce.getAuteur().getMailAutre();
+		
+		if (EmailSender.sendMail(mailto,
 				utilisateurService.getUserInSession().getMailLille1(),
 				request.getParameter("contentMail"), annonce) == true)
 			myModel.put("confirmMail", "mailsent");

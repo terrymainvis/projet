@@ -63,7 +63,13 @@ public class ModerationController {
 			String content = "Bonjour, votre annonce intitulée : " + ann.getTitre() + "\n\n"
 					 + "dont la description est la suivante \n\n" + ann.getDesc() + "\n\n\n"
 					 + "a été modérée pour le motif suivant : " + motif;
-			EmailSender.sendMail(ann.getAuteur().getMailLille1(), "Lille1Community", content, ann);
+			
+			//envoie à l'email renseigné, sinon à l'email lille 1
+			String mailto = ann.getAuteur().getMailLille1();
+			if(ann.getAuteur().getMailAutre()!=null && ann.getAuteur().getMailAutre()!="")
+				mailto = ann.getAuteur().getMailAutre();
+			
+			EmailSender.sendMail(mailto, "Lille1Community", content, ann);
 			annonceService.deleteRow(ann.getId());
 			return getListAnnoncesAModerer();
 		}  else
