@@ -12,7 +12,10 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/form.css" />">
 <link rel="stylesheet"
 	href="http://cdn.foundation5.zurb.com/foundation.css">
+<script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
+<script src="<c:url value="/resources/js/foundation.min.js" />"></script>
 <script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
+<script src="<c:url value="/resources/js/lang.js" />"></script>
 
 </head>
 <body class="bg">
@@ -101,20 +104,7 @@
 							<p>${annonce.desc }</p>
 						</div>
 						<br>
-						<div>
-							<c:if
-								test="${champscompletes != null && champscompletes.size()>0 }">
-								<c:forEach items="${champscompletes}" var="cc">
-									<span><h4>
-											<c:out value="${cc.champ.nom }" />
-											:
-										</h4></span>
-									<p>
-										<c:out value="${cc.valeur }" />
-									</p>
-								</c:forEach>
-							</c:if>
-
+						<div id="champ_nom">
 						</div>
 					</div>
 
@@ -185,5 +175,33 @@
 		$('#myModal').foundation('reveal', 'open');
 		$('[data-reveal]').foundation('reveal', 'close')
 	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	var query = gup('lang');
+	
+	if (query == null){
+		$('<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
+				+'<c:forEach  items="${champscompletes}" var="cc">'
+					+ '<h4><c:out value="${cc.champ.nom }" /> :</h4>'
+					+ '<p><c:out value="${cc.valeur }" /></p>'
+				+ '</c:forEach></c:if>').appendTo('#champ_nom');
+	}
+	
+	else if (query == "en"){
+		$('<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
+				+'<c:forEach  items="${champscompletes}" var="cc">'
+					+ '<h4><c:out value="${cc.champ.nom_en }" /> :</h4>'
+					+ '<p><c:out value="${cc.valeur }" /></p>'
+				+ '</c:forEach></c:if>').appendTo('#champ_nom');
+	}
+	else if (query == "fr"){
+		$('<c:if test="${champscompletes != null && champscompletes.size()>0 }">'
+				+'<c:forEach  items="${champscompletes}" var="cc">'
+					+ '<h4><c:out value="${cc.champ.nom }" /> :</h4>'
+					+ '<p><c:out value="${cc.valeur }" /></p>'
+				+ '</c:forEach></c:if>').appendTo('#champ_nom');
+	}
+});
 </script>
 </html>

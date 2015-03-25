@@ -61,6 +61,7 @@
 										function() {
 											$(
 													'<div id="ch'+i+'"><input type="text" name="champs[' + i + '].nom" placeholder="Nom du champ" />'
+															+ '<input type="text" name="champs[' + i + '].nom_en" placeholder="Nom du champ en Anglais" />'
 															+ '<select name="champs[' + i + '].type" >'
 															+ '<option value="0" label="Type de champ" />'
 															+ '<c:forEach var="item" items="${typelist}">'

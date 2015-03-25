@@ -34,6 +34,10 @@ public class Champ {
 	@Column(name="nom")
 	private String nom;
 	
+	//le nom du chap en anglais
+	@Column(name="nom_en")
+	private String nom_en;
+	
 	@Column(name="requis")
 	private boolean requis;
 
@@ -41,17 +45,19 @@ public class Champ {
 		super();
 	}
 
-	public Champ(int id, String nom, Categorie cat, TypeChampEnum type, boolean requis) {
+	public Champ(int id, String nom, String nom_en, Categorie cat, TypeChampEnum type, boolean requis) {
 		super();
 		this.id = id;
 		this.nom = nom;
+		this.nom_en = nom_en;
 		this.cat = cat;
 		this.type = type;
 		this.requis = requis;
 	}
-	public Champ( String nom, Categorie cat, TypeChampEnum type, boolean requis) {
+	public Champ( String nom, String nom_en, Categorie cat, TypeChampEnum type, boolean requis) {
 		super();
 		this.nom = nom;
+		this.nom_en = nom_en;
 		this.cat = cat;
 		this.type = type;
 		this.requis = requis;
@@ -103,6 +109,14 @@ public class Champ {
 
 	public void setRequis(boolean requis) {
 		this.requis = requis;
+	}
+
+	public String getNom_en() {
+		return nom_en;
+	}
+
+	public void setNom_en(String nom_en) {
+		this.nom_en = nom_en;
 	}
 	
 	

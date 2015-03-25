@@ -12,6 +12,12 @@
 	href="<c:url value="/resources/css/accueil.css" />	">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/listannonce.css" />	">
+	
+<script src="<c:url value="/resources/js/vendor/jquery.js" />"></script>
+<script src="<c:url value="/resources/js/foundation.min.js" />"></script>
+<script src="<c:url value="/resources/js/vendor/modernizr.js" />"></script>
+<script src="<c:url value="/resources/js/lang.js" />"></script>
+
 <title>Liste des annonces</title>
 </head>
 <body class="bg">
@@ -50,7 +56,7 @@
 								<tr>
 									<td>${ann.titre}</td>
 
-									<td>${ann.categorie.lib}</td>
+									<td><div id="cat_lib"> ${ann.categorie.lib}</div></td>
 									<td>${ann.type}</td>
 
 									<td><fmt:formatDate value="${ann.date_fin}"
@@ -91,5 +97,6 @@
 											});
 						});
 	</script>
+	
 </body>
 </html>
