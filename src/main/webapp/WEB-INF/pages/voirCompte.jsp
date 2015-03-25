@@ -194,14 +194,14 @@
 
 
 
-						<form:form id="formAnnoncePubliees" method="post"
+						<form:form id="formAnnoncePerim" method="post"
 							action="SupprimerAnnonceUtilisateur" commandName="annonce">
 							<input id="idAnn2" type="hidden" name="idAnnonce" />
 							<input id="date_fin2" type="hidden" name="datefin" />
-							<input id="clicked_button2" type="hidden" name="clickedbutton" />
+							<input id="clicked_button3" type="hidden" name="clickedbutton" />
 							<div class="row">
 								<dl class="accordion " data-accordion>
-									<c:forEach items="${listeAnnoncesPubliees}" var="ann"
+									<c:forEach items="${listeAnnoncesPerimees}" var="ann"
 										varStatus="status">
 										<input id="idhidden" type="hidden" value="${ann.id}" />
 										<dd id="annonce" class="accordion-navigation">
@@ -225,7 +225,7 @@
 															class="datepick" name="date_fin" type="text" />
 													</div>
 													<div class="large-2 columns end">
-														<br> <input id="changeDateButton2"
+														<br> <input id="changeDateButton3"
 															class="button small success" name="buttonchangedate"
 															type="submit" value="Modifier" />
 													</div>
@@ -233,7 +233,7 @@
 												<br>
 												<div class="row">
 													<div class=" large-offset-3 large-8 columns">
-														<input id="deleteButton2" name="test"
+														<input id="deleteButton3" name="test"
 															class="button small success" type="submit"
 															value="Supprimer cette annonce" />
 													</div>
@@ -420,6 +420,46 @@
 							success : function(data) {
 							}
 						});
+						location.reload();
+
+						ev.preventDefault();
+
+						$("input[type=hidden]").each(
+
+						function() {
+							if ($(this).next('dd').is(".active")) {
+								$(this).next('dd').remove();
+							}
+
+						});
+
+					}
+				});
+			});
+
+		});
+		
+		$(document).on('click', '#deleteButton3', function() {
+			$("input[type=hidden]").each(function(index, element) {
+				var $this = $(this);
+				var $form3 = $('#formAnnoncePerim');
+
+				$form3.submit(function(ev) {
+					if ($this.next('dd').is(".active")) {
+						
+				$("#idAnn2").val($this.val());
+				;
+				var data="idAnnonce="+$this.val()+"&clickedbutton=deleteaction"; 
+				
+						$("#idAnn2").val($this.val());
+						$.ajax({
+							type : $form3.attr('method'),
+							url : $form3.attr('action'),
+							data :data,
+							success : function(data) {
+							}
+						});
+						location.reload();
 
 						ev.preventDefault();
 
@@ -468,6 +508,50 @@
 										});
 
 										ev.preventDefault();
+										location.reload();
+										return false;
+
+									}
+								});
+							});
+
+				});
+	</script>
+	
+	
+	
+	<script type="text/javascript">
+		$(document).on(
+				'click',
+				'#changeDateButton3',
+				function() {
+
+					$("input[type=hidden]").each(
+							function(index, element) {
+								var $this = $(this);
+								var $form4 = $('#formAnnoncePerim');
+
+								$form4.submit(function(ev) {
+									if ($this.next('dd').is(".active")) {
+										
+										$('#clicked_button3').val(
+												"changeaction");
+										$("#idAnn2").val($this.val());
+										$("#date_fin2").val(
+												$this.next('dd').find(
+														'.datepick').val());
+										var data="idAnnonce="+$this.val()+"&datefin="+$this.next('dd').find(
+										'.datepick').val()+"&clickedbutton=changeaction"; 
+										$.ajax({
+											type : $form4.attr('method'),
+											url : $form4.attr('action'),
+											data : data,
+											success : function(data) {
+											}
+										});
+
+										ev.preventDefault();
+										location.reload();
 										return false;
 
 									}

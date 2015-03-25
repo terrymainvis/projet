@@ -47,13 +47,9 @@
 				<value>glp.domain.Role</value>
 				<value>glp.domain.Job</value>
 				<value>glp.domain.Forum</value>
-
 				<value>glp.domain.Signalisation</value>
 				<value>glp.domain.Stats</value>
-
 				<value>glp.domain.Parametre</value>
-
-
 			</list>
 		</property>
 		<property name="hibernateProperties">

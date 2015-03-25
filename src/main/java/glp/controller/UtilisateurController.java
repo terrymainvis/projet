@@ -100,10 +100,11 @@ public class UtilisateurController {
 //		
 //		new Utilisateur(prenom, nom, mailLille1)
 //		utilisateurService.insertRow();
-		Utilisateur u = utilisateurService.getUserInSession();
+		Utilisateur u= utilisateurService.getRowById(10);
+		//Utilisateur u = utilisateurService.getUserInSession();
 		if (u != null) {
-			u = utilisateurService.getRowById(utilisateurService
-					.getUserInSession().getId());
+//			u = utilisateurService.getRowById(utilisateurService
+//					.getUserInSession().getId());
 			myModel.put("utilisateur", u);
 			myModel.put("listeAnnoncesPubliees",
 					utilisateurService.listAnnoncePublie(u));
@@ -123,7 +124,7 @@ public class UtilisateurController {
 
 		String action = request.getParameter("clickedbutton");
 		String id = request.getParameter("idAnnonce");
-
+System.out.println("l'action est :"+action);
 		if (action.equals("changeaction")) {
 			String datefin = request.getParameter("datefin");
 			annonceService.updateDateAnnonce(Integer.parseInt(id), datefin);
