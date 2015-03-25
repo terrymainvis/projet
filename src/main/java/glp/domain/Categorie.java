@@ -20,6 +20,10 @@ public class Categorie {
 	@Column(name="cat_lib")
 	private String lib;
 	
+	//le libelle en anglais
+	@Column(name="cat_lib_en")
+	private String lib_en;
+	
 	@Column(name="cat_desc")
 	private String desc;
 	
@@ -30,9 +34,10 @@ public class Categorie {
 		
 	}
 	
-	public Categorie(String lib, String desc) {
+	public Categorie(String lib, String lib_en, String desc) {
 		super();
 		this.lib = lib;
+		this.lib_en = lib_en;
 		this.desc = desc;
 	}
 
@@ -74,6 +79,14 @@ public class Categorie {
 	
 	public void addChamp(Champ champ) {
 		this.champs.add(champ);
+	}
+
+	public String getLib_en() {
+		return lib_en;
+	}
+
+	public void setLib_en(String lib_en) {
+		this.lib_en = lib_en;
 	}
 	
 

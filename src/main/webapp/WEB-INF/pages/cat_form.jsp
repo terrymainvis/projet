@@ -25,6 +25,11 @@
 			</div>
 			<div class="row">
 				<div class="large-offset-3 large-6 colums">
+					<form:input path="lib_en" placeholder="Libellé en anglais" required="required" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-offset-3 large-6 colums">
 					<form:textarea path="desc" placeholder="Description" />
 				</div>
 

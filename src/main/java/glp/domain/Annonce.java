@@ -145,6 +145,5 @@ public class Annonce {
 	public void setValide(boolean valide) {
 		this.valide = valide;
 	}
-	
-	
+
 }
