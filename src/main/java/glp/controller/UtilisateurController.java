@@ -100,8 +100,8 @@ public class UtilisateurController {
 //		
 //		new Utilisateur(prenom, nom, mailLille1)
 //		utilisateurService.insertRow();
-		Utilisateur u= utilisateurService.getRowById(10);
-		//Utilisateur u = utilisateurService.getUserInSession();
+		//Utilisateur u= utilisateurService.getRowById(10);
+		Utilisateur u = utilisateurService.getUserInSession();
 		if (u != null) {
 //			u = utilisateurService.getRowById(utilisateurService
 //					.getUserInSession().getId());
