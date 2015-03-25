@@ -17,7 +17,7 @@
 	<%@ include file="../templates/header.jsp"%>
 	<div class="row">
 		<div class="large-8 columns">
-			<h3>Liste des témoignages</h3>
+			<h3 style="text-align:center"><spring:message code="forumList.listeTemoignages"></spring:message></h3>
 			<c:if test="${!empty forumList}">
 				<table id="listeforums" class="display" cellspacing="0" width="100%">
 					<thead>
@@ -78,10 +78,11 @@
 		</div>
 		<div class="large-4 columns">
 			<div class="panel callout radius">
-				<p>Vous ne trouvez pas ce que vous recherchez ?</p>
-				<p>Partagez votre expérience en publiant un témoignage!</p>
-				<a class="button success tiny" href="<c:url value="/forum/new"  />">Ajout
-					d'un témoignage</a>
+				<p><spring:message code="forumList.messageNeTrouvePas1"></spring:message></p>
+				<p><spring:message code="forumList.messageNeTrouvePas2"></spring:message></p>
+				<a class="button success tiny" href="<c:url value="/forum/new"  />">
+					<spring:message code="forumList.ajoutTemoignage"></spring:message>
+				</a>
 			</div>
 		</div>
 	</div>

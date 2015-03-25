@@ -26,7 +26,7 @@
 	<div class="row">
 		<div class="large-9 columns">
 		
-		<h3>Liste des annonces</h3>
+		<h3 style="text-align:center"><spring:message code="annList.listeAnnonces"></spring:message></h3>
 
 			<table id="listeAnnonces" class="display" cellspacing="0"
 				width="100%">
@@ -76,10 +76,11 @@
 		</div>
 		<div class="large-3 columns">
 			<div class="panel callout radius">
-				<p>Vous ne trouvez pas ce que vous recherchez ?</p>
-				<p>Indiquez directement aux autres utilisateurs vos besoins en
-					créant votre propre annonce</p>
-					<a class="button success tiny" href="<c:url value="/annonce/new/categoriechoice" />">Ajout d'une nouvelle annonce</a>
+				<p><spring:message code="annList.messageNeTrouvePas1"></spring:message></p>
+				<p><spring:message code="annList.messageNeTrouvePas2"></spring:message></p>
+					<a class="button success tiny" href="<c:url value="/annonce/new/categoriechoice" />">
+						<spring:message code="annList.nouvelleAnnonce"></spring:message>
+					</a>
 			</div>
 		</div>
 	</div>

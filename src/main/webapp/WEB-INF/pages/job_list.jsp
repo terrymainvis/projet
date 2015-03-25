@@ -18,7 +18,7 @@
 	<div class="row">
 		<div class="large-10 columns">
 
-				<h3>Liste des offres d'emploi</h3>
+				<h3 style="text-align:center"><spring:message code="jobList.listeJobs"></spring:message></h3>
 
 				<div class="row">
 				<c:if test="${!empty jobList}">

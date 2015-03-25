@@ -27,7 +27,7 @@
 
 		<div class="large-6 columns" >
 			<div id="global" class="panel callout" data-equalizer-watch>
-				<h3 class="text-center">Mes informations</h3><br/>
+				<h3 class="text-center"><spring:message code="voirCompte.mesInformations"></spring:message></h3><br/>
 				<c:choose>
 					<c:when test="${!empty utilisateur}">
 						<span>${utilisateur.prenom}</span>
@@ -39,7 +39,7 @@
 						<span>Second mail :</span>
 						<span id="spanMail"><c:choose>
 								<c:when test="${empty utilisateur.mailAutre}">
-								Aucun
+									<spring:message code="voirCompte.aucunMail"></spring:message>
 								</c:when>
 								<c:otherwise>
 			    				${utilisateur.mailAutre}
@@ -49,20 +49,20 @@
 							method="post" action="updateMailUtilisateur">
 							<div class="row" id="SecondeAdresseMail"></div>
 						</form:form>
-						<button id="ModifMail" class="success tiny">Modifier</button>
+						<button id="ModifMail" class="success tiny"><spring:message code="voirCompte.modifier"></spring:message></button>
 					</c:when>
 					<c:otherwise>
 							Se reconnecter
-			    		</c:otherwise>
+			    	</c:otherwise>
 				</c:choose>
 			</div>
 		</div>
 	<div class="large-6 columns">
 	<div class="panel" data-equalizer-watch>
-		<h3 class="text-center">Mes statistiques</h3><br/>
-			Annonces en ligne : ${fn:length(listeAnnoncesPubliees)} <br/>
-			Annonces en attente de modération : ${fn:length(listeAnnoncesAModerer)} <br/>
-			Annonces expirées : ${fn:length(listeAnnoncesPerimees)} <br/>
+		<h3 class="text-center"><spring:message code="voirCompte.mesStatistiques"></spring:message></h3><br/>
+			<spring:message code="voirCompte.annoncesEnLigne"></spring:message> : ${fn:length(listeAnnoncesPubliees)} <br/>
+			<spring:message code="voirCompte.annoncesEnAttente"></spring:message> : ${fn:length(listeAnnoncesAModerer)} <br/>
+			<spring:message code="voirCompte.annoncesExpirees"></spring:message> : ${fn:length(listeAnnoncesPerimees)} <br/>
 		</div>
 	</div>
 	
@@ -70,13 +70,13 @@
 <div class="row">
 <div class="tabs-content large-12 columns">
   	<ul class="tabs" data-tab>
-	  <li class="tab-title active"><a href="#panelPubliees">Publiées</a></li>
-	  <li class="tab-title"><a href="#panelModeration">En modération</a></li>
-	  <li class="tab-title"><a href="#panelExpirees">Expirées</a></li>
+	  <li class="tab-title active"><a href="#panelPubliees"><spring:message code="voirCompte.publiees"></spring:message></a></li>
+	  <li class="tab-title"><a href="#panelModeration"><spring:message code="voirCompte.enModeration"></spring:message></a></li>
+	  <li class="tab-title"><a href="#panelExpirees"><spring:message code="voirCompte.expirees"></spring:message></a></li>
 	</ul>
   <div class="content active" id="panelPubliees">
     <div class="panel">
-				<h3 style="text-align: center">Annonces publiées</h3><br/>
+				<h3 style="text-align: center"><spring:message code="voirCompte.annoncesPubliees"></spring:message></h3><br/>
 				<c:choose>
 					<c:when test="${!empty listeAnnoncesPubliees}">
 						<form:form id="formAnnoncePubliees" method="post"
@@ -130,14 +130,14 @@
 						</form:form>
 					</c:when>
 					<c:otherwise>
-			 Aucune annonce publiée
+			 <spring:message code="voirCompte.aucuneAnnoncePubliee"></spring:message>
 		</c:otherwise>
 		</c:choose>
 	</div>
   </div>
   <div class="content" id="panelModeration">
    <div class="panel">
-		<h3 style="text-align: center">Annonces en cours de modération</h3><br/>
+		<h3 style="text-align: center"><spring:message code="voirCompte.annoncesEnCoursDeModeration"></spring:message></h3><br/>
 		<c:choose>
 			<c:when test="${!empty listeAnnoncesAModerer}">
 				<form:form id="formAnnonceAModerer" method="post"
@@ -191,14 +191,14 @@
 				</form:form>
 			</c:when>
 			<c:otherwise>
-	 	Aucune annonce en cours de modération
+	 			<spring:message code="voirCompte.aucuneAnnonceEnCoursDeModeration"></spring:message>
 	   		</c:otherwise>
 			</c:choose>
 		</div>
   </div>
   <div class="content" id="panelExpirees">
     <div class="panel">
-				<h3 style="text-align: center;">Annonces expirées</h3><br/>
+				<h3 style="text-align: center;"><spring:message code="voirCompte.annoncesExpirees"></spring:message></h3><br/>
 				<c:choose>
 					<c:when test="${!empty listeAnnoncesPerimees}">
 
@@ -252,8 +252,8 @@
 						</form:form>
 					</c:when>
 					<c:otherwise>
-			 Aucune annonce expirée
-		</c:otherwise>
+						<spring:message code="voirCompte.aucuneAnnonceExpiree"></spring:message>
+					</c:otherwise>
 				</c:choose>
 			</div>
   </div>

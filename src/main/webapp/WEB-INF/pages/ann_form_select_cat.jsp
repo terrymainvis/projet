@@ -21,15 +21,37 @@
 			<form:input type="hidden" path="annonce.type" value="${annonce.type }" />
 			<div>
 				<h4 style="text-align:center"><spring:message code="annFormSelectCat.selection"></spring:message></h4><br/>
-				<form:select path="cat_choisie">					
-					<form:options items="${catList}" itemValue="id" itemLabel="lib" />
+				<form:select path="cat_choisie" id="catList_fr_en">					
+<%-- 					<form:options items="${catList}" itemValue="id" itemLabel="lib" /> --%>
 				</form:select>				
 			</div>
 			<br/>
 			<div>				
-				<input class="button" type="submit" value="Suivant" />
+				<input class="button" type="submit" value="<spring:message code="annFormSelectCat.boutonSuivant"></spring:message>" >
 			</div>
 		</form:form>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+	var query = gup('lang');
+	
+	if (query == null){
+		$('<c:forEach items="${catList}" var="cat">' 
+		+ '<option id="${cat.id}" value="${cat.id}">${cat.lib}</option>'
+		+ '</c:forEach>').appendTo('#catList_fr_en');
+	}
+	
+	else if (query == "en"){
+		$('<c:forEach items="${catList}" var="cat">' 
+				+ '<option id="${cat.id}" value="${cat.id}">${cat.lib_en}</option>'
+				+ '</c:forEach>').appendTo('#catList_fr_en');
+	}
+	else if (query == "fr"){
+		$('<c:forEach items="${catList}" var="cat">' 
+				+ '<option id="${cat.id}" value="${cat.id}">${cat.lib}</option>'
+				+ '</c:forEach>').appendTo('#catList_fr_en');
+	}
+});
+</script>
 </html>
